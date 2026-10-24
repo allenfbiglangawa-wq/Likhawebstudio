@@ -1,0 +1,116 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Likha Web Studio Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap">
+</head><body>
+<style>
+/* Layout: studio portfolio — wordmark header, statement, numbered demo list with live links, packages strip. */
+:root{
+  --bg:#F5F5F2; --card:#FFFFFF; --ink:#111318; --muted:#4A4D57; --line:#DCDCD6; --accent:#2E4BFF;
+  --font:'Archivo', system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111318;--card:#1B1E26;--ink:#F2F2EF;--muted:#B0B4C0;--line:#2E323D;--accent:#7D8EFF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111318;--card:#1B1E26;--ink:#F2F2EF;--muted:#B0B4C0;--line:#2E323D;--accent:#7D8EFF;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header .wrap{display:flex;align-items:center;gap:12px;padding-block:28px}
+.lock{display:flex;flex-direction:column;line-height:1}
+.lock b{font-size:26px;font-weight:800;letter-spacing:-0.035em}
+.lock span{font-size:10px;font-weight:600;letter-spacing:0.24em;margin-top:4px;color:var(--muted)}
+.intro .wrap{padding-block:24px 48px}
+h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-0.04em;line-height:1;margin:0 0 18px;text-wrap:balance;max-width:16ch}
+.intro p{color:var(--muted);font-size:19px;max-width:54ch;margin:0}
+.list .wrap{display:flex;flex-direction:column;padding-bottom:56px}
+.demo{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:20px;align-items:center;padding-block:26px;border-top:1.5px solid var(--ink);color:inherit;text-decoration:none}
+.demo:last-child{border-bottom:1.5px solid var(--ink)}
+.demo .n{font-size:15px;font-weight:700;color:var(--accent)}
+.demo h2{margin:0 0 4px;font-size:28px;font-weight:800;letter-spacing:-0.02em}
+.demo p{margin:0;color:var(--muted);font-size:16px}
+.demo .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.demo .tags span{font-size:13px;font-weight:600;border:1px solid var(--line);border-radius:4px;padding:3px 8px;color:var(--muted)}
+.demo .go{font-weight:800;color:var(--accent);white-space:nowrap}
+.demo:hover h2{color:var(--accent)}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.pk{background:var(--card)}
+.pk .wrap{padding-block:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.pk h3{margin:0;font-size:20px;font-weight:800}
+.pk .amt{font-size:38px;font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.pk p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.cta .wrap{padding-block:48px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.cta h2{margin:0;font-size:32px;font-weight:800;letter-spacing:-0.03em}
+.cta p{margin:4px 0 0;color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+.label{font-size:13px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.demo .n.live{color:#0F7B5F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .demo .n.live{color:#5FD3A8}}
+:root[data-theme="dark"] .demo .n.live{color:#5FD3A8}
+@media (max-width:700px){.demo{grid-template-columns:1fr}.demo .go{justify-self:start}.pk .wrap{grid-template-columns:1fr}}
+</style>
+
+<header><div class="wrap">
+  <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="18" height="18" rx="2.5" fill="var(--ink)"/><rect x="4" y="26" width="18" height="18" rx="2.5" fill="var(--ink)"/><rect x="26" y="26" width="18" height="18" rx="2.5" fill="#2E4BFF"/></svg>
+  <a class="lock" href="../" style="color:inherit;text-decoration:none" aria-label="Likha Web Studio home"><b>likha</b><span>WEB STUDIO</span></a>
+</div></header>
+
+<section class="intro"><div class="wrap">
+  <h1>Websites we've built.</h1>
+  <p>Real websites for real businesses, plus working samples you can try yourself. Open them on your phone: your business website can look this good too.</p>
+</div></section>
+
+<section class="list"><div class="wrap">
+  <p class="label">Client projects</p>
+  <a class="demo" href="https://kapepinagpala.pages.dev/">
+    <span class="n live">LIVE</span>
+    <div><h2>Kape Pinagpala</h2><p>Specialty coffee house with SM mall pop-up stalls. Menu, pre-ordering for pick-up, and event coffee cart booking.</p><div class="tags"><span>Pre-order</span><span>Event booking</span><span>Menu</span></div></div>
+    <span class="go">Visit →</span>
+  </a>
+  <a class="demo" href="https://sleepscienzzz-pi.vercel.app/">
+    <span class="n live">LIVE</span>
+    <div><h2>SleepScienzzz</h2><p>Sleep care clinic platform. Sleep study booking, CPAP shop, machine registration, servicing reminders, and staff tools for stock and scheduling.</p><div class="tags"><span>Booking</span><span>Online shop</span><span>Patient accounts</span><span>Inventory</span></div></div>
+    <span class="go">Visit →</span>
+  </a>
+  <a class="demo" href="https://pabangodemanila.pabangodemanilaph.workers.dev/">
+    <span class="n live">LIVE</span>
+    <div><h2>Pabango de Manila</h2><p>Perfume shop website with customer accounts.</p><div class="tags"><span>Online shop</span><span>Customer accounts</span></div></div>
+    <span class="go">Visit →</span>
+  </a>
+</div></section>
+
+<section class="list"><div class="wrap">
+  <p class="label">Try a sample</p>
+  <a class="demo" href="../demos/brew-and-co/">
+    <span class="n">DEMO</span>
+    <div><h2>Brew &amp; Co.</h2><p>Coffee shop with a menu and online ordering for pick-up or delivery.</p><div class="tags"><span>Online ordering</span><span>Menu</span><span>GCash</span></div></div>
+    <span class="go">Open →</span>
+  </a>
+  <a class="demo" href="../demos/kusina-ni-lola/">
+    <span class="n">DEMO</span>
+    <div><h2>Kusina ni Lola</h2><p>Food business with ulam, bilao trays and merienda, plus scheduled delivery.</p><div class="tags"><span>Online ordering</span><span>Delivery</span><span>Free delivery promo</span></div></div>
+    <span class="go">Open →</span>
+  </a>
+  <a class="demo" href="../demos/lakas-fitness/">
+    <span class="n">DEMO</span>
+    <div><h2>Lakas Fitness</h2><p>Gym with membership rates, a class schedule and free trial booking.</p><div class="tags"><span>Booking</span><span>Schedule</span><span>Membership</span></div></div>
+    <span class="go">Open →</span>
+  </a>
+  <a class="demo" href="../demos/ganda-studio/">
+    <span class="n">DEMO</span>
+    <div><h2>Ganda Studio</h2><p>Salon and spa with online booking for service, date and time.</p><div class="tags"><span>Appointment booking</span><span>Services</span></div></div>
+    <span class="go">Open →</span>
+  </a>
+  <p class="note" style="margin-top:16px">These are sample businesses, built to show what we can make for you.</p>
+</div></section>
+
+<section class="pk"><div class="wrap">
+  <div><h3>Starter</h3><div class="amt">₱3,500</div><p>1-page website, free domain and hosting for the first year.</p></div>
+  <div><h3>Business</h3><div class="amt">₱5,499</div><p>Up to 5 pages, menu, online ordering or booking.</p></div>
+  <div><h3>Premium</h3><div class="amt">₱7,999</div><p>Fully customized, with inventory and sales POS.</p></div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <div><h2>Want a website like this?</h2><p>Message Likha Web Studio on Facebook for a free consultation.</p></div>
+  <a href="https://m.me/61595731580054" target="_blank" rel="noopener" style="font:700 16px var(--font);background:var(--accent);color:#fff;text-decoration:none;border-radius:6px;padding:14px 22px">Message us</a>
+</div></section>
+
+</body></html>

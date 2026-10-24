@@ -1,0 +1,236 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Brew &amp; Co. Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+</head><body>
+<style>
+/* Layout: one-column cafe site — hero, filterable menu grid, cart drawer with checkout. Single light look. */
+:root{
+  --bg:#FFFFFF; --soft:#F3F1EE; --ink:#2A1E16; --muted:#6E6159; --line:#E6E0D9;
+  --accent:#2F6B4F; --accent-ink:#FFFFFF; --bar:#111318;
+  --display:'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --body:'Figtree', system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
+.demo b{color:#FFFFFF}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em}
+nav{display:flex;gap:22px;font-weight:500;color:var(--muted)}
+nav a{color:inherit;text-decoration:none}
+nav a:hover{color:var(--ink)}
+.btn{font:600 15px var(--body);border:0;border-radius:8px;padding:12px 20px;cursor:pointer;background:var(--ink);color:#FFFFFF}
+.btn.green{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:40px 56px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-0.035em;margin:0 0 18px;text-wrap:balance}
+.hero p{color:var(--muted);font-size:18px;max-width:44ch;margin:0 0 26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-art{aspect-ratio:1/1;max-width:100%;border-radius:20px;background:#C9A47C;display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-art .steam{position:absolute;inset:auto 0 0;height:38%;background:#A9825B}
+.hero-art svg{position:relative;width:46%;height:auto}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
+.facts b{display:block;color:var(--ink);font-size:16px}
+section h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-0.03em;margin:0 0 6px}
+.menu{background:var(--soft);padding-block:56px}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:600 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:#FFFFFF;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.item{background:var(--bg);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.thumb{height:130px;border-radius:10px;display:grid;place-items:center}
+.thumb svg{width:56px;height:56px}
+.item h3{margin:0;font-size:18px;font-weight:700}
+.item p{margin:0;color:var(--muted);font-size:14px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.price{font-weight:700;font-variant-numeric:tabular-nums}
+.add{font:600 14px var(--body);border:0;background:var(--accent);color:#FFFFFF;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}
+.info .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-block:56px}
+.info h3{font-family:var(--display);font-size:20px;margin:0 0 6px}
+.info p{margin:0;color:var(--muted)}
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.cartbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#FFFFFF;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
+.cartbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:12px}
+.cartbar .btn{background:var(--accent)}
+.overlay{position:fixed;inset:0;background:rgba(20,14,10,0.45);z-index:30}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg);z-index:31;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) 20px;overflow-y:auto;gap:16px}
+.drawer h2{font-family:var(--display);font-size:28px;margin:0}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding-block:10px;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer}
+.totals div{display:flex;justify-content:space-between;padding-block:3px;font-variant-numeric:tabular-nums}
+.totals .grand{font-weight:800;font-size:18px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
+form{display:flex;flex-direction:column;gap:12px}
+label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
+input,select,textarea{font:16px var(--body);padding:11px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;font-weight:500}
+.note{font-size:13px;color:var(--muted)}
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding-top:40px}
+.done .num{font-family:var(--display);font-size:34px;font-weight:800}
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-height:300px;aspect-ratio:auto;height:280px}
+  .info .wrap{grid-template-columns:1fr}
+  nav{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.add,.btn{transition:transform .12s}.add:active,.btn:active{transform:scale(.97)}}
+</style>
+
+<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your business? Starts at ₱3,500</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cup" viewBox="0 0 64 64"><path d="M14 22 H44 V38 a14 14 0 0 1 -14 14 h-2 a14 14 0 0 1 -14 -14 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M44 26 h4 a6 6 0 0 1 0 12 h-4" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M24 8 c-3 4 3 6 0 10 M33 8 c-3 4 3 6 0 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="iced" viewBox="0 0 64 64"><path d="M18 14 H46 L42 56 H22 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M19 26 H45" stroke="currentColor" stroke-width="3"/><path d="M36 14 L40 4" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><rect x="25" y="32" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="33" y="40" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="bread" viewBox="0 0 64 64"><path d="M8 40 C8 22 56 22 56 40 C56 46 50 48 32 48 C14 48 8 46 8 40 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M22 30 L26 40 M32 28 L32 40 M42 30 L38 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+</svg>
+
+<header><div class="wrap">
+  <div class="brand">Brew &amp; Co.</div>
+  <nav aria-label="Main"><a href="#menu">Menu</a><a href="#info">Location</a><a href="#info">Hours</a></nav>
+  <button class="btn green" type="button" id="openCart">Cart (<span id="headCount">0</span>)</button>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Good coffee, made right.</h1>
+    <p>Freshly brewed coffee and pastries every day. Order online for pick-up or delivery, and it's ready when you arrive.</p>
+    <div class="ctas"><a class="btn green" href="#menu" style="text-decoration:none">Order online</a><a class="btn ghost" href="#info" style="text-decoration:none">Find us</a></div>
+    <div class="facts"><div><b>15 mins</b>pick-up ready</div><div><b>7AM–9PM</b>open daily</div><div><b>GCash</b>or cash</div></div>
+  </div>
+  <div class="hero-art" aria-hidden="true"><div class="steam"></div><svg viewBox="0 0 64 64" style="color:#2A1E16"><use href="#cup"/></svg></div>
+</div></section>
+
+<section class="menu" id="menu"><div class="wrap">
+  <div class="menu-head">
+    <div><h2>Menu</h2><div class="note">Tap “Add” to put it in your order.</div></div>
+    <div class="tabs" role="group" aria-label="Category">
+      <button class="tab" type="button" data-cat="all" aria-pressed="true">All</button>
+      <button class="tab" type="button" data-cat="coffee" aria-pressed="false">Coffee</button>
+      <button class="tab" type="button" data-cat="noncoffee" aria-pressed="false">Non-coffee</button>
+      <button class="tab" type="button" data-cat="pastry" aria-pressed="false">Pastries</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="info" id="info"><div class="wrap">
+  <div><h3>Location</h3><p>Ground floor, [Mall or street name], [City]</p></div>
+  <div><h3>Hours</h3><p>Monday–Sunday, 7:00 AM – 9:00 PM</p></div>
+  <div><h3>Contact</h3><p>0917 000 0000 · Brew &amp; Co. on Facebook</p></div>
+</div></section>
+
+<footer><div class="wrap"><span>© Brew &amp; Co. (sample business)</span><span>Website by Likha Web Studio</span></div></footer>
+<div style="height:72px" aria-hidden="true"></div>
+
+<div class="cartbar" id="cartbar" hidden><div class="wrap">
+  <span><b id="barCount">0</b> item · <b id="barTotal">₱0</b></span>
+  <button class="btn" type="button" id="barOpen">View order</button>
+</div></div>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Your order">
+  <div class="row"><h2>Your order</h2><button class="btn ghost" type="button" id="closeCart">Close</button></div>
+  <div id="cartView">
+    <div id="lines"></div>
+    <p class="note" id="emptyNote">Your order is empty. Pick something from the menu.</p>
+    <div class="totals" id="totals">
+      <div><span>Subtotal</span><span id="sub">₱0</span></div>
+      <div><span>Delivery fee</span><span id="fee">₱0</span></div>
+      <div class="grand"><span>Total</span><span id="total">₱0</span></div>
+    </div>
+    <form id="checkout">
+      <label for="cname">Name<input id="cname" required autocomplete="name" value="Juan Dela Cruz"></label>
+      <label for="cphone">Mobile number<input id="cphone" required inputmode="tel" value="0917 123 4567"></label>
+      <div class="choices" role="radiogroup" aria-label="Pick-up or delivery">
+        <label><input type="radio" name="mode" id="mPick" value="pick" checked> Pick-up</label>
+        <label><input type="radio" name="mode" id="mDel" value="del"> Delivery (+₱49)</label>
+      </div>
+      <label for="caddr" id="addrWrap" hidden>Address<input id="caddr" autocomplete="street-address"></label>
+      <div class="choices" role="radiogroup" aria-label="Payment">
+        <label><input type="radio" name="pay" id="pGcash" value="GCash" checked> GCash</label>
+        <label><input type="radio" name="pay" id="pCash" value="Cash"> Cash</label>
+      </div>
+      <button class="btn green" type="submit">Place order</button>
+    </form>
+  </div>
+  <div class="done" id="doneView" hidden>
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="color:var(--accent)"><circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4"/><path d="M20 33 L28 41 L44 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="num" id="orderNum">BC-0000</div>
+    <p id="doneMsg">Thank you! We received your order.</p>
+    <p class="note">This is a demo, so no real order was sent. On a live website, the shop gets notified of every order.</p>
+    <button class="btn" type="button" id="newOrder">New order</button>
+  </div>
+</aside>
+
+<script>
+const MENU=[
+ {id:'ame',cat:'coffee',name:'Americano',desc:'Espresso and hot water. Simple and strong.',price:95,icon:'cup',bg:'#E9DCCB'},
+ {id:'lat',cat:'coffee',name:'Café Latte',desc:'Espresso and steamed milk, smooth and creamy.',price:120,icon:'cup',bg:'#D9C2A5'},
+ {id:'spa',cat:'coffee',name:'Spanish Latte',desc:'Bestseller. Sweetened with condensed milk.',price:140,icon:'iced',bg:'#C9A47C'},
+ {id:'car',cat:'coffee',name:'Caramel Macchiato',desc:'Vanilla, espresso and caramel drizzle.',price:150,icon:'iced',bg:'#E3B98A'},
+ {id:'moc',cat:'coffee',name:'Mocha',desc:'Espresso and dark chocolate.',price:135,icon:'cup',bg:'#B8927A'},
+ {id:'mat',cat:'noncoffee',name:'Matcha Latte',desc:'Japanese matcha and milk.',price:145,icon:'iced',bg:'#C9DDB5'},
+ {id:'cho',cat:'noncoffee',name:'Classic Chocolate',desc:'Rich chocolate, hot or iced.',price:120,icon:'cup',bg:'#CDB4A2'},
+ {id:'str',cat:'noncoffee',name:'Strawberry Milk',desc:'Fresh strawberry jam and milk.',price:130,icon:'iced',bg:'#F2C9CC'},
+ {id:'cro',cat:'pastry',name:'Butter Croissant',desc:'Flaky and buttery, baked every morning.',price:95,icon:'bread',bg:'#F0D9A8'},
+ {id:'ens',cat:'pastry',name:'Ensaymada',desc:'Topped with butter, sugar and cheese.',price:75,icon:'bread',bg:'#F5E3B5'},
+ {id:'ban',cat:'pastry',name:'Banana Bread',desc:'Moist, with walnuts.',price:85,icon:'bread',bg:'#DCC09A'},
+ {id:'che',cat:'pastry',name:'Cheese Roll',desc:'Soft, with cheese inside.',price:60,icon:'bread',bg:'#F4DFA0'}
+];
+const cart={};let cat='all';
+const peso=n=>'₱'+n.toLocaleString('en-PH');
+const $=id=>document.getElementById(id);
+function renderMenu(){
+  $('grid').innerHTML=MENU.filter(m=>cat==='all'||m.cat===cat).map(m=>`
+   <article class="item">
+     <div class="thumb" style="background:${m.bg};color:#2A1E16"><svg aria-hidden="true"><use href="#${m.icon}"/></svg></div>
+     <h3>${m.name}</h3><p>${m.desc}</p>
+     <div class="row"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-add="${m.id}" aria-label="Add ${m.name}">Add</button></div>
+   </article>`).join('');
+}
+function totals(){
+  const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);
+  const fee=sub>0&&$('mDel').checked?49:0;
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  return {sub,fee,total:sub+fee,count};
+}
+function renderCart(){
+  const t=totals();
+  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `
+   <div class="line"><span>${m.name}</span>
+    <span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one ${m.name}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one ${m.name}">+</button></span>
+    <span class="price">${peso(m.price*q)}</span></div>`}).join('');
+  $('emptyNote').hidden=t.count>0;$('totals').hidden=t.count===0;$('checkout').hidden=t.count===0;
+  $('sub').textContent=peso(t.sub);$('fee').textContent=peso(t.fee);$('total').textContent=peso(t.total);
+  $('headCount').textContent=t.count;$('barCount').textContent=t.count;$('barTotal').textContent=peso(t.total);
+  $('cartbar').hidden=t.count===0||!$('drawer').hidden;
+}
+function openCart(o){$('drawer').hidden=!o;$('overlay').hidden=!o;renderCart();}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',900);renderCart();}
+  if(b.dataset.inc){cart[b.dataset.inc]++;renderCart();}
+  if(b.dataset.dec){cart[b.dataset.dec]--;if(cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderCart();}
+  if(b.dataset.cat){cat=b.dataset.cat;document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-pressed',t===b));renderMenu();}
+});
+$('openCart').onclick=()=>openCart(true);$('barOpen').onclick=()=>openCart(true);
+$('closeCart').onclick=()=>openCart(false);$('overlay').onclick=()=>openCart(false);
+document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{$('addrWrap').hidden=!$('mDel').checked;$('caddr').required=$('mDel').checked;renderCart();});
+$('checkout').addEventListener('submit',e=>{
+  e.preventDefault();const t=totals();
+  $('orderNum').textContent='BC-'+Math.floor(1000+Math.random()*9000);
+  $('doneMsg').textContent=`Thank you, ${$('cname').value.split(' ')[0]}! ${t.count} item(s), total ${peso(t.total)} via ${document.querySelector('input[name=pay]:checked').value}. ${$('mDel').checked?'We will deliver it to your address.':'It will be ready in 15 minutes.'}`;
+  $('cartView').hidden=true;$('doneView').hidden=false;
+});
+$('newOrder').onclick=()=>{for(const k in cart)delete cart[k];$('cartView').hidden=false;$('doneView').hidden=true;openCart(false);};
+cart.spa=2;cart.cro=1;
+renderMenu();renderCart();
+</script>
+
+</body></html>

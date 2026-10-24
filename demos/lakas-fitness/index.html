@@ -1,0 +1,177 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Lakas Fitness Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+</head><body>
+<style>
+/* Layout: dark gym site — loud condensed hero, plan cards, day-tabbed class schedule, free-trial form. Single dark look by choice. */
+:root{
+  --bg:#14213D; --surface:#1C2D52; --line:#2E4170; --fg:#FFFFFF; --muted:#B8C2D9;
+  --accent:#FCA311; --on-accent:#14213D; --bar:#0B1324;
+  --display:'Anton', 'Barlow', Impact, sans-serif;
+  --body:'Barlow', system-ui, sans-serif;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:var(--muted);font-size:13px;text-align:center;padding-block:9px}
+.demo b{color:var(--fg)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.brand{font-family:var(--display);font-size:28px;letter-spacing:0.02em;text-transform:uppercase}
+.brand span{color:var(--accent)}
+nav{display:flex;gap:24px;font-weight:600;color:var(--muted)}
+nav a{color:inherit;text-decoration:none}nav a:hover{color:var(--fg)}
+.btn{font:700 16px var(--body);border:0;border-radius:6px;padding:13px 22px;cursor:pointer;background:var(--accent);color:var(--on-accent);text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:0.04em}
+.btn.ghost{background:transparent;color:var(--fg);border:2px solid var(--line)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero .wrap{padding-block:48px 64px;display:flex;flex-direction:column;gap:24px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,10vw,128px);line-height:0.92;text-transform:uppercase;margin:0;letter-spacing:0.005em;text-wrap:balance}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:20px;max-width:52ch;margin:0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:2px solid var(--line);padding-top:24px;margin-top:8px}
+.stats b{display:block;font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
+.stats span{color:var(--muted);font-size:15px}
+section{padding-block:64px}
+section h2{font-family:var(--display);font-weight:400;font-size:clamp(38px,5vw,56px);text-transform:uppercase;margin:0 0 8px;line-height:1}
+.sub{color:var(--muted);margin:0 0 28px}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.plan{background:var(--surface);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.plan.hot{background:var(--accent);color:var(--on-accent)}
+.plan.hot .muted{color:#3A3320}
+.plan h3{margin:0;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.plan .amt{font-family:var(--display);font-size:44px;line-height:1}
+.plan .amt small{font-family:var(--body);font-size:15px;font-weight:600}
+.plan ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:15px;flex:1}
+.muted{color:var(--muted)}
+.tag{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.day{font:700 15px var(--body);padding:10px 16px;border-radius:6px;border:2px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;min-width:58px}
+.day[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.sched{background:var(--surface);border-radius:10px;overflow:hidden}
+.cls{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.cls:last-child{border-bottom:0}
+.cls time{font-weight:700;font-variant-numeric:tabular-nums}
+.cls .name{font-weight:700}
+.cls .coach{color:var(--muted);font-size:15px}
+.slots{font-size:13px;font-weight:700;padding:5px 10px;border-radius:4px;background:var(--line);white-space:nowrap}
+.slots.low{background:var(--accent);color:var(--on-accent)}
+.coaches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.coachcard{background:var(--surface);border-radius:10px;padding:22px;display:flex;gap:16px;align-items:center}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-family:var(--display);font-size:24px;flex-shrink:0}
+.coachcard b{display:block;font-size:18px}
+.trial .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+form{background:var(--surface);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px}
+label{font-weight:600;font-size:15px;display:flex;flex-direction:column;gap:6px}
+input,select{font:16px var(--body);padding:12px;border-radius:6px;border:2px solid var(--line);background:var(--bg);color:var(--fg)}
+.ok{background:var(--surface);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:10px}
+.ok h3{font-family:var(--display);font-weight:400;font-size:36px;margin:0;text-transform:uppercase;color:var(--accent)}
+.info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:2px solid var(--line);padding-top:32px}
+.info h3{margin:0 0 4px;font-size:16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent)}
+.info p{margin:0;color:var(--muted)}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px}
+@media (max-width:900px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.coaches{grid-template-columns:1fr}.trial .wrap{grid-template-columns:1fr}}
+@media (max-width:560px){.plans{grid-template-columns:1fr}nav{display:none}.cls{grid-template-columns:1fr auto}.cls time{grid-column:1/-1}.info{grid-template-columns:1fr}.stats b{font-size:32px}}
+</style>
+
+<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your gym? Starts at ₱3,500</div>
+
+<header><div class="wrap">
+  <div class="brand">Lakas <span>Fitness</span></div>
+  <nav aria-label="Main"><a href="#plans">Membership</a><a href="#classes">Classes</a><a href="#coaches">Coaches</a></nav>
+  <a class="btn" href="#trial">Free trial</a>
+</div></header>
+
+<section class="hero" style="padding-block:0"><div class="wrap">
+  <h1>Stronger <span>than yesterday.</span></h1>
+  <p>Complete gym equipment, group classes and personal trainers. For beginners all the way to serious lifters.</p>
+  <div class="ctas"><a class="btn" href="#trial">Book a free trial</a><a class="btn ghost" href="#plans">See rates</a></div>
+  <div class="stats">
+    <div><b>300+</b><span>active members</span></div>
+    <div><b>6</b><span>certified coaches</span></div>
+    <div><b>5AM–11PM</b><span>open daily</span></div>
+  </div>
+</div></section>
+
+<section id="plans"><div class="wrap">
+  <h2>Membership</h2>
+  <p class="sub">No joining fee this month. Pay with GCash or cash.</p>
+  <div class="plans">
+    <div class="plan"><h3>Day pass</h3><div class="amt">₱100</div><ul class="muted"><li>Full-day gym access</li><li>Locker and shower</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
+    <div class="plan hot"><span class="tag">Most popular</span><h3>Monthly</h3><div class="amt">₱1,200<small> /month</small></div><ul><li>Unlimited gym access</li><li>All group classes</li><li>Fitness assessment</li></ul><a class="btn" href="#trial" style="background:var(--on-accent);color:var(--accent)">Choose</a></div>
+    <div class="plan"><h3>3 Months</h3><div class="amt">₱3,200</div><ul class="muted"><li>Save ₱400</li><li>All group classes</li><li>1 free PT session</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
+    <div class="plan"><h3>With coach</h3><div class="amt">₱2,500<small> /month</small></div><ul class="muted"><li>8 personal training sessions</li><li>Meal guide</li><li>Monthly progress check</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
+  </div>
+</div></section>
+
+<section id="classes" style="background:var(--bar)"><div class="wrap">
+  <h2>Class schedule</h2>
+  <p class="sub">Included in Monthly and 3 Months. Pick a day.</p>
+  <div class="days" role="group" aria-label="Day" id="days"></div>
+  <div class="sched" id="sched"></div>
+</div></section>
+
+<section id="coaches"><div class="wrap">
+  <h2>Coaches</h2>
+  <p class="sub">Certified trainers to help you reach your goal.</p>
+  <div class="coaches">
+    <div class="coachcard"><div class="avatar" aria-hidden="true">MR</div><div><b>Coach Mark</b><span class="muted">Strength and powerlifting</span></div></div>
+    <div class="coachcard"><div class="avatar" aria-hidden="true">JA</div><div><b>Coach Jen</b><span class="muted">HIIT and weight loss</span></div></div>
+    <div class="coachcard"><div class="avatar" aria-hidden="true">RB</div><div><b>Coach Rey</b><span class="muted">Boxing and conditioning</span></div></div>
+  </div>
+</div></section>
+
+<section class="trial" id="trial" style="background:var(--bar)"><div class="wrap">
+  <div>
+    <h2>Free trial</h2>
+    <p class="sub">Try the gym free for one day. No payment, no commitment.</p>
+    <div class="info">
+      <div><h3>Address</h3><p>[Street], [City]</p></div>
+      <div><h3>Hours</h3><p>Daily, 5AM–11PM</p></div>
+      <div><h3>Contact</h3><p>0917 000 0000</p></div>
+    </div>
+  </div>
+  <div>
+    <form id="trialForm">
+      <label for="tname">Name<input id="tname" required autocomplete="name" value="Maria Santos"></label>
+      <label for="tphone">Mobile number<input id="tphone" required inputmode="tel" value="0917 123 4567"></label>
+      <label for="tdate">When will you come?<select id="tdate"></select></label>
+      <label for="tgoal">What's your goal?<select id="tgoal"><option>Lose weight</option><option>Build strength and muscle</option><option>Get fit and healthy</option><option>Boxing or combat</option></select></label>
+      <button class="btn" type="submit">Book my free trial</button>
+    </form>
+    <div class="ok" id="ok" hidden>
+      <h3>You're booked!</h3>
+      <p id="okMsg"></p>
+      <p class="muted" style="font-size:14px">This is a demo, so no real booking was sent. On a live website, the gym gets notified right away.</p>
+      <button class="btn ghost" type="button" id="again">Book again</button>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© Lakas Fitness (sample business)</span><span>Website by Likha Web Studio</span></div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const SCHED={
+ Mon:[['6:00 AM','HIIT Burn','Coach Jen',4],['6:00 PM','Strength 101','Coach Mark',9],['7:30 PM','Boxing Basics','Coach Rey',2]],
+ Tue:[['6:30 AM','Core & Mobility','Coach Jen',10],['7:00 PM','Circuit Training','Coach Mark',6]],
+ Wed:[['6:00 AM','HIIT Burn','Coach Jen',3],['6:00 PM','Powerlifting Clinic','Coach Mark',5],['7:30 PM','Boxing Conditioning','Coach Rey',7]],
+ Thu:[['6:30 AM','Core & Mobility','Coach Jen',11],['7:00 PM','Circuit Training','Coach Mark',8]],
+ Fri:[['6:00 AM','HIIT Burn','Coach Jen',6],['7:00 PM','Friday Fight Night','Coach Rey',1]],
+ Sat:[['8:00 AM','Weekend Bootcamp','Coach Jen',12],['10:00 AM','Strength 101','Coach Mark',9]]
+};
+let day='Mon';
+function renderDays(){$('days').innerHTML=Object.keys(SCHED).map(d=>`<button class="day" type="button" data-day="${d}" aria-pressed="${d===day}">${d}</button>`).join('');}
+function renderSched(){$('sched').innerHTML=SCHED[day].map(([t,n,c,s])=>`<div class="cls"><time>${t}</time><div><div class="name">${n}</div><div class="coach">${c}</div></div><span class="slots ${s<=3?'low':''}">${s<=3?'Almost full: ':''}${s} slots</span></div>`).join('');}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b){day=b.dataset.day;renderDays();renderSched();}});
+const opts=[];const fmt=new Intl.DateTimeFormat('en-PH',{weekday:'long',month:'long',day:'numeric'});
+for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()+i);opts.push(`<option>${fmt.format(d)}</option>`);}
+$('tdate').innerHTML=opts.join('');
+$('trialForm').addEventListener('submit',e=>{e.preventDefault();
+  $('okMsg').textContent=`See you on ${$('tdate').value}, ${$('tname').value.split(' ')[0]}! Goal: ${$('tgoal').value}. Bring water, a towel and rubber shoes.`;
+  $('trialForm').hidden=true;$('ok').hidden=false;});
+$('again').onclick=()=>{$('trialForm').hidden=false;$('ok').hidden=true;};
+renderDays();renderSched();
+</script>
+
+</body></html>

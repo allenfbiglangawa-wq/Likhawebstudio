@@ -1,0 +1,159 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Ganda Studio Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;600;700&display=swap">
+</head><body>
+<style>
+/* Layout: salon site — calm split hero, then a three-step booking card (service → schedule → details). Single light look. */
+:root{
+  --bg:#FFFFFF; --blush:#F7E6EA; --plum:#4A2545; --plum-2:#6B3A64; --ink:#2B1A28; --muted:#6F5C6B; --line:#EAD7DD; --bar:#111318;
+  --display:'Marcellus', Georgia, serif;
+  --body:'Karla', system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
+.demo b{color:#FFFFFF}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:20px;gap:16px}
+.brand{font-family:var(--display);font-size:26px;letter-spacing:0.06em;text-transform:uppercase;color:var(--plum)}
+.btn{font:700 15px var(--body);border:0;border-radius:999px;padding:12px 22px;cursor:pointer;background:var(--plum);color:#FFFFFF;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--plum);border:1.5px solid var(--plum)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--plum-2);outline-offset:2px}
+.hero{background:var(--blush)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:56px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,6vw,66px);line-height:1.05;margin:0 0 16px;color:var(--plum);text-wrap:balance}
+.hero p{color:var(--muted);font-size:18px;margin:0 0 24px;max-width:44ch}
+.hours{background:var(--bg);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.hours h2{font-family:var(--display);font-weight:400;font-size:24px;margin:0;color:var(--plum)}
+.hours div{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-block:6px;font-variant-numeric:tabular-nums}
+.hours div:last-child{border:0}
+section.book .wrap{padding-block:56px}
+.book h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4.5vw,44px);margin:0 0 6px;color:var(--plum)}
+.sub{color:var(--muted);margin:0 0 24px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;font-size:14px;font-weight:600}
+.step{padding:6px 14px;border-radius:999px;background:var(--blush);color:var(--muted)}
+.step.on{background:var(--plum);color:#FFFFFF}
+.card{border:1.5px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;font:16px var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:16px;cursor:pointer}
+.opt b{display:block;font-weight:700}
+.opt small{color:var(--muted)}
+.opt .p{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt[aria-pressed="true"]{border-color:var(--plum);background:var(--blush)}
+.label{font-weight:700;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.dates,.times{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 15px var(--body);padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-width:84px;text-align:center}
+.chip small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.chip[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:#FFFFFF}
+.chip[aria-pressed="true"] small{color:#E9D6E5}
+.chip:disabled{text-decoration:line-through;opacity:.45;cursor:not-allowed}
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.summary{background:var(--blush);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.summary div{display:flex;justify-content:space-between;gap:12px}
+form{display:flex;flex-direction:column;gap:12px}
+label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
+input,select{font:16px var(--body);padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.done{text-align:center;align-items:center}
+.done h3{font-family:var(--display);font-weight:400;font-size:34px;margin:0;color:var(--plum)}
+.note{font-size:13px;color:var(--muted)}
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.svc{grid-template-columns:1fr}}
+</style>
+
+<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your salon? Starts at ₱3,500</div>
+
+<header><div class="wrap"><div class="brand">Ganda Studio</div><a class="btn" href="#book">Book now</a></div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Relax. We’ll take care of the rest.</h1>
+    <p>Hair, nails and spa in one place. Book online, pick your time, and skip the line.</p>
+    <a class="btn" href="#book">Book an appointment</a>
+  </div>
+  <div class="hours">
+    <h2>Salon hours</h2>
+    <div><span>Tuesday – Friday</span><span>10:00 AM – 8:00 PM</span></div>
+    <div><span>Saturday – Sunday</span><span>9:00 AM – 9:00 PM</span></div>
+    <div><span>Monday</span><span>Closed</span></div>
+    <div><span>Address</span><span>[Street], [City]</span></div>
+  </div>
+</div></section>
+
+<section class="book" id="book"><div class="wrap">
+  <h2>Book an appointment</h2>
+  <p class="sub">Just three steps. Your slot is confirmed right away.</p>
+  <div class="steps" aria-hidden="true"><span class="step" id="s1">1 · Service</span><span class="step" id="s2">2 · Date and time</span><span class="step" id="s3">3 · Details</span></div>
+
+  <div class="card" id="step1">
+    <p class="label">Choose a service</p>
+    <div class="svc" id="svc"></div>
+    <div class="nav"><span class="note" id="svcNote"></span><button class="btn" type="button" id="to2">Next</button></div>
+  </div>
+
+  <div class="card" id="step2" hidden>
+    <p class="label">Date</p>
+    <div class="dates" id="dates"></div>
+    <p class="label">Time</p>
+    <div class="times" id="times"></div>
+    <div class="nav"><button class="btn ghost" type="button" id="back1">Back</button><button class="btn" type="button" id="to3">Next</button></div>
+  </div>
+
+  <div class="card" id="step3" hidden>
+    <div class="summary" id="summary"></div>
+    <form id="form">
+      <label for="bname">Name<input id="bname" required autocomplete="name" value="Carla Mendoza"></label>
+      <label for="bphone">Mobile number<input id="bphone" required inputmode="tel" value="0917 222 3344"></label>
+      <label for="bstylist">Preferred stylist<select id="bstylist"><option>Anyone available</option><option>Ate Joy</option><option>Kuya Paolo</option><option>Ms. Rica</option></select></label>
+      <div class="nav"><button class="btn ghost" type="button" id="back2">Back</button><button class="btn" type="submit">Confirm booking</button></div>
+    </form>
+  </div>
+
+  <div class="card done" id="done" hidden>
+    <h3>You're booked!</h3>
+    <p id="doneMsg"></p>
+    <p class="note">This is a demo, so no real booking was sent. On a live website, the salon gets notified and sends a reminder.</p>
+    <button class="btn ghost" type="button" id="restart">Book again</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© Ganda Studio (sample business) · 0917 000 0000</span><span>Website by Likha Web Studio</span></div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const SVC=[
+ {id:'cut',n:'Haircut and blow-dry',d:45,p:350},{id:'col',n:'Hair color',d:120,p:1500},
+ {id:'reb',n:'Rebond',d:180,p:2500},{id:'kera',n:'Keratin treatment',d:120,p:1800},
+ {id:'mani',n:'Manicure and pedicure',d:60,p:300},{id:'gel',n:'Gel nails',d:75,p:650},
+ {id:'mas',n:'Full body massage',d:60,p:550},{id:'fac',n:'Facial',d:60,p:700}
+];
+const TIMES=['10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+const st={svc:'cut',date:null,time:null};
+const fmtD=new Intl.DateTimeFormat('en-PH',{weekday:'short'}),fmtN=new Intl.DateTimeFormat('en-PH',{month:'short',day:'numeric'}),fmtL=new Intl.DateTimeFormat('en-PH',{weekday:'long',month:'long',day:'numeric'});
+const DAYS=[];for(let i=1;DAYS.length<7;i++){const d=new Date();d.setDate(d.getDate()+i);if(d.getDay()!==1)DAYS.push(d);}
+function show(n){[1,2,3].forEach(i=>{$('step'+i).hidden=i!==n;$('s'+i).classList.toggle('on',i===n);});$('done').hidden=n!==4;}
+function renderSvc(){$('svc').innerHTML=SVC.map(s=>`<button class="opt" type="button" data-svc="${s.id}" aria-pressed="${s.id===st.svc}"><span><b>${s.n}</b><small>${s.d} minutes</small></span><span class="p">₱${s.p.toLocaleString('en-PH')}</span></button>`).join('');
+  const s=SVC.find(x=>x.id===st.svc);$('svcNote').textContent=`Selected: ${s.n}`;}
+function taken(di,t){return (di*3+TIMES.indexOf(t))%4===0;}
+function renderSched(){
+  $('dates').innerHTML=DAYS.map((d,i)=>`<button class="chip" type="button" data-date="${i}" aria-pressed="${st.date===i}">${fmtD.format(d)}<small>${fmtN.format(d)}</small></button>`).join('');
+  $('times').innerHTML=st.date===null?'<span class="note">Pick a date first.</span>':TIMES.map(t=>`<button class="chip" type="button" data-time="${t}" aria-pressed="${st.time===t}" ${taken(st.date,t)?'disabled aria-label="'+t+', fully booked"':''}>${t}</button>`).join('');
+  $('to3').disabled=st.date===null||st.time===null;}
+function renderSummary(){const s=SVC.find(x=>x.id===st.svc);
+  $('summary').innerHTML=`<div><span>Service</span><b>${s.n}</b></div><div><span>When</span><b>${fmtL.format(DAYS[st.date])}, ${st.time}</b></div><div><span>Price</span><b>₱${s.p.toLocaleString('en-PH')}</b></div>`;}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.svc){st.svc=b.dataset.svc;renderSvc();}
+  if(b.dataset.date){st.date=+b.dataset.date;st.time=null;renderSched();}
+  if(b.dataset.time){st.time=b.dataset.time;renderSched();}
+});
+$('to2').onclick=()=>{renderSched();show(2);};$('back1').onclick=()=>show(1);
+$('to3').onclick=()=>{renderSummary();show(3);};$('back2').onclick=()=>show(2);
+$('form').addEventListener('submit',e=>{e.preventDefault();const s=SVC.find(x=>x.id===st.svc);
+  $('doneMsg').textContent=`Thank you, ${$('bname').value.split(' ')[0]}! See you on ${fmtL.format(DAYS[st.date])} at ${st.time} for your ${s.n.toLowerCase()} (${$('bstylist').value}).`;show(4);});
+$('restart').onclick=()=>{st.date=null;st.time=null;show(1);};
+renderSvc();show(1);
+</script>
+
+</body></html>

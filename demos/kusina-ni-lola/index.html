@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Kusina ni Lola Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+</head><body>
+<style>
+/* Layout: home-cooked food delivery — green banana-leaf band hero, carinderia-board menu list beside a sticky order panel. Single light look. */
+:root{
+  --bg:#FFFFFF; --leaf:#1F5132; --leaf-2:#2C6B45; --sun:#F4C542; --ink:#1A1A14; --muted:#5F6358; --line:#E4E6DF; --soft:#F2F4EE; --bar:#111318;
+  --display:'DM Serif Display', Georgia, serif;
+  --body:'Nunito Sans', system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
+.demo b{color:#FFFFFF}
+.top{background:var(--leaf);color:#FFFFFF}
+.top header{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
+.brand{font-family:var(--display);font-size:28px}
+.brand small{display:block;font-family:var(--body);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sun);font-weight:700}
+.top .hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;padding-block:28px 48px}
+.top h1{font-family:var(--display);font-weight:400;font-size:clamp(42px,6.5vw,76px);line-height:1;margin:0 0 16px;text-wrap:balance}
+.top h1 em{font-style:normal;color:var(--sun)}
+.top p{color:#D8E6DC;font-size:18px;margin:0;max-width:46ch}
+.badges{display:flex;flex-direction:column;gap:10px}
+.badge{background:var(--leaf-2);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-weight:600}
+.badge b{color:var(--sun)}
+.btn{font:800 16px var(--body);border:0;border-radius:8px;padding:13px 20px;cursor:pointer;background:var(--sun);color:var(--ink);text-decoration:none;display:inline-block}
+.btn.dark{background:var(--leaf);color:#FFFFFF}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+main .wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:36px;padding-block:40px 64px;align-items:start}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.cat{font:700 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.cat[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#FFFFFF}
+.group h2{font-family:var(--display);font-weight:400;font-size:34px;margin:28px 0 4px}
+.group .note{margin:0 0 8px}
+.dish{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;padding-block:16px;border-bottom:1px dashed #C9CDC0}
+.dish h3{margin:0;font-size:18px;font-weight:800}
+.dish p{margin:0;color:var(--muted);font-size:14px;grid-column:1}
+.dish .serve{font-size:13px;color:var(--leaf);font-weight:700}
+.dish .right{grid-row:1/span 3;grid-column:2;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px}
+.price{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
+.add{font:800 14px var(--body);border:0;background:var(--leaf);color:#FFFFFF;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}
+.note{font-size:13px;color:var(--muted)}
+.panel{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));background:var(--soft);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.panel h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;font-size:15px;padding-block:6px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:7px;border:1.5px solid #C9CDC0;background:var(--bg);color:var(--ink);cursor:pointer}
+.totals div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;padding-block:2px}
+.totals .grand{font-weight:800;font-size:19px;border-top:1.5px solid #C9CDC0;padding-top:8px;margin-top:4px}
+.free{font-size:13px;font-weight:700;color:var(--leaf);background:#E3EEDF;border-radius:8px;padding:8px 10px}
+form{display:flex;flex-direction:column;gap:11px}
+label{font-weight:700;font-size:14px;display:flex;flex-direction:column;gap:5px}
+input,select,textarea{font:16px var(--body);padding:10px 12px;border-radius:8px;border:1.5px solid #C9CDC0;background:var(--bg);color:var(--ink)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid #C9CDC0;border-radius:8px;padding:9px 12px;font-weight:600;background:var(--bg)}
+.qr{border:2px dashed #C9CDC0;border-radius:10px;padding:16px;text-align:center;font-size:14px;color:var(--muted);background:var(--bg)}
+.done{display:flex;flex-direction:column;gap:10px}
+.done .num{font-family:var(--display);font-size:34px;color:var(--leaf)}
+footer{background:var(--leaf);color:#D8E6DC}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px}
+.mbar{position:fixed;left:0;right:0;bottom:0;background:var(--leaf);color:#FFFFFF;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20;display:none}
+.mbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:12px}
+@media (max-width:900px){
+  main .wrap{grid-template-columns:1fr}
+  .panel{position:static}
+  .top .hero{grid-template-columns:1fr}
+  .mbar.show{display:block}
+  footer{padding-bottom:64px}
+}
+</style>
+
+<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your food business? Starts at ₱3,500</div>
+
+<div class="top"><div class="wrap">
+  <header>
+    <div class="brand">Kusina ni Lola<small>Home-cooked, delivered home</small></div>
+    <a class="btn" href="#order">Order now</a>
+  </header>
+  <div class="hero">
+    <div>
+      <h1>Home cooking <em>just like Lola's.</em></h1>
+      <p>Adobo, kare-kare, pancit and kakanin, cooked fresh daily. Order now for lunch, dinner or your next party.</p>
+    </div>
+    <div class="badges">
+      <div class="badge"><span>Free delivery</span><b>₱800 and up</b></div>
+      <div class="badge"><span>Order cut-off</span><b>10 AM for lunch</b></div>
+      <div class="badge"><span>Payment</span><b>GCash or COD</b></div>
+    </div>
+  </div>
+</div></div>
+
+<main><div class="wrap">
+  <div>
+    <div class="cats" role="group" aria-label="Category" id="cats"></div>
+    <div id="menu"></div>
+  </div>
+  <aside class="panel" id="order" aria-label="Your order">
+    <div id="orderView">
+      <h2>Your order</h2>
+      <div id="lines"></div>
+      <p class="note" id="empty">Your order is empty. Pick a dish from the menu.</p>
+      <div id="sum">
+        <div class="totals">
+          <div><span>Subtotal</span><span id="sub">₱0</span></div>
+          <div><span>Delivery</span><span id="fee">₱0</span></div>
+          <div class="grand"><span>Total</span><span id="total">₱0</span></div>
+        </div>
+        <div class="free" id="free"></div>
+        <form id="checkout" style="margin-top:12px">
+          <label for="oname">Name<input id="oname" required autocomplete="name" value="Ana Reyes"></label>
+          <label for="ophone">Mobile number<input id="ophone" required inputmode="tel" value="0918 765 4321"></label>
+          <label for="oaddr">Delivery address<textarea id="oaddr" rows="2" required>Blk 5 Lot 12, Sampaguita St.</textarea></label>
+          <div class="two">
+            <label for="odate">Date<select id="odate"></select></label>
+            <label for="oslot">Time<select id="oslot"><option>11:00 AM – 12:00 NN</option><option>12:00 – 1:00 PM</option><option>5:00 – 6:00 PM</option><option>6:00 – 7:00 PM</option></select></label>
+          </div>
+          <div class="choices" role="radiogroup" aria-label="Payment">
+            <label><input type="radio" name="pay" id="pg" value="GCash" checked> GCash</label>
+            <label><input type="radio" name="pay" id="pc" value="COD"> Cash on delivery</label>
+          </div>
+          <div class="qr" id="qr">Your GCash QR code appears here. Customers scan, pay, and upload a screenshot.</div>
+          <button class="btn dark" type="submit">Place order</button>
+        </form>
+      </div>
+    </div>
+    <div class="done" id="doneView" hidden>
+      <span class="note">Order number</span>
+      <div class="num" id="num">KL-0000</div>
+      <p id="doneMsg"></p>
+      <p class="note">This is a demo, so no real order was sent. On a live website, the business gets notified of every order.</p>
+      <button class="btn ghost" type="button" id="again">New order</button>
+    </div>
+  </aside>
+</div></main>
+
+<footer><div class="wrap"><span>© Kusina ni Lola (sample business) · 0917 000 0000</span><span>Website by Likha Web Studio</span></div></footer>
+
+<div class="mbar" id="mbar"><div class="wrap"><span><b id="mCount">0</b> item · <b id="mTotal">₱0</b></span><a class="btn" href="#order">View order</a></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const peso=n=>'₱'+n.toLocaleString('en-PH');
+const GROUPS={ulam:'Ulam (main dishes)',bilao:'Bilao and party trays',merienda:'Merienda (snacks)'};
+const MENU=[
+ {id:'ado',g:'ulam',name:'Chicken Pork Adobo',desc:'Garlicky dry-style adobo, Lola’s recipe.',serve:'Good for 2',price:180},
+ {id:'kar',g:'ulam',name:'Kare-Kare',desc:'Thick peanut sauce, served with bagoong.',serve:'Good for 2–3',price:320},
+ {id:'sin',g:'ulam',name:'Sinigang na Baboy',desc:'Tangy broth with gabi and kangkong.',serve:'Good for 2–3',price:260},
+ {id:'bic',g:'ulam',name:'Bicol Express',desc:'Coconut milk and chili. Medium spicy.',serve:'Good for 2',price:200},
+ {id:'pan',g:'bilao',name:'Pancit Canton Bilao',desc:'With shrimp, chicken and vegetables.',serve:'Good for 10–12',price:850},
+ {id:'pal',g:'bilao',name:'Pancit Palabok Bilao',desc:'Topped with chicharon, egg and tinapa flakes.',serve:'Good for 10–12',price:900},
+ {id:'lum',g:'bilao',name:'Lumpiang Shanghai Tray',desc:'50 pieces, with sweet chili sauce.',serve:'50 pcs',price:650},
+ {id:'bib',g:'merienda',name:'Bibingka',desc:'Charcoal-cooked, with salted egg and cheese.',serve:'1 pc',price:70},
+ {id:'tur',g:'merienda',name:'Turon',desc:'Banana and jackfruit in a crispy wrapper.',serve:'3 pcs',price:60},
+ {id:'puto',g:'merienda',name:'Puto Cheese',desc:'Soft and freshly steamed.',serve:'12 pcs',price:120}
+];
+const cart={ado:1,pan:1};let g='all';
+function renderCats(){$('cats').innerHTML=[['all','All'],...Object.entries(GROUPS)].map(([k,v])=>`<button class="cat" type="button" data-g="${k}" aria-pressed="${k===g}">${v}</button>`).join('');}
+function renderMenu(){
+  $('menu').innerHTML=Object.entries(GROUPS).filter(([k])=>g==='all'||g===k).map(([k,v])=>`
+   <div class="group"><h2>${v}</h2>${MENU.filter(m=>m.g===k).map(m=>`
+    <div class="dish"><h3>${m.name}</h3><p>${m.desc}</p><span class="serve">${m.serve}</span>
+     <div class="right"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-add="${m.id}" aria-label="Add ${m.name}">Add</button></div></div>`).join('')}</div>`).join('');
+}
+function calc(){const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);const fee=sub===0||sub>=800?0:49;return{sub,fee,total:sub+fee,count:Object.values(cart).reduce((a,b)=>a+b,0)};}
+function renderCart(){
+  const t=calc();
+  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `<div class="line"><span>${m.name}</span><span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one">+</button></span><span class="price" style="font-size:15px">${peso(m.price*q)}</span></div>`}).join('');
+  $('empty').hidden=t.count>0;$('sum').hidden=t.count===0;
+  $('sub').textContent=peso(t.sub);$('fee').textContent=t.fee?peso(t.fee):'Free';$('total').textContent=peso(t.total);
+  $('free').textContent=t.sub>=800?'You get free delivery!':`Add ${peso(800-t.sub)} more for free delivery.`;
+  $('mCount').textContent=t.count;$('mTotal').textContent=peso(t.total);$('mbar').classList.toggle('show',t.count>0);
+}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.g){g=b.dataset.g;renderCats();renderMenu();}
+  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',900);renderCart();}
+  if(b.dataset.inc){cart[b.dataset.inc]++;renderCart();}
+  if(b.dataset.dec){if(--cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderCart();}
+});
+const fmt=new Intl.DateTimeFormat('en-PH',{weekday:'short',month:'short',day:'numeric'});const ds=[];
+for(let i=0;i<6;i++){const d=new Date();d.setDate(d.getDate()+i);ds.push(`<option>${i===0?'Today, ':''}${fmt.format(d)}</option>`);}
+$('odate').innerHTML=ds.join('');
+document.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{$('qr').hidden=!$('pg').checked;});
+$('checkout').addEventListener('submit',e=>{e.preventDefault();const t=calc();
+  $('num').textContent='KL-'+Math.floor(1000+Math.random()*9000);
+  $('doneMsg').textContent=`Thank you, ${$('oname').value.split(' ')[0]}! We will deliver ${t.count} item(s) on ${$('odate').value}, ${$('oslot').value}. Total: ${peso(t.total)} (${document.querySelector('input[name=pay]:checked').value}).`;
+  $('orderView').hidden=true;$('doneView').hidden=false;$('mbar').classList.remove('show');});
+$('again').onclick=()=>{for(const k in cart)delete cart[k];$('orderView').hidden=false;$('doneView').hidden=true;renderCart();};
+renderCats();renderMenu();renderCart();
+</script>
+
+</body></html>
