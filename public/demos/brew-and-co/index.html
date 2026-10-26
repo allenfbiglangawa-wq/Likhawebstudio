@@ -1,493 +1,236 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Brew &amp; Co. · Specialty Coffee in Maginhawa, Quezon City</title>
-<meta name="description" content="Brew &amp; Co. is a neighborhood specialty coffee shop on Maginhawa St., Quezon City. Order online for pick-up or delivery.">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Brew &amp; Co. Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+</head><body>
 <style>
-/* Layout: neighborhood cafe — photo hero, bestsellers, filterable photo menu with drink customizer, story, reviews, visit info with map, cart drawer with GCash checkout and order tracker. Single light look. */
+/* Layout: one-column cafe site — hero, filterable menu grid, cart drawer with checkout. Single light look. */
 :root{
-  --bg:#FFFFFF; --soft:#F6F2EC; --ink:#2A1E16; --muted:#6E6159; --line:#E8E1D8;
-  --accent:#2F6B4F; --accent-2:#24563F; --accent-ink:#FFFFFF; --bar:#111318; --cream:#EADBC6; --gold:#E3A33B;
-  --display:'Bricolage Grotesque','Figtree',system-ui,sans-serif;
-  --body:'Figtree',system-ui,sans-serif;
-  color-scheme:light;
+  --bg:#FFFFFF; --soft:#F3F1EE; --ink:#2A1E16; --muted:#6E6159; --line:#E6E0D9;
+  --accent:#2F6B4F; --accent-ink:#FFFFFF; --bar:#111318;
+  --display:'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --body:'Figtree', system-ui, sans-serif;
+  color-scheme: light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
-img{max-width:100%;display:block}
-[hidden]{display:none!important}
-.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-a{color:inherit}
-.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding:9px 16px}
-.demo a{color:#fff;font-weight:700}
-.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--c1,#D9C2A5),var(--c2,#A9825B))}
-.ph img{width:100%;height:100%;object-fit:cover}
-/* header */
-header{position:sticky;top:0;z-index:25;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-0.02em;text-decoration:none}
-.brand i{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--cream);display:grid;place-items:center;font-style:normal;font-size:15px}
-nav{display:flex;gap:24px;font-weight:500;color:var(--muted)}
-nav a{text-decoration:none}nav a:hover{color:var(--ink)}
-.hdr-r{display:flex;align-items:center;gap:10px}
-.status{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--muted);white-space:nowrap}
-.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dot,#9AA0A6)}
-.btn{font:600 15px var(--body);border:0;border-radius:10px;padding:12px 20px;cursor:pointer;background:var(--ink);color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
+.demo b{color:#FFFFFF}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em}
+nav{display:flex;gap:22px;font-weight:500;color:var(--muted)}
+nav a{color:inherit;text-decoration:none}
+nav a:hover{color:var(--ink)}
+.btn{font:600 15px var(--body);border:0;border-radius:8px;padding:12px 20px;cursor:pointer;background:var(--ink);color:#FFFFFF}
 .btn.green{background:var(--accent);color:var(--accent-ink)}
-.btn.green:hover{background:var(--accent-2)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn.light{background:#fff;color:var(--ink)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.cartbtn .n{background:#fff;color:var(--accent);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px;font-weight:700;padding:0 6px}
-/* hero */
-.hero{position:relative;color:#fff;background:#2A1E16}
-.hero .ph{position:absolute;inset:0;--c1:#5B4030;--c2:#2A1E16}
-.hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,16,11,.88) 0%,rgba(24,16,11,.6) 45%,rgba(24,16,11,.15) 100%)}
-.hero .wrap{position:relative;padding-block:96px 88px;min-height:560px;display:flex;flex-direction:column;justify-content:center}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);margin:0 0 14px}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,6.5vw,76px);line-height:.98;letter-spacing:-0.035em;margin:0 0 18px;max-width:14ch;text-wrap:balance}
-.hero p{font-size:19px;max-width:46ch;margin:0 0 28px;color:#EFE6DC}
-.ctas{display:flex;gap:12px;flex-wrap:wrap}
-.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45)}
-.rating{display:flex;align-items:center;gap:10px;margin-top:32px;font-size:15px;color:#EFE6DC;flex-wrap:wrap}
-.stars{color:var(--gold);letter-spacing:2px}
-.rating b{color:#fff}
-/* perks strip */
-.perks{background:var(--soft);border-bottom:1px solid var(--line)}
-.perks .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-block:20px}
-.perk{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)}
-.perk b{display:block;color:var(--ink);font-size:15px}
-.perk svg{width:28px;height:28px;flex-shrink:0;color:var(--accent)}
-/* sections */
-section{padding-block:72px}
-.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
-section h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.03em;margin:0 0 6px;line-height:1.05}
-.sub{color:var(--muted);margin:0;max-width:56ch}
-.best{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.bcard{border-radius:18px;overflow:hidden;background:var(--soft);display:flex;flex-direction:column}
-.bcard .ph{aspect-ratio:4/3}
-.bcard .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
-.bcard h3{margin:0;font-size:20px}
-.bcard p{margin:0;color:var(--muted);font-size:15px;flex:1}
-.tagc{position:absolute;top:12px;left:12px;background:#fff;color:var(--ink);font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;z-index:1}
+.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:40px 56px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-0.035em;margin:0 0 18px;text-wrap:balance}
+.hero p{color:var(--muted);font-size:18px;max-width:44ch;margin:0 0 26px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-art{aspect-ratio:1/1;max-width:100%;border-radius:20px;background:#C9A47C;display:grid;place-items:center;position:relative;overflow:hidden}
+.hero-art .steam{position:absolute;inset:auto 0 0;height:38%;background:#A9825B}
+.hero-art svg{position:relative;width:46%;height:auto}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
+.facts b{display:block;color:var(--ink);font-size:16px}
+section h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-0.03em;margin:0 0 6px}
+.menu{background:var(--soft);padding-block:56px}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{font:600 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:#FFFFFF;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.item{background:var(--bg);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.thumb{height:130px;border-radius:10px;display:grid;place-items:center}
+.thumb svg{width:56px;height:56px}
+.item h3{margin:0;font-size:18px;font-weight:700}
+.item p{margin:0;color:var(--muted);font-size:14px;flex:1}
 .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .price{font-weight:700;font-variant-numeric:tabular-nums}
-.add{font:600 14px var(--body);border:0;background:var(--accent);color:#fff;border-radius:10px;padding:9px 16px;cursor:pointer;min-height:40px}
-.add:hover{background:var(--accent-2)}
-/* menu */
-.menu{background:var(--soft)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tab{font:600 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-height:40px}
-.tab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-.item{background:var(--bg);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
-.item .ph{aspect-ratio:16/11}
-.item .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.item h3{margin:0;font-size:17px;font-weight:700}
-.item p{margin:0;color:var(--muted);font-size:14px;flex:1}
-.sold{position:absolute;inset:0;background:rgba(255,255,255,.7);display:grid;place-items:center;font-weight:700;z-index:1}
-/* story */
-.story .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.story .pics{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
-.story .pics .ph{border-radius:16px;aspect-ratio:3/4}
-.story .pics .ph:last-child{margin-top:48px}
-.story p{color:var(--muted);font-size:17px}
-.sig{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
-.sig b{display:block;font-family:var(--display);font-size:32px;line-height:1}
-.sig span{font-size:14px;color:var(--muted)}
-/* reviews */
-.reviews{background:var(--ink);color:#fff}
-.reviews .sub{color:#CDBFB3}
-.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.rev{background:#3A2B21;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
-.rev p{margin:0;color:#F1E8DF;flex:1}
-.who{display:flex;align-items:center;gap:12px;font-size:14px;color:#CDBFB3}
-.who b{display:block;color:#fff;font-size:15px}
-.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex-shrink:0}
-.gsum{display:flex;align-items:center;gap:14px;background:#3A2B21;border-radius:14px;padding:14px 18px}
-.gsum .big{font-family:var(--display);font-size:38px;font-weight:800;line-height:1}
-/* instagram */
-.ig{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-.ig .ph{aspect-ratio:1/1;border-radius:10px}
-/* visit */
-.visit .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:32px;align-items:stretch}
-.vinfo{display:flex;flex-direction:column;gap:22px}
-.vinfo h3{margin:0 0 4px;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.vinfo p{margin:0}
-.hours div{display:flex;justify-content:space-between;gap:12px;padding-block:5px;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
-.hours div.today{font-weight:700;color:var(--accent)}
-.map{border-radius:18px;overflow:hidden;min-height:380px;background:var(--soft);border:1px solid var(--line)}
-.map iframe{width:100%;height:100%;min-height:380px;border:0;display:block}
-footer{background:var(--bar);color:#B9BCC6;font-size:14px}
-footer .wrap{padding-block:40px 28px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
-footer h4{color:#fff;margin:0 0 10px;font-size:15px}
-footer a{color:#B9BCC6;text-decoration:none;display:block;padding-block:3px}
-footer a:hover{color:#fff}
-.legal{border-top:1px solid #262A33;padding-block:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-/* cart */
-.cartbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20;box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+.add{font:600 14px var(--body);border:0;background:var(--accent);color:#FFFFFF;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}
+.info .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-block:56px}
+.info h3{font-family:var(--display);font-size:20px;margin:0 0 6px}
+.info p{margin:0;color:var(--muted)}
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.cartbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#FFFFFF;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
 .cartbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:12px}
-.overlay{position:fixed;inset:0;background:rgba(20,14,10,.5);z-index:30}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--bg);z-index:31;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) 20px;overflow-y:auto;gap:16px}
+.cartbar .btn{background:var(--accent)}
+.overlay{position:fixed;inset:0;background:rgba(20,14,10,0.45);z-index:30}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg);z-index:31;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) 20px;overflow-y:auto;gap:16px}
 .drawer h2{font-family:var(--display);font-size:28px;margin:0}
-.line{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding-block:12px;border-bottom:1px solid var(--line)}
-.line .ph{width:52px;height:52px;border-radius:10px}
-.line small{display:block;color:var(--muted);font-size:13px}
-.qty{display:flex;align-items:center;gap:6px;margin-top:6px}
-.qty button{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding-block:10px;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer}
 .totals div{display:flex;justify-content:space-between;padding-block:3px;font-variant-numeric:tabular-nums}
 .totals .grand{font-weight:800;font-size:18px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
 form{display:flex;flex-direction:column;gap:12px}
 label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
-input,select,textarea{font:16px var(--body);padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.seg label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font-weight:600;cursor:pointer}
-.seg label:has(input:checked){border-color:var(--accent);background:#EEF5F1}
-.seg label small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+input,select,textarea{font:16px var(--body);padding:11px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;font-weight:500}
 .note{font-size:13px;color:var(--muted)}
-.gcash{border:1.5px dashed var(--line);border-radius:12px;padding:14px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;font-size:14px}
-.qr{width:96px;height:96px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px}
-.track{display:flex;flex-direction:column;gap:0;text-align:left;width:100%;margin-top:6px}
-.tstep{font-size:15px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding-bottom:18px;position:relative;color:var(--muted)}
-.tstep::before{content:"";position:absolute;left:13px;top:26px;bottom:0;width:2px;background:var(--line)}
-.tstep:last-child::before{display:none}
-.tstep .dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
-.tstep.on{color:var(--ink)}
-.tstep.on .dot{background:var(--accent);border-color:var(--accent);color:#fff}
-.tstep b{display:block}
-.done{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;padding-top:12px}
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding-top:40px}
 .done .num{font-family:var(--display);font-size:34px;font-weight:800}
-/* customizer */
-dialog{border:0;border-radius:20px;padding:0;width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px);color:var(--ink)}
-dialog::backdrop{background:rgba(20,14,10,.55)}
-.dlg .ph{aspect-ratio:16/9}
-.dlg .bd{padding:20px;display:flex;flex-direction:column;gap:16px}
-.dlg h3{font-family:var(--display);font-size:26px;margin:0}
-.opts{display:flex;gap:8px;flex-wrap:wrap}
-.opts label{flex-direction:row;font-weight:600;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;gap:6px;align-items:center}
-.opts label:has(input:checked){border-color:var(--accent);background:#EEF5F1}
-.opts input{accent-color:var(--accent)}
-.olabel{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.dlg .foot{display:flex;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
-.dlg{position:relative}
-.x{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
-#dAdd{white-space:nowrap}
-.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;z-index:40;box-shadow:0 8px 24px rgba(0,0,0,.2)}
-@media (max-width:900px){
-  .perks .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .best,.rgrid{grid-template-columns:1fr}
-  .story .wrap,.visit .wrap{grid-template-columns:1fr}
-  .ig{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-height:300px;aspect-ratio:auto;height:280px}
+  .info .wrap{grid-template-columns:1fr}
   nav{display:none}
-  footer .wrap{grid-template-columns:1fr 1fr}
-  footer .wrap>div:first-child{grid-column:1/-1}
 }
-@media (max-width:560px){
-  .status{display:none}
-  .hide-sm{display:none!important}
-  .hero .wrap{padding-block:64px 56px;min-height:500px}
-  .hero .ph::after{background:linear-gradient(180deg,rgba(24,16,11,.5) 0%,rgba(24,16,11,.88) 70%)}
-  .perks .wrap{grid-template-columns:1fr 1fr;gap:14px}
-  section{padding-block:56px}
-  .best{grid-auto-flow:column;grid-auto-columns:82%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
-  .bcard{scroll-snap-align:start}
-}
-@media (prefers-reduced-motion:no-preference){.add,.btn{transition:transform .12s,background .15s}.add:active,.btn:active{transform:scale(.97)}.bcard .ph img,.item .ph img{transition:transform .5s}.bcard:hover .ph img,.item:hover .ph img{transform:scale(1.04)}}
+@media (prefers-reduced-motion:no-preference){.add,.btn{transition:transform .12s}.add:active,.btn:active{transform:scale(.97)}}
 </style>
-</head><body>
 
-<div class="demo">Sample website by <a href="../../">Likha Web Studio</a> · Want one like this for your café? Starts at ₱3,500</div>
+<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your business? Starts at ₱3,500</div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-  <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 17l4-8h5l3 8M10 9l-1-3H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-bean" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="6.5" ry="9" transform="rotate(30 12 12)" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 6c3 3 1 8 7 12" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-  <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 12.5h2M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="cup" viewBox="0 0 64 64"><path d="M14 22 H44 V38 a14 14 0 0 1 -14 14 h-2 a14 14 0 0 1 -14 -14 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M44 26 h4 a6 6 0 0 1 0 12 h-4" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M24 8 c-3 4 3 6 0 10 M33 8 c-3 4 3 6 0 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="iced" viewBox="0 0 64 64"><path d="M18 14 H46 L42 56 H22 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M19 26 H45" stroke="currentColor" stroke-width="3"/><path d="M36 14 L40 4" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><rect x="25" y="32" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="33" y="40" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="bread" viewBox="0 0 64 64"><path d="M8 40 C8 22 56 22 56 40 C56 46 50 48 32 48 C14 48 8 46 8 40 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M22 30 L26 40 M32 28 L32 40 M42 30 L38 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
 </svg>
 
 <header><div class="wrap">
-  <a class="brand" href="#top"><i aria-hidden="true">B&amp;</i>Brew &amp; Co.</a>
-  <nav aria-label="Main"><a href="#menu">Menu</a><a href="#story">Our story</a><a href="#reviews">Reviews</a><a href="#visit">Visit us</a></nav>
-  <div class="hdr-r">
-    <span class="status" id="status">Checking hours…</span>
-    <button class="btn green cartbtn" type="button" id="openCart">Order <span class="n" id="headCount">0</span></button>
-  </div>
+  <div class="brand">Brew &amp; Co.</div>
+  <nav aria-label="Main"><a href="#menu">Menu</a><a href="#info">Location</a><a href="#info">Hours</a></nav>
+  <button class="btn green" type="button" id="openCart">Cart (<span id="headCount">0</span>)</button>
 </div></header>
 
-<main id="top">
-<section class="hero" style="padding:0">
-  <div class="ph" aria-hidden="true"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=70" alt="" fetchpriority="high" onerror="this.remove()"></div>
-  <div class="wrap">
-    <p class="eyebrow">Specialty coffee · Maginhawa, QC</p>
-    <h1>Your daily cup, made with care.</h1>
-    <p>Locally roasted beans from Benguet and Batangas, pastries baked every morning, and a cozy corner to stay a while. Order ahead and skip the line.</p>
-    <div class="ctas"><a class="btn green" href="#menu">Order for pick-up</a><a class="btn ghost" href="#visit">Get directions</a></div>
-    <div class="rating"><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.8</b> on Google · 412 reviews</span></div>
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Good coffee, made right.</h1>
+    <p>Freshly brewed coffee and pastries every day. Order online for pick-up or delivery, and it's ready when you arrive.</p>
+    <div class="ctas"><a class="btn green" href="#menu" style="text-decoration:none">Order online</a><a class="btn ghost" href="#info" style="text-decoration:none">Find us</a></div>
+    <div class="facts"><div><b>15 mins</b>pick-up ready</div><div><b>7AM–9PM</b>open daily</div><div><b>GCash</b>or cash</div></div>
   </div>
-</section>
-
-<div class="perks"><div class="wrap">
-  <div class="perk"><svg aria-hidden="true"><use href="#i-clock"/></svg><span><b>Ready in 15 mins</b>Order ahead for pick-up</span></div>
-  <div class="perk"><svg aria-hidden="true"><use href="#i-bike"/></svg><span><b>Delivery within 5 km</b>Flat ₱49 fee</span></div>
-  <div class="perk"><svg aria-hidden="true"><use href="#i-bean"/></svg><span><b>Local beans</b>Roasted every week</span></div>
-  <div class="perk"><svg aria-hidden="true"><use href="#i-wallet"/></svg><span><b>GCash, Maya or cash</b>Pay how you like</span></div>
-</div></div>
-
-<section id="best"><div class="wrap">
-  <div class="sh"><div><h2>Customer favorites</h2><p class="sub">The three drinks our regulars order again and again.</p></div><a class="btn ghost" href="#menu">See full menu</a></div>
-  <div class="best" id="bestGrid"></div>
+  <div class="hero-art" aria-hidden="true"><div class="steam"></div><svg viewBox="0 0 64 64" style="color:#2A1E16"><use href="#cup"/></svg></div>
 </div></section>
 
 <section class="menu" id="menu"><div class="wrap">
-  <div class="sh">
-    <div><h2>Menu</h2><p class="sub">Tap a drink to choose size, sugar level and milk. Prices include VAT.</p></div>
-    <div class="tabs" role="group" aria-label="Category" id="tabs"></div>
+  <div class="menu-head">
+    <div><h2>Menu</h2><div class="note">Tap “Add” to put it in your order.</div></div>
+    <div class="tabs" role="group" aria-label="Category">
+      <button class="tab" type="button" data-cat="all" aria-pressed="true">All</button>
+      <button class="tab" type="button" data-cat="coffee" aria-pressed="false">Coffee</button>
+      <button class="tab" type="button" data-cat="noncoffee" aria-pressed="false">Non-coffee</button>
+      <button class="tab" type="button" data-cat="pastry" aria-pressed="false">Pastries</button>
+    </div>
   </div>
   <div class="grid" id="grid"></div>
 </div></section>
 
-<section class="story" id="story"><div class="wrap">
-  <div class="pics">
-    <div class="ph" style="--c1:#8C6A50;--c2:#4B3426"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=70" alt="Barista pouring latte art" loading="lazy" onerror="this.remove()"></div>
-    <div class="ph" style="--c1:#C9A47C;--c2:#7A5A40"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=70" alt="Inside the Brew &amp; Co. café" loading="lazy" onerror="this.remove()"></div>
-  </div>
-  <div>
-    <p class="eyebrow" style="color:var(--accent)">Our story</p>
-    <h2>A small café with a big love for Filipino coffee.</h2>
-    <p>Brew &amp; Co. started in 2019 as a weekend coffee cart outside UP Diliman. Today we are a 30-seat café on Maginhawa, but we still do things the slow way: we buy straight from farmers in Atok and Lipa, roast in small batches, and dial in every shot by hand.</p>
-    <p>Whether you need a quick iced latte before class or a quiet table to work for the afternoon, come say hi. Free Wi-Fi and plenty of outlets.</p>
-    <div class="sig">
-      <div><b>2019</b><span>since our first cup</span></div>
-      <div><b>12</b><span>partner farms</span></div>
-      <div><b>30</b><span>seats, with outlets</span></div>
-    </div>
-  </div>
+<section class="info" id="info"><div class="wrap">
+  <div><h3>Location</h3><p>Ground floor, [Mall or street name], [City]</p></div>
+  <div><h3>Hours</h3><p>Monday–Sunday, 7:00 AM – 9:00 PM</p></div>
+  <div><h3>Contact</h3><p>0917 000 0000 · Brew &amp; Co. on Facebook</p></div>
 </div></section>
 
-<section class="reviews" id="reviews"><div class="wrap">
-  <div class="sh">
-    <div><h2>What our regulars say</h2><p class="sub">Real talk from our Google and Facebook reviews.</p></div>
-    <div class="gsum"><span class="big">4.8</span><span><span class="stars" aria-hidden="true">★★★★★</span><br><span style="font-size:14px;color:#CDBFB3">412 Google reviews</span></span></div>
-  </div>
-  <div class="rgrid">
-    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“Best Spanish latte in Maginhawa, hands down. Not too sweet, and the ordering online thing is so convenient. Pick-up na lang pagdating ko.”</p><div class="who"><span class="av" style="background:#2F6B4F">KD</span><span><b>Kim Dela Rosa</b>2 weeks ago · Google</span></div></div>
-    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“My go-to study spot. Fast Wi-Fi, lots of outlets, and the staff remember my order. The ensaymada is a must-try!”</p><div class="who"><span class="av" style="background:#A1662F">JP</span><span><b>Josh Pascual</b>1 month ago · Google</span></div></div>
-    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“Ordered for our office meeting, 14 drinks arrived on time and still cold. Paid via GCash in seconds. Will order again.”</p><div class="who"><span class="av" style="background:#6B4E8A">AR</span><span><b>Aira Ramos</b>1 month ago · Facebook</span></div></div>
-  </div>
-</div></section>
-
-<section id="ig" style="padding-bottom:0"><div class="wrap">
-  <div class="sh"><div><h2>@brewandco.ph</h2><p class="sub">Tag us on Instagram for a chance to be featured.</p></div><a class="btn ghost" href="#ig">Follow us</a></div>
-  <div class="ig" id="igGrid"></div>
-</div></section>
-
-<section class="visit" id="visit"><div class="wrap">
-  <div class="vinfo">
-    <div><h2>Visit us</h2><p class="sub">Across the street from the Maginhawa food park. Street parking available.</p></div>
-    <div><h3>Address</h3><p>128 Maginhawa St., Teachers Village East,<br>Diliman, Quezon City 1101</p></div>
-    <div><h3>Hours</h3><div class="hours" id="hours"></div></div>
-    <div><h3>Contact</h3><p>0917 842 1190 · hello@brewandco.ph</p></div>
-    <div class="ctas"><a class="btn green" href="https://www.google.com/maps/search/?api=1&query=Maginhawa+St+Teachers+Village+East+Quezon+City" target="_blank" rel="noopener">Open in Google Maps</a><a class="btn ghost" href="#visit">Message us</a></div>
-  </div>
-  <div class="map"><iframe title="Map to Brew &amp; Co." loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Maginhawa%20St%2C%20Teachers%20Village%20East%2C%20Quezon%20City&z=16&output=embed"></iframe></div>
-</div></section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div><h4>Brew &amp; Co.</h4><p style="margin:0;max-width:38ch">Specialty coffee and fresh pastries on Maginhawa St., Quezon City. Open daily.</p></div>
-    <div><h4>Order</h4><a href="#menu">Menu</a><a href="#menu">Pick-up</a><a href="#menu">Delivery</a></div>
-    <div><h4>Follow</h4><a href="#ig">Instagram</a><a href="#ig">Facebook</a><a href="#ig">TikTok</a></div>
-  </div>
-  <div class="wrap legal"><span>© 2026 Brew &amp; Co. (sample business for demo purposes)</span><span>Website by <a href="../../" style="display:inline;color:#fff">Likha Web Studio</a></span></div>
-</footer>
+<footer><div class="wrap"><span>© Brew &amp; Co. (sample business)</span><span>Website by Likha Web Studio</span></div></footer>
 <div style="height:72px" aria-hidden="true"></div>
 
 <div class="cartbar" id="cartbar" hidden><div class="wrap">
-  <span><b id="barCount">0</b> <span id="barWord">items</span> · <b id="barTotal">₱0</b></span>
-  <button class="btn green" type="button" id="barOpen">View order</button>
+  <span><b id="barCount">0</b> item · <b id="barTotal">₱0</b></span>
+  <button class="btn" type="button" id="barOpen">View order</button>
 </div></div>
-
-<dialog id="dlg" aria-labelledby="dName"><div class="dlg">
-  <button class="x" type="button" id="dClose" aria-label="Close">×</button>
-  <div class="ph" id="dPh"></div>
-  <form class="bd" id="dForm" method="dialog">
-    <div><h3 id="dName"></h3><p class="note" id="dDesc" style="margin:4px 0 0;font-size:15px"></p></div>
-    <div id="dSize"><p class="olabel">Size</p><div class="opts"><label><input type="radio" name="size" value="12 oz" checked> 12 oz</label><label><input type="radio" name="size" value="16 oz"> 16 oz <small>+₱20</small></label></div></div>
-    <div id="dTemp"><p class="olabel">Hot or iced</p><div class="opts"><label><input type="radio" name="temp" value="Iced" checked> Iced</label><label><input type="radio" name="temp" value="Hot"> Hot</label></div></div>
-    <div id="dSugar"><p class="olabel">Sugar level</p><div class="opts"><label><input type="radio" name="sugar" value="0%"> 0%</label><label><input type="radio" name="sugar" value="50%"> 50%</label><label><input type="radio" name="sugar" value="100%" checked> 100%</label></div></div>
-    <div id="dMilk"><p class="olabel">Milk</p><div class="opts"><label><input type="radio" name="milk" value="Fresh milk" checked> Fresh milk</label><label><input type="radio" name="milk" value="Oat milk"> Oat <small>+₱30</small></label></div></div>
-    <div id="dShot"><p class="olabel">Add-ons</p><div class="opts"><label><input type="checkbox" name="shot" value="Extra shot"> Extra espresso shot <small>+₱40</small></label></div></div>
-    <div class="foot">
-      <span class="qty" style="margin:0"><button type="button" id="dDec" aria-label="Less">−</button><b id="dQty" style="min-width:20px;text-align:center">1</b><button type="button" id="dInc" aria-label="More">+</button></span>
-      <span style="display:flex;gap:8px"><button class="btn ghost hide-sm" type="button" id="dCancel">Cancel</button><button class="btn green" type="submit" id="dAdd">Add · ₱0</button></span>
-    </div>
-  </form>
-</div></dialog>
 
 <div class="overlay" id="overlay" hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="Your order">
-  <div class="row"><h2 id="drawerTitle">Your order</h2><button class="btn ghost" type="button" id="closeCart">Close</button></div>
+  <div class="row"><h2>Your order</h2><button class="btn ghost" type="button" id="closeCart">Close</button></div>
   <div id="cartView">
     <div id="lines"></div>
     <p class="note" id="emptyNote">Your order is empty. Pick something from the menu.</p>
-    <div class="totals" id="totals" style="margin-top:12px">
+    <div class="totals" id="totals">
       <div><span>Subtotal</span><span id="sub">₱0</span></div>
       <div><span>Delivery fee</span><span id="fee">₱0</span></div>
       <div class="grand"><span>Total</span><span id="total">₱0</span></div>
     </div>
-    <form id="checkout" style="margin-top:16px">
-      <div class="seg" role="radiogroup" aria-label="Pick-up or delivery">
-        <label><input type="radio" name="mode" id="mPick" value="pick" checked><span>Pick-up<small>Ready in 15 mins</small></span></label>
-        <label><input type="radio" name="mode" id="mDel" value="del"><span>Delivery<small>30–45 mins · ₱49</small></span></label>
-      </div>
+    <form id="checkout">
       <label for="cname">Name<input id="cname" required autocomplete="name" value="Juan Dela Cruz"></label>
-      <label for="cphone">Mobile number<input id="cphone" required inputmode="tel" autocomplete="tel" value="0917 123 4567"></label>
-      <label for="caddr" id="addrWrap" hidden>Delivery address<textarea id="caddr" rows="2" autocomplete="street-address">Unit 4B, 22 Mapagkawanggawa St., Teachers Village West, QC</textarea></label>
-      <label for="cwhen">When<select id="cwhen"><option>As soon as possible</option></select></label>
-      <label for="cnote">Note for the barista <span class="note" style="font-weight:400">(optional)</span><input id="cnote" placeholder="e.g. less ice please"></label>
-      <div class="seg" role="radiogroup" aria-label="Payment">
-        <label><input type="radio" name="pay" value="GCash" checked><span>GCash</span></label>
-        <label><input type="radio" name="pay" value="Cash"><span>Cash</span></label>
+      <label for="cphone">Mobile number<input id="cphone" required inputmode="tel" value="0917 123 4567"></label>
+      <div class="choices" role="radiogroup" aria-label="Pick-up or delivery">
+        <label><input type="radio" name="mode" id="mPick" value="pick" checked> Pick-up</label>
+        <label><input type="radio" name="mode" id="mDel" value="del"> Delivery (+₱49)</label>
       </div>
-      <div class="gcash" id="gcashBox">
-        <svg class="qr" viewBox="0 0 29 29" aria-label="Sample GCash QR code" role="img" id="qr"></svg>
-        <div><b>Scan to pay with GCash</b><br><span class="note">Brew &amp; Co. · 0917 842 1190. On the live site, customers upload their receipt and the shop gets notified.</span></div>
+      <label for="caddr" id="addrWrap" hidden>Address<input id="caddr" autocomplete="street-address"></label>
+      <div class="choices" role="radiogroup" aria-label="Payment">
+        <label><input type="radio" name="pay" id="pGcash" value="GCash" checked> GCash</label>
+        <label><input type="radio" name="pay" id="pCash" value="Cash"> Cash</label>
       </div>
-      <button class="btn green" type="submit" id="placeBtn">Place order</button>
+      <button class="btn green" type="submit">Place order</button>
     </form>
   </div>
   <div class="done" id="doneView" hidden>
-    <span class="note">Order number</span>
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="color:var(--accent)"><circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4"/><path d="M20 33 L28 41 L44 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="num" id="orderNum">BC-0000</div>
-    <p id="doneMsg" style="margin:0"></p>
-    <div class="track" id="track"></div>
-    <p class="note">This is a demo, so no real order was sent. On a live website, the café gets every order on their phone and updates the status here.</p>
-    <button class="btn ghost" type="button" id="newOrder">Start a new order</button>
+    <p id="doneMsg">Thank you! We received your order.</p>
+    <p class="note">This is a demo, so no real order was sent. On a live website, the shop gets notified of every order.</p>
+    <button class="btn" type="button" id="newOrder">New order</button>
   </div>
 </aside>
-<div class="toast" id="toast" role="status" hidden></div>
 
 <script>
-const IMG=(id,w=600)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
 const MENU=[
- {id:'spa',cat:'coffee',name:'Spanish Latte',desc:'Our bestseller. Espresso, fresh milk and a touch of condensed milk.',price:150,img:'1461023058943-07fcbe16d735',c:['#D9C2A5','#9A7352'],tag:'Bestseller',drink:1},
- {id:'sea',cat:'coffee',name:'Sea Salt Latte',desc:'Velvety cream cap with a pinch of sea salt over iced latte.',price:165,img:'1517701604599-bb29b565090c',c:['#E8DCCB','#A88B6D'],tag:'New',drink:1},
- {id:'mat',cat:'noncoffee',name:'Dirty Matcha',desc:'Ceremonial-grade matcha, oat milk and a shot of espresso.',price:175,img:'1515823064-d6e0c04616a7',c:['#C9DDB5','#6E8E55'],tag:'Staff pick',drink:1},
- {id:'ame',cat:'coffee',name:'Americano',desc:'Double shot of our house blend and hot water.',price:110,img:'1495474472287-4d71bcdd2085',c:['#B8927A','#5B4030'],drink:1},
- {id:'lat',cat:'coffee',name:'Café Latte',desc:'Espresso and steamed milk, smooth and creamy.',price:135,img:'1541167760496-1628856ab772',c:['#E9DCCB','#B08A68'],drink:1},
- {id:'car',cat:'coffee',name:'Caramel Macchiato',desc:'Vanilla, fresh milk, espresso and caramel drizzle.',price:160,img:'1485808191679-5f86510681a2',c:['#E3B98A','#9E6B3E'],drink:1},
- {id:'moc',cat:'coffee',name:'Tablea Mocha',desc:'Espresso with Batangas tablea chocolate.',price:155,img:'1534778101976-62847782c213',c:['#B8927A','#5E3F2C'],drink:1},
- {id:'cho',cat:'noncoffee',name:'Tablea Chocolate',desc:'Thick, rich and not too sweet. Hot or iced.',price:130,img:'1542990253-0d0f5be5f0ed',c:['#CDB4A2','#6A4532'],drink:1},
- {id:'str',cat:'noncoffee',name:'Strawberry Milk',desc:'House-made Baguio strawberry jam and fresh milk.',price:140,img:'1553787499-6f9133860278',c:['#F2C9CC','#C9737D'],drink:1,out:1},
- {id:'cro',cat:'pastry',name:'Butter Croissant',desc:'Flaky and buttery, baked every morning at 6.',price:95,img:'1555507036-ab1f4038808a',c:['#F0D9A8','#C49A55']},
- {id:'ens',cat:'pastry',name:'Ube Ensaymada',desc:'Soft brioche, ube halaya, butter and queso de bola.',price:85,img:'1509440159596-0249088772ff',c:['#D8C3E6','#8A6AA8']},
- {id:'ban',cat:'pastry',name:'Banana Walnut Bread',desc:'Moist, toasted and served warm with butter.',price:90,img:'1558961363-fa8fdf82db35',c:['#DCC09A','#9A7448']}
+ {id:'ame',cat:'coffee',name:'Americano',desc:'Espresso and hot water. Simple and strong.',price:95,icon:'cup',bg:'#E9DCCB'},
+ {id:'lat',cat:'coffee',name:'Café Latte',desc:'Espresso and steamed milk, smooth and creamy.',price:120,icon:'cup',bg:'#D9C2A5'},
+ {id:'spa',cat:'coffee',name:'Spanish Latte',desc:'Bestseller. Sweetened with condensed milk.',price:140,icon:'iced',bg:'#C9A47C'},
+ {id:'car',cat:'coffee',name:'Caramel Macchiato',desc:'Vanilla, espresso and caramel drizzle.',price:150,icon:'iced',bg:'#E3B98A'},
+ {id:'moc',cat:'coffee',name:'Mocha',desc:'Espresso and dark chocolate.',price:135,icon:'cup',bg:'#B8927A'},
+ {id:'mat',cat:'noncoffee',name:'Matcha Latte',desc:'Japanese matcha and milk.',price:145,icon:'iced',bg:'#C9DDB5'},
+ {id:'cho',cat:'noncoffee',name:'Classic Chocolate',desc:'Rich chocolate, hot or iced.',price:120,icon:'cup',bg:'#CDB4A2'},
+ {id:'str',cat:'noncoffee',name:'Strawberry Milk',desc:'Fresh strawberry jam and milk.',price:130,icon:'iced',bg:'#F2C9CC'},
+ {id:'cro',cat:'pastry',name:'Butter Croissant',desc:'Flaky and buttery, baked every morning.',price:95,icon:'bread',bg:'#F0D9A8'},
+ {id:'ens',cat:'pastry',name:'Ensaymada',desc:'Topped with butter, sugar and cheese.',price:75,icon:'bread',bg:'#F5E3B5'},
+ {id:'ban',cat:'pastry',name:'Banana Bread',desc:'Moist, with walnuts.',price:85,icon:'bread',bg:'#DCC09A'},
+ {id:'che',cat:'pastry',name:'Cheese Roll',desc:'Soft, with cheese inside.',price:60,icon:'bread',bg:'#F4DFA0'}
 ];
-const CATS=[['all','All'],['coffee','Coffee'],['noncoffee','Non-coffee'],['pastry','Pastries']];
+const cart={};let cat='all';
 const peso=n=>'₱'+n.toLocaleString('en-PH');
 const $=id=>document.getElementById(id);
-const ph=(m,w,alt='')=>`<div class="ph" style="--c1:${m.c[0]};--c2:${m.c[1]}">${m.tag&&w>200?`<span class="tagc">${m.tag}</span>`:''}${m.out&&w>200?'<span class="sold">Sold out today</span>':''}<img src="${IMG(m.img,w)}" alt="${alt}" loading="lazy" onerror="this.remove()"></div>`;
-let cart=[];let cat='all';let cur=null,curQty=1;
-
-/* open-now status, using Manila time */
-const HOURS=[[8,21],[7,21],[7,21],[7,21],[7,21],[7,22],[8,22]]; /* Sun..Sat */
-const DAYN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const fmtH=h=>`${h%12||12}:00 ${h<12?'AM':'PM'}`;
-function manila(){const s=new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'});return new Date(s);}
-function renderStatus(){
-  const n=manila(),d=n.getDay(),h=n.getHours()+n.getMinutes()/60,[o,c]=HOURS[d];
-  const open=h>=o&&h<c;
-  $('status').textContent=open?`Open now · until ${fmtH(c)}`:`Closed · opens ${fmtH(h<o?o:HOURS[(d+1)%7][0])}`;
-  $('status').style.setProperty('--dot',open?'#22A35A':'#D14343');
-  $('hours').innerHTML=[1,2,3,4,5,6,0].map(i=>`<div class="${i===d?'today':''}"><span>${DAYN[i]}${i===d?' (today)':''}</span><span>${fmtH(HOURS[i][0])} – ${fmtH(HOURS[i][1])}</span></div>`).join('');
-  const opts=['As soon as possible'];for(let t=Math.max(Math.ceil(h+0.5),o+1);t<c;t++)opts.push(`Today, ${fmtH(t)}`);
-  $('cwhen').innerHTML=opts.map(x=>`<option>${x}</option>`).join('');
-}
-
-function renderBest(){$('bestGrid').innerHTML=MENU.filter(m=>m.tag).map(m=>`
-  <article class="bcard">${ph(m,700,m.name)}<div class="bd"><h3>${m.name}</h3><p>${m.desc}</p>
-  <div class="row"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-pick="${m.id}">Add to order</button></div></div></article>`).join('');}
-function renderTabs(){$('tabs').innerHTML=CATS.map(([k,v])=>`<button class="tab" type="button" data-cat="${k}" aria-pressed="${k===cat}">${v}</button>`).join('');}
 function renderMenu(){
   $('grid').innerHTML=MENU.filter(m=>cat==='all'||m.cat===cat).map(m=>`
-   <article class="item">${ph(m,500,m.name)}<div class="bd"><h3>${m.name}</h3><p>${m.desc}</p>
-     <div class="row"><span class="price">${m.drink?'from ':''}${peso(m.price)}</span>${m.out?'<span class="note">Back tomorrow</span>':`<button class="add" type="button" data-pick="${m.id}" aria-label="Add ${m.name}">Add</button>`}</div></div></article>`).join('');
+   <article class="item">
+     <div class="thumb" style="background:${m.bg};color:#2A1E16"><svg aria-hidden="true"><use href="#${m.icon}"/></svg></div>
+     <h3>${m.name}</h3><p>${m.desc}</p>
+     <div class="row"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-add="${m.id}" aria-label="Add ${m.name}">Add</button></div>
+   </article>`).join('');
 }
-function renderIG(){const ids=['1509042239860-f550ce710b93','1453614512568-c4024d13c247','1511920170033-f8396924c348','1559925393-8be0ec4767c8','1514432324607-a09d9b4aefdd','1497935586351-b67a49e012bf'];
-  const cs=[['#C9A47C','#7A5A40'],['#8C6A50','#3E2A1F'],['#E3B98A','#9E6B3E'],['#B8927A','#5B4030'],['#D9C2A5','#9A7352'],['#A9825B','#4B3426']];
-  $('igGrid').innerHTML=ids.map((id,i)=>`<div class="ph" style="--c1:${cs[i][0]};--c2:${cs[i][1]}"><img src="${IMG(id,400)}" alt="" loading="lazy" onerror="this.remove()"></div>`).join('');}
-
-/* customizer */
-function optPrice(){if(!cur)return 0;let p=cur.price;const f=new FormData($('dForm'));
-  if(cur.drink){if(f.get('size')==='16 oz')p+=20;if(f.get('milk')==='Oat milk')p+=30;if(f.get('shot'))p+=40;}return p;}
-function updDlg(){$('dQty').textContent=curQty;$('dAdd').textContent=`Add ${curQty} · ${peso(optPrice()*curQty)}`;}
-function pick(id){cur=MENU.find(m=>m.id===id);curQty=1;$('dForm').reset();
-  $('dPh').outerHTML=ph(cur,900,cur.name).replace('class="ph"','class="ph" id="dPh"');
-  $('dName').textContent=cur.name;$('dDesc').textContent=cur.desc;
-  ['dSize','dTemp','dSugar','dMilk','dShot'].forEach(k=>$(k).hidden=!cur.drink);
-  updDlg();$('dlg').showModal();}
-$('dForm').addEventListener('change',updDlg);
-$('dInc').onclick=()=>{curQty++;updDlg();};$('dDec').onclick=()=>{if(curQty>1)curQty--;updDlg();};
-$('dClose').onclick=$('dCancel').onclick=()=>$('dlg').close();
-$('dlg').addEventListener('click',e=>{if(e.target===$('dlg'))$('dlg').close();});
-$('dForm').addEventListener('submit',()=>{const f=new FormData($('dForm'));
-  const opts=cur.drink?[f.get('size'),f.get('temp'),`${f.get('sugar')} sugar`,f.get('milk'),f.get('shot')].filter(Boolean).join(' · '):'';
-  const key=cur.id+'|'+opts;const ex=cart.find(l=>l.key===key);
-  if(ex)ex.q+=curQty;else cart.push({key,id:cur.id,opts,unit:optPrice(),q:curQty});
-  toast(`Added ${curQty} ${cur.name}`);renderCart();});
-function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').hidden=true,1800);}
-
-function totals(){const sub=cart.reduce((s,l)=>s+l.unit*l.q,0);const fee=sub>0&&$('mDel').checked?49:0;const count=cart.reduce((a,l)=>a+l.q,0);return {sub,fee,total:sub+fee,count};}
+function totals(){
+  const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);
+  const fee=sub>0&&$('mDel').checked?49:0;
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  return {sub,fee,total:sub+fee,count};
+}
 function renderCart(){
   const t=totals();
-  $('lines').innerHTML=cart.map((l,i)=>{const m=MENU.find(x=>x.id===l.id);return `
-   <div class="line">${ph(m,120)}<div><b>${m.name}</b>${l.opts?`<small>${l.opts}</small>`:''}
-    <span class="qty"><button type="button" data-dec="${i}" aria-label="Remove one ${m.name}">−</button><span>${l.q}</span><button type="button" data-inc="${i}" aria-label="Add one ${m.name}">+</button></span></div>
-    <span class="price">${peso(l.unit*l.q)}</span></div>`}).join('');
+  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `
+   <div class="line"><span>${m.name}</span>
+    <span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one ${m.name}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one ${m.name}">+</button></span>
+    <span class="price">${peso(m.price*q)}</span></div>`}).join('');
   $('emptyNote').hidden=t.count>0;$('totals').hidden=t.count===0;$('checkout').hidden=t.count===0;
-  $('sub').textContent=peso(t.sub);$('fee').textContent=t.fee?peso(t.fee):'—';$('total').textContent=peso(t.total);
-  $('headCount').textContent=t.count;$('barCount').textContent=t.count;$('barWord').textContent=t.count===1?'item':'items';$('barTotal').textContent=peso(t.total);
-  $('placeBtn').textContent=`Place order · ${peso(t.total)}`;
+  $('sub').textContent=peso(t.sub);$('fee').textContent=peso(t.fee);$('total').textContent=peso(t.total);
+  $('headCount').textContent=t.count;$('barCount').textContent=t.count;$('barTotal').textContent=peso(t.total);
   $('cartbar').hidden=t.count===0||!$('drawer').hidden;
 }
-function openCart(o){$('drawer').hidden=!o;$('overlay').hidden=!o;document.body.style.overflow=o?'hidden':'';renderCart();}
+function openCart(o){$('drawer').hidden=!o;$('overlay').hidden=!o;renderCart();}
 document.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.pick)pick(b.dataset.pick);
-  if(b.dataset.inc){cart[+b.dataset.inc].q++;renderCart();}
-  if(b.dataset.dec){const l=cart[+b.dataset.dec];l.q--;if(l.q<=0)cart.splice(+b.dataset.dec,1);renderCart();}
-  if(b.dataset.cat){cat=b.dataset.cat;renderTabs();renderMenu();}
+  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',900);renderCart();}
+  if(b.dataset.inc){cart[b.dataset.inc]++;renderCart();}
+  if(b.dataset.dec){cart[b.dataset.dec]--;if(cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderCart();}
+  if(b.dataset.cat){cat=b.dataset.cat;document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-pressed',t===b));renderMenu();}
 });
 $('openCart').onclick=()=>openCart(true);$('barOpen').onclick=()=>openCart(true);
 $('closeCart').onclick=()=>openCart(false);$('overlay').onclick=()=>openCart(false);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('drawer').hidden)openCart(false);});
 document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{$('addrWrap').hidden=!$('mDel').checked;$('caddr').required=$('mDel').checked;renderCart();});
-document.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{$('gcashBox').hidden=r.value!=='GCash'||!r.checked;});
-
-/* a decorative QR pattern so the GCash step looks real */
-(function(){let s=7,out='';const rnd=()=>(s=(s*9301+49297)%233280)/233280;
-  const fin=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#111"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#111"/>`;
-  for(let y=0;y<29;y++)for(let x=0;x<29;x++){const f=(x<8&&y<8)||(x>20&&y<8)||(x<8&&y>20);if(!f&&rnd()>.52)out+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#111"/>`;}
-  $('qr').innerHTML=out+fin(0,0)+fin(22,0)+fin(0,22);})();
-
-function renderTrack(stage){const S=[['Order received','We got your order and payment.'],['Preparing','Your barista is making your drinks.'],[$('mDel').checked?'Out for delivery':'Ready for pick-up',$('mDel').checked?'Rider is on the way.':'Show your order number at the counter.']];
-  $('track').innerHTML=S.map(([a,b],i)=>`<div class="tstep ${i<=stage?'on':''}"><span class="dot">${i<stage?'✓':i+1}</span><span><b>${a}</b>${b}</span></div>`).join('');}
 $('checkout').addEventListener('submit',e=>{
   e.preventDefault();const t=totals();
   $('orderNum').textContent='BC-'+Math.floor(1000+Math.random()*9000);
-  const when=$('cwhen').value;
-  $('doneMsg').textContent=`Salamat, ${$('cname').value.split(' ')[0]}! ${t.count} item${t.count>1?'s':''}, ${peso(t.total)} via ${document.querySelector('input[name=pay]:checked').value}. ${$('mDel').checked?'We will text you when your rider leaves.':(when.startsWith('As soon')?'Ready in about 15 minutes.':`Ready ${when.toLowerCase()}.`)}`;
-  $('cartView').hidden=true;$('doneView').hidden=false;$('drawerTitle').textContent='Order placed';
-  renderTrack(0);clearTimeout(renderTrack.a);clearTimeout(renderTrack.b);
-  renderTrack.a=setTimeout(()=>renderTrack(1),2500);renderTrack.b=setTimeout(()=>renderTrack(2),6000);
+  $('doneMsg').textContent=`Thank you, ${$('cname').value.split(' ')[0]}! ${t.count} item(s), total ${peso(t.total)} via ${document.querySelector('input[name=pay]:checked').value}. ${$('mDel').checked?'We will deliver it to your address.':'It will be ready in 15 minutes.'}`;
+  $('cartView').hidden=true;$('doneView').hidden=false;
 });
-$('newOrder').onclick=()=>{cart=[];$('cartView').hidden=false;$('doneView').hidden=true;$('drawerTitle').textContent='Your order';openCart(false);};
-
-cart=[{key:'spa|demo',id:'spa',opts:'16 oz · Iced · 50% sugar · Fresh milk',unit:170,q:2},{key:'cro|',id:'cro',opts:'',unit:95,q:1}];
-renderStatus();renderBest();renderTabs();renderMenu();renderIG();renderCart();
+$('newOrder').onclick=()=>{for(const k in cart)delete cart[k];$('cartView').hidden=false;$('doneView').hidden=true;openCart(false);};
+cart.spa=2;cart.cro=1;
+renderMenu();renderCart();
 </script>
+
 </body></html>
