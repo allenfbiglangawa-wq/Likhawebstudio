@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Handaan Catering &amp; Events · Weddings, Debuts, Corporate (Demo)</title>
+<meta name="description" content="Handaan Catering &amp; Events is a sample catering website by Likha Web Studio: event packages, a menu builder, live date availability and an instant quotation estimate.">
+<meta name="theme-color" content="#1E3B2F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Handaan Catering &amp; Events · Every handaan, handled. (Website demo)">
+<meta property="og:description" content="A sample catering website with event packages, menu builder, date availability and instant quotes. Built by Likha Web Studio.">
+<meta property="og:image" content="https://likha-webstudio.likhawebstudioph.workers.dev/og-image.png">
+<meta property="og:url" content="https://likha-webstudio.likhawebstudioph.workers.dev/demos/handaan-catering/">
+<link rel="canonical" href="https://likha-webstudio.likhawebstudioph.workers.dev/demos/handaan-catering/">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: catering and events site. Photo hero with a quick date check, event types, package tiers,
+   a four-step event planner (date and headcount with availability calendar → package → menu builder →
+   add-ons and inquiry) beside a live quotation estimate, sample setups gallery, admin teaser, FAQ. */
+:root{
+  --cream:#FBF6EC; --paper:#F4ECDD; --green:#1E3B2F; --green-2:#132820; --leaf:#2F5D45; --leaf-soft:#E4EDE6;
+  --gold:#C99A3E; --gold-ink:#8A6420; --gold-soft:#F5E9CF; --terra:#B5522B; --terra-2:#94401F;
+  --ink:#1F2A24; --muted:#5D6A62; --line:#E3D8C4; --white:#FFFFFF; --bad:#A23B2A;
+  --display:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --body:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --shadow:0 20px 44px -24px rgba(19,40,32,.5);
+  --shadow-sm:0 6px 18px -10px rgba(19,40,32,.35);
+  --radius:16px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;color:var(--green);text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none}
+.skip:focus{top:12px}
+svg.i{width:18px;height:18px;flex:none}
+
+/* Demo ribbon */
+.demo{background:var(--green-2);color:#D9E4DC;font-size:13px;text-align:center;padding:9px 16px}
+.demo a{color:#fff;font-weight:700}
+
+/* Buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 15px/1 var(--body);text-decoration:none;border:1.5px solid var(--terra);background:var(--terra);color:#fff;padding:16px 24px;border-radius:999px;cursor:pointer;transition:background .25s,border-color .25s,transform .25s var(--ease),box-shadow .25s}
+.btn:hover{background:var(--terra-2);border-color:var(--terra-2);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(148,64,31,.75)}
+.btn svg{width:17px;height:17px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.7);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;box-shadow:none}
+.btn.line{background:transparent;color:var(--green);border-color:var(--green)}
+.btn.line:hover{background:var(--green);color:#fff;box-shadow:none}
+.btn.sm{padding:11px 16px;font-size:14px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.eyebrow{font:700 12.5px/1.2 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:12px}
+.tag{display:inline-flex;align-items:center;gap:6px;font:700 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--gold-soft);color:var(--gold-ink)}
+
+/* Header */
+.site-head{position:sticky;top:0;z-index:50;height:76px;margin-bottom:-76px;transition:background .35s var(--ease),box-shadow .35s var(--ease)}
+.site-head .wrap{height:100%;display:flex;align-items:center;gap:28px}
+.site-head.solid{background:rgba(19,40,32,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;line-height:1}
+.brand .mark{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold)}
+.brand .mark svg{width:24px;height:24px}
+.brand b{display:block;font:600 24px/1 var(--display);letter-spacing:.02em}
+.brand small{display:block;font:600 10px/1 var(--body);letter-spacing:.26em;margin-top:5px;color:#D7C9A8}
+.nav{display:flex;gap:26px;margin-left:auto}
+.nav a{color:#EDF2EE;text-decoration:none;font-size:15px;font-weight:500;position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav a:hover::after,.nav a[aria-current="true"]::after{transform:scaleX(1)}
+.menu-btn{display:none;margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:10px;width:46px;height:46px;color:#fff;cursor:pointer;align-items:center;justify-content:center}
+.menu-btn svg{width:22px;height:22px}
+.drawer{position:fixed;inset:0;z-index:60;background:rgba(19,40,32,.98);display:flex;flex-direction:column;padding:90px 28px 28px;gap:8px}
+.drawer a{color:#fff;text-decoration:none;font:600 30px/1.4 var(--display)}
+.drawer .btn{margin-top:20px;font-family:var(--body)}
+.drawer .close{position:absolute;top:16px;right:20px}
+
+/* Hero */
+.hero{position:relative;min-height:min(860px,100svh);display:flex;align-items:flex-end;background:var(--green-2);color:#fff;overflow:hidden}
+.hero-media,.hero-media.ph{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.07);animation:kenburns 18s var(--ease) forwards}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(19,40,32,.94) 0%,rgba(19,40,32,.78) 40%,rgba(19,40,32,.25) 75%,rgba(19,40,32,.1)),linear-gradient(0deg,rgba(19,40,32,.7),transparent 45%)}
+.hero-in{position:relative;z-index:2;width:100%;padding-top:150px;padding-bottom:60px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:end}
+.hero .eyebrow{color:#E7C987}
+.hero h1{color:#fff;font-size:clamp(44px,6.8vw,88px);line-height:1;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:#E7C987;font-weight:500}
+.hero .desc{color:#DCE6DF;font-size:18px;max-width:50ch;margin-top:20px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 34px}
+.perks{display:flex;flex-wrap:wrap;gap:16px 30px;list-style:none;margin:0;padding:22px 0 0;border-top:1px solid rgba(255,255,255,.18)}
+.perks li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#DCE6DF}
+.perks svg{width:22px;height:22px;color:var(--gold)}
+.quick{background:rgba(251,246,236,.97);color:var(--ink);border-radius:var(--radius);padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);display:flex;flex-direction:column;gap:14px}
+.quick h2{font-size:26px}
+.quick p.small{font-size:14px;color:var(--muted)}
+.quick .res{font-size:14px;border-radius:10px;padding:10px 12px;display:flex;gap:8px;align-items:flex-start}
+.res.ok{background:var(--leaf-soft);color:#1F4A33}
+.res.few{background:var(--gold-soft);color:#6E4F14}
+.res.no{background:#F8E3DD;color:var(--bad)}
+.stock-note{position:absolute;z-index:2;right:16px;bottom:14px;font-size:11px;color:rgba(255,255,255,.75);background:rgba(19,40,32,.55);padding:5px 9px;border-radius:999px}
+.reveal-line{opacity:0;transform:translateY(24px);animation:rise 1s var(--ease) forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}.d4{animation-delay:.55s}.d5{animation-delay:.7s}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes kenburns{to{transform:scale(1)}}
+
+/* Image fallback */
+.ph{position:relative;background:linear-gradient(135deg,#DCE6DF,#B9CDBF 55%,#9DB5A5)}
+.ph.failed img{opacity:0}
+.hero-media.failed::after{display:none}
+.ph.failed::after{content:attr(data-label);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:12px;font:500 italic 20px/1.2 var(--display);color:var(--green);opacity:.75}
+
+/* Sections */
+.sec{padding:104px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{font-size:clamp(34px,4.4vw,54px)}
+.sec-head .lede{color:var(--muted);max-width:56ch;margin-top:12px}
+.demo-note{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--muted);background:var(--paper);border:1px dashed #D3C3A5;border-radius:10px;padding:12px 14px;margin-top:28px}
+.demo-note svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--gold-ink)}
+
+/* Events */
+.ev-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.ev-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.ev-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.ev-card .ph{aspect-ratio:4/3.4;overflow:hidden}
+.ev-card img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.ev-card:hover img{transform:scale(1.06)}
+.ev-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ev-body h3{font-size:24px}
+.ev-body p{color:var(--muted);font-size:14.5px}
+.ev-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ev-meta b{font:600 22px/1 var(--display);color:var(--green)}
+.ev-meta b small,.ev-meta span{font:500 12.5px var(--body);color:var(--muted)}
+.ev-body .btn{margin-top:12px;width:100%}
+
+/* Packages */
+.packages{background:var(--paper)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.tab{font:600 15px var(--body);padding:11px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--cream);color:var(--ink);cursor:pointer;transition:all .2s}
+.tab:hover{border-color:var(--leaf)}
+.tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.tier{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:16px;position:relative}
+.tier.best{border:2px solid var(--gold);box-shadow:var(--shadow)}
+.tier .ribbon{position:absolute;top:-13px;left:28px;background:var(--gold);color:#3A2A08;font:700 11.5px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+.tier h3{font-size:30px}
+.tier .price{font:600 44px/1 var(--display);color:var(--green);font-variant-numeric:tabular-nums}
+.tier .price small{font:500 14px var(--body);color:var(--muted);margin-left:4px}
+.tier .min{font-size:13.5px;color:var(--muted);margin-top:-8px}
+.tier ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:14.5px;flex:1}
+.tier li{display:flex;gap:9px;align-items:flex-start}
+.tier li svg{width:17px;height:17px;color:var(--leaf);flex:none;margin-top:3px}
+.tier li.x svg{color:var(--gold-ink)}
+
+/* Planner */
+.planner{background:var(--cream)}
+.plan-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start}
+.steps{display:flex;gap:6px;margin:0 0 16px;list-style:none;padding:0;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;font:600 14px var(--body);padding:8px 14px 8px 8px;border-radius:999px;background:var(--paper);color:var(--muted);border:1px solid var(--line);cursor:pointer}
+.step:disabled{cursor:not-allowed;opacity:.6}
+.step i{font-style:normal;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#fff;font-size:12px}
+.step[aria-current="step"]{background:var(--green);border-color:var(--green);color:#fff}
+.step[aria-current="step"] i{background:var(--gold);color:#3A2A08}
+.step.ok i{background:var(--leaf);color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:20px;box-shadow:var(--shadow-sm)}
+.card h3{font-size:28px}
+.label{font:700 12.5px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.seg button,.opt{font:600 14.5px var(--body);text-align:left;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;color:var(--ink);transition:border-color .2s,background .2s,transform .2s}
+.seg button:hover,.opt:hover{border-color:var(--leaf);transform:translateY(-1px)}
+.seg button small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:2px}
+.seg button[aria-pressed="true"],.opt[aria-pressed="true"]{border-color:var(--green);background:var(--leaf-soft);box-shadow:inset 0 0 0 1px var(--green)}
+.row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.guests{display:flex;align-items:center;gap:12px}
+.guests input[type=number]{width:96px;text-align:center;font-weight:700}
+input[type=range]{width:100%;accent-color:var(--leaf)}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select,textarea{font:16px var(--body);padding:12px 13px;border-radius:10px;border:1px solid #D6C8AE;background:var(--cream);color:var(--ink);width:100%}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--leaf)}
+.err{color:var(--bad);font-size:13px;font-weight:500}
+.hint{font-size:13.5px;color:var(--muted)}
+
+.cal{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--cream)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-head b{font:600 20px var(--display);color:var(--green)}
+.cal-head button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--green)}
+.cal-head button:disabled{opacity:.35;cursor:not-allowed}
+.cal-head svg{width:18px;height:18px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;text-align:center}
+.cal-grid .dow{font:700 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:4px 0}
+.day{position:relative;aspect-ratio:1/0.86;border-radius:10px;border:1px solid transparent;background:#fff;font:600 15px var(--body);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-variant-numeric:tabular-nums;padding:0}
+.day::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--leaf)}
+.day.few::after{background:var(--gold)}
+.day.full,.day.lead,.day.big{background:transparent;color:#A9A397;cursor:not-allowed}
+.day.full::after,.day.big::after{background:#C9725C}
+.day.lead::after{background:transparent}
+.day.full span,.day.big span{text-decoration:line-through}
+.day:not(:disabled):hover{border-color:var(--leaf)}
+.day[aria-pressed="true"]{background:var(--green);color:#fff}
+.day[aria-pressed="true"]::after{background:var(--gold)}
+.day.blank{visibility:hidden}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:12px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+.menu-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;position:sticky;top:76px;z-index:5;background:#fff;padding:10px 0;border-bottom:1px solid var(--line)}
+.counts{display:flex;gap:8px;flex-wrap:wrap}
+.count{font:700 13px var(--body);padding:7px 12px;border-radius:999px;background:var(--paper);color:var(--muted);font-variant-numeric:tabular-nums}
+.count.done{background:var(--leaf-soft);color:#1F4A33}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--leaf)}
+.mcat h4{font:700 13px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 10px;display:flex;justify-content:space-between}
+.mcat h4 span{color:var(--muted);letter-spacing:.04em;text-transform:none;font-weight:500}
+.dishes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.dish{display:flex;align-items:center;gap:12px;text-align:left;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;font:500 15px var(--body);color:var(--ink);transition:border-color .2s,background .2s}
+.dish:hover:not(:disabled){border-color:var(--leaf)}
+.dish .box{width:22px;height:22px;border-radius:6px;border:1.5px solid #B9AD94;display:grid;place-items:center;flex:none;background:#fff}
+.dish .box svg{width:14px;height:14px;opacity:0;color:#fff}
+.dish[aria-pressed="true"]{border-color:var(--green);background:var(--leaf-soft)}
+.dish[aria-pressed="true"] .box{background:var(--green);border-color:var(--green)}
+.dish[aria-pressed="true"] .box svg{opacity:1}
+.dish:disabled{opacity:.45;cursor:not-allowed}
+.dish .nm{flex:1;line-height:1.3}
+.dish .nm small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.dish .up{font:700 12px var(--body);color:var(--gold-ink);background:var(--gold-soft);padding:4px 8px;border-radius:999px;white-space:nowrap}
+.dish .up.free{color:#1F4A33;background:var(--leaf-soft)}
+
+.addons{display:flex;flex-direction:column;gap:10px}
+.addon{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;background:var(--cream)}
+.addon.on{border-color:var(--green);background:var(--leaf-soft)}
+.addon b{display:block;font-weight:600}
+.addon small{color:var(--muted);font-size:13px}
+.addon .ctl{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font:700 18px/1 var(--body);color:var(--green)}
+.qty output{min-width:22px;text-align:center;font-weight:700}
+.switch{position:relative;width:48px;height:28px;border-radius:999px;border:0;background:#CFC6B4;cursor:pointer;transition:background .2s;padding:0}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.switch[aria-checked="true"]{background:var(--leaf)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+.card-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+
+.done{text-align:center;align-items:center}
+.done .seal{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:var(--leaf-soft);color:var(--leaf)}
+.done .seal svg{width:32px;height:32px}
+.done h3{font-size:36px}
+.refno{font:700 18px var(--body);letter-spacing:.08em;background:var(--gold-soft);color:#5A410E;padding:8px 14px;border-radius:10px}
+.history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;width:100%;text-align:left}
+.history li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px;background:var(--cream)}
+.history li span{color:var(--muted);display:block;font-size:13px}
+.history button{background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:600 13px var(--body);cursor:pointer;color:var(--ink)}
+
+/* Quote */
+.quote{background:var(--green);color:#E2EBE5;border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:14px;position:sticky;top:96px;box-shadow:var(--shadow)}
+.quote .label{color:#E7C987;margin:0}
+.quote h3{color:#fff;font-size:28px}
+.q-meta{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.q-meta dt{color:#A9BDB1}
+.q-meta dd{margin:0;color:#fff;font-weight:600;text-align:right}
+.q-lines{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:8px;font-size:14px;font-variant-numeric:tabular-nums}
+.q-lines li{display:flex;justify-content:space-between;gap:12px}
+.q-lines li span:first-child{color:#C9D7CE}
+.q-lines li small{display:block;color:#93A99B;font-size:12px}
+.q-total{border-top:1px solid rgba(255,255,255,.2);padding-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.q-total b{font:600 36px/1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
+.q-sub{display:flex;justify-content:space-between;font-size:14px;color:#C9D7CE;font-variant-numeric:tabular-nums}
+.q-sub b{color:#E7C987}
+.quote .fine{font-size:12.5px;color:#93A99B}
+.quote .btn.ghost{width:100%}
+.q-empty{font-size:14px;color:#A9BDB1;background:rgba(255,255,255,.05);border-radius:10px;padding:12px}
+
+/* Process */
+.process{background:var(--green-2);color:#DCE6DF}
+.process h2,.process h3{color:#fff}
+.process .eyebrow{color:#E7C987}
+.process .lede{color:#A9BDB1}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:f;list-style:none;margin:0;padding:0}
+.flow li{border-top:2px solid rgba(201,154,62,.5);padding-top:20px;display:flex;flex-direction:column;gap:8px}
+.flow li::before{counter-increment:f;content:"0" counter(f);font:600 40px/1 var(--display);color:var(--gold)}
+.flow h3{font-size:22px}
+.flow p{font-size:14.5px;color:#B9CABF}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px}
+.gal figure{margin:0;border-radius:14px;overflow:hidden;position:relative}
+.gal figure.wide{grid-column:span 2}
+.gal figure.tall{grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.gal figure:hover img{transform:scale(1.05)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;font-size:13px;color:#fff;background:linear-gradient(0deg,rgba(19,40,32,.8),transparent)}
+
+/* Admin teaser */
+.biz{background:var(--paper)}
+.biz-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.biz ul{list-style:none;padding:0;margin:22px 0 28px;display:flex;flex-direction:column;gap:12px}
+.biz li{display:flex;gap:12px;align-items:flex-start}
+.biz li svg{width:20px;height:20px;color:var(--leaf);flex:none;margin-top:3px}
+.mock{background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line);font-size:13px}
+.mock-top{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--green-2);color:#A9BDB1}
+.mock-top i{width:10px;height:10px;border-radius:50%;background:#3D5A4B}
+.mock-top span{margin-left:10px}
+.mock-body{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.tile.span{grid-column:1/-1}
+.tile b{font:600 24px/1 var(--display);color:var(--green)}
+.tile span{color:var(--muted)}
+.tile .r{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid #F0E8D9}
+.pill{font:700 11px var(--body);padding:3px 8px;border-radius:999px}
+.pill.g{background:var(--leaf-soft);color:#1F4A33}.pill.y{background:var(--gold-soft);color:#6E4F14}.pill.r{background:#F8E3DD;color:var(--bad)}
+
+/* FAQ */
+.faq{max-width:860px}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font:600 20px/1.3 var(--display);color:var(--green);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 26px/1 var(--body);color:var(--gold-ink);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--muted);margin-top:10px;max-width:70ch}
+
+/* CTA */
+.cta{position:relative;overflow:hidden;background:var(--green);color:#fff;text-align:center}
+.cta .wrap{position:relative;z-index:2;padding:96px 20px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.cta h2{color:#fff;font-size:clamp(34px,5vw,58px)}
+.cta p{color:#C9D7CE;max-width:54ch}
+.cta .ph{position:absolute;inset:0;opacity:.22}
+.cta .ph img{width:100%;height:100%;object-fit:cover}
+
+/* Footer */
+footer{background:var(--green-2);color:#A9BDB1;font-size:14px}
+footer .wrap{padding-block:48px 110px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+footer .brand{margin-bottom:14px}
+footer h4{font:700 12.5px var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+footer a{color:#DCE6DF}
+footer details{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+footer summary{cursor:pointer;color:#DCE6DF}
+footer .credits{columns:3 220px;margin-top:12px;font-size:13px;line-height:1.9;padding:0;list-style:none}
+.byline{grid-column:1/-1;text-align:center;color:#8EA497;font-size:13px;letter-spacing:.08em;border-top:1px solid rgba(255,255,255,.1);padding-top:22px}
+.byline a{color:#E7C987}
+
+/* Mobile sticky */
+.sticky-cta{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:40;display:none;transform:translateY(140%);transition:transform .4s var(--ease)}
+.sticky-cta.show{transform:none}
+.sticky-cta a{width:100%;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)}
+.sticky-cta .est{font-variant-numeric:tabular-nums}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .nav,.head-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .hero-in{grid-template-columns:1fr;gap:34px}
+  .quick{max-width:520px}
+  .ev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan-grid{grid-template-columns:1fr}
+  .quote{position:static}
+  .biz-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .tiers{grid-template-columns:1fr}
+  .tier.best{order:-1}
+  .seg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .row{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  .sticky-cta{display:block}
+}
+@media (max-width:620px){
+  .sec{padding:76px 0}
+  .ev-grid{grid-template-columns:1fr}
+  .dishes{grid-template-columns:1fr}
+  .card{padding:20px}
+  .quote{padding:22px}
+  .field-row{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .hero .desc{font-size:16.5px}
+  .hero-in{padding-top:120px}
+  .gal figure.wide{grid-column:span 2}
+  .mock-body{grid-template-columns:1fr}
+  .menu-bar{top:72px}
+  footer .wrap{grid-template-columns:1fr}
+  .step{font-size:13px;padding-right:10px}
+  .step .t{display:none}
+  .step[aria-current="step"] .t{display:inline}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal-line,.rv{opacity:1;transform:none}
+  .hero-media img{transform:none}
+}
+@media print{
+  body{background:#fff}
+  body>*:not(main),main>*:not(#plan),.plan-grid>*:not(.quote-col),.quote .btn,.quote .fine.screen,#plan .sec-head,#plan .demo-note{display:none!important}
+  #plan{padding:0}
+  .plan-grid{display:block}
+  .quote{position:static;background:#fff;color:#000;box-shadow:none;border:1px solid #999}
+  .quote *{color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-dish" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5 6-5s5.4 1.7 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14c2.4.2 4 1.7 4.5 4.5"/></symbol>
+  <symbol id="i-spoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="7" rx="3" ry="4.2"/><path d="M8 11.2V21M16 3v18M13.5 3v5a2.5 2.5 0 0 0 5 0V3"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></symbol>
+</svg>
+
+<div class="demo" role="note">Demo website by <a href="../../">Likha Web Studio</a> · Sample business, prices and bookings. Want one like this for your catering business? Starts at ₱3,500</div>
+
+<header class="site-head" id="head">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Handaan Catering and Events, back to top"><span class="mark"><svg aria-hidden="true"><use href="#i-leaf"/></svg></span><span><b>Handaan</b><small>CATERING &amp; EVENTS</small></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#events">Events</a><a href="#packages">Packages</a><a href="#plan">Plan &amp; quote</a><a href="#setups">Setups</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn sm head-cta" href="#plan">Get a quote <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <button class="menu-btn close" id="menuClose" type="button" aria-label="Close menu" style="display:inline-flex"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+  <a href="#events">Events</a><a href="#packages">Packages</a><a href="#plan">Plan &amp; quote</a><a href="#setups">Setups</a><a href="#faq">FAQ</a>
+  <a class="btn" href="#plan">Check your date <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-media ph" data-label="Banquet hall set for an event"><img id="heroImg" alt="Banquet hall set with round tables for an event (illustrative stock photo)" fetchpriority="high" width="1600" height="1000"></div>
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow reveal-line d1">Full-service catering · Metro Manila &amp; nearby provinces</p>
+      <h1 class="reveal-line d2">Every <em>handaan</em>,<br>handled.</h1>
+      <p class="desc reveal-line d3">Weddings, debuts, corporate events and family celebrations. Pick a package, build your menu, and see your estimate in minutes, not after three days of back-and-forth messages.</p>
+      <div class="ctas reveal-line d4">
+        <a class="btn" href="#plan">Plan my event <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn ghost" href="#packages">See packages</a>
+      </div>
+      <ul class="perks reveal-line d5">
+        <li><svg aria-hidden="true"><use href="#i-dish"/></svg>Filipino and international buffet</li>
+        <li><svg aria-hidden="true"><use href="#i-people"/></svg>Uniformed waitstaff</li>
+        <li><svg aria-hidden="true"><use href="#i-spoon"/></svg>Food tasting before you book</li>
+      </ul>
+    </div>
+    <form class="quick reveal-line d4" id="quick" novalidate>
+      <span class="tag">Live availability · demo</span>
+      <h2>Is your date still open?</h2>
+      <div class="field"><label for="qEv">Event</label><select id="qEv"></select></div>
+      <div class="field-row">
+        <div class="field"><label for="qDate">Date</label><input id="qDate" type="date" required></div>
+        <div class="field"><label for="qGuests">Guests</label><input id="qGuests" type="number" inputmode="numeric" min="50" max="500" value="150"></div>
+      </div>
+      <div id="qRes" class="res" role="status" hidden></div>
+      <button class="btn" type="submit">Check availability <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <p class="small">We book a limited number of events per day so every one gets a full crew.</p>
+    </form>
+  </div>
+  <span class="stock-note">Illustrative stock photo</span>
+</section>
+
+<section class="sec" id="events">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="eyebrow">What we cater</p><h2>One kitchen, every kind of celebration</h2><p class="lede">Each event type has its own packages and inclusions, from a 50-guest christening to a 500-guest wedding reception.</p></div>
+    </div>
+    <div class="ev-grid" id="evGrid"></div>
+    <p class="demo-note rv"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>Demo content:</b> Handaan is a sample business. Per-head prices, minimums and inclusions are sample figures for this portfolio demo, not real rates. Photos are free Unsplash stock images and do not show an actual caterer's food or events.</span></p>
+  </div>
+</section>
+
+<section class="sec packages" id="packages">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="eyebrow">Packages</p><h2>Clear per-head pricing</h2><p class="lede">Every package includes steamed rice, buffet setup, tables and chairs with linens, and waitstaff. Choose a tier, then build the menu yourself.</p></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Event type" id="pkgTabs"></div>
+    <div class="tiers" id="tiers" role="tabpanel"></div>
+  </div>
+</section>
+
+<section class="sec planner" id="plan">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><p class="eyebrow">Plan &amp; quote</p><h2>Build your event, see the price live</h2><p class="lede">Four quick steps. Your estimate updates as you go, and you can print it or send it as an inquiry at the end.</p></div>
+    </div>
+    <div class="plan-grid">
+      <div>
+        <ol class="steps" id="steps">
+          <li><button class="step" type="button" data-go="1"><i>1</i><span class="t">Date &amp; guests</span></button></li>
+          <li><button class="step" type="button" data-go="2"><i>2</i><span class="t">Package</span></button></li>
+          <li><button class="step" type="button" data-go="3"><i>3</i><span class="t">Menu</span></button></li>
+          <li><button class="step" type="button" data-go="4"><i>4</i><span class="t">Add-ons &amp; send</span></button></li>
+        </ol>
+
+        <!-- Step 1 -->
+        <div class="card" id="s1" aria-labelledby="s1h">
+          <h3 id="s1h">When, and for how many?</h3>
+          <div><span class="label" id="evLbl">Event type</span><div class="seg" id="evSeg" role="group" aria-labelledby="evLbl"></div></div>
+          <div class="row">
+            <div class="field"><label for="guests">Guests</label>
+              <div class="guests"><input id="guests" type="number" inputmode="numeric" min="50" max="500" step="10"><input id="guestsR" type="range" min="50" max="500" step="10" aria-label="Guests slider"></div>
+              <span class="err" id="gErr" role="alert"></span></div>
+            <div class="field"><label for="time">Serving time</label><select id="time"><option value="lunch">Lunch (11 AM – 3 PM)</option><option value="dinner">Dinner (5 PM – 10 PM)</option></select></div>
+            <div class="field"><label for="area">Venue area</label><select id="area"></select></div>
+          </div>
+          <div>
+            <span class="label">Pick a date</span>
+            <div class="cal">
+              <div class="cal-head"><button type="button" id="calPrev" aria-label="Previous month"><svg aria-hidden="true"><use href="#i-left"/></svg></button><b id="calTitle" aria-live="polite"></b><button type="button" id="calNext" aria-label="Next month"><svg aria-hidden="true"><use href="#i-right"/></svg></button></div>
+              <div class="cal-grid" id="calGrid"></div>
+              <div class="legend"><span><i style="background:var(--leaf)"></i>Open</span><span><i style="background:var(--gold)"></i>1 crew left</span><span><i style="background:#C9725C"></i>Fully booked</span><span>Dates within 14 days need a rush request</span></div>
+            </div>
+            <p class="hint" id="dateMsg" role="status" style="margin-top:10px"></p>
+          </div>
+          <div class="card-nav"><span class="hint">Sample availability, generated for this demo.</span><button class="btn" type="button" id="to2" disabled>Choose a package <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="card" id="s2" hidden aria-labelledby="s2h">
+          <h3 id="s2h">Pick your package</h3>
+          <div class="seg" id="tierSeg" role="group" aria-label="Package tier" style="grid-template-columns:repeat(3,minmax(0,1fr))"></div>
+          <div id="tierInfo"></div>
+          <div class="card-nav"><button class="btn line sm" type="button" data-go="1">Back</button><button class="btn" type="button" id="to3">Build the menu <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="card" id="s3" hidden aria-labelledby="s3h">
+          <h3 id="s3h">Build your menu</h3>
+          <div class="menu-bar">
+            <div class="counts" id="counts" aria-live="polite"></div>
+            <label class="toggle"><input type="checkbox" id="noPork"> No pork</label>
+          </div>
+          <div id="menuList" style="display:flex;flex-direction:column;gap:22px"></div>
+          <p class="hint">Steamed rice is always included. Max 2 dishes per category so the buffet stays balanced. To swap a dish, uncheck one first. Dishes marked with a price add that amount per guest.</p>
+          <div class="card-nav"><button class="btn line sm" type="button" data-go="2">Back</button><button class="btn" type="button" id="to4" disabled>Add-ons &amp; details <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="card" id="s4" hidden aria-labelledby="s4h">
+          <h3 id="s4h">Extras, then send your inquiry</h3>
+          <div><span class="label">Add-ons</span><div class="addons" id="addons"></div></div>
+          <form id="inq" novalidate>
+            <span class="label">Your details</span>
+            <div class="field-row">
+              <div class="field"><label for="fName">Full name</label><input id="fName" autocomplete="name" required><span class="err" id="eName"></span></div>
+              <div class="field"><label for="fPhone">Mobile number</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><span class="err" id="ePhone"></span></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="fEmail">Email (optional)</label><input id="fEmail" type="email" autocomplete="email"></div>
+              <div class="field"><label for="fVenue">Venue name</label><input id="fVenue" placeholder="e.g. Clubhouse, function hall, home"></div>
+            </div>
+            <div class="field"><label for="fNotes">Notes for the planner</label><textarea id="fNotes" placeholder="Theme, allergies, program flow, anything we should know"></textarea></div>
+            <div class="card-nav"><button class="btn line sm" type="button" data-go="3">Back</button><button class="btn" type="submit">Send inquiry <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+            <p class="hint">Demo only: nothing is sent. On a live site the inquiry goes to the caterer's inbox and Messenger, and the date is held for 48 hours.</p>
+          </form>
+        </div>
+
+        <!-- Done -->
+        <div class="card done" id="sDone" hidden tabindex="-1">
+          <div class="seal"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+          <h3>Inquiry received!</h3>
+          <p>Your reference number</p>
+          <span class="refno" id="refNo"></span>
+          <p class="hint" style="max-width:52ch">This is a demo, so no message was sent. On a live website, the caterer would reply within the day to schedule a food tasting, and the date would be held while you decide.</p>
+          <div style="width:100%"><span class="label">Your demo inquiries on this device</span><ul class="history" id="hist"></ul></div>
+          <button class="btn line sm" type="button" id="again">Plan another event</button>
+        </div>
+      </div>
+
+      <aside class="quote-col">
+        <div class="quote" id="quote" aria-labelledby="qh">
+          <p class="label">Quotation estimate</p>
+          <h3 id="qh">Your event</h3>
+          <dl class="q-meta" id="qMeta"></dl>
+          <ul class="q-lines" id="qLines"></ul>
+          <div class="q-total"><span>Estimated total</span><b id="qTotal">₱0</b></div>
+          <div class="q-sub"><span>Per guest, all-in</span><span id="qPer">₱0</span></div>
+          <div class="q-sub"><span>30% to reserve the date</span><b id="qDep">₱0</b></div>
+          <p class="q-empty" id="qWarn" hidden></p>
+          <button class="btn ghost sm" type="button" id="printQ">Print or save as PDF</button>
+          <p class="fine">Sample rates for a demo. A final quote depends on venue, final menu and headcount.</p>
+        </div>
+      </aside>
+    </div>
+    <p class="demo-note rv"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>How this demo works:</b> availability is simulated and inquiries are saved only in this browser. A live version checks real bookings on a server, so two clients can never reserve the same crew on the same day.</span></p>
+  </div>
+</section>
+
+<section class="sec process">
+  <div class="wrap">
+    <div class="sec-head rv"><div><p class="eyebrow">How it works</p><h2>From inquiry to last plate</h2><p class="lede">A simple, predictable process clients can read before they message you.</p></div></div>
+    <ol class="flow rv">
+      <li><h3>Check and quote</h3><p>Pick your date, package and menu online and get an instant estimate.</p></li>
+      <li><h3>Food tasting</h3><p>Taste your shortlisted dishes and finalize the menu with your coordinator.</p></li>
+      <li><h3>Reserve</h3><p>A 30% deposit locks your date. The balance is due 7 days before the event.</p></li>
+      <li><h3>Event day</h3><p>We set up 2 to 3 hours early, serve, and clean up after. You just enjoy.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="setups">
+  <div class="wrap">
+    <div class="sec-head rv"><div><p class="eyebrow">Setups &amp; food</p><h2>The look of a Handaan buffet</h2><p class="lede">A real caterer would show their own events here. These are illustrative stock photos.</p></div></div>
+    <div class="gal rv" id="gal"></div>
+    <p class="demo-note"><svg aria-hidden="true"><use href="#i-info"/></svg><span>Illustrative stock photography from Unsplash, not actual Handaan events, food or clients.</span></p>
+  </div>
+</section>
+
+<section class="sec biz">
+  <div class="wrap biz-grid">
+    <div class="rv">
+      <p class="eyebrow">For the business owner</p>
+      <h2 style="font-size:clamp(32px,4vw,48px)">Behind the site: an events dashboard</h2>
+      <p class="lede" style="color:var(--muted);margin-top:12px">Likha can connect this website to a simple admin side, so inquiries stop living in scattered chats.</p>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#i-cal"/></svg><span>One calendar for every booking, crew and venue, with no double bookings</span></li>
+        <li><svg aria-hidden="true"><use href="#i-receipt"/></svg><span>Quotes, deposits and balances tracked per event</span></li>
+        <li><svg aria-hidden="true"><use href="#i-dish"/></svg><span>Kitchen prep list generated from the final menu and headcount</span></li>
+      </ul>
+      <a class="btn" href="../../#quote">Ask Likha about this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="mock rv" aria-label="Sample admin dashboard illustration" role="img">
+      <div class="mock-top"><i></i><i></i><i></i><span>Handaan Admin · sample data</span></div>
+      <div class="mock-body">
+        <div class="tile"><span>Events this month</span><b>14</b><span>3 awaiting deposit</span></div>
+        <div class="tile"><span>Guests to serve this week</span><b>1,240</b><span>across 4 events</span></div>
+        <div class="tile span"><span>Upcoming</span>
+          <div class="r"><span>Sat · Santos–Reyes wedding · 220 pax</span><span class="pill g">Paid 30%</span></div>
+          <div class="r"><span>Sat · Corporate lunch · 80 pax</span><span class="pill y">Quote sent</span></div>
+          <div class="r"><span>Sun · Mika's debut · 150 pax</span><span class="pill r">Balance due</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv"><div><p class="eyebrow">FAQ</p><h2>Good to know</h2></div></div>
+    <div class="faq rv">
+      <details open><summary>What is the minimum number of guests?</summary><p>50 guests for birthdays, christenings and corporate events, 80 for debuts, and 100 for weddings. For smaller groups, ask about our party trays. (Sample policy for this demo.)</p></details>
+      <details><summary>How far ahead should we book?</summary><p>Weddings and debuts usually book 3 to 6 months ahead, especially for December weekends. The online planner accepts dates at least 14 days away; for anything sooner, send a rush request.</p></details>
+      <details><summary>Can we have a food tasting first?</summary><p>Yes. Once you have an estimate, we schedule a tasting of your shortlisted dishes. The tasting fee is deducted from your package when you book.</p></details>
+      <details><summary>Do you serve outside Metro Manila?</summary><p>Yes, within Rizal, Cavite, Laguna and Bulacan, and further by request. A transport fee applies outside Metro Manila and is shown in your estimate.</p></details>
+      <details><summary>Can you handle dietary needs?</summary><p>Turn on "No pork" in the menu builder for a pork-free buffet. Tell us about allergies in the inquiry notes and the kitchen will label and separate those dishes.</p></details>
+      <details><summary>What happens if our headcount changes?</summary><p>Final headcount is due 7 days before the event. Adding guests is usually fine; reducing below the package minimum is billed at the minimum.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="ph" data-label=""><img id="ctaImg" alt="" loading="lazy" width="1600" height="900"></div>
+  <div class="wrap">
+    <p class="eyebrow" style="color:#E7C987">Let's start planning</p>
+    <h2>Your guests will remember the food.</h2>
+    <p>Check your date and get an estimate now. No sign-up needed.</p>
+    <a class="btn" href="#plan">Plan my event <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><span class="mark"><svg aria-hidden="true"><use href="#i-leaf"/></svg></span><span><b>Handaan</b><small>CATERING &amp; EVENTS</small></span></a>
+      <p>Handaan Catering &amp; Events is a sample business created for a website demo. Packages, prices, menus and availability shown are demo content.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <p><a href="#events">Events</a><br><a href="#packages">Packages</a><br><a href="#plan">Plan &amp; quote</a><br><a href="#faq">FAQ</a></p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>[Commissary address], [City]<br>0917 000 0000 (sample)<br>Inquiries daily, 9 AM – 7 PM</p>
+    </div>
+    <details>
+      <summary>Photo credits</summary>
+      <p style="margin-top:10px">All photos are licensed under the free <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash License</a> and used for illustration only.</p>
+      <ul class="credits" id="credits"></ul>
+    </details>
+    <p class="byline">Website Demo by <a href="../../">Likha Web Studio</a></p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta"><a class="btn" id="stickyLink" href="#plan">Check your date <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const peso=n=>'₱'+Math.round(n).toLocaleString('en-PH');
+
+/* Photos: free Unsplash License images, served from Unsplash's CDN at the size each slot needs. */
+const U=(id,w)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=72`;
+const srcset=(id,ws)=>ws.map(w=>`${U(id,w)} ${w}w`).join(', ');
+const PAGE=slug=>`https://unsplash.com/photos/${slug}`;
+function setImg(img,p,ws,sizes){
+  img.src=U(p.id,ws[1]||ws[0]);img.srcset=srcset(p.id,ws);if(sizes)img.sizes=sizes;
+  const box=img.closest('.ph');if(box){if(p.label&&!box.dataset.label)box.dataset.label=p.label;
+    img.addEventListener('error',()=>box.classList.add('failed'),{once:true});}
+}
+const PH={
+  hero:{id:'photo-1768851142332-75f3d1b47452',slug:'elegant-banquet-hall-set-for-an-event-with-round-tables-cQxEJoQZ_-E',cap:'Banquet hall set with round tables',by:'Matt Benson'},
+  cta:{id:'photo-1555244162-803834f70033',slug:'buffet-table-with-silver-chafing-dishes-SiwrpBnxDww',cap:'Buffet table with chafing dishes',by:'Saile Ilyas'}
+};
+
+/* Event types and package tiers (sample prices per guest). */
+const EVENTS={
+  wedding:{n:'Weddings',s:'Wedding',min:100,blurb:'Reception buffet, styling and a full service crew for your big day.',p:{classic:850,premium:1150,grand:1550},
+    extra:['Presidential table and cake table styling','Food tasting for the couple included'],
+    img:{id:'photo-1758810743028-6b8e150ec98f',slug:'a-beautifully-set-table-with-floral-arrangements-for-an-event-3nj-jsGwjVg',alt:'Reception table set with floral arrangements',label:'Weddings',by:'Bruno Ngarukiye'}},
+  debut:{n:'Debuts',s:'Debut',min:80,blurb:'An elegant 18th with stage-ready styling and a buffet her friends will talk about.',p:{classic:750,premium:980,grand:1350},
+    extra:['18 roses and 18 candles setup','Stage backdrop with name signage'],
+    img:{id:'photo-1786125493154-8a2bcedfef9b',slug:'floral-arch-in-banquet-hall-0oZgn2VQ1Jc',alt:'Gold floral arch with roses in a banquet hall',label:'Debuts',by:'Anushka Shashimal'}},
+  corporate:{n:'Corporate events',s:'Corporate',min:50,blurb:'Seminars, launches and year-end parties, served on time with official receipts.',p:{classic:550,premium:780,grand:1100},
+    extra:['Registration table setup','Official receipt and PO billing'],
+    img:{id:'photo-1759873148521-c49d9497cf64',slug:'people-gathered-for-an-event-in-a-large-hall-m0WOBC7lHTI',alt:'Guests gathered for an event in a large hall',label:'Corporate events',by:'Finden Marketing'}},
+  party:{n:'Birthdays & christenings',s:'Family party',min:50,blurb:'Kiddie parties, milestone birthdays and binyag celebrations at home or in a venue.',p:{classic:480,premium:650,grand:890},
+    extra:['Theme backdrop (basic)','Kids\' table with child-size seats'],
+    img:{id:'photo-1537495988501-f9cd94a78f3e',slug:'variety-of-fried-dishes-on-banana-leaf-q4pns2LtGwk',alt:'Filipino dishes served on banana leaves',label:'Family celebrations',by:'Eiliv Aceron'}}
+};
+const TIERS={
+  classic:{n:'Classic',mains:4,desserts:1,ratio:15,hrs:4,incl:['Rice, 4 main dishes, 1 dessert, 1 drink','Buffet setup with skirting and chafing dishes','Tables and Tiffany chairs with linens','1 waiter for every 15 guests','4 hours of service']},
+  premium:{n:'Premium',mains:5,desserts:2,ratio:12,hrs:5,best:true,incl:['Rice, 5 main dishes, 2 desserts, 1 drink','Themed buffet and table centerpieces','Tables and Tiffany chairs with linens','1 waiter for every 12 guests','5 hours of service']},
+  grand:{n:'Grand',mains:6,desserts:2,ratio:10,hrs:6,free:true,incl:['Rice, 6 main dishes, 2 desserts, 1 drink','Premium dishes at no extra charge','Full styling with fresh florals','1 waiter for every 10 guests','On-the-day event coordinator','6 hours of service']}
+};
+const CATS=[['beef','Beef'],['pork','Pork'],['chicken','Chicken'],['seafood','Fish & seafood'],['pasta','Pasta & noodles'],['veg','Vegetables'],['dessert','Desserts'],['drink','Drinks']];
+const MAIN_CATS=['beef','pork','chicken','seafood','pasta','veg'];
+const DISHES=[
+  ['kare','beef','Kare-kare','with bagoong on the side',0],['calde','beef','Beef caldereta','',0],['mush','beef','Beef with mushroom sauce','',0],['roast','beef','Roast beef carving station','with gravy',90],
+  ['kawali','pork','Lechon kawali','with liver sauce',0],['hamon','pork','Pork hamonado','',0],['menudo','pork','Pork menudo','',0],['bbq','pork','Pork barbecue skewers','',0],
+  ['cordon','chicken','Chicken cordon bleu','',0],['pastel','chicken','Chicken pastel','',0],['inasal','chicken','Chicken inasal','',0],['butter','chicken','Buttered chicken','',0],
+  ['sweet','seafood','Fish fillet sweet and sour','',0],['tartar','seafood','Fish fillet with tartar','',0],['relleno','seafood','Rellenong bangus','',0],['shrimp','seafood','Garlic butter shrimp','contains shellfish',80],
+  ['canton','pasta','Pancit canton guisado','',0],['malabon','pasta','Pancit malabon','contains shellfish',0],['baked','pasta','Baked macaroni','',0],['carbo','pasta','Creamy carbonara','',0],
+  ['chop','veg','Chopsuey','',0],['mixed','veg','Buttered mixed vegetables','',0],['pinak','veg','Pinakbet','with bagoong',0],['lumpia','veg','Fresh lumpiang ubod','',35],
+  ['buko','dessert','Buko pandan','',0],['flan','dessert','Leche flan','',0],['mango','dessert','Mango float','',0],['maja','dessert','Maja blanca','',0],['ube','dessert','Ube cheese cake bars','',25],
+  ['tea','drink','House iced tea','',0],['sago','drink','Sago\'t gulaman','',0],['lemon','drink','Cucumber lemonade','',0],['calam','drink','Calamansi juice','',0]
+].map(([id,c,n,note,up])=>({id,c,n,note,up}));
+const DISH=Object.fromEntries(DISHES.map(d=>[d.id,d]));
+const AREAS=[['mm','Metro Manila',0],['near','Rizal, Cavite, Laguna, Bulacan',3500],['far','Pampanga, Batangas, Tarlac',6500]];
+const ADDONS=[
+  {id:'lechon',n:'Whole lechon',d:'Cebu-style, about 18–20 kg',price:9500,qty:true,max:4},
+  {id:'graze',n:'Grazing table',d:'Cheese, cold cuts and fruit, good for up to 100',price:18000},
+  {id:'dessert',n:'Dessert station',d:'Mini cakes, kakanin and fruit',price:45,per:true},
+  {id:'coffee',n:'Coffee and tea bar',d:'Brewed coffee, tea and pastries',price:35,per:true},
+  {id:'mocktail',n:'Mocktail bar',d:'3 hours, with bartender',price:12000},
+  {id:'lights',n:'Basic lights and sound',d:'Speakers, 2 mics, uplights',price:8500},
+  {id:'booth',n:'Photo booth',d:'3 hours, unlimited prints',price:7500},
+  {id:'staff',n:'Extra waitstaff',d:'Per waiter, for the full service',price:1200,qty:true,max:10}
+];
+const SERVICE=0.10, DEPOSIT=0.30, LEAD=14, CREWS=3;
+
+/* ---------- State ---------- */
+const st={ev:'wedding',tier:'premium',guests:150,time:'dinner',area:'mm',date:null,menu:new Set(['kare','kawali','cordon','sweet','canton','buko','flan','tea']),noPork:false,add:{},step:1};
+let pastHero=false,inPlan=false;
+const today=new Date();today.setHours(0,0,0,0);
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const fromIso=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+const fmtL=new Intl.DateTimeFormat('en-PH',{weekday:'short',month:'long',day:'numeric',year:'numeric'});
+const fmtM=new Intl.DateTimeFormat('en-PH',{month:'long',year:'numeric'});
+const earliest=addDays(today,LEAD), latest=addDays(today,365);
+
+/* Simulated availability: weekends and December are busier. Deterministic per date. */
+function booked(d){
+  let h=(d.getFullYear()*372+d.getMonth()*31+d.getDate())*2654435761>>>0; h=(h^(h>>>13))*1274126177>>>0; const r=(h>>>8)%100;
+  const dow=d.getDay(), dec=d.getMonth()===11;
+  let b = dow===6 ? (r<55?3:2) : dow===0 ? (r<30?3:r<75?2:1) : dow===5 ? (r<35?2:r<70?1:0) : (r<12?2:r<40?1:0);
+  if(dec&&b<3&&r%3===0)b++;
+  return Math.min(b,CREWS);
+}
+function status(d,guests=st.guests){
+  if(d<earliest)return 'lead';
+  if(d>latest)return 'lead';
+  const left=CREWS-booked(d), need=guests>300?2:1;
+  if(left===0)return 'full';
+  if(left<need)return 'big';
+  return left===1||left-need===0?'few':'open';
+}
+const STATUS_TXT={open:'Open',few:'Only 1 crew left',full:'Fully booked',big:'Not enough crew left for this many guests',lead:'Needs a rush request'};
+
+/* ---------- Photos in fixed slots ---------- */
+setImg($('heroImg'),PH.hero,[960,1600,2200],'100vw');
+setImg($('ctaImg'),PH.cta,[800,1600],'100vw');
+
+/* ---------- Event cards ---------- */
+$('evGrid').innerHTML=Object.entries(EVENTS).map(([k,e],i)=>`<article class="ev-card rv" style="transition-delay:${i*80}ms">
+  <div class="ph"><img data-ev="${k}" alt="${esc(e.img.alt)} (illustrative stock photo)" loading="lazy" decoding="async" width="600" height="510"></div>
+  <div class="ev-body"><h3>${esc(e.n)}</h3><p>${esc(e.blurb)}</p>
+   <div class="ev-meta"><b><small>from </small>${peso(e.p.classic)}</b><span>per guest · min ${e.min}</span></div>
+   <button class="btn sm" type="button" data-pick-ev="${k}">See packages <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></article>`).join('');
+document.querySelectorAll('img[data-ev]').forEach(img=>setImg(img,EVENTS[img.dataset.ev].img,[480,720,960],'(max-width:620px) 100vw, (max-width:1100px) 50vw, 290px'));
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pick-ev]');if(!b)return;setEv(b.dataset.pickEv);$('packages').scrollIntoView();});
+
+/* ---------- Package tabs ---------- */
+function renderPkgs(){
+  $('pkgTabs').innerHTML=Object.entries(EVENTS).map(([k,e])=>`<button class="tab" role="tab" type="button" aria-selected="${k===st.ev}" data-tab="${k}">${esc(e.n)}</button>`).join('');
+  const e=EVENTS[st.ev];
+  $('tiers').innerHTML=Object.entries(TIERS).map(([k,t])=>`<article class="tier${t.best?' best':''}">
+    ${t.best?'<span class="ribbon">Most booked</span>':''}
+    <h3>${t.n}</h3><p class="price">${peso(e.p[k])}<small>/ guest</small></p><p class="min">Minimum ${e.min} guests · from ${peso(e.p[k]*e.min)}</p>
+    <ul>${t.incl.map(x=>`<li><svg aria-hidden="true"><use href="#i-check"/></svg>${esc(x)}</li>`).join('')}
+    ${k!=='classic'?e.extra.map(x=>`<li class="x"><svg aria-hidden="true"><use href="#i-plus"/></svg>${esc(x)}</li>`).join(''):''}</ul>
+    <button class="btn${t.best?'':' line'}" type="button" data-tier="${k}">Choose ${t.n} <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></article>`).join('');
+}
+$('pkgTabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)setEv(b.dataset.tab);});
+$('pkgTabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;const ks=Object.keys(EVENTS);const i=(ks.indexOf(st.ev)+(e.key==='ArrowRight'?1:ks.length-1))%ks.length;setEv(ks[i]);$('pkgTabs').querySelector(`[data-tab="${ks[i]}"]`).focus();});
+$('tiers').addEventListener('click',e=>{const b=e.target.closest('[data-tier]');if(!b)return;st.tier=b.dataset.tier;trimMenu();renderAll();go(st.date?2:1);$('plan').scrollIntoView();});
+
+function setEv(k){st.ev=k;if(st.guests<EVENTS[k].min)st.guests=EVENTS[k].min;renderAll();}
+
+/* ---------- Step 1: event, guests, area, calendar ---------- */
+$('qEv').innerHTML=Object.entries(EVENTS).map(([k,e])=>`<option value="${k}">${esc(e.n)}</option>`).join('');
+$('area').innerHTML=AREAS.map(([k,n,f])=>`<option value="${k}">${esc(n)}${f?` (+${peso(f)})`:''}</option>`).join('');
+$('qDate').min=iso(today);$('qDate').max=iso(latest);
+let calMonth=new Date(earliest.getFullYear(),earliest.getMonth(),1);
+
+function renderStep1(){
+  $('evSeg').innerHTML=Object.entries(EVENTS).map(([k,e])=>`<button type="button" aria-pressed="${k===st.ev}" data-ev-seg="${k}">${esc(e.s)}<small>min ${e.min} guests</small></button>`).join('');
+  const min=EVENTS[st.ev].min;
+  $('guests').min=$('guestsR').min=min;$('guests').value=$('guestsR').value=st.guests;
+  $('time').value=st.time;$('area').value=st.area;
+  renderCal();
+  const ok=st.date&&['open','few'].includes(status(fromIso(st.date)))&&st.guests>=min&&st.guests<=500;
+  $('to2').disabled=!ok;
+  if(st.date){const s=status(fromIso(st.date));
+    $('dateMsg').textContent=['open','few'].includes(s)?`${fmtL.format(fromIso(st.date))} · ${STATUS_TXT[s]}`:`${fmtL.format(fromIso(st.date))} is no longer available for ${st.guests} guests. Please pick another date.`;
+  } else $('dateMsg').textContent='Choose an available date to continue.';
+}
+function renderCal(){
+  const y=calMonth.getFullYear(),m=calMonth.getMonth();
+  $('calTitle').textContent=fmtM.format(calMonth);
+  $('calPrev').disabled=calMonth<=new Date(today.getFullYear(),today.getMonth(),1);
+  $('calNext').disabled=calMonth>=new Date(latest.getFullYear(),latest.getMonth(),1);
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  let h=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<span class="dow" aria-hidden="true">${d}</span>`).join('');
+  for(let i=0;i<first;i++)h+='<span class="day blank"></span>';
+  for(let d=1;d<=days;d++){const dt=new Date(y,m,d),k=iso(dt),s=status(dt),off=!['open','few'].includes(s);
+    h+=`<button type="button" class="day ${s}" data-day="${k}" aria-pressed="${st.date===k}" ${off?'disabled':''} aria-label="${fmtL.format(dt)}: ${STATUS_TXT[s]}"><span>${d}</span></button>`;}
+  $('calGrid').innerHTML=h;
+}
+$('calPrev').onclick=()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);renderCal();};
+$('calNext').onclick=()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);renderCal();};
+$('calGrid').addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(!b||b.disabled)return;st.date=b.dataset.day;renderAll();});
+$('evSeg').addEventListener('click',e=>{const b=e.target.closest('[data-ev-seg]');if(b)setEv(b.dataset.evSeg);});
+function setGuests(v,commit){
+  const min=EVENTS[st.ev].min;let n=parseInt(v,10);
+  if(isNaN(n)){$('gErr').textContent=`Enter at least ${min} guests.`;return;}
+  if(commit)n=Math.max(min,Math.min(500,n));
+  $('gErr').textContent=n<min?`${EVENTS[st.ev].s} packages start at ${min} guests.`:n>500?'For more than 500 guests, send us a custom request.':'';
+  st.guests=n;renderAll();
+}
+$('guests').addEventListener('input',e=>setGuests(e.target.value,false));
+$('guests').addEventListener('change',e=>setGuests(e.target.value,true));
+$('guestsR').addEventListener('input',e=>setGuests(e.target.value,true));
+$('time').onchange=e=>{st.time=e.target.value;renderQuote();};
+$('area').onchange=e=>{st.area=e.target.value;renderQuote();};
+
+/* ---------- Hero quick check ---------- */
+$('quick').addEventListener('submit',e=>{
+  e.preventDefault();const r=$('qRes');r.hidden=false;
+  const v=$('qDate').value;if(!v){r.className='res no';r.textContent='Pick a date first.';return;}
+  const ev=$('qEv').value,min=EVENTS[ev].min,g=Math.max(min,Math.min(500,parseInt($('qGuests').value,10)||min));
+  $('qGuests').value=g;const d=fromIso(v),s=status(d,g);
+  st.ev=ev;st.guests=g;
+  if(s==='open'||s==='few'){
+    st.date=v;calMonth=new Date(d.getFullYear(),d.getMonth(),1);
+    r.className='res '+(s==='open'?'ok':'few');
+    r.innerHTML=`<span><b>Good news!</b> ${esc(fmtL.format(d))} is ${s==='open'?'open':'still open, with only 1 crew left'}. <a href="#plan">Continue to your quote</a>.</span>`;
+  }else{
+    r.className='res no';
+    r.textContent=s==='lead'?'That date is less than 14 days away. Send a rush request and we\'ll check by phone.':s==='big'?`That date can't take ${g} guests anymore. Try a weekday or another weekend.`:'Sorry, that date is fully booked. See nearby open dates in the planner.';
+    calMonth=new Date(Math.max(d,earliest));calMonth.setDate(1);
+  }
+  renderAll();
+});
+
+/* ---------- Step 2: tier ---------- */
+function renderStep2(){
+  const e=EVENTS[st.ev];
+  $('tierSeg').innerHTML=Object.entries(TIERS).map(([k,t])=>`<button type="button" aria-pressed="${k===st.tier}" data-tier-seg="${k}">${t.n}<small>${peso(e.p[k])} / guest</small></button>`).join('');
+  const t=TIERS[st.tier];
+  $('tierInfo').innerHTML=`<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">${[...t.incl,...(st.tier!=='classic'?e.extra:[])].map(x=>`<li style="display:flex;gap:9px"><svg class="i" style="color:var(--leaf);margin-top:3px" aria-hidden="true"><use href="#i-check"/></svg>${esc(x)}</li>`).join('')}</ul>`;
+}
+$('tierSeg').addEventListener('click',e=>{const b=e.target.closest('[data-tier-seg]');if(!b)return;st.tier=b.dataset.tierSeg;trimMenu();renderAll();});
+
+/* ---------- Step 3: menu builder ---------- */
+const picked=c=>[...st.menu].filter(id=>DISH[id].c===c);
+const mainsPicked=()=>[...st.menu].filter(id=>MAIN_CATS.includes(DISH[id].c));
+function limits(){const t=TIERS[st.tier];return{mains:t.mains,dessert:t.desserts,drink:1};}
+function trimMenu(){
+  const L=limits();
+  if(st.noPork)picked('pork').forEach(id=>st.menu.delete(id));
+  [['dessert',L.dessert],['drink',1]].forEach(([c,n])=>picked(c).slice(n).forEach(id=>st.menu.delete(id)));
+  mainsPicked().slice(L.mains).forEach(id=>st.menu.delete(id));
+}
+function menuFull(){const L=limits();return mainsPicked().length===L.mains&&picked('dessert').length===L.dessert&&picked('drink').length===1;}
+function renderStep3(){
+  const L=limits(),t=TIERS[st.tier],m=mainsPicked().length;
+  const cnt=(n,max,lbl)=>`<span class="count${n===max?' done':''}">${lbl} ${n}/${max}</span>`;
+  $('counts').innerHTML=cnt(m,L.mains,'Mains')+cnt(picked('dessert').length,L.dessert,'Desserts')+cnt(picked('drink').length,1,'Drink');
+  $('noPork').checked=st.noPork;
+  $('menuList').innerHTML=CATS.filter(([c])=>!(st.noPork&&c==='pork')).map(([c,n])=>{
+    const isMain=MAIN_CATS.includes(c),inCat=picked(c).length,catMax=isMain?2:(c==='dessert'?L.dessert:1);
+    const hint=isMain?`up to 2 · ${inCat} picked`:`pick ${catMax}`;
+    return `<div class="mcat"><h4>${esc(n)}<span>${hint}</span></h4><div class="dishes">${DISHES.filter(d=>d.c===c).map(d=>{
+      const on=st.menu.has(d.id);
+      const blocked=!on&&(isMain?(inCat>=2||m>=L.mains):(inCat>=catMax&&catMax>1));
+      const up=d.up?`<span class="up${t.free?' free':''}">${t.free?'Included':'+'+peso(d.up)+'/guest'}</span>`:'';
+      return `<button type="button" class="dish" data-dish="${d.id}" aria-pressed="${on}" ${blocked?'disabled':''}><span class="box"><svg aria-hidden="true"><use href="#i-check"/></svg></span><span class="nm">${esc(d.n)}${d.note?`<small>${esc(d.note)}</small>`:''}</span>${up}</button>`;}).join('')}</div></div>`;}).join('');
+  $('to4').disabled=!menuFull();
+}
+$('menuList').addEventListener('click',e=>{
+  const b=e.target.closest('[data-dish]');if(!b||b.disabled)return;const d=DISH[b.dataset.dish];
+  if(st.menu.has(d.id))st.menu.delete(d.id);
+  else{ // drink and single-dessert picks swap instead of blocking
+    const L=limits();
+    if(d.c==='drink')picked('drink').forEach(id=>st.menu.delete(id));
+    if(d.c==='dessert'&&L.dessert===1)picked('dessert').forEach(id=>st.menu.delete(id));
+    st.menu.add(d.id);
+  }
+  renderAll();
+  const again=$('menuList').querySelector(`[data-dish="${d.id}"]`);if(again)again.focus();
+});
+$('noPork').onchange=e=>{st.noPork=e.target.checked;trimMenu();renderAll();};
+
+/* ---------- Step 4: add-ons ---------- */
+function renderStep4(){
+  $('addons').innerHTML=ADDONS.map(a=>{const v=st.add[a.id]||0;
+    const price=a.per?`${peso(a.price)} / guest`:a.qty?`${peso(a.price)} each`:peso(a.price);
+    const ctl=a.qty?`<div class="ctl qty"><button type="button" data-dec="${a.id}" aria-label="Fewer ${esc(a.n)}">−</button><output aria-live="polite">${v}</output><button type="button" data-inc="${a.id}" aria-label="More ${esc(a.n)}">+</button></div>`
+      :`<button type="button" class="switch" role="switch" aria-checked="${!!v}" data-sw="${a.id}" aria-label="${esc(a.n)}"></button>`;
+    return `<div class="addon${v?' on':''}"><div><b>${esc(a.n)}</b><small>${esc(a.d)} · ${price}</small></div>${ctl}</div>`;}).join('');
+}
+$('addons').addEventListener('click',e=>{
+  const t=e.target.closest('[data-inc],[data-dec],[data-sw]');if(!t)return;
+  const id=t.dataset.inc||t.dataset.dec||t.dataset.sw,a=ADDONS.find(x=>x.id===id),v=st.add[id]||0;
+  if(t.dataset.sw)st.add[id]=v?0:1;else st.add[id]=Math.max(0,Math.min(a.max,v+(t.dataset.inc?1:-1)));
+  renderAll();$('addons').querySelector(`[data-${t.dataset.inc?'inc':t.dataset.dec?'dec':'sw'}="${id}"]`).focus();
+});
+
+/* ---------- Quote ---------- */
+function calc(){
+  const e=EVENTS[st.ev],t=TIERS[st.tier],g=st.guests;
+  const base=e.p[st.tier];
+  const ups=t.free?0:[...st.menu].reduce((s,id)=>s+DISH[id].up,0);
+  const food=(base+ups)*g;
+  const lines=[{n:`${t.n} package`,d:`${g} guests × ${peso(base)}`,v:base*g}];
+  if(ups)lines.push({n:'Premium dish upgrades',d:`${g} guests × ${peso(ups)}`,v:ups*g});
+  let add=0;
+  ADDONS.forEach(a=>{const q=st.add[a.id]||0;if(!q)return;const v=a.per?a.price*g:a.price*q;add+=v;
+    lines.push({n:a.n+(a.qty&&q>1?` × ${q}`:''),d:a.per?`${g} guests × ${peso(a.price)}`:'',v});});
+  const area=AREAS.find(x=>x[0]===st.area);
+  if(area[2])lines.push({n:'Transport',d:area[1],v:area[2]});
+  const svc=food*SERVICE;lines.push({n:'Service charge',d:'10% of food',v:svc});
+  const total=food+add+area[2]+svc;
+  return{lines,total,per:total/g,dep:total*DEPOSIT,waiters:Math.ceil(g/t.ratio)+(st.add.staff||0)};
+}
+function renderQuote(){
+  const e=EVENTS[st.ev],t=TIERS[st.tier],q=calc();
+  $('qh').textContent=`${e.s} · ${t.n}`;
+  const meta=[['Date',st.date?fmtL.format(fromIso(st.date)):'Not picked yet'],['Serving',st.time==='lunch'?'Lunch':'Dinner'],['Guests',st.guests],['Waitstaff',q.waiters],['Menu',`${st.menu.size} dishes + rice`]];
+  $('qMeta').innerHTML=meta.map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
+  $('qLines').innerHTML=q.lines.map(l=>`<li><span>${esc(l.n)}${l.d?`<small>${esc(l.d)}</small>`:''}</span><span>${peso(l.v)}</span></li>`).join('');
+  $('qTotal').textContent=peso(q.total);$('qPer').textContent=peso(q.per);$('qDep').textContent=peso(q.dep);
+  const warn=[];if(!st.date)warn.push('Pick a date to lock in availability.');if(!menuFull())warn.push('Finish choosing your menu.');
+  $('qWarn').hidden=!warn.length;$('qWarn').textContent=warn.join(' ');
+  $('stickyLink').dataset.est=peso(q.total);paintSticky();
+}
+$('printQ').onclick=()=>window.print();
+
+/* ---------- Steps ---------- */
+function canGo(n){
+  if(n<=1)return true;
+  const d1=st.date&&['open','few'].includes(status(fromIso(st.date)))&&st.guests>=EVENTS[st.ev].min&&st.guests<=500;
+  if(n===2||n===3)return !!d1;
+  return d1&&menuFull();
+}
+function go(n,focus){
+  if(!canGo(n))return;st.step=n;
+  ['s1','s2','s3','s4'].forEach((id,i)=>$(id).hidden=i+1!==n);$('sDone').hidden=true;
+  renderSteps();
+  if(focus){$('steps').scrollIntoView({block:'start'});const h=$('s'+n).querySelector('h3');h.tabIndex=-1;h.focus({preventScroll:true});}
+}
+function renderSteps(){
+  document.querySelectorAll('.step').forEach(b=>{const n=+b.dataset.go;
+    b.disabled=!canGo(n)||!$('sDone').hidden;
+    if(n===st.step&&$('sDone').hidden)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');
+    b.classList.toggle('ok',n<st.step||!$('sDone').hidden);});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(+b.dataset.go,true);});
+$('to2').onclick=()=>go(2,true);$('to3').onclick=()=>go(3,true);$('to4').onclick=()=>go(4,true);
+
+/* ---------- Inquiry (demo, on-device) ---------- */
+const KEY='handaan-demo-inquiries';
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[];}catch{return[];}};
+const save=a=>{try{localStorage.setItem(KEY,JSON.stringify(a));}catch{}};
+function renderHist(){
+  const a=load();
+  $('hist').innerHTML=a.length?a.map(x=>`<li><div><b>${esc(x.ref)}</b> · ${esc(x.ev)}<span>${esc(x.date)} · ${x.guests} guests · ${esc(x.total)}</span></div><button type="button" data-del="${esc(x.ref)}">Remove</button></li>`).join(''):'<li>No saved inquiries.</li>';
+}
+$('hist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;save(load().filter(x=>x.ref!==b.dataset.del));renderHist();});
+$('inq').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=$('fName').value.trim(),phone=$('fPhone').value.replace(/[\s-]/g,'');
+  $('eName').textContent=name.length<2?'Please enter your name.':'';
+  $('ePhone').textContent=/^(09|\+639)\d{9}$/.test(phone)?'':'Enter a PH mobile number, e.g. 0917 123 4567.';
+  if($('eName').textContent||$('ePhone').textContent){($('eName').textContent?$('fName'):$('fPhone')).focus();return;}
+  const d=fromIso(st.date),q=calc();
+  const ref=`HND-${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  save([{ref,ev:`${EVENTS[st.ev].s} · ${TIERS[st.tier].n}`,date:fmtL.format(d),guests:st.guests,total:peso(q.total)},...load()].slice(0,10));
+  $('refNo').textContent=ref;renderHist();
+  ['s1','s2','s3','s4'].forEach(id=>$(id).hidden=true);$('sDone').hidden=false;renderSteps();
+  $('steps').scrollIntoView({block:'start'});$('sDone').focus({preventScroll:true});
+});
+$('again').onclick=()=>{$('inq').reset();st.date=null;st.add={};$('sDone').hidden=true;renderAll();go(1,true);};
+
+/* ---------- Gallery and credits ---------- */
+const GAL=[
+  {id:'photo-1671612451404-f4f8fc5fe25e',slug:'a-buffet-line-with-a-variety-of-appetizers-eDu0pbME1tc',cap:'Buffet line with appetizers',by:'Annie Spratt',sz:'wide'},
+  {id:'photo-1583913459026-781129ce061f',slug:'cooked-food-on-white-ceramic-bowl-PAynGzC2hME',cap:'Home-style Filipino dish',by:'John Matthew Flores',sz:'tall'},
+  {id:'photo-1723832348140-a2d9eb1753b1',slug:'a-table-with-a-white-table-cloth-and-a-chandelier-TgV07XNKS54',cap:'Table setting under a chandelier',by:'Jennifer Kalenberg'},
+  {id:'photo-1555939594-58d7cb561ad1',slug:'grilled-meat-and-vegetable-on-the-table-UC0HZdUitWY',cap:'Grilled meat and vegetables',by:'Victoria Shes'},
+  {id:'photo-1762765684665-6b6855bb6fe6',slug:'long-tables-set-for-a-banquet-in-a-grand-hall-jds_OTZ8c7w',cap:'Long banquet tables',by:'Adrien Olichon',sz:'wide'},
+  {id:'photo-1642616128754-7d026f979317',slug:'a-person-is-serving-food-from-a-bowl-2SifhsGcpLk',cap:'Serving from the buffet',by:'KAT'},
+  {id:'photo-1536489885071-87983c3e2859',slug:'white-rice-steamed-okra-grilled-eggplant-and-salted-egg-Q-5eUQwEqm0',cap:'Rice with grilled eggplant and salted egg',by:'Eiliv Aceron'}
+];
+$('gal').innerHTML=GAL.map((g,i)=>`<figure class="ph ${g.sz||''}" data-label="${esc(g.cap)}"><img data-g="${i}" alt="${esc(g.cap)} (illustrative stock photo)" loading="lazy" decoding="async"><figcaption>${esc(g.cap)}</figcaption></figure>`).join('');
+document.querySelectorAll('img[data-g]').forEach(img=>setImg(img,GAL[+img.dataset.g],[400,700,1000],'(max-width:820px) 50vw, 300px'));
+const seen=new Set(),credits=[];
+[PH.hero,...Object.values(EVENTS).map(e=>({...e.img,cap:e.img.alt})),...GAL,PH.cta].forEach(p=>{if(seen.has(p.id))return;seen.add(p.id);credits.push(p);});
+$('credits').innerHTML=credits.map(p=>`<li><a href="${PAGE(p.slug)}" target="_blank" rel="noopener">${esc(p.cap||p.alt)}</a>${p.by?' · '+esc(p.by):''}</li>`).join('');
+
+/* ---------- Render ---------- */
+function renderAll(){
+  renderPkgs();renderStep1();renderStep2();renderStep3();renderStep4();renderQuote();
+  if(!canGo(st.step))go(1);else renderSteps();
+  $('qEv').value=st.ev;
+}
+renderAll();
+
+/* ---------- Header, drawer, sticky CTA, reveal ---------- */
+const head=$('head');
+const onScroll=()=>head.classList.toggle('solid',scrollY>40);onScroll();addEventListener('scroll',onScroll,{passive:true});
+const drawer=$('drawer');
+const openD=o=>{drawer.hidden=!o;$('menuBtn').setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';if(o)$('menuClose').focus();else $('menuBtn').focus();};
+$('menuBtn').onclick=()=>openD(true);$('menuClose').onclick=()=>openD(false);
+drawer.addEventListener('click',e=>{if(e.target.closest('a'))openD(false);});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!drawer.hidden)openD(false);});
+function paintSticky(){
+  const a=$('stickyLink');
+  if(inPlan){a.href='#quote';a.innerHTML=`Estimate <span class="est">${a.dataset.est||''}</span> · View`;}
+  else{a.href='#plan';a.innerHTML='Check your date <svg aria-hidden="true"><use href="#i-arrow"/></svg>';}
+  $('stickyCta').classList.toggle('show',pastHero);
+}
+if('IntersectionObserver' in window){
+  new IntersectionObserver(([e])=>{pastHero=!e.isIntersecting;paintSticky();}).observe(document.querySelector('.hero'));
+  new IntersectionObserver(([e])=>{inPlan=e.isIntersecting;paintSticky();},{rootMargin:'-20% 0px -30% 0px'}).observe(document.querySelector('.plan-grid'));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const links=[...document.querySelectorAll('.nav a')];
+  const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-45% 0px -50% 0px'});
+  ['events','packages','plan','setups','faq'].forEach(id=>spy.observe($(id)));
+}else document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+</script>
+</body>
+</html>
