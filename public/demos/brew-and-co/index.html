@@ -1,236 +1,902 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Brew &amp; Co. Demo</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brew &amp; Co. — Specialty Coffee Shop (Demo by Likha Web Studio)</title>
+<meta name="description" content="Brew &amp; Co. is a sample specialty coffee shop website by Likha Web Studio: cinematic homepage, interactive menu, online ordering and table reservations.">
+<meta name="theme-color" content="#241710">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Brew &amp; Co. — Coffee Shop Website Demo">
+<meta property="og:description" content="More than just coffee. A premium coffee shop website demo by Likha Web Studio.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&h=630&q=70">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
-</head><body>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: one-column cafe site — hero, filterable menu grid, cart drawer with checkout. Single light look. */
 :root{
-  --bg:#FFFFFF; --soft:#F3F1EE; --ink:#2A1E16; --muted:#6E6159; --line:#E6E0D9;
-  --accent:#2F6B4F; --accent-ink:#FFFFFF; --bar:#111318;
-  --display:'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
-  --body:'Figtree', system-ui, sans-serif;
-  color-scheme: light;
+  --espresso:#241710; --espresso-2:#2F1F16; --cream:#F7F1E7; --caramel:#A66B40; --caramel-d:#8C5631;
+  --beige:#E9DCCB; --white:#FFFFFF; --ink:#241710; --muted:#6B5A4E; --line:#E3D6C4;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:14px; --shadow:0 10px 30px rgba(36,23,16,.10);
+  color-scheme:light;
 }
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
-.demo b{color:#FFFFFF}
-header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em}
-nav{display:flex;gap:22px;font-weight:500;color:var(--muted)}
-nav a{color:inherit;text-decoration:none}
-nav a:hover{color:var(--ink)}
-.btn{font:600 15px var(--body);border:0;border-radius:8px;padding:12px 20px;cursor:pointer;background:var(--ink);color:#FFFFFF}
-.btn.green{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:40px 56px}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-0.035em;margin:0 0 18px;text-wrap:balance}
-.hero p{color:var(--muted);font-size:18px;max-width:44ch;margin:0 0 26px}
-.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
-.hero-art{aspect-ratio:1/1;max-width:100%;border-radius:20px;background:#C9A47C;display:grid;place-items:center;position:relative;overflow:hidden}
-.hero-art .steam{position:absolute;inset:auto 0 0;height:38%;background:#A9825B}
-.hero-art svg{position:relative;width:46%;height:auto}
-.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--muted)}
-.facts b{display:block;color:var(--ink);font-size:16px}
-section h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-0.03em;margin:0 0 6px}
-.menu{background:var(--soft);padding-block:56px}
-.menu-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tab{font:600 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
-.tab[aria-pressed="true"]{background:var(--ink);color:#FFFFFF;border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.item{background:var(--bg);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.thumb{height:130px;border-radius:10px;display:grid;place-items:center}
-.thumb svg{width:56px;height:56px}
-.item h3{margin:0;font-size:18px;font-weight:700}
-.item p{margin:0;color:var(--muted);font-size:14px;flex:1}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.price{font-weight:700;font-variant-numeric:tabular-nums}
-.add{font:600 14px var(--body);border:0;background:var(--accent);color:#FFFFFF;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}
-.info .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-block:56px}
-.info h3{font-family:var(--display);font-size:20px;margin:0 0 6px}
-.info p{margin:0;color:var(--muted)}
-footer{border-top:1px solid var(--line)}
-footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
-.cartbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#FFFFFF;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
-.cartbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:12px}
-.cartbar .btn{background:var(--accent)}
-.overlay{position:fixed;inset:0;background:rgba(20,14,10,0.45);z-index:30}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg);z-index:31;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) 20px;overflow-y:auto;gap:16px}
-.drawer h2{font-family:var(--display);font-size:28px;margin:0}
-.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding-block:10px;border-bottom:1px solid var(--line)}
-.qty{display:flex;align-items:center;gap:6px}
-.qty button{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px;cursor:pointer}
-.totals div{display:flex;justify-content:space-between;padding-block:3px;font-variant-numeric:tabular-nums}
-.totals .grand{font-weight:800;font-size:18px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
-form{display:flex;flex-direction:column;gap:12px}
-label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
-input,select,textarea{font:16px var(--body);padding:11px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
-.choices{display:flex;gap:8px;flex-wrap:wrap}
-.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;font-weight:500}
-.note{font-size:13px;color:var(--muted)}
-.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding-top:40px}
-.done .num{font-family:var(--display);font-size:34px;font-weight:800}
-@media (max-width:760px){
-  .hero .wrap{grid-template-columns:1fr}
-  .hero-art{max-height:300px;aspect-ratio:auto;height:280px}
-  .info .wrap{grid-template-columns:1fr}
-  nav{display:none}
-}
-@media (prefers-reduced-motion:no-preference){.add,.btn{transition:transform .12s}.add:active,.btn:active{transform:scale(.97)}}
-</style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--caramel);outline-offset:3px;border-radius:6px}
 
-<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your business? Starts at ₱3,500</div>
+/* Demo bar */
+.demobar{background:#120B07;color:#E9DCCB;font-size:13px;text-align:center;padding:8px 16px;position:relative;z-index:60}
+.demobar a{color:#fff;font-weight:700}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px var(--sans);padding:13px 22px;border-radius:6px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;min-height:46px;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn svg{width:16px;height:16px;transition:transform .2s}
+.btn:hover svg{transform:translateX(3px)}
+.btn-caramel{background:var(--caramel);color:#fff}
+.btn-caramel:hover{background:var(--caramel-d)}
+.btn-line{border-color:rgba(255,255,255,.75);color:#fff;background:transparent}
+.btn-line:hover{background:#fff;color:var(--espresso)}
+.btn-dark{background:var(--espresso);color:#fff}
+.btn-dark:hover{background:#3a271c}
+.btn-outline{border-color:var(--espresso);color:var(--espresso);background:transparent}
+.btn-outline:hover{background:var(--espresso);color:#fff}
+.btn-sm{padding:9px 16px;min-height:40px;font-size:14px}
+
+/* Header */
+.site-head{position:absolute;left:0;right:0;z-index:40;color:#fff;transition:background .3s,box-shadow .3s}
+.site-head.stuck{position:fixed;top:0;background:rgba(36,23,16,.96);box-shadow:0 6px 24px rgba(0,0,0,.25);backdrop-filter:blur(8px)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:18px}
+.site-head.stuck .wrap{padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:36px;height:36px;flex:none}
+.logo b{font:700 22px/1 var(--serif);letter-spacing:.06em;display:block}
+.logo small{display:block;font-size:10px;letter-spacing:.32em;margin-top:4px;opacity:.85}
+.nav{display:flex;gap:26px;font-weight:500;font-size:15px}
+.nav a{text-decoration:none;opacity:.9;padding-block:6px;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.on{opacity:1;border-color:var(--caramel)}
+.head-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:inherit;cursor:pointer}
+.icon-btn:hover{background:rgba(255,255,255,.12)}
+.icon-btn svg{width:22px;height:22px}
+.badge{position:absolute;top:4px;right:2px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--caramel);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.menu-toggle{display:none}
+.mnav{position:fixed;inset:0;z-index:70;background:var(--espresso);color:#fff;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 24px 32px}
+.mnav .top{display:flex;justify-content:space-between;align-items:center}
+.mnav nav{display:flex;flex-direction:column;margin-top:28px}
+.mnav nav a{font:600 28px/1.2 var(--serif);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.mnav .btn{margin-top:28px}
+
+/* Hero */
+.hero{position:relative;min-height:min(100svh,860px);display:flex;align-items:flex-end;color:#fff;background:#2b1c13;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:heroZoom 14s ease-out forwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,8,.88) 0%,rgba(20,12,8,.62) 45%,rgba(20,12,8,.25) 100%),linear-gradient(0deg,rgba(20,12,8,.85) 0%,transparent 40%)}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-top:150px;padding-bottom:36px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--caramel);margin:0 0 14px}
+.hero .eyebrow{color:#EBD9C3}
+.hero h1{font:600 clamp(46px,7.4vw,92px)/1.02 var(--serif);margin:0 0 22px;max-width:11ch;letter-spacing:-.01em}
+.hero p.lead{font-size:clamp(17px,1.6vw,19px);max-width:44ch;color:#EFE4D6;margin:0 0 32px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:64px;border-top:1px solid rgba(255,255,255,.18);padding-top:26px}
+.hero-feats div{display:flex;gap:14px;align-items:center;padding-right:16px}
+.hero-feats div+div{border-left:1px solid rgba(255,255,255,.18);padding-left:22px}
+.hero-feats svg{width:34px;height:34px;flex:none;color:#EBD9C3}
+.hero-feats b{display:block;font-size:15px}
+.hero-feats span{font-size:13px;color:#D9C9B6}
+
+/* Sections */
+section{padding-block:88px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head h2,.h2{font:600 clamp(34px,4.4vw,52px)/1.08 var(--serif);margin:0;letter-spacing:-.01em}
+.sec-head p{color:var(--muted);margin:10px 0 0;max-width:52ch}
+.demo-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--caramel-d);background:#F1E4D2;border-radius:999px;padding:4px 10px;margin-top:12px}
+
+/* Photo boxes with graceful fallback */
+.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#C49A72,#7A4F31)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ph .fb{position:absolute;inset:0;display:none;place-items:center;color:rgba(255,255,255,.85)}
+.ph .fb svg{width:42%;max-width:72px;height:auto}
+.ph.noimg img{display:none}
+.ph.noimg .fb{display:grid}
+
+/* Product cards */
+.rail-wrap{position:relative}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:2px;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:var(--beige) transparent;overscroll-behavior-x:contain}
+.rail>*{scroll-snap-align:start}
+.rail.five{grid-auto-columns:calc((100% - 80px)/5)}
+.rail.four{grid-auto-columns:calc((100% - 60px)/4)}
+.card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 0 var(--line);display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+.card:hover .ph img{transform:scale(1.06)}
+.card .ph{aspect-ratio:4/4.2}
+.card-open{all:unset;cursor:pointer;display:block;width:100%}
+.panel .ph .fb,.quality .bg .fb{display:none!important}
+.card-open:focus-visible{outline:3px solid var(--caramel);outline-offset:-3px}
+.card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{font:600 17px/1.3 var(--sans);margin:0}
+.card .desc{font-size:13.5px;color:var(--muted);margin:0;flex:1}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.price{font-weight:700;font-variant-numeric:tabular-nums}
+.plus{width:40px;height:40px;border-radius:50%;border:0;background:var(--caramel);color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}
+.plus:hover{background:var(--caramel-d);transform:scale(1.08)}
+.plus svg{width:18px;height:18px}
+.plus.ok{background:#3E7A55}
+.fav{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--espresso);display:grid;place-items:center;cursor:pointer;z-index:2}
+.fav svg{width:18px;height:18px}
+.fav[aria-pressed="true"]{color:#B4432F}
+.fav[aria-pressed="true"] svg path{fill:currentColor}
+.tagpill{position:absolute;left:10px;top:10px;background:var(--espresso);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;z-index:2}
+.rail-btn{position:absolute;top:38%;width:46px;height:46px;border-radius:50%;border:0;background:#fff;color:var(--espresso);box-shadow:var(--shadow);cursor:pointer;display:grid;place-items:center;z-index:3}
+.rail-btn svg{width:20px;height:20px}
+.rail-btn.prev{left:-18px}.rail-btn.next{right:-18px}
+.rail-btn:disabled{opacity:0;pointer-events:none}
+
+/* Favorites */
+.favs{background:var(--cream)}
+
+/* Menu */
+.menu{background:#FBF7F0;border-block:1px solid var(--line)}
+.menu-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filter{font:600 14px var(--sans);padding:10px 18px;border-radius:6px;border:1.5px solid var(--line);background:#fff;color:var(--espresso);cursor:pointer;min-height:42px;transition:all .2s}
+.filter:hover{border-color:var(--caramel)}
+.filter[aria-pressed="true"]{background:var(--caramel);border-color:var(--caramel);color:#fff}
+.menu-feature{position:sticky;top:96px;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;color:#fff}
+.menu-feature .ph{position:absolute;inset:0}
+.menu-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,12,8,.85),transparent 55%)}
+.menu-feature .cap{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
+.menu-feature .cap b{font:600 26px/1.15 var(--serif);display:block;margin-bottom:6px}
+.menu-feature .cap span{font-size:14px;color:#E9DCCB}
+.menu .rail{grid-auto-columns:calc((100% - 40px)/3)}
+.empty{color:var(--muted)}
+
+/* Story */
+.story-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:20px;align-items:stretch}
+.story-grid .ph{border-radius:var(--r);min-height:420px}
+.story-copy{background:#fff;border-radius:var(--r);padding:40px 34px;display:flex;flex-direction:column;justify-content:center}
+.story-copy p{color:var(--muted);margin:16px 0 0}
+.story-stack{display:grid;grid-template-rows:1fr 1fr;gap:20px}
+.story-stack .ph{min-height:200px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}
+.pillar{background:#fff;border-radius:var(--r);padding:24px;display:flex;gap:16px;align-items:flex-start}
+.pillar svg{width:34px;height:34px;color:var(--caramel);flex:none}
+.pillar b{display:block;font-size:16px;margin-bottom:2px}
+.pillar span{font-size:14px;color:var(--muted)}
+
+/* Quality band */
+.quality{position:relative;color:#fff;background:var(--espresso);overflow:hidden}
+.quality .bg{position:absolute;inset:0;opacity:.35}
+.quality .bg img{width:100%;height:100%;object-fit:cover}
+.quality::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(36,23,16,.96) 30%,rgba(36,23,16,.6))}
+.quality .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:center}
+.quality p{color:#E2D3C1;max-width:46ch}
+.quality .eyebrow{color:#D8A980}
+.q-list{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px}
+.q-list div{display:flex;gap:12px;align-items:center}
+.q-list svg{width:30px;height:30px;color:#D8A980}
+.q-list b{display:block;font-size:14px}.q-list span{font-size:12.5px;color:#CDB8A2}
+.q-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.q-gallery .ph{border-radius:var(--r);aspect-ratio:4/4.4}
+.q-gallery .ph:nth-child(2){transform:translateY(32px)}
+
+/* Order + reserve */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{position:relative;border-radius:18px;overflow:hidden;color:#fff;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;padding:36px}
+.panel .ph{position:absolute;inset:0}
+.panel::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,12,8,.92) 15%,rgba(20,12,8,.45))}
+.panel>*:not(.ph){position:relative;z-index:1}
+.panel h2{font:600 clamp(30px,3.4vw,40px)/1.1 var(--serif);margin:0 0 6px}
+.panel p{margin:0 0 24px;color:#E9DCCB}
+.steps{display:flex;align-items:center;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.step{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px}
+.step i{width:56px;height:56px;border:1.5px solid rgba(255,255,255,.7);border-radius:12px;display:grid;place-items:center;font-style:normal}
+.step svg{width:26px;height:26px}
+.steps .sep{opacity:.6;margin-bottom:22px}
+
+/* Visit */
+.visit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.visit-card{background:#fff;border-radius:var(--r);padding:28px}
+.visit-card h3{font:600 22px var(--serif);margin:0 0 8px}
+.visit-card p{margin:0;color:var(--muted)}
+
+/* Footer */
+footer{background:var(--espresso);color:#D9C9B6;padding-block:48px 28px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+footer .logo{color:#fff}
+footer .fine{width:100%;border-top:1px solid rgba(255,255,255,.12);padding-top:20px;margin-top:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}
+footer a{color:#fff}
+
+/* Cart bar (mobile) */
+.cartbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--espresso);color:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:45;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 10px 10px 18px}
+
+/* Overlay, drawer, modal */
+.overlay{position:fixed;inset:0;background:rgba(18,11,7,.55);z-index:80;backdrop-filter:blur(2px)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--cream);z-index:81;display:flex;flex-direction:column;overflow-y:auto;padding:calc(22px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));gap:16px;box-shadow:-20px 0 50px rgba(0,0,0,.25)}
+.modal{position:fixed;z-index:82;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow-y:auto;background:var(--cream);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.modal-body{padding:24px 26px 26px}
+.x-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.x-row h2{font:600 28px/1.15 var(--serif);margin:0}
+.x{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--espresso);flex:none}
+.x svg{width:18px;height:18px}
+.pd-img{aspect-ratio:16/9;max-height:260px;width:100%}
+.pd-img .x{position:absolute;top:14px;right:14px;z-index:2;border:0}
+.opt{border:0;padding:0;margin:18px 0 0}
+.opt legend{font-weight:700;font-size:14px;margin-bottom:8px;padding:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chips span{display:inline-flex;align-items:center;min-height:42px;padding:8px 14px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:14px;font-weight:500}
+.chips input:checked+span{border-color:var(--caramel);background:#F4E6D6;color:var(--caramel-d);font-weight:700}
+.chips input:focus-visible+span{outline:3px solid var(--caramel);outline-offset:2px}
+.qty{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:3px}
+.qty button{width:36px;height:36px;border:0;border-radius:8px;background:transparent;font-size:18px;cursor:pointer;color:var(--espresso)}
+.qty button:hover{background:var(--beige)}
+.qty output{min-width:24px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.pd-foot{display:flex;gap:12px;align-items:center;margin-top:24px}
+.pd-foot .btn{flex:1}
+.line{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;padding-block:12px;border-bottom:1px solid var(--line)}
+.line .ph{width:56px;height:56px;border-radius:10px}
+.line b{display:block;font-size:15px}
+.line small{display:block;color:var(--muted);font-size:12.5px;line-height:1.4}
+.line .end{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.line .qty button{width:30px;height:30px;font-size:16px}
+.totals div{display:flex;justify-content:space-between;padding-block:3px;font-variant-numeric:tabular-nums}
+.totals .grand{font-weight:800;font-size:18px;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+form{display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.field input,.field select,.field textarea{font:16px var(--sans);padding:12px 13px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--ink);min-height:46px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--caramel);outline:none;box-shadow:0 0 0 3px rgba(166,107,64,.2)}
+.field .err{color:#A3341F;font-weight:500;font-size:13px}
+.field input[aria-invalid="true"]{border-color:#A3341F}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.note{font-size:13px;color:var(--muted);margin:0}
+.notice{background:#F1E4D2;border-radius:10px;padding:10px 14px;font-size:13px;color:#5C3E28}
+.done{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;padding-top:20px}
+.done .num{font:600 34px var(--serif)}
+.done svg{width:64px;height:64px;color:#3E7A55}
+.track{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin:12px 0}
+.track div{border-top:4px solid var(--line);padding-top:8px;font-size:13px;color:var(--muted);transition:border-color .4s,color .4s}
+.track div.on{border-color:var(--caramel);color:var(--espresso);font-weight:700}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.slots label{position:relative}
+.slots input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.slots span{display:grid;place-items:center;min-height:42px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.slots input:checked+span{background:var(--caramel);border-color:var(--caramel);color:#fff}
+.slots input:disabled+span{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.slots input:focus-visible+span{outline:3px solid var(--caramel);outline-offset:2px}
+
+/* Reveal */
+.reveal{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .js .reveal.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* Responsive */
+@media (max-width:1080px){
+  .nav{gap:18px;font-size:14px}
+  .rail.five{grid-auto-columns:calc((100% - 60px)/4)}
+  .menu-grid{grid-template-columns:1fr}
+  .menu-feature{display:none}
+  .story-grid{grid-template-columns:1fr 1fr}
+  .story-grid>.ph{grid-column:1/-1;min-height:320px}
+}
+@media (max-width:900px){
+  .nav,.head-actions .btn{display:none}
+  .menu-toggle{display:grid}
+  .hero-feats{grid-template-columns:1fr 1fr;row-gap:20px}
+  .hero-feats div+div{border-left:0;padding-left:0}
+  .rail.five,.rail.four,.menu .rail{grid-auto-columns:calc((100% - 40px)/2.3)}
+  .quality .wrap{grid-template-columns:1fr}
+  .duo{grid-template-columns:1fr}
+  .visit-grid,.pillars{grid-template-columns:1fr}
+  .rail-btn{display:none}
+}
+@media (max-width:600px){
+  section{padding-block:64px}
+  .hero .wrap{padding-top:120px}
+  .hero .ctas .btn{flex:1 1 auto}
+  .hero-feats{margin-top:40px}
+  .hero-feats span{display:none}
+  .rail.five,.rail.four,.menu .rail{grid-auto-columns:72%}
+  .story-grid{grid-template-columns:1fr}
+  .story-grid .ph{min-height:260px}
+  .story-stack{grid-template-rows:none;grid-template-columns:1fr 1fr}
+  .story-stack .ph{min-height:160px}
+  .story-copy{padding:28px 22px}
+  .panel{padding:26px;min-height:340px}
+  .two{grid-template-columns:1fr}
+  .logo b{font-size:19px}
+  .q-gallery .ph:nth-child(2){transform:translateY(20px)}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="cup" viewBox="0 0 64 64"><path d="M14 22 H44 V38 a14 14 0 0 1 -14 14 h-2 a14 14 0 0 1 -14 -14 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M44 26 h4 a6 6 0 0 1 0 12 h-4" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M24 8 c-3 4 3 6 0 10 M33 8 c-3 4 3 6 0 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
-  <symbol id="iced" viewBox="0 0 64 64"><path d="M18 14 H46 L42 56 H22 Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M19 26 H45" stroke="currentColor" stroke-width="3"/><path d="M36 14 L40 4" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><rect x="25" y="32" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="33" y="40" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
-  <symbol id="bread" viewBox="0 0 64 64"><path d="M8 40 C8 22 56 22 56 40 C56 46 50 48 32 48 C14 48 8 46 8 40 Z" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M22 30 L26 40 M32 28 L32 40 M42 30 L38 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-bean" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#fff"/><path d="M27 9c-7 0-12 6-13 12-1 6 2 10 6 10 7 0 12-6 13-12 1-6-2-10-6-10Zm-1 4c-2 5-5 9-10 13" fill="none" stroke="#241710" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.5L21 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.4" fill="currentColor"/><circle cx="17" cy="20.5" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 3.8 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.4 0 5.6 3.2 4.4 6.6C19.5 15.4 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 48 48"><path d="M8 18h26v10a11 11 0 0 1-11 11h-4A11 11 0 0 1 8 28V18Z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M34 21h3a5 5 0 0 1 0 10h-3M6 43h32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M17 6c-2 3 2 5 0 8M25 6c-2 3 2 5 0 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-iced" viewBox="0 0 48 48"><path d="M12 12h24l-3 32H15L12 12Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13 20h22M27 12l4-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><rect x="18" y="25" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="24" y="32" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-bread" viewBox="0 0 48 48"><path d="M6 30C6 17 42 17 42 30c0 5-5 7-18 7S6 35 6 30Z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 23l3 8M24 21v10M32 23l-3 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 48 48"><path d="M10 38C10 18 24 8 40 8c0 18-10 30-28 30M10 38l16-16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-people" viewBox="0 0 48 48"><circle cx="17" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="33" cy="18" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M5 38c1-7 6-11 12-11s11 4 12 11M28 28c6-1 13 2 15 10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-heart2" viewBox="0 0 48 48"><path d="M24 40S8 30 6 20C4.5 12 10 7 16 8c3.5.6 6 3 8 6 2-3 4.5-5.4 8-6 6-1 11.5 4 10 12-2 10-18 20-18 20Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-beans" viewBox="0 0 48 48"><ellipse cx="17" cy="26" rx="9" ry="13" transform="rotate(-25 17 26)" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M14 15c5 6 2 14 6 22" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="33" cy="20" rx="7" ry="10" transform="rotate(25 33 20)" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M36 11c-4 5-2 11-5 17" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 48 48"><path d="M24 42c-8 0-13-5-13-12 0-9 9-12 9-22 7 4 15 12 15 21 0 2 0 3-1 5 2-1 3-3 3-5 3 3 3 6 3 8 0 0-4 5-16 5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-store" viewBox="0 0 48 48"><path d="M8 18h32l-3-9H11l-3 9Zm0 0v22h32V18M19 40V29h10v11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 48 48"><path d="M10 16h28l-2 26H12L10 16Zm8 0v-3a6 6 0 0 1 12 0v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="31" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M7 19h34M16 6v8M32 6v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M24 14v10l7 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 24.5l5.5 5.5L33 18.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
-<header><div class="wrap">
-  <div class="brand">Brew &amp; Co.</div>
-  <nav aria-label="Main"><a href="#menu">Menu</a><a href="#info">Location</a><a href="#info">Hours</a></nav>
-  <button class="btn green" type="button" id="openCart">Cart (<span id="headCount">0</span>)</button>
-</div></header>
+<div class="demobar">Demo website by <a href="../../">Likha Web Studio</a> · Sample business, prices and bookings. Want one for your café? Starts at ₱3,500</div>
 
-<section class="hero"><div class="wrap">
-  <div>
-    <h1>Good coffee, made right.</h1>
-    <p>Freshly brewed coffee and pastries every day. Order online for pick-up or delivery, and it's ready when you arrive.</p>
-    <div class="ctas"><a class="btn green" href="#menu" style="text-decoration:none">Order online</a><a class="btn ghost" href="#info" style="text-decoration:none">Find us</a></div>
-    <div class="facts"><div><b>15 mins</b>pick-up ready</div><div><b>7AM–9PM</b>open daily</div><div><b>GCash</b>or cash</div></div>
-  </div>
-  <div class="hero-art" aria-hidden="true"><div class="steam"></div><svg viewBox="0 0 64 64" style="color:#2A1E16"><use href="#cup"/></svg></div>
-</div></section>
-
-<section class="menu" id="menu"><div class="wrap">
-  <div class="menu-head">
-    <div><h2>Menu</h2><div class="note">Tap “Add” to put it in your order.</div></div>
-    <div class="tabs" role="group" aria-label="Category">
-      <button class="tab" type="button" data-cat="all" aria-pressed="true">All</button>
-      <button class="tab" type="button" data-cat="coffee" aria-pressed="false">Coffee</button>
-      <button class="tab" type="button" data-cat="noncoffee" aria-pressed="false">Non-coffee</button>
-      <button class="tab" type="button" data-cat="pastry" aria-pressed="false">Pastries</button>
+<header class="site-head" id="head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Brew &amp; Co. home"><svg aria-hidden="true"><use href="#i-bean"/></svg><span><b>BREW &amp; CO.</b><small>COFFEE SHOP</small></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#top" class="on">Home</a><a href="#menu">Menu</a><a href="#order">Order Online</a><a href="#order" data-reserve>Reservations</a><a href="#story">Our Story</a><a href="#visit">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <button class="icon-btn" type="button" data-open-cart aria-label="Open cart"><svg aria-hidden="true"><use href="#i-cart"/></svg><span class="badge" data-count>0</span></button>
+      <a class="btn btn-line btn-sm" href="#menu">Order Now <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <button class="icon-btn menu-toggle" type="button" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
-  <div class="grid" id="grid"></div>
-</div></section>
+</header>
 
-<section class="info" id="info"><div class="wrap">
-  <div><h3>Location</h3><p>Ground floor, [Mall or street name], [City]</p></div>
-  <div><h3>Hours</h3><p>Monday–Sunday, 7:00 AM – 9:00 PM</p></div>
-  <div><h3>Contact</h3><p>0917 000 0000 · Brew &amp; Co. on Facebook</p></div>
-</div></section>
+<div class="mnav" id="mnav" hidden>
+  <div class="top"><span class="logo"><svg aria-hidden="true"><use href="#i-bean"/></svg><span><b>BREW &amp; CO.</b><small>COFFEE SHOP</small></span></span><button class="icon-btn" type="button" id="menuClose" aria-label="Close menu"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+  <nav aria-label="Mobile">
+    <a href="#top">Home</a><a href="#menu">Menu</a><a href="#order">Order Online</a><a href="#order" data-reserve>Reservations</a><a href="#story">Our Story</a><a href="#visit">Contact</a>
+  </nav>
+  <a class="btn btn-caramel" href="#menu">Order Now <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
 
-<footer><div class="wrap"><span>© Brew &amp; Co. (sample business)</span><span>Website by Likha Web Studio</span></div></footer>
-<div style="height:72px" aria-hidden="true"></div>
+<main id="top">
+<section class="hero" aria-labelledby="heroTitle" style="padding:0">
+  <div class="hero-media ph">
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=70"
+         srcset="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=65 800w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=70 1600w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=2200&q=70 2200w"
+         sizes="100vw" alt="Warm, softly lit coffee shop interior (stock photo)" fetchpriority="high">
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">Good coffee · Brighter days</p>
+    <h1 id="heroTitle">More Than Just Coffee.</h1>
+    <p class="lead">Handcrafted coffee, delicious food, and a warm space for meaningful conversations.</p>
+    <div class="ctas">
+      <a class="btn btn-caramel" href="#menu">View Menu <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-line" href="#menu">Order Online</a>
+      <button class="btn btn-line" type="button" data-reserve>Reserve a Table</button>
+    </div>
+    <div class="hero-feats">
+      <div><svg aria-hidden="true"><use href="#i-cup"/></svg><p style="margin:0"><b>Specialty Coffee</b><span>Handcrafted with care</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-leaf"/></svg><p style="margin:0"><b>Fresh Food</b><span>Made fresh daily</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-people"/></svg><p style="margin:0"><b>Cozy Ambiance</b><span>For work or catching up</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-heart2"/></svg><p style="margin:0"><b>A Community Space</b><span>Good coffee, better people</span></p></div>
+    </div>
+  </div>
+</section>
 
-<div class="cartbar" id="cartbar" hidden><div class="wrap">
-  <span><b id="barCount">0</b> item · <b id="barTotal">₱0</b></span>
-  <button class="btn" type="button" id="barOpen">View order</button>
-</div></div>
+<section class="favs" aria-labelledby="favTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">Our bestsellers</p><h2 id="favTitle">Customer Favorites</h2><p>The drinks guests come back for. Tap a card to customize it.</p></div>
+      <a class="btn btn-outline btn-sm" href="#menu">View All <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="rail-wrap reveal">
+      <button class="rail-btn prev" type="button" aria-label="Scroll favorites left" data-rail="favRail" data-dir="-1"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
+      <div class="rail five" id="favRail" tabindex="0" aria-label="Customer favorites"></div>
+      <button class="rail-btn next" type="button" aria-label="Scroll favorites right" data-rail="favRail" data-dir="1"><svg aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu" aria-labelledby="menuTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">Handcrafted with care</p><h2 id="menuTitle">Our Menu</h2><p>Premium coffee, refreshing non-coffee drinks, matcha, and café food. Pick a category, then tap any item for options.</p><span class="demo-tag">Sample prices · demo data</span></div>
+    </div>
+    <div class="menu-grid">
+      <div>
+        <div class="filters reveal" role="group" aria-label="Menu category" id="filters"></div>
+        <div class="rail-wrap reveal">
+          <button class="rail-btn prev" type="button" aria-label="Scroll menu left" data-rail="menuRail" data-dir="-1"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
+          <div class="rail" id="menuRail" tabindex="0" aria-live="polite" aria-label="Menu items"></div>
+          <button class="rail-btn next" type="button" aria-label="Scroll menu right" data-rail="menuRail" data-dir="1"><svg aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+        <p class="note" id="menuCount" style="margin-top:6px"></p>
+      </div>
+      <figure class="menu-feature reveal" style="margin:0">
+        <div class="ph" data-ph="cup"><img loading="lazy" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=70" alt="Latte art in a ceramic cup (stock photo)"></div>
+        <figcaption class="cap"><b>Every cup, pulled to order.</b><span>Espresso-based drinks are made fresh when you order. Ask our baristas for your perfect sweetness.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="story" aria-labelledby="storyTitle">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="ph reveal" data-ph="cup"><img loading="lazy" src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=900&q=70" alt="Barista preparing an espresso drink (stock photo)"></div>
+      <div class="story-copy reveal">
+        <p class="eyebrow">Our story</p>
+        <h2 class="h2" id="storyTitle">Brewed by Passion.</h2>
+        <p>Brew &amp; Co. began with a simple idea: a neighborhood café where good coffee brings people together. We keep the menu focused, make every drink by hand, and treat every guest like a regular.</p>
+        <p>Come in to work, to catch up, or just to slow down for a cup. There's always a seat for you here.</p>
+        <div style="margin-top:24px"><a class="btn btn-dark btn-sm" href="#visit">Visit Us <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      </div>
+      <div class="story-stack">
+        <div class="ph reveal" data-ph="cup" style="border-radius:var(--r)"><img loading="lazy" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=70" alt="Cozy café seating area (stock photo)"></div>
+        <div class="ph reveal" data-ph="beans" style="border-radius:var(--r)"><img loading="lazy" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=70" alt="Roasted coffee beans (stock photo)"></div>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal"><svg aria-hidden="true"><use href="#i-cup"/></svg><p style="margin:0"><b>Made by hand</b><span>Every drink is prepared to order by our baristas.</span></p></div>
+      <div class="pillar reveal"><svg aria-hidden="true"><use href="#i-people"/></svg><p style="margin:0"><b>Warm service</b><span>We learn your name and your usual order.</span></p></div>
+      <div class="pillar reveal"><svg aria-hidden="true"><use href="#i-store"/></svg><p style="margin:0"><b>A place to stay</b><span>Comfortable seats, good light, and Wi-Fi for working.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quality" aria-labelledby="qTitle">
+  <div class="bg ph" data-ph="beans"><img loading="lazy" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1600&q=60" alt=""></div>
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Premium quality</p>
+      <h2 class="h2" id="qTitle">Coffee That Makes a Difference.</h2>
+      <p style="margin-top:16px">We care about every step: the beans we choose, the grind, the shot, the milk, and the moment we hand you your cup. Good coffee should taste good every single time.</p>
+      <div class="q-list">
+        <div><svg aria-hidden="true"><use href="#i-beans"/></svg><p style="margin:0"><b>Carefully chosen beans</b><span>Picked for flavor</span></p></div>
+        <div><svg aria-hidden="true"><use href="#i-flame"/></svg><p style="margin:0"><b>Freshly pulled shots</b><span>Rich, balanced taste</span></p></div>
+        <div><svg aria-hidden="true"><use href="#i-heart2"/></svg><p style="margin:0"><b>Community focused</b><span>Your neighborhood café</span></p></div>
+      </div>
+    </div>
+    <div class="q-gallery reveal">
+      <div class="ph" data-ph="cup"><img loading="lazy" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=70" alt="Coffee being brewed by hand (stock photo)"></div>
+      <div class="ph" data-ph="cup"><img loading="lazy" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=700&q=70" alt="Cappuccino with latte art (stock photo)"></div>
+    </div>
+  </div>
+</section>
+
+<section id="order" aria-label="Order online and table reservations">
+  <div class="wrap">
+    <div class="duo">
+      <div class="panel reveal">
+        <div class="ph" data-ph="iced"><img loading="lazy" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1000&q=70" alt=""></div>
+        <h2>Order Online</h2>
+        <p>Your favorite coffee, just a few taps away.</p>
+        <div class="steps" aria-hidden="true">
+          <div class="step"><i><svg><use href="#i-store"/></svg></i>Dine-in</div><span class="sep">or</span>
+          <div class="step"><i><svg><use href="#i-bag"/></svg></i>Pickup</div><span class="sep">→</span>
+          <div class="step"><i><svg><use href="#i-ok"/></svg></i>Ready</div>
+        </div>
+        <div><a class="btn btn-caramel" href="#menu">Order Now <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      </div>
+      <div class="panel reveal">
+        <div class="ph" data-ph="cup"><img loading="lazy" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1000&q=70" alt=""></div>
+        <h2>Table Reservations</h2>
+        <p>Book your spot and enjoy a cozy experience.</p>
+        <div class="steps" aria-hidden="true">
+          <div class="step"><i><svg><use href="#i-cal"/></svg></i>Choose date</div><span class="sep">+</span>
+          <div class="step"><i><svg><use href="#i-clock"/></svg></i>Select time</div><span class="sep">+</span>
+          <div class="step"><i><svg><use href="#i-ok"/></svg></i>Confirm</div>
+        </div>
+        <div><button class="btn btn-caramel" type="button" data-reserve>Reserve a Table <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" style="padding-top:0" aria-labelledby="visitTitle">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><p class="eyebrow">Come say hi</p><h2 id="visitTitle">Visit Brew &amp; Co.</h2></div></div>
+    <div class="visit-grid">
+      <div class="visit-card reveal"><h3>Location</h3><p>Ground floor, [Mall or street name], [City]</p></div>
+      <div class="visit-card reveal"><h3>Hours</h3><p>Monday–Sunday<br>7:00 AM – 9:00 PM</p></div>
+      <div class="visit-card reveal"><h3>Contact</h3><p>0917 000 0000<br>Brew &amp; Co. on Facebook</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="logo"><svg aria-hidden="true"><use href="#i-bean"/></svg><span><b>BREW &amp; CO.</b><small>COFFEE SHOP</small></span></span>
+      <p style="max-width:36ch;margin:14px 0 0">Good coffee, better people. A sample café created to show what a Likha website can do.</p>
+    </div>
+    <div><b style="color:#fff">Explore</b><br><a href="#menu">Menu</a> · <a href="#order">Order</a> · <a href="#story">Our Story</a> · <a href="#visit">Visit</a></div>
+    <div class="fine">
+      <span>© Brew &amp; Co. (sample business). Photos are Unsplash stock images for demo purposes and do not show a real Brew &amp; Co. store or products.</span>
+      <span>Website Demo by <a href="../../">Likha Web Studio</a></span>
+    </div>
+  </div>
+</footer>
+<div style="height:76px" aria-hidden="true" id="barSpacer" hidden></div>
+
+<div class="cartbar" id="cartbar" hidden>
+  <span><b id="barCount">0</b> item(s) · <b id="barTotal">₱0</b></span>
+  <button class="btn btn-caramel btn-sm" type="button" data-open-cart>View order</button>
+</div>
 
 <div class="overlay" id="overlay" hidden></div>
-<aside class="drawer" id="drawer" hidden aria-label="Your order">
-  <div class="row"><h2>Your order</h2><button class="btn ghost" type="button" id="closeCart">Close</button></div>
-  <div id="cartView">
-    <div id="lines"></div>
-    <p class="note" id="emptyNote">Your order is empty. Pick something from the menu.</p>
-    <div class="totals" id="totals">
-      <div><span>Subtotal</span><span id="sub">₱0</span></div>
-      <div><span>Delivery fee</span><span id="fee">₱0</span></div>
-      <div class="grand"><span>Total</span><span id="total">₱0</span></div>
-    </div>
-    <form id="checkout">
-      <label for="cname">Name<input id="cname" required autocomplete="name" value="Juan Dela Cruz"></label>
-      <label for="cphone">Mobile number<input id="cphone" required inputmode="tel" value="0917 123 4567"></label>
-      <div class="choices" role="radiogroup" aria-label="Pick-up or delivery">
-        <label><input type="radio" name="mode" id="mPick" value="pick" checked> Pick-up</label>
-        <label><input type="radio" name="mode" id="mDel" value="del"> Delivery (+₱49)</label>
+
+<!-- Product detail -->
+<div class="modal" id="pd" role="dialog" aria-modal="true" aria-labelledby="pdName" hidden>
+  <div class="ph pd-img" id="pdImg"><button class="x" type="button" data-close aria-label="Close"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+  <div class="modal-body">
+    <div class="x-row"><h2 id="pdName"></h2><span class="price" id="pdPrice" style="font-size:20px"></span></div>
+    <p class="note" id="pdDesc" style="margin-top:6px;font-size:15px"></p>
+    <form id="pdForm">
+      <div id="pdOpts"></div>
+      <div class="pd-foot">
+        <div class="qty" role="group" aria-label="Quantity"><button type="button" id="pdMinus" aria-label="Decrease quantity">−</button><output id="pdQty">1</output><button type="button" id="pdPlus" aria-label="Increase quantity">+</button></div>
+        <button class="btn btn-caramel" type="submit" id="pdAdd">Add to cart</button>
       </div>
-      <label for="caddr" id="addrWrap" hidden>Address<input id="caddr" autocomplete="street-address"></label>
-      <div class="choices" role="radiogroup" aria-label="Payment">
-        <label><input type="radio" name="pay" id="pGcash" value="GCash" checked> GCash</label>
-        <label><input type="radio" name="pay" id="pCash" value="Cash"> Cash</label>
-      </div>
-      <button class="btn green" type="submit">Place order</button>
     </form>
   </div>
+</div>
+
+<!-- Cart -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <div class="x-row"><h2 id="cartTitle">Your order</h2><button class="x" type="button" data-close aria-label="Close cart"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+  <div id="cartView">
+    <div id="lines"></div>
+    <p class="note" id="emptyNote" style="padding-block:20px">Your order is empty. Pick something from the menu.</p>
+    <div id="checkoutWrap">
+      <div class="totals" style="margin-block:14px 18px">
+        <div><span>Subtotal</span><span id="sub">₱0</span></div>
+        <div class="grand"><span>Total</span><span id="total">₱0</span></div>
+      </div>
+      <form id="checkout" novalidate>
+        <fieldset class="opt" style="margin:0"><legend>How would you like it?</legend>
+          <div class="chips">
+            <label><input type="radio" name="mode" value="Pickup" checked><span>Pickup</span></label>
+            <label><input type="radio" name="mode" value="Dine-in"><span>Dine-in</span></label>
+          </div>
+        </fieldset>
+        <div class="field" id="tableWrap" hidden><label for="ctable">Table number (optional)</label><input id="ctable" inputmode="numeric" maxlength="3"></div>
+        <div class="field" id="pickWrap"><label for="cwhen">Pickup time</label><select id="cwhen"><option>As soon as possible (~15 mins)</option><option>In 30 minutes</option><option>In 1 hour</option></select></div>
+        <div class="field"><label for="cname">Name</label><input id="cname" required autocomplete="name" aria-describedby="cnameErr"><span class="err" id="cnameErr" hidden>Please enter your name.</span></div>
+        <div class="field"><label for="cphone">Mobile number</label><input id="cphone" required inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" aria-describedby="cphoneErr"><span class="err" id="cphoneErr" hidden>Enter an 11-digit PH mobile number starting with 09.</span></div>
+        <p class="notice">Demo checkout: no payment is taken and no real order is sent. Pay at the counter (cash or GCash) on a live site.</p>
+        <button class="btn btn-caramel" type="submit">Place order</button>
+      </form>
+    </div>
+  </div>
   <div class="done" id="doneView" hidden>
-    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="color:var(--accent)"><circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4"/><path d="M20 33 L28 41 L44 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg aria-hidden="true"><use href="#i-ok"/></svg>
+    <p class="note" style="margin:0">Order number</p>
     <div class="num" id="orderNum">BC-0000</div>
-    <p id="doneMsg">Thank you! We received your order.</p>
-    <p class="note">This is a demo, so no real order was sent. On a live website, the shop gets notified of every order.</p>
-    <button class="btn" type="button" id="newOrder">New order</button>
+    <p id="doneMsg" style="margin:0"></p>
+    <div class="track" aria-live="polite" id="track"><div class="on">Received</div><div>Preparing</div><div>Ready</div></div>
+    <p class="note">Demo only: status updates are simulated. On a live website, the shop gets each order on its dashboard.</p>
+    <button class="btn btn-dark" type="button" id="newOrder">Start a new order</button>
   </div>
 </aside>
 
+<!-- Reservation -->
+<div class="modal" id="rsv" role="dialog" aria-modal="true" aria-labelledby="rsvTitle" hidden>
+  <div class="modal-body">
+    <div class="x-row"><h2 id="rsvTitle">Reserve a Table</h2><button class="x" type="button" data-close aria-label="Close"><svg aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div id="rsvFormView">
+      <p class="notice" style="margin:12px 0 4px">Demo reservation: no real booking is made. Slots you book here are blocked for the rest of this visit to show double-booking prevention.</p>
+      <form id="rsvForm" novalidate style="margin-top:12px">
+        <div class="two">
+          <div class="field"><label for="rdate">Date</label><input type="date" id="rdate" required></div>
+          <div class="field"><label for="rparty">Party size</label><select id="rparty"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option value="7">7+ (we'll call you)</option></select></div>
+        </div>
+        <fieldset class="opt" style="margin:0"><legend>Time</legend><div class="slots" id="slots"></div><span class="err" id="slotErr" hidden style="color:#A3341F;font-size:13px">Please pick a time.</span></fieldset>
+        <div class="two">
+          <div class="field"><label for="rname">Name</label><input id="rname" required autocomplete="name"><span class="err" id="rnameErr" hidden>Please enter your name.</span></div>
+          <div class="field"><label for="rphone">Mobile number</label><input id="rphone" required inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX"><span class="err" id="rphoneErr" hidden>Enter an 11-digit PH mobile number.</span></div>
+        </div>
+        <div class="field"><label for="rnote">Notes (optional)</label><textarea id="rnote" rows="2" maxlength="200" placeholder="Birthday, quiet corner, high chair…"></textarea></div>
+        <button class="btn btn-caramel" type="submit">Confirm reservation</button>
+      </form>
+    </div>
+    <div class="done" id="rsvDone" hidden>
+      <svg aria-hidden="true"><use href="#i-ok"/></svg>
+      <p class="note" style="margin:0">Reservation code</p>
+      <div class="num" id="rsvCode">BR-0000</div>
+      <p id="rsvMsg" style="margin:0"></p>
+      <p class="note">Demo only. On a live website, the café confirms by SMS and sees every booking in its admin dashboard.</p>
+      <button class="btn btn-dark" type="button" data-close>Done</button>
+    </div>
+  </div>
+</div>
+
 <script>
+(()=>{
+const U=(id,w=600)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+// Sample menu. Prices are demo data, not official.
 const MENU=[
- {id:'ame',cat:'coffee',name:'Americano',desc:'Espresso and hot water. Simple and strong.',price:95,icon:'cup',bg:'#E9DCCB'},
- {id:'lat',cat:'coffee',name:'Café Latte',desc:'Espresso and steamed milk, smooth and creamy.',price:120,icon:'cup',bg:'#D9C2A5'},
- {id:'spa',cat:'coffee',name:'Spanish Latte',desc:'Bestseller. Sweetened with condensed milk.',price:140,icon:'iced',bg:'#C9A47C'},
- {id:'car',cat:'coffee',name:'Caramel Macchiato',desc:'Vanilla, espresso and caramel drizzle.',price:150,icon:'iced',bg:'#E3B98A'},
- {id:'moc',cat:'coffee',name:'Mocha',desc:'Espresso and dark chocolate.',price:135,icon:'cup',bg:'#B8927A'},
- {id:'mat',cat:'noncoffee',name:'Matcha Latte',desc:'Japanese matcha and milk.',price:145,icon:'iced',bg:'#C9DDB5'},
- {id:'cho',cat:'noncoffee',name:'Classic Chocolate',desc:'Rich chocolate, hot or iced.',price:120,icon:'cup',bg:'#CDB4A2'},
- {id:'str',cat:'noncoffee',name:'Strawberry Milk',desc:'Fresh strawberry jam and milk.',price:130,icon:'iced',bg:'#F2C9CC'},
- {id:'cro',cat:'pastry',name:'Butter Croissant',desc:'Flaky and buttery, baked every morning.',price:95,icon:'bread',bg:'#F0D9A8'},
- {id:'ens',cat:'pastry',name:'Ensaymada',desc:'Topped with butter, sugar and cheese.',price:75,icon:'bread',bg:'#F5E3B5'},
- {id:'ban',cat:'pastry',name:'Banana Bread',desc:'Moist, with walnuts.',price:85,icon:'bread',bg:'#DCC09A'},
- {id:'che',cat:'pastry',name:'Cheese Roll',desc:'Soft, with cheese inside.',price:60,icon:'bread',bg:'#F4DFA0'}
+ {id:'spa',cat:'coffee',name:'Iced Spanish Latte',desc:'Bestseller. Espresso and milk sweetened with condensed milk.',price:140,img:'1461023058943-07fcbe16d735',icon:'iced',fav:1,temp:'iced'},
+ {id:'car',cat:'coffee',name:'Caramel Macchiato',desc:'Vanilla, milk, espresso and caramel drizzle.',price:150,img:'1485808191679-5f86510681a2',icon:'iced',fav:1,temp:'both'},
+ {id:'cold',cat:'coffee',name:'Cold Brew',desc:'Steeped slow for a smooth, low-acid cup.',price:130,img:'1517701550927-30cf4ba1dba5',icon:'iced',fav:1,temp:'iced'},
+ {id:'cap',cat:'coffee',name:'Classic Cappuccino',desc:'Espresso with velvety foamed milk.',price:130,img:'1572442388796-11668a67e53d',icon:'cup',fav:1,temp:'hot'},
+ {id:'lat',cat:'coffee',name:'Café Latte',desc:'Espresso and steamed milk, smooth and creamy.',price:120,img:'1541167760496-1628856ab772',icon:'cup',temp:'both'},
+ {id:'ame',cat:'coffee',name:'Americano',desc:'Espresso and water. Simple and strong.',price:95,img:'1497935586351-b67a49e012bf',icon:'cup',temp:'both'},
+ {id:'moc',cat:'coffee',name:'Café Mocha',desc:'Espresso, dark chocolate and milk.',price:135,img:'1514432324607-a09d9b4aefdd',icon:'cup',temp:'both'},
+ {id:'mat',cat:'matcha',name:'Matcha Latte',desc:'Japanese matcha whisked into milk.',price:145,img:'1515823064-d6e0c04616a7',icon:'iced',fav:1,temp:'both'},
+ {id:'dmat',cat:'matcha',name:'Dirty Matcha',desc:'Matcha latte topped with a shot of espresso.',price:160,img:'1536256263959-770b48d82b0a',icon:'iced',temp:'iced'},
+ {id:'smat',cat:'matcha',name:'Strawberry Matcha',desc:'Strawberry purée, milk and matcha in layers.',price:165,img:'1536256263959-770b48d82b0a',icon:'iced',temp:'iced'},
+ {id:'cho',cat:'noncoffee',name:'Classic Chocolate',desc:'Rich chocolate, hot or iced.',price:120,img:'1542990253-0d0f5be5f0ed',icon:'cup',temp:'both'},
+ {id:'str',cat:'noncoffee',name:'Strawberry Milk',desc:'Strawberry jam and cold milk.',price:130,img:'1563227812-0ea4c22e6cc8',icon:'iced',temp:'iced'},
+ {id:'avo',cat:'food',name:'Avocado Toast',desc:'Sourdough, smashed avocado, egg and chili flakes.',price:185,img:'1541519227354-08fa5d50c44d',icon:'bread',warm:1},
+ {id:'sand',cat:'food',name:'Ham & Cheese Sandwich',desc:'Toasted with melted cheese, served warm.',price:165,img:'1528735602780-2552fd46c7af',icon:'bread',warm:1},
+ {id:'cro',cat:'pastry',name:'Butter Croissant',desc:'Flaky and buttery, baked every morning.',price:95,img:'1555507036-ab1f4038808a',icon:'bread',warm:1},
+ {id:'ens',cat:'pastry',name:'Ensaymada',desc:'Topped with butter, sugar and cheese.',price:75,img:'1509440159596-0249088772ff',icon:'bread',warm:1},
+ {id:'ban',cat:'pastry',name:'Banana Bread',desc:'Moist, with walnuts.',price:85,img:'1606101273945-e9eba91c0dc4',icon:'bread',warm:1},
+ {id:'che',cat:'pastry',name:'Cheese Roll',desc:'Soft bread with cheese inside.',price:60,img:'1558961363-fa8fdf82db35',icon:'bread',warm:1}
 ];
-const cart={};let cat='all';
+const CATS=[['all','All'],['coffee','Coffee'],['noncoffee','Non-Coffee'],['matcha','Matcha'],['food','Food'],['pastry','Pastries']];
+const DRINK=c=>['coffee','noncoffee','matcha'].includes(c);
 const peso=n=>'₱'+n.toLocaleString('en-PH');
 const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const byId=id=>MENU.find(m=>m.id===id);
+const favs=new Set();
+
+function ph(m,w,extra=''){
+  return `<div class="ph" ${extra}><img loading="lazy" src="${U(m.img,w)}" alt="${esc(m.name)} (stock photo)"><span class="fb"><svg aria-hidden="true" viewBox="0 0 48 48"><use href="#i-${m.icon}"/></svg></span></div>`;
+}
+function card(m,showFav){
+  return `<article class="card">
+    <div style="position:relative">
+      ${m.fav&&!showFav?'<span class="tagpill">Bestseller</span>':''}
+      ${showFav?`<button class="fav" type="button" data-fav="${m.id}" aria-pressed="${favs.has(m.id)}" aria-label="Save ${esc(m.name)} to favorites"><svg aria-hidden="true"><use href="#i-heart"/></svg></button>`:''}
+      <button class="card-open" type="button" data-open="${m.id}" aria-label="${esc(m.name)}, ${peso(m.price)}. View options">${ph(m,500)}</button>
+    </div>
+    <div class="card-body">
+      <h3>${esc(m.name)}</h3>
+      <p class="desc">${esc(m.desc)}</p>
+      <div class="row"><span class="price">${peso(m.price)}</span><button class="plus" type="button" data-quick="${m.id}" aria-label="Add ${esc(m.name)} to cart"><svg aria-hidden="true"><use href="#i-plus"/></svg></button></div>
+    </div>
+  </article>`;
+}
+// Image fallback: show a branded tile if a photo can't load.
+function wireImgs(root=document){
+  root.querySelectorAll('.ph img').forEach(img=>{
+    if(img.dataset.w)return;img.dataset.w=1;
+    const fail=()=>img.closest('.ph').classList.add('noimg');
+    if(img.complete&&img.naturalWidth===0&&img.src)fail();else img.addEventListener('error',fail);
+  });
+}
+document.querySelectorAll('.ph[data-ph]').forEach(p=>{if(!p.querySelector('.fb'))p.insertAdjacentHTML('beforeend',`<span class="fb"><svg aria-hidden="true" viewBox="0 0 48 48"><use href="#i-${p.dataset.ph}"/></svg></span>`)});
+
+// Favorites + menu
+let cat='all';
+function renderFavs(){$('favRail').innerHTML=MENU.filter(m=>m.fav).map(m=>card(m,true)).join('');wireImgs($('favRail'));updRail('favRail');}
+function renderFilters(){$('filters').innerHTML=CATS.map(([k,l])=>`<button class="filter" type="button" data-cat="${k}" aria-pressed="${k===cat}">${l}</button>`).join('');}
 function renderMenu(){
-  $('grid').innerHTML=MENU.filter(m=>cat==='all'||m.cat===cat).map(m=>`
-   <article class="item">
-     <div class="thumb" style="background:${m.bg};color:#2A1E16"><svg aria-hidden="true"><use href="#${m.icon}"/></svg></div>
-     <h3>${m.name}</h3><p>${m.desc}</p>
-     <div class="row"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-add="${m.id}" aria-label="Add ${m.name}">Add</button></div>
-   </article>`).join('');
+  const list=MENU.filter(m=>cat==='all'||m.cat===cat);
+  $('menuRail').innerHTML=list.map(m=>card(m,false)).join('');
+  $('menuRail').scrollLeft=0;
+  $('menuCount').textContent=`${list.length} item${list.length>1?'s':''}. Swipe or use the arrows to see more.`;
+  wireImgs($('menuRail'));updRail('menuRail');
 }
-function totals(){
-  const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);
-  const fee=sub>0&&$('mDel').checked?49:0;
-  const count=Object.values(cart).reduce((a,b)=>a+b,0);
-  return {sub,fee,total:sub+fee,count};
+function updRail(id){
+  const r=$(id);requestAnimationFrame(()=>{
+    document.querySelectorAll(`[data-rail="${id}"]`).forEach(b=>{
+      b.disabled=b.dataset.dir<0?r.scrollLeft<=4:r.scrollLeft+r.clientWidth>=r.scrollWidth-4;
+    });
+  });
 }
+['favRail','menuRail'].forEach(id=>$(id).addEventListener('scroll',()=>updRail(id),{passive:true}));
+addEventListener('resize',()=>{updRail('favRail');updRail('menuRail')});
+
+// Cart
+const cart=[]; // {key,id,opts:{},label,unit,qty}
+function priceFor(m,o){return m.price+(o.Size==='Large'?20:0)+(o.Milk==='Oat milk'?30:0)+(o['Extra shot']==='Yes'?25:0);}
+function addToCart(m,o,qty){
+  const label=Object.entries(o).filter(([k,v])=>v&&!(k==='Extra shot'&&v==='No')).map(([k,v])=>k==='Sugar'?`${v} sugar`:v).join(' · ');
+  const key=m.id+'|'+label;const unit=priceFor(m,o);
+  const ex=cart.find(l=>l.key===key);
+  if(ex)ex.qty+=qty;else cart.push({key,id:m.id,label,unit,qty});
+  renderCart();
+}
+function defaults(m){
+  if(!DRINK(m.cat))return {Warm:m.warm?'Warmed':''};
+  const o={};
+  if(m.temp==='both')o.Temp='Iced';else o.Temp=m.temp==='hot'?'Hot':'Iced';
+  o.Size='Regular';o.Sugar='100%';
+  if(m.cat!=='noncoffee'||m.id==='cho')o.Milk='Whole milk';
+  return o;
+}
+function totals(){const sub=cart.reduce((s,l)=>s+l.unit*l.qty,0);return{sub,count:cart.reduce((s,l)=>s+l.qty,0)};}
 function renderCart(){
   const t=totals();
-  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `
-   <div class="line"><span>${m.name}</span>
-    <span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one ${m.name}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one ${m.name}">+</button></span>
-    <span class="price">${peso(m.price*q)}</span></div>`}).join('');
-  $('emptyNote').hidden=t.count>0;$('totals').hidden=t.count===0;$('checkout').hidden=t.count===0;
-  $('sub').textContent=peso(t.sub);$('fee').textContent=peso(t.fee);$('total').textContent=peso(t.total);
-  $('headCount').textContent=t.count;$('barCount').textContent=t.count;$('barTotal').textContent=peso(t.total);
-  $('cartbar').hidden=t.count===0||!$('drawer').hidden;
+  $('lines').innerHTML=cart.map((l,i)=>{const m=byId(l.id);return `<div class="line">${ph(m,120)}<div><b>${esc(m.name)}</b><small>${esc(l.label||'')}</small><small>${peso(l.unit)} each</small></div>
+   <div class="end"><span class="price">${peso(l.unit*l.qty)}</span><span class="qty" role="group" aria-label="Quantity of ${esc(m.name)}"><button type="button" data-dec="${i}" aria-label="Remove one ${esc(m.name)}">−</button><output>${l.qty}</output><button type="button" data-inc="${i}" aria-label="Add one ${esc(m.name)}">+</button></span></div></div>`}).join('');
+  wireImgs($('lines'));
+  $('emptyNote').hidden=t.count>0;$('checkoutWrap').hidden=t.count===0;
+  $('sub').textContent=peso(t.sub);$('total').textContent=peso(t.sub);
+  document.querySelectorAll('[data-count]').forEach(e=>e.textContent=t.count);
+  $('barCount').textContent=t.count;$('barTotal').textContent=peso(t.sub);
+  const show=t.count>0&&$('drawer').hidden&&matchMedia('(max-width:900px)').matches;
+  $('cartbar').hidden=!show;$('barSpacer').hidden=!show;
 }
-function openCart(o){$('drawer').hidden=!o;$('overlay').hidden=!o;renderCart();}
-document.addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',900);renderCart();}
-  if(b.dataset.inc){cart[b.dataset.inc]++;renderCart();}
-  if(b.dataset.dec){cart[b.dataset.dec]--;if(cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderCart();}
-  if(b.dataset.cat){cat=b.dataset.cat;document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-pressed',t===b));renderMenu();}
-});
-$('openCart').onclick=()=>openCart(true);$('barOpen').onclick=()=>openCart(true);
-$('closeCart').onclick=()=>openCart(false);$('overlay').onclick=()=>openCart(false);
-document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{$('addrWrap').hidden=!$('mDel').checked;$('caddr').required=$('mDel').checked;renderCart();});
-$('checkout').addEventListener('submit',e=>{
-  e.preventDefault();const t=totals();
-  $('orderNum').textContent='BC-'+Math.floor(1000+Math.random()*9000);
-  $('doneMsg').textContent=`Thank you, ${$('cname').value.split(' ')[0]}! ${t.count} item(s), total ${peso(t.total)} via ${document.querySelector('input[name=pay]:checked').value}. ${$('mDel').checked?'We will deliver it to your address.':'It will be ready in 15 minutes.'}`;
-  $('cartView').hidden=true;$('doneView').hidden=false;
-});
-$('newOrder').onclick=()=>{for(const k in cart)delete cart[k];$('cartView').hidden=false;$('doneView').hidden=true;openCart(false);};
-cart.spa=2;cart.cro=1;
-renderMenu();renderCart();
-</script>
+addEventListener('resize',renderCart);
 
-</body></html>
+// Dialog handling
+let openEl=null,lastFocus=null;
+function openDlg(el){
+  if(openEl)closeDlg(true);
+  lastFocus=document.activeElement;openEl=el;el.hidden=false;$('overlay').hidden=false;document.body.style.overflow='hidden';
+  renderCart();
+  const f=el.querySelector('input:not([type=hidden]),select,button.btn,button.x');(f||el).focus();
+}
+function closeDlg(silent){
+  if(!openEl)return;openEl.hidden=true;openEl=null;$('overlay').hidden=true;document.body.style.overflow='';
+  renderCart();if(!silent&&lastFocus)lastFocus.focus();
+}
+$('overlay').onclick=()=>closeDlg();
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){if(!$('mnav').hidden)toggleNav(false);else closeDlg();}
+  if(e.key==='Tab'&&openEl){
+    const f=[...openEl.querySelectorAll('button,input,select,textarea,a[href]')].filter(x=>!x.disabled&&x.offsetParent);
+    if(!f.length)return;const a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}
+  }
+});
+
+// Product detail
+let pdItem=null,pdQty=1;
+function chipSet(name,vals,sel,extra={}){
+  return `<fieldset class="opt"><legend>${name}</legend><div class="chips">${vals.map(v=>`<label><input type="radio" name="${name}" value="${v}" ${v===sel?'checked':''}><span>${v}${extra[v]?` <small style="margin-left:4px;opacity:.75">+${peso(extra[v])}</small>`:''}</span></label>`).join('')}</div></fieldset>`;
+}
+function openProduct(id){
+  const m=byId(id);pdItem=m;pdQty=1;const d=defaults(m);
+  $('pdImg').querySelectorAll('img,.fb').forEach(n=>n.remove());$('pdImg').classList.remove('noimg');
+  $('pdImg').insertAdjacentHTML('afterbegin',`<img src="${U(m.img,900)}" alt="${esc(m.name)} (stock photo)"><span class="fb"><svg aria-hidden="true" viewBox="0 0 48 48"><use href="#i-${m.icon}"/></svg></span>`);
+  wireImgs($('pdImg'));
+  $('pdName').textContent=m.name;$('pdDesc').textContent=m.desc;
+  let h='';
+  if(DRINK(m.cat)){
+    if(m.temp==='both')h+=chipSet('Temp',['Hot','Iced'],d.Temp);
+    h+=chipSet('Size',['Regular','Large'],'Regular',{Large:20});
+    h+=chipSet('Sugar',['100%','50%','0%'],'100%');
+    if(d.Milk)h+=chipSet('Milk',['Whole milk','Oat milk'],'Whole milk',{'Oat milk':30});
+    if(m.cat==='coffee')h+=chipSet('Extra shot',['No','Yes'],'No',{Yes:25});
+  }else if(m.warm){h+=chipSet('Warm',['Warmed','As is'],'Warmed');}
+  $('pdOpts').innerHTML=h;
+  updPd();openDlg($('pd'));
+}
+function pdOpts(){const o=defaults(pdItem);$('pdForm').querySelectorAll('input[type=radio]:checked').forEach(r=>o[r.name]=r.value);return o;}
+function updPd(){const u=priceFor(pdItem,pdOpts());$('pdQty').textContent=pdQty;$('pdPrice').textContent=peso(u);$('pdAdd').textContent=`Add ${pdQty} · ${peso(u*pdQty)}`;}
+$('pdForm').addEventListener('change',updPd);
+$('pdMinus').onclick=()=>{pdQty=Math.max(1,pdQty-1);updPd();};
+$('pdPlus').onclick=()=>{pdQty=Math.min(20,pdQty+1);updPd();};
+$('pdForm').addEventListener('submit',e=>{e.preventDefault();addToCart(pdItem,pdOpts(),pdQty);closeDlg();toast(`${pdItem.name} added to cart`);});
+
+// Toast (announced to screen readers)
+const tEl=document.createElement('div');tEl.setAttribute('role','status');
+tEl.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:#241710;color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;white-space:nowrap;z-index:90;opacity:0;transition:opacity .25s;pointer-events:none';
+document.body.append(tEl);let tT;
+function toast(s){tEl.textContent=s;tEl.style.opacity=1;clearTimeout(tT);tT=setTimeout(()=>tEl.style.opacity=0,1800);}
+
+// Global clicks
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-open],[data-quick],[data-fav],[data-cat],[data-inc],[data-dec],[data-rail],[data-open-cart],[data-reserve],[data-close]');
+  if(!t)return;
+  if(t.dataset.open)openProduct(t.dataset.open);
+  else if(t.dataset.quick){const m=byId(t.dataset.quick);addToCart(m,defaults(m),1);t.classList.add('ok');t.innerHTML='<svg aria-hidden="true"><use href="#i-check"/></svg>';setTimeout(()=>{t.classList.remove('ok');t.innerHTML='<svg aria-hidden="true"><use href="#i-plus"/></svg>'},1000);toast(`${m.name} added to cart`);}
+  else if(t.dataset.fav){const id=t.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);t.setAttribute('aria-pressed',favs.has(id));}
+  else if(t.dataset.cat){cat=t.dataset.cat;renderFilters();renderMenu();}
+  else if(t.dataset.inc!==undefined){cart[+t.dataset.inc].qty++;renderCart();}
+  else if(t.dataset.dec!==undefined){const l=cart[+t.dataset.dec];if(--l.qty<=0)cart.splice(+t.dataset.dec,1);renderCart();}
+  else if(t.dataset.rail){const r=$(t.dataset.rail);r.scrollBy({left:t.dataset.dir*r.clientWidth*.8,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}
+  else if(t.hasAttribute('data-open-cart')){openDlg($('drawer'));}
+  else if(t.hasAttribute('data-reserve')){e.preventDefault();toggleNav(false);openReserve();}
+  else if(t.hasAttribute('data-close')){closeDlg();}
+});
+
+// Checkout (demo)
+document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener('change',()=>{
+  const dine=document.querySelector('input[name=mode]:checked').value==='Dine-in';
+  $('tableWrap').hidden=!dine;$('pickWrap').hidden=dine;
+}));
+const PH_RE=/^(09|\+639)\d{9}$/;
+function check(input,errId,ok){input.setAttribute('aria-invalid',!ok);$(errId).hidden=ok;return ok;}
+let trackT=[];
+$('checkout').addEventListener('submit',e=>{
+  e.preventDefault();
+  const a=check($('cname'),'cnameErr',$('cname').value.trim().length>1);
+  const b=check($('cphone'),'cphoneErr',PH_RE.test($('cphone').value.replace(/[\s-]/g,'')));
+  if(!a||!b){(a?$('cphone'):$('cname')).focus();return;}
+  const t=totals();const mode=document.querySelector('input[name=mode]:checked').value;
+  $('orderNum').textContent='BC-'+Math.floor(1000+Math.random()*9000);
+  const first=$('cname').value.trim().split(' ')[0];
+  $('doneMsg').textContent=`Thank you, ${first}! ${t.count} item(s), total ${peso(t.sub)}. `+(mode==='Pickup'?`Pickup: ${$('cwhen').value.toLowerCase()}.`:`Dine-in${$('ctable').value?`, table ${$('ctable').value}`:''}. We'll bring it to you.`);
+  $('cartView').hidden=true;$('doneView').hidden=false;
+  const steps=[...$('track').children];steps.forEach((s,i)=>s.classList.toggle('on',i===0));
+  trackT.forEach(clearTimeout);trackT=[setTimeout(()=>steps[1].classList.add('on'),2500),setTimeout(()=>steps[2].classList.add('on'),6000)];
+  $('doneView').querySelector('button').focus();
+});
+$('newOrder').onclick=()=>{cart.length=0;$('cartView').hidden=false;$('doneView').hidden=true;$('checkout').reset();$('tableWrap').hidden=true;$('pickWrap').hidden=false;closeDlg();};
+
+// Reservations (demo, in-memory)
+const booked=new Set();
+const SLOTS=['7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
+const fmt=s=>{const [h]=s.split(':').map(Number);return `${(h+11)%12+1}:00 ${h<12?'AM':'PM'}`;};
+const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);};
+function renderSlots(){
+  const d=$('rdate').value;const isToday=d===today();const nowH=new Date().getHours();
+  $('slots').innerHTML=SLOTS.map(s=>{const h=+s.split(':')[0];const off=booked.has(d+' '+s)||(isToday&&h<=nowH);
+    return `<label><input type="radio" name="slot" value="${s}" ${off?'disabled':''}><span>${fmt(s)}</span></label>`}).join('');
+}
+function openReserve(){
+  $('rsvFormView').hidden=false;$('rsvDone').hidden=true;
+  if(!$('rdate').value){$('rdate').value=today();}
+  $('rdate').min=today();renderSlots();openDlg($('rsv'));
+}
+$('rdate').addEventListener('change',renderSlots);
+$('rsvForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const slot=document.querySelector('input[name=slot]:checked');$('slotErr').hidden=!!slot;
+  const a=check($('rname'),'rnameErr',$('rname').value.trim().length>1);
+  const b=check($('rphone'),'rphoneErr',PH_RE.test($('rphone').value.replace(/[\s-]/g,'')));
+  const dOk=$('rdate').value&&$('rdate').value>=today();$('rdate').setAttribute('aria-invalid',!dOk);
+  if(!slot||!a||!b||!dOk)return;
+  booked.add($('rdate').value+' '+slot.value);
+  const date=new Date($('rdate').value+'T00:00').toLocaleDateString('en-PH',{weekday:'long',month:'long',day:'numeric'});
+  $('rsvCode').textContent='BR-'+Math.floor(1000+Math.random()*9000);
+  const p=$('rparty').value;
+  $('rsvMsg').textContent=`See you, ${$('rname').value.trim().split(' ')[0]}! Table for ${p==='7'?'7 or more':p} on ${date} at ${fmt(slot.value)}.`;
+  $('rsvFormView').hidden=true;$('rsvDone').hidden=false;$('rsvForm').reset();$('rdate').value='';
+  $('rsvDone').querySelector('button').focus();
+});
+
+// Header + mobile nav
+const head=$('head');const hero=document.querySelector('.hero');
+const onScroll=()=>head.classList.toggle('stuck',scrollY>hero.offsetHeight*.25+40);
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+function toggleNav(o){$('mnav').hidden=!o;$('menuToggle').setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';if(o)$('menuClose').focus();}
+$('menuToggle').onclick=()=>toggleNav(true);$('menuClose').onclick=()=>toggleNav(false);
+$('mnav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(!a.hasAttribute('data-reserve'))toggleNav(false)}));
+
+// Active nav link
+const navLinks=[...document.querySelectorAll('.nav a')];
+const spy=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id&&!a.hasAttribute('data-reserve')));}}),{rootMargin:'-45% 0px -50% 0px'});
+['top','menu','order','story','visit'].forEach(id=>spy.observe($(id)));
+
+// Scroll reveal
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+
+renderFavs();renderFilters();renderMenu();wireImgs();
+addToCart(byId('spa'),defaults(byId('spa')),2);addToCart(byId('cro'),defaults(byId('cro')),1);
+})();
+</script>
+</body>
+</html>
