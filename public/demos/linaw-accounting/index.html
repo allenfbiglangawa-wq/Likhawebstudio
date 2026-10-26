@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Linaw Accounting &amp; Tax · Bookkeeping, BIR Compliance &amp; Business Registration (Demo)</title>
+<meta name="description" content="Linaw Accounting &amp; Tax is a sample professional-services website by Likha Web Studio: service packages with sample pricing, a fee estimator, consultation booking and a client inquiry form.">
+<meta name="theme-color" content="#12302B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Linaw Accounting &amp; Tax · Malinaw na libro, panatag na negosyo. (Website demo)">
+<meta property="og:description" content="A sample accounting firm website with consultation booking, fee estimator and inquiry form. Built by Likha Web Studio.">
+<meta property="og:url" content="https://likha-webstudio.likhawebstudioph.workers.dev/demos/linaw-accounting/">
+<link rel="canonical" href="https://likha-webstudio.likhawebstudioph.workers.dev/demos/linaw-accounting/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: accounting and tax firm. Typographic hero with a live sample compliance calendar,
+   client-type cards, tabbed packages with sample pricing, monthly fee estimator, three-step
+   consultation booking with on-device history, sample team, inquiry form, portal teaser, FAQ.
+   No stock photos: the page uses type, colour and inline SVG so nothing depends on a CDN. */
+:root{
+  --ink:#12302B; --ink-2:#0B201C; --ink-3:#1C4740; --paper:#F7F4EC; --paper-2:#EFEADC; --white:#fff;
+  --brass:#B8893B; --brass-2:#9A6F27; --brass-soft:#F1E3C6; --mint:#CFE6DC; --mint-2:#E6F2EC;
+  --text:#1E2A27; --muted:#5D6B67; --line:#DED7C5; --red:#A23B2A;
+  --display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --body:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --shadow:0 24px 48px -28px rgba(11,32,28,.45);
+  --shadow-sm:0 8px 22px -14px rgba(11,32,28,.35);
+  --radius:16px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--text);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+[hidden]{display:none!important}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;color:var(--ink);text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+svg{flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none}
+.skip:focus{top:12px}
+.num{font-variant-numeric:tabular-nums}
+
+/* Demo ribbon */
+.demo{background:var(--ink-2);color:#CFE0D9;font-size:13px;text-align:center;padding:9px 16px}
+.demo a{color:#fff;font-weight:600}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 15px/1 var(--body);text-decoration:none;border:1.5px solid var(--brass);background:var(--brass);color:var(--ink-2);padding:15px 22px;border-radius:10px;cursor:pointer;transition:background .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease),color .25s}
+.btn:hover{background:#C99A4A;border-color:#C99A4A;transform:translateY(-2px);box-shadow:0 14px 24px -14px rgba(154,111,39,.8)}
+.btn svg{width:17px;height:17px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.dark:hover{background:var(--ink-3);border-color:var(--ink-3);box-shadow:0 14px 24px -14px rgba(11,32,28,.8)}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.4);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.08);border-color:#fff;box-shadow:none}
+.btn.line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:#fff;box-shadow:none}
+.btn.sm{padding:11px 16px;font-size:14px}
+.btn.block{width:100%}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12.5px/1.2 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--brass-2);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:currentColor}
+.tag{display:inline-flex;align-items:center;gap:6px;font:700 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--brass-soft);color:var(--brass-2)}
+.tag.mint{background:var(--mint-2);color:var(--ink-3)}
+
+/* Header */
+.site-head{position:sticky;top:0;z-index:50;background:rgba(18,48,43,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .3s}
+.site-head.solid{box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.site-head .wrap{height:74px;display:flex;align-items:center;gap:26px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.brand .mark{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--brass);color:var(--ink-2)}
+.brand .mark svg{width:22px;height:22px}
+.brand b{display:block;font:600 22px/1 var(--display);letter-spacing:.02em}
+.brand small{display:block;font:600 10px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:#A9C6BC;margin-top:5px}
+.nav{display:flex;gap:26px;margin-left:auto}
+.nav a{color:#DCE8E3;text-decoration:none;font-size:15px;font-weight:500;padding:6px 0;border-bottom:1.5px solid transparent;transition:border-color .25s,color .25s}
+.nav a:hover,.nav a[aria-current="true"]{color:#fff;border-color:var(--brass)}
+.menu-btn{display:none;margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.35);border-radius:8px;width:44px;height:44px;color:#fff;cursor:pointer;align-items:center;justify-content:center}
+.menu-btn svg{width:22px;height:22px}
+.mnav{display:none}
+
+/* Hero */
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(800px 420px at 85% 10%,rgba(184,137,59,.22),transparent 60%),
+  radial-gradient(600px 400px at 0% 100%,rgba(207,230,220,.10),transparent 60%);pointer-events:none}
+.hero .grid-lines{position:absolute;inset:0;opacity:.07;background-image:linear-gradient(rgba(255,255,255,.9) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.9) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:48px;align-items:center;padding-top:84px;padding-bottom:96px}
+.hero .eyebrow{color:#E2C48E}
+.hero h1{color:#fff;font-size:clamp(42px,5.4vw,70px);line-height:1.02;font-weight:600}
+.hero h1 em{font-style:italic;color:#E2C48E;font-weight:500}
+.hero .lead{color:#C9DAD4;font-size:18px;max-width:50ch;margin:22px 0 32px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.assure{display:flex;flex-wrap:wrap;gap:14px 28px;list-style:none;margin:40px 0 0;padding:26px 0 0;border-top:1px solid rgba(255,255,255,.14)}
+.assure li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#DCE8E3}
+.assure svg{width:20px;height:20px;color:#E2C48E}
+.rise{opacity:0;transform:translateY(22px);animation:rise .9s var(--ease) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}.d4{animation-delay:.44s}.d5{animation-delay:.6s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* Hero calendar card */
+.cal{position:relative;background:var(--paper);color:var(--text);border-radius:20px;padding:24px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7);transform:rotate(.6deg)}
+.cal::after{content:"";position:absolute;inset:auto -14px -14px 14px;height:100%;border-radius:20px;background:rgba(255,255,255,.06);z-index:-1;transform:rotate(-2.5deg)}
+.cal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.cal-head h2{font-size:22px}
+.cal-head p{font-size:13px;color:var(--muted);margin-top:4px}
+.next{display:flex;gap:16px;align-items:center;background:var(--ink);color:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.next .days{font:600 46px/1 var(--display);color:#E2C48E;min-width:64px;text-align:center}
+.next .days small{display:block;font:600 11px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#A9C6BC;margin-top:6px}
+.next b{display:block;font-size:16px}
+.next span{font-size:13.5px;color:#C9DAD4}
+.cal ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.cal li{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 2px;border-top:1px solid var(--line)}
+.cal li:first-child{border-top:0}
+.cal .dt{text-align:center;line-height:1;border:1px solid var(--line);border-radius:10px;padding:7px 0;background:#fff}
+.cal .dt b{display:block;font:600 20px/1 var(--display);color:var(--ink)}
+.cal .dt small{font:700 10px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--brass-2)}
+.cal li strong{display:block;font-size:14.5px;font-weight:600;color:var(--ink)}
+.cal li span{font-size:13px;color:var(--muted)}
+.cal li em{font-style:normal;font-size:12px;font-weight:700;color:var(--ink-3);background:var(--mint-2);padding:5px 9px;border-radius:999px;white-space:nowrap}
+.cal .fine{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.5}
+
+/* Sections */
+.sec{padding:104px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.sec-head h2{font-size:clamp(32px,4.2vw,50px)}
+.sec-head .lede{color:var(--muted);max-width:56ch;margin-top:14px;font-size:17px}
+.demo-note{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--muted);background:var(--paper-2);border:1px dashed #CDBF9F;border-radius:10px;padding:12px 14px;margin-top:28px}
+.demo-note svg{width:18px;height:18px;margin-top:2px;color:var(--brass-2)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* Who we help */
+.who{background:var(--paper)}
+.who-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.who-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;display:flex;flex-direction:column;gap:12px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.who-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+.who-card .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--mint-2);color:var(--ink-3);margin-bottom:6px}
+.who-card .ic svg{width:26px;height:26px}
+.who-card h3{font-size:25px}
+.who-card p{color:var(--muted);font-size:15.5px}
+.who-card ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
+.who-card li{display:flex;gap:9px;align-items:flex-start}
+.who-card li svg{width:16px;height:16px;margin-top:4px;color:var(--brass-2)}
+
+/* Services & pricing */
+.services{background:var(--paper-2)}
+.tabs{display:inline-flex;gap:4px;padding:5px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:30px}
+.tab{font:600 15px var(--body);border:0;background:transparent;color:var(--muted);padding:11px 18px;border-radius:9px;cursor:pointer;transition:background .25s,color .25s}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.plan{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;display:flex;flex-direction:column;gap:14px}
+.plan.feat{background:var(--ink);color:#DCE8E3;border-color:var(--ink);box-shadow:var(--shadow)}
+.plan.feat h3,.plan.feat .price b{color:#fff}
+.plan .ribbon{position:absolute;top:-12px;right:22px;background:var(--brass);color:var(--ink-2);font:700 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:7px 11px;border-radius:999px}
+.plan h3{font-size:26px}
+.plan .for{font-size:14.5px;color:var(--muted)}
+.plan.feat .for{color:#A9C6BC}
+.price{display:flex;align-items:baseline;gap:6px;padding:12px 0 14px;border-bottom:1px solid var(--line)}
+.plan.feat .price{border-color:rgba(255,255,255,.14)}
+.price small{font-size:13px;color:var(--muted)}
+.plan.feat .price small{color:#A9C6BC}
+.price b{font:600 40px/1 var(--display);color:var(--ink)}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15px;flex:1}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li svg{width:17px;height:17px;margin-top:3px;color:var(--ink-3)}
+.plan.feat li svg{color:#E2C48E}
+.plan .btn{margin-top:10px}
+.once{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.once-item{display:flex;justify-content:space-between;gap:20px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:border-color .25s,transform .25s}
+.once-item:hover{border-color:var(--brass);transform:translateY(-2px)}
+.once-item h3{font:600 17px/1.3 var(--body);color:var(--ink)}
+.once-item p{font-size:14px;color:var(--muted);margin-top:4px}
+.once-item .p{text-align:right;white-space:nowrap}
+.once-item .p small{display:block;font-size:12px;color:var(--muted)}
+.once-item .p b{font:600 24px/1.1 var(--display);color:var(--ink)}
+
+/* Estimator */
+.estimate{background:var(--paper)}
+.est-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:30px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:22px;box-shadow:var(--shadow-sm)}
+.q .label{display:block;font:700 12.5px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{display:flex;flex-direction:column;gap:3px;text-align:left;font:15px var(--body);color:var(--text);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.opt:hover{border-color:var(--brass);transform:translateY(-1px)}
+.opt b{font-weight:600;color:var(--ink)}
+.opt small{color:var(--muted);font-size:13px;line-height:1.4}
+.opt[aria-pressed="true"]{border-color:var(--ink);background:var(--mint-2);box-shadow:inset 0 0 0 1px var(--ink)}
+.range{display:flex;align-items:center;gap:16px}
+.range input{flex:1;accent-color:var(--ink);height:28px}
+.range output{min-width:92px;text-align:right;font:600 22px/1 var(--display);color:var(--ink)}
+.range output small{display:block;font:500 12px var(--body);color:var(--muted);margin-top:4px}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;font-size:14.5px;transition:border-color .2s,background .2s}
+.check:has(input:checked){border-color:var(--ink);background:var(--mint-2)}
+.check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.check b{display:block;font-weight:600;color:var(--ink)}
+.check small{color:var(--muted);font-size:13px}
+.result{position:sticky;top:96px;background:var(--ink);color:#DCE8E3;border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
+.result .label{font:700 12.5px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#E2C48E}
+.result .total{font:600 clamp(44px,5vw,58px)/1 var(--display);color:#fff}
+.result .total small{font:500 15px var(--body);color:#A9C6BC;margin-left:6px}
+.result .plan-name{font-size:15px;color:#C9DAD4}
+.result .plan-name b{color:#fff}
+.lines{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:8px;font-size:14.5px}
+.lines li{display:flex;justify-content:space-between;gap:12px}
+.lines li span:last-child{color:#fff;font-weight:600}
+.result .fine{font-size:12.5px;color:#A9C6BC;line-height:1.55}
+
+/* Process */
+.process{background:var(--ink);color:#DCE8E3}
+.process h2{color:#fff}
+.process .eyebrow{color:#E2C48E}
+.process .lede{color:#A9C6BC}
+.steps-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps-row li{position:relative;padding:28px 24px;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);background:rgba(255,255,255,.03);counter-increment:s}
+.steps-row li::before{content:"0" counter(s);display:block;font:600 34px/1 var(--display);color:#E2C48E;margin-bottom:18px}
+.steps-row h3{color:#fff;font-size:21px;margin-bottom:8px}
+.steps-row p{font-size:15px;color:#B8CCC5}
+
+/* Booking */
+.booking{background:var(--paper-2)}
+.book-grid{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:30px;align-items:start}
+.steps{display:flex;gap:6px;margin:0 0 18px;list-style:none;padding:0;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;background:#fff;color:var(--muted);border:1px solid var(--line)}
+.step i{font-style:normal;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--paper-2);font-size:12px;font-weight:700}
+.step.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.step.on i{background:var(--brass);color:var(--ink-2)}
+.step.ok i{background:var(--ink-3);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 15px var(--body);padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--text);cursor:pointer;min-width:84px;text-align:center;transition:border-color .2s,background .2s}
+.chip:hover:not(:disabled){border-color:var(--brass)}
+.chip small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] small{color:#A9C6BC}
+.chip:disabled{text-decoration:line-through;opacity:.45;cursor:not-allowed}
+.card-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.note{font-size:13.5px;color:var(--muted)}
+.summary{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.summary div{display:flex;justify-content:space-between;gap:12px}
+.summary span{color:var(--muted)}
+.summary b{text-align:right;font-weight:600;color:var(--ink)}
+form{display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px;color:var(--ink)}
+.field .opt-l{font-weight:500;color:var(--muted)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font:16px var(--body);padding:12px 13px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--text);width:100%}
+textarea{resize:vertical;min-height:104px}
+input:focus,select:focus,textarea:focus{border-color:var(--ink);outline:none}
+.err{color:var(--red);font-size:13px;font-weight:500}
+.done{text-align:center;align-items:center}
+.done .seal{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:var(--mint-2);color:var(--ink-3)}
+.done .seal svg{width:30px;height:30px}
+.done h3{font-size:34px}
+.done .ref{font:600 15px var(--body);letter-spacing:.1em;background:var(--brass-soft);color:var(--brass-2);padding:8px 14px;border-radius:8px}
+.prep{text-align:left;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.prep h4{font:700 12.5px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.prep ul{margin:0;padding-left:20px;font-size:14.5px;display:flex;flex-direction:column;gap:4px}
+.side-card{background:var(--ink);color:#DCE8E3;border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:14px;position:sticky;top:96px;box-shadow:var(--shadow)}
+.side-card h3{color:#fff;font-size:24px}
+.side-card .label{font:700 12px/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#E2C48E}
+.history{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.history li{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start;font-size:14px}
+.history li b{display:block;color:#fff;font-weight:600}
+.history li span{color:#B8CCC5}
+.history button{background:transparent;border:1px solid rgba(255,255,255,.3);color:#DCE8E3;border-radius:8px;padding:6px 10px;font:600 13px var(--body);cursor:pointer;white-space:nowrap}
+.history button:hover{border-color:#E2C48E;color:#fff}
+.side-card .empty,.side-card .fine{font-size:13.5px;color:#A9C6BC}
+.side-card hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:4px 0;width:100%}
+.contact-mini{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.contact-mini span{display:flex;gap:10px;align-items:center}
+.contact-mini svg{width:16px;height:16px;color:#E2C48E}
+
+/* Team */
+.team{background:var(--paper)}
+.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.person{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.person .mono{aspect-ratio:5/4;display:grid;place-items:center;position:relative;background:linear-gradient(150deg,var(--ink-3),var(--ink));color:#E2C48E;font:600 54px/1 var(--display);letter-spacing:.04em}
+.person:nth-child(2) .mono{background:linear-gradient(150deg,#2B5A50,#173A34)}
+.person:nth-child(3) .mono{background:linear-gradient(150deg,#7A5A26,#4E3A17);color:#F1E3C6}
+.person:nth-child(4) .mono{background:linear-gradient(150deg,#3A4F4A,#1F2E2B)}
+.person .mono .tag{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.14);color:#fff}
+.person .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px}
+.person h3{font-size:21px}
+.person .role{font-size:13.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brass-2)}
+.person p{font-size:14.5px;color:var(--muted)}
+
+/* Portal teaser */
+.portal{background:var(--paper-2)}
+.portal-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.portal h2{font-size:clamp(30px,3.8vw,46px);margin-bottom:16px}
+.portal .lede{color:var(--muted);font-size:17px;margin-bottom:22px}
+.portal ul.feat{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:12px}
+.portal ul.feat li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px}
+.portal ul.feat svg{width:20px;height:20px;margin-top:2px;color:var(--ink-3)}
+.mock{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.mock-top{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.mock-top i{width:10px;height:10px;border-radius:50%;background:#D9D2C0}
+.mock-top span{margin-left:10px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 10px}
+.mock-body{display:grid;grid-template-columns:160px minmax(0,1fr)}
+.mock-side{background:var(--ink);color:#B8CCC5;padding:18px 14px;display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.mock-side b{color:#fff;font:600 17px var(--display);margin-bottom:10px}
+.mock-side span{padding:7px 10px;border-radius:8px}
+.mock-side span.on{background:rgba(255,255,255,.1);color:#fff}
+.mock-main{padding:20px;display:flex;flex-direction:column;gap:14px}
+.mock-main h4{font-size:18px}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi small{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.kpi b{font:600 22px/1.3 var(--display);color:var(--ink)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:84px;padding:10px 12px 0;border:1px solid var(--line);border-radius:12px}
+.bars i{flex:1;background:var(--mint);border-radius:5px 5px 0 0}
+.bars i.hi{background:var(--ink-3)}
+.reqs{display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.reqs div{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.reqs em{font-style:normal;font-size:11.5px;font-weight:700;padding:4px 8px;border-radius:999px}
+.reqs em.w{background:var(--brass-soft);color:var(--brass-2)}
+.reqs em.ok{background:var(--mint-2);color:var(--ink-3)}
+
+/* Inquiry */
+.inquiry{background:var(--paper)}
+.inq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px;align-items:start}
+.inq-side h2{font-size:clamp(30px,3.8vw,46px);margin-bottom:14px}
+.inq-side .lede{color:var(--muted);font-size:17px}
+.info-list{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:14px}
+.info-list li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.info-list .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--mint-2);color:var(--ink-3);flex:none}
+.info-list svg{width:20px;height:20px}
+.info-list b{display:block;color:var(--ink)}
+.info-list span{font-size:14.5px;color:var(--muted)}
+.svc-checks{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;padding:9px 13px;border:1.5px solid var(--line);border-radius:999px;background:var(--paper);cursor:pointer}
+.pill:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff}
+.pill input{position:absolute;opacity:0;pointer-events:none}
+.pill:has(input:focus-visible){outline:2px solid var(--brass);outline-offset:2px}
+.files{font-size:13.5px;color:var(--muted)}
+.files ul{margin:6px 0 0;padding-left:18px}
+
+/* FAQ */
+.faq{background:var(--paper-2)}
+.faq-list{max-width:860px;display:flex;flex-direction:column;gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 22px;transition:border-color .25s}
+.faq details[open]{border-color:var(--ink)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:19px 0;font:600 17px/1.4 var(--body);color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:20px;height:20px;transition:transform .3s var(--ease);color:var(--brass-2)}
+.faq details[open] summary svg{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);font-size:15.5px;max-width:70ch}
+
+/* CTA band */
+.band{background:var(--ink);color:#fff;padding:72px 0}
+.band .wrap{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.band h2{color:#fff;font-size:clamp(28px,3.6vw,42px);max-width:22ch}
+.band h2 em{color:#E2C48E;font-weight:500}
+.band .ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Footer */
+footer{background:var(--ink-2);color:#A9C6BC;font-size:14px}
+footer .wrap{padding-block:52px 110px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+footer .brand{margin-bottom:16px}
+footer h4{font:700 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:#E2C48E;margin:0 0 12px}
+footer a{color:#DCE8E3;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .byline{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* Mobile sticky bar */
+.mbar{display:none}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--ink-2);color:#fff;font-size:14.5px;padding:12px 18px;border-radius:10px;box-shadow:var(--shadow);transition:opacity .3s,transform .3s var(--ease);max-width:calc(100vw - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1060px){
+  .hero .wrap{grid-template-columns:1fr;gap:48px;padding-top:64px;padding-bottom:80px}
+  .cal{max-width:560px;transform:none}
+  .plans,.who-grid{grid-template-columns:1fr 1fr}
+  .plans .plan:last-child,.who-grid .who-card:last-child{grid-column:1/-1}
+  .est-grid,.book-grid,.portal-grid,.inq-grid{grid-template-columns:1fr}
+  .result,.side-card{position:static}
+  .steps-row,.team-grid{grid-template-columns:1fr 1fr}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .nav,.site-head .head-cta{display:none}
+  .menu-btn{display:inline-flex}
+  .mnav{position:fixed;inset:74px 0 auto 0;z-index:49;background:var(--ink);padding:10px 20px 22px;flex-direction:column;box-shadow:0 20px 30px -20px rgba(0,0,0,.6)}
+  .mnav.open{display:flex}
+  .mnav a{color:#fff;text-decoration:none;font-size:17px;font-weight:500;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .mnav .btn{margin-top:16px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(247,244,236,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .35s var(--ease)}
+  .mbar.on{transform:none}
+  .mbar .btn{flex:1;padding:14px 12px}
+  .toast{bottom:88px}
+}
+@media (max-width:640px){
+  .sec{padding:76px 0}
+  .hero .lead{font-size:16.5px}
+  .hero .ctas .btn{flex:1 1 100%}
+  .cal{padding:18px}
+  .cal li{grid-template-columns:48px minmax(0,1fr);row-gap:6px}
+  .cal li em{grid-column:2;justify-self:start}
+  .plans,.who-grid,.once,.checks,.steps-row,.field-row,.kpis{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .person .mono{font-size:40px}
+  .person .body{padding:16px}
+  .person h3{font-size:18px}
+  .person p{font-size:13.5px}
+  .plans .plan:last-child,.who-grid .who-card:last-child{grid-column:auto}
+  .once-item{flex-direction:column;align-items:flex-start;gap:10px}
+  .once-item .p{text-align:left}
+  .card,.result,.side-card{padding:22px}
+  .tabs{display:flex;width:100%}
+  .tab{flex:1;padding:11px 10px}
+  .mock-body{grid-template-columns:1fr}
+  .mock-side{flex-direction:row;flex-wrap:wrap;padding:12px}
+  .mock-side b{width:100%;margin-bottom:2px}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .kpi{padding:9px}
+  .kpi b{font-size:17px}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rise,.rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v10h16V10"/><path d="M3 10l2-6h14l2 6"/><path d="M3 10c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h5v12h-5"/><path d="M8 7h3M8 11h3M8 15h3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></symbol>
+</svg>
+
+<div class="demo" role="note">Demo website by <a href="../../">Likha Web Studio</a> · Want one like this for your firm or practice? Starts at ₱3,500</div>
+
+<header class="site-head" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Linaw Accounting and Tax, home">
+      <span class="mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span>
+      <span><b>Linaw</b><small>Accounting &amp; Tax</small></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#estimate">Fee estimate</a>
+      <a href="#book">Book</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn sm head-cta" href="#book">Book a consultation</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Mobile">
+  <a href="#services">Services &amp; pricing</a>
+  <a href="#estimate">Fee estimate</a>
+  <a href="#book">Book a consultation</a>
+  <a href="#team">Team</a>
+  <a href="#contact">Send an inquiry</a>
+  <a class="btn" href="#book">Book a free call</a>
+</nav>
+
+<main id="main">
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rise d1">Bookkeeping · BIR compliance · Business registration</p>
+      <h1 id="heroTitle" class="rise d2">Malinaw na libro.<br><em>Panatag na negosyo.</em></h1>
+      <p class="lead rise d3">We keep your books in order, file your BIR returns on time and explain your numbers in plain Taglish, so you can focus on running the business. For freelancers, small businesses and growing corporations.</p>
+      <div class="ctas rise d4">
+        <a class="btn" href="#book">Book a free 30-min call <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn ghost" href="#estimate">Estimate your monthly fee</a>
+      </div>
+      <ul class="assure rise d5">
+        <li><svg aria-hidden="true"><use href="#i-shield"/></svg>Fixed monthly fees, no surprise billing</li>
+        <li><svg aria-hidden="true"><use href="#i-video"/></svg>Online or in-office</li>
+        <li><svg aria-hidden="true"><use href="#i-doc"/></svg>Monthly reports you can actually read</li>
+      </ul>
+    </div>
+
+    <aside class="cal rise d4" aria-labelledby="calTitle">
+      <div class="cal-head">
+        <div>
+          <h2 id="calTitle">Filing reminders</h2>
+          <p>What a client sees in their monthly update</p>
+        </div>
+        <span class="tag">Sample</span>
+      </div>
+      <div class="next" id="calNext"></div>
+      <ul id="calList"></ul>
+      <p class="fine">Sample reminders based on common BIR due dates for illustration only. Due dates can change with new BIR issuances; a live site would use the firm's own calendar.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="sec who" aria-labelledby="whoTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Who we help</p>
+        <h2 id="whoTitle">Whatever stage your business is in</h2>
+        <p class="lede">From your first BIR registration to your first audited financial statements, we keep you compliant at each step.</p>
+      </div>
+    </div>
+    <div class="who-grid">
+      <article class="who-card rv">
+        <span class="ic"><svg aria-hidden="true"><use href="#i-user"/></svg></span>
+        <h3>Freelancers &amp; professionals</h3>
+        <p>Online sellers, creatives, consultants and self-employed professionals.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>BIR registration and books of accounts</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quarterly and annual income tax returns</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Help choosing between 8% and graduated rates</li>
+        </ul>
+      </article>
+      <article class="who-card rv">
+        <span class="ic"><svg aria-hidden="true"><use href="#i-store"/></svg></span>
+        <h3>Small businesses</h3>
+        <p>Sari-sari stores, cafés, salons, clinics, shops and service businesses.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Monthly bookkeeping and tax filing</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Payroll, SSS, PhilHealth and Pag-IBIG</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Business permit renewal support</li>
+        </ul>
+      </article>
+      <article class="who-card rv">
+        <span class="ic"><svg aria-hidden="true"><use href="#i-building"/></svg></span>
+        <h3>Corporations</h3>
+        <p>OPCs, partnerships and corporations that are scaling up.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>SEC incorporation and annual reports</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>VAT, withholding and alphalist filing</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Coordination with your external auditor</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec services" id="services" aria-labelledby="svcTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Services &amp; pricing</p>
+        <h2 id="svcTitle">Simple packages, clear fees</h2>
+        <p class="lede">Choose a monthly retainer for ongoing compliance, or book a one-time service when you need it.</p>
+      </div>
+    </div>
+    <div class="tabs rv" role="tablist" aria-label="Service type">
+      <button class="tab" role="tab" id="tabMonthly" aria-selected="true" aria-controls="panelMonthly">Monthly retainers</button>
+      <button class="tab" role="tab" id="tabOnce" aria-selected="false" aria-controls="panelOnce" tabindex="-1">One-time services</button>
+    </div>
+    <div id="panelMonthly" role="tabpanel" aria-labelledby="tabMonthly">
+      <div class="plans" id="plans"></div>
+    </div>
+    <div id="panelOnce" role="tabpanel" aria-labelledby="tabOnce" hidden>
+      <div class="once" id="once"></div>
+    </div>
+    <p class="demo-note rv"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>Demo content:</b> packages and prices are sample figures for this portfolio demo, not official rates. Government fees (BIR, SEC, LGU) are paid separately on a real engagement.</span></p>
+  </div>
+</section>
+
+<section class="sec estimate" id="estimate" aria-labelledby="estTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Fee estimator</p>
+        <h2 id="estTitle">How much would it cost per month?</h2>
+        <p class="lede">Answer four quick questions for a ballpark retainer. We confirm the final fee after a short call.</p>
+      </div>
+    </div>
+    <div class="est-grid">
+      <div class="card rv">
+        <div class="q">
+          <span class="label" id="lblEntity">1 · Business type</span>
+          <div class="seg" role="group" aria-labelledby="lblEntity" id="segEntity"></div>
+        </div>
+        <div class="q">
+          <span class="label" id="lblTax">2 · Tax registration</span>
+          <div class="seg" role="group" aria-labelledby="lblTax" id="segTax"></div>
+        </div>
+        <div class="q">
+          <label class="label" for="txn">3 · Sales and expense receipts per month</label>
+          <div class="range"><input type="range" id="txn" min="0" max="400" step="10" value="60"><output for="txn" id="txnOut" class="num"></output></div>
+        </div>
+        <div class="q">
+          <label class="label" for="emp">4 · Employees on payroll</label>
+          <div class="range"><input type="range" id="emp" min="0" max="40" step="1" value="0"><output for="emp" id="empOut" class="num"></output></div>
+        </div>
+        <div class="q">
+          <span class="label">Add-ons</span>
+          <div class="checks" id="addons"></div>
+        </div>
+      </div>
+      <aside class="result rv" aria-live="polite">
+        <span class="label">Estimated monthly retainer</span>
+        <div class="total num" id="estTotal"></div>
+        <p class="plan-name" id="estPlan"></p>
+        <ul class="lines num" id="estLines"></ul>
+        <button class="btn" id="estBook">Book a call with this estimate <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="fine">Sample computation for this demo. A live site uses the firm's own rates and can email the estimate to the client.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec process" aria-labelledby="procTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2 id="procTitle">From first call to monthly peace of mind</h2>
+        <p class="lede">A clear process, so you always know what we need from you and what you get back.</p>
+      </div>
+    </div>
+    <ol class="steps-row">
+      <li class="rv"><h3>Free discovery call</h3><p>30 minutes online or in our office. We learn about your business and current filings.</p></li>
+      <li class="rv"><h3>Proposal &amp; checklist</h3><p>You get a fixed monthly fee and a list of documents to prepare. No hidden charges.</p></li>
+      <li class="rv"><h3>Clean-up &amp; setup</h3><p>We catch up on any missed filings, set up your books and your filing calendar.</p></li>
+      <li class="rv"><h3>Monthly routine</h3><p>Send receipts by the 5th, we file on time and send a one-page report you can understand.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec booking" id="book" aria-labelledby="bookTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Book a consultation</p>
+        <h2 id="bookTitle">Schedule your free 30-minute call</h2>
+        <p class="lede">Pick a topic and a time that works for you. We'll confirm by email and send a calendar invite.</p>
+      </div>
+      <span class="tag mint">Demo booking · nothing is sent</span>
+    </div>
+    <div class="book-grid">
+      <div>
+        <ol class="steps" aria-label="Booking steps">
+          <li class="step on" id="st1"><i>1</i>Topic</li>
+          <li class="step" id="st2"><i>2</i>Schedule</li>
+          <li class="step" id="st3"><i>3</i>Your details</li>
+        </ol>
+
+        <div class="card" id="b1">
+          <div class="q">
+            <span class="label" id="lblTopic">What do you need help with?</span>
+            <div class="seg" role="group" aria-labelledby="lblTopic" id="topics"></div>
+          </div>
+          <div class="q">
+            <span class="label" id="lblMode">How would you like to meet?</span>
+            <div class="seg" role="group" aria-labelledby="lblMode" id="modes"></div>
+          </div>
+          <div class="card-nav">
+            <p class="note" id="b1Note">Choose a topic to continue.</p>
+            <button class="btn dark" id="to2" disabled>Choose a schedule <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+        </div>
+
+        <div class="card" id="b2" hidden>
+          <div class="q">
+            <span class="label" id="lblDate">Date</span>
+            <div class="chips" role="group" aria-labelledby="lblDate" id="dates"></div>
+          </div>
+          <div class="q">
+            <span class="label" id="lblTime">Time (Philippine time)</span>
+            <div class="chips" role="group" aria-labelledby="lblTime" id="times"></div>
+            <p class="note" style="margin-top:10px">Crossed-out slots are already booked (sample availability).</p>
+          </div>
+          <div class="card-nav">
+            <button class="btn line sm" id="back1">Back</button>
+            <button class="btn dark" id="to3" disabled>Add your details <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+        </div>
+
+        <div class="card" id="b3" hidden>
+          <div class="summary" id="sum"></div>
+          <form id="bookForm" novalidate>
+            <div class="field-row">
+              <label class="field">Full name<input id="bName" autocomplete="name" required><span class="err" id="eName"></span></label>
+              <label class="field">Business name <span class="opt-l">(optional)</span><input id="bBiz" autocomplete="organization"></label>
+            </div>
+            <div class="field-row">
+              <label class="field">Email<input id="bEmail" type="email" autocomplete="email" required><span class="err" id="eEmail"></span></label>
+              <label class="field">Mobile number<input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX" required><span class="err" id="ePhone"></span></label>
+            </div>
+            <label class="field">Anything we should know? <span class="opt-l">(optional)</span><textarea id="bNotes" placeholder="e.g. I have unfiled returns since last year"></textarea></label>
+            <div class="card-nav">
+              <button type="button" class="btn line sm" id="back2">Back</button>
+              <button type="submit" class="btn dark">Confirm booking <svg aria-hidden="true"><use href="#i-check"/></svg></button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card done" id="b4" hidden>
+          <span class="seal"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+          <h3>You're booked!</h3>
+          <span class="ref" id="doneRef"></span>
+          <p id="doneMsg"></p>
+          <div class="prep" id="donePrep"></div>
+          <p class="note">This is a demo, so no booking was sent. On a live website, the firm gets notified, the slot is reserved on the server, and you receive an email with a calendar invite and meeting link.</p>
+          <button class="btn line sm" id="again">Book another consultation</button>
+        </div>
+      </div>
+
+      <aside class="side-card">
+        <span class="label">On this device</span>
+        <h3>Your consultations</h3>
+        <ul class="history" id="hist"></ul>
+        <p class="empty" id="histEmpty">No bookings yet. Your demo bookings will appear here.</p>
+        <hr>
+        <div class="contact-mini">
+          <span><svg aria-hidden="true"><use href="#i-clock"/></svg>Mon – Fri · 9:00 AM – 5:00 PM</span>
+          <span><svg aria-hidden="true"><use href="#i-phone"/></svg>0917 000 0000 (sample)</span>
+          <span><svg aria-hidden="true"><use href="#i-mail"/></svg>hello@linaw.example</span>
+        </div>
+        <p class="fine">Demo only: bookings are saved in this browser, not on a server.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec team" id="team" aria-labelledby="teamTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Our team</p>
+        <h2 id="teamTitle">The people behind your books</h2>
+        <p class="lede">One dedicated accountant for your account, backed by a team that covers tax, payroll and registration.</p>
+      </div>
+    </div>
+    <div class="team-grid" id="teamGrid"></div>
+    <p class="demo-note rv"><svg aria-hidden="true"><use href="#i-info"/></svg><span><b>Sample profiles:</b> these team members are placeholders for the demo. A real firm would show its actual people, photos and professional licenses here.</span></p>
+  </div>
+</section>
+
+<section class="sec portal" aria-labelledby="portalTitle">
+  <div class="wrap portal-grid">
+    <div class="rv">
+      <p class="eyebrow">Client portal · add-on</p>
+      <h2 id="portalTitle">No more chasing receipts over chat</h2>
+      <p class="lede">A secure client portal can be added to this website, so clients upload documents and see their filing status in one place.</p>
+      <ul class="feat">
+        <li><svg aria-hidden="true"><use href="#i-lock"/></svg><span><b>Secure document uploads</b> for receipts, payroll and bank statements</span></li>
+        <li><svg aria-hidden="true"><use href="#i-bell"/></svg><span><b>Automatic reminders</b> before every filing deadline</span></li>
+        <li><svg aria-hidden="true"><use href="#i-chart"/></svg><span><b>Monthly reports</b> with sales, expenses and taxes paid</span></li>
+      </ul>
+      <a class="btn dark" href="../../#systems">See business systems by Likha <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="mock rv" role="img" aria-label="Preview of a sample client portal showing monthly figures, a sales chart and document requests">
+      <div class="mock-top"><i></i><i></i><i></i><span>portal.linaw.example</span></div>
+      <div class="mock-body">
+        <div class="mock-side"><b>Linaw Portal</b><span class="on">Overview</span><span>Documents</span><span>Filings</span><span>Reports</span></div>
+        <div class="mock-main">
+          <h4>Good morning, Sample Client</h4>
+          <div class="kpis">
+            <div class="kpi"><small>Sales</small><b>₱284k</b></div>
+            <div class="kpi"><small>Expenses</small><b>₱191k</b></div>
+            <div class="kpi"><small>Tax due</small><b>₱8.5k</b></div>
+          </div>
+          <div class="bars" aria-hidden="true"><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:66%"></i><i style="height:60%"></i><i class="hi" style="height:82%"></i></div>
+          <div class="reqs">
+            <div><span>October sales invoices</span><em class="w">Needed</em></div>
+            <div><span>Q3 percentage tax (2551Q)</span><em class="ok">Filed</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inquiry" id="contact" aria-labelledby="inqTitle">
+  <div class="wrap inq-grid">
+    <div class="inq-side rv">
+      <p class="eyebrow">Client inquiry</p>
+      <h2 id="inqTitle">Tell us about your business</h2>
+      <p class="lede">Not ready for a call? Send us a short inquiry and we'll reply within one business day with a proposal.</p>
+      <ul class="info-list">
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><span><b>Office</b><span>[Unit, Building], [Street], [City] · sample address</span></span></li>
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><span><b>Office hours</b><span>Mon – Fri, 9:00 AM – 5:00 PM · Online calls until 7 PM</span></span></li>
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><span><b>Messenger &amp; Viber</b><span>0917 000 0000 (sample number)</span></span></li>
+      </ul>
+    </div>
+    <div class="card rv">
+      <form id="inqForm" novalidate>
+        <div class="field-row">
+          <label class="field">Full name<input id="iName" autocomplete="name" required><span class="err" id="eiName"></span></label>
+          <label class="field">Business name <span class="opt-l">(optional)</span><input id="iBiz" autocomplete="organization"></label>
+        </div>
+        <div class="field-row">
+          <label class="field">Email<input id="iEmail" type="email" autocomplete="email" required><span class="err" id="eiEmail"></span></label>
+          <label class="field">Mobile number <span class="opt-l">(optional)</span><input id="iPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXXX"><span class="err" id="eiPhone"></span></label>
+        </div>
+        <label class="field">Business type
+          <select id="iType">
+            <option>Freelancer / self-employed professional</option>
+            <option>Sole proprietorship</option>
+            <option>Partnership</option>
+            <option>Corporation / OPC</option>
+            <option>Not yet registered</option>
+          </select>
+        </label>
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend style="padding:0;margin-bottom:8px">Services you're interested in</legend>
+          <div class="svc-checks" id="iSvcs"></div>
+          <span class="err" id="eiSvcs"></span>
+        </fieldset>
+        <label class="field">Message<textarea id="iMsg" placeholder="Tell us what you need, e.g. monthly bookkeeping for a café with 6 staff" required></textarea><span class="err" id="eiMsg"></span></label>
+        <label class="field">Attach documents <span class="opt-l">(optional · demo: files stay on your device)</span><input id="iFiles" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.xlsx,.csv"></label>
+        <div class="files" id="iFileList" hidden></div>
+        <div class="card-nav">
+          <p class="note">Demo form: nothing is sent.</p>
+          <button type="submit" class="btn dark">Send inquiry <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </form>
+      <div class="done" id="inqDone" hidden style="display:flex;flex-direction:column;gap:14px">
+        <span class="seal"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+        <h3>Salamat! Inquiry received.</h3>
+        <p id="inqMsg"></p>
+        <p class="note">This is a demo, so nothing was sent. On a live website, the inquiry goes to the firm's email or CRM, and the client gets an automatic acknowledgment.</p>
+        <button class="btn line sm" id="inqAgain">Send another inquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" aria-labelledby="faqTitle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faqTitle">Common questions</h2>
+      </div>
+    </div>
+    <div class="faq-list">
+      <details class="rv"><summary>I haven't filed in months. Can you still help?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes. We start with a review of your BIR records, list what's missing, and give you a catch-up plan with the expected cost before we file anything.</p></details>
+      <details class="rv"><summary>Do I need to visit your office?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. Most clients work with us fully online: video calls, document uploads and e-signatures. You're welcome to visit if you prefer meeting in person.</p></details>
+      <details class="rv"><summary>What do I send you each month?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Usually your sales invoices or receipts, expense receipts, and payroll records if you have employees. We send a simple checklist after onboarding.</p></details>
+      <details class="rv"><summary>Are government fees and penalties included?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>No. Our fee covers our professional services. Taxes, government filing fees and any penalties are paid directly to the agency, and we always tell you the amount in advance.</p></details>
+      <details class="rv"><summary>Can I cancel the monthly retainer?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Yes, with 30 days' notice (sample policy). We hand over your books and filing records so your next accountant can continue smoothly.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="bandTitle">
+  <div class="wrap">
+    <h2 id="bandTitle">Ready for books you <em>don't have to worry about?</em></h2>
+    <div class="ctas">
+      <a class="btn" href="#book">Book a free call <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn ghost" href="#contact">Send an inquiry</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><span class="mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span><span><b>Linaw</b><small>Accounting &amp; Tax</small></span></a>
+      <p>Linaw Accounting &amp; Tax is a sample business created for a website demo. Services, prices, team members, schedules and contact details shown are demo content.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <p><a href="#services">Monthly bookkeeping</a><br><a href="#services">Tax filing</a><br><a href="#services">Business registration</a><br><a href="#services">Payroll</a></p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <p><a href="#estimate">Fee estimator</a><br><a href="#book">Book a consultation</a><br><a href="#team">Team</a><br><a href="#contact">Inquiry form</a></p>
+    </div>
+    <div>
+      <h4>Office</h4>
+      <p>[Street], [City]<br>0917 000 0000 (sample)<br>Mon – Fri · 9 AM – 5 PM</p>
+    </div>
+    <div class="byline">
+      <span>Website Demo by <a href="../../">Likha Web Studio</a></span>
+      <span>No photos used: illustrations and icons are drawn in code.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <a class="btn dark" href="#contact">Inquire</a>
+  <a class="btn" href="#book">Book a free call</a>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const peso=n=>'₱'+Math.round(n).toLocaleString('en-PH');
+const ICON=(id)=>`<svg aria-hidden="true"><use href="#${id}"/></svg>`;
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2600);}
+
+/* ---------- Header, mobile menu, scroll reveal ---------- */
+const head=document.querySelector('.site-head'),mbar=$('mbar');
+addEventListener('scroll',()=>{head.classList.toggle('solid',scrollY>10);mbar.classList.toggle('on',scrollY>520);},{passive:true});
+$('menuBtn').addEventListener('click',()=>{const o=$('mnav').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',o);});
+$('mnav').addEventListener('click',e=>{if(e.target.closest('a')){$('mnav').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');}});
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'}):null;
+function watch(root){root.querySelectorAll('.rv:not(.in)').forEach(el=>io?io.observe(el):el.classList.add('in'));}
+const navLinks=[...document.querySelectorAll('.nav a')];
+if('IntersectionObserver' in window){
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-45% 0px -50% 0px'});
+  ['services','estimate','book','team','contact'].forEach(id=>so.observe($(id)));
+}
+
+/* ---------- Sample filing reminders (computed from today's date) ---------- */
+/* Common BIR due dates, simplified for the demo. */
+function deadlines(from){
+  const out=[],y0=from.getFullYear();
+  for(let y=y0;y<=y0+1;y++){
+    for(let m=0;m<12;m++) out.push({d:new Date(y,m,m===0?15:10),t:'Monthly withholding tax',f:'BIR Form 1601-C',who:'With employees'});
+    [[0,25],[3,25],[6,25],[9,25]].forEach(([m,d])=>{out.push({d:new Date(y,m,d),t:'Quarterly percentage tax / VAT',f:'BIR Form 2551Q / 2550Q',who:'Non-VAT / VAT'});});
+    [[4,15],[7,15],[10,15]].forEach(([m,d])=>out.push({d:new Date(y,m,d),t:'Quarterly income tax',f:'BIR Form 1701Q',who:'Individuals'}));
+    out.push({d:new Date(y,3,15),t:'Annual income tax return',f:'BIR Form 1701 / 1701A',who:'Individuals'});
+    out.push({d:new Date(y,0,31),t:'Annual withholding information return',f:'BIR Form 1604-C',who:'With employees'});
+  }
+  const today=new Date(from.getFullYear(),from.getMonth(),from.getDate());
+  return out.filter(x=>x.d>=today).sort((a,b)=>a.d-b.d).map(x=>({...x,days:Math.round((x.d-today)/864e5)}));
+}
+(function(){
+  const list=deadlines(new Date()),n=list[0];
+  $('calNext').innerHTML=`<div class="days num">${n.days}<small>${n.days===1?'day':'days'} left</small></div><div><b>${esc(n.t)}</b><span>${esc(n.f)} · due ${DOW[n.d.getDay()]}, ${MON[n.d.getMonth()]} ${n.d.getDate()}</span></div>`;
+  $('calList').innerHTML=list.slice(1,5).map(x=>`<li><span class="dt"><b>${x.d.getDate()}</b><small>${MON[x.d.getMonth()]}</small></span><span><strong>${esc(x.t)}</strong><span>${esc(x.f)}</span></span><em>${esc(x.who)}</em></li>`).join('');
+})();
+
+/* ---------- Packages (sample prices) ---------- */
+const PLANS=[
+  {name:'Solo',for:'Freelancers and self-employed professionals',price:2500,items:['Books of accounts maintenance','Monthly and quarterly BIR filing','Annual income tax return','8% vs graduated rate advice','Email and chat support']},
+  {name:'Negosyo',for:'Small businesses with up to 10 staff',price:6500,feat:true,items:['Everything in Solo','Monthly bookkeeping and reports','Payroll for up to 10 employees','SSS, PhilHealth and Pag-IBIG remittances','Quarterly review call']},
+  {name:'Korporasyon',for:'OPCs and corporations, VAT-registered',price:15000,items:['Everything in Negosyo','VAT and expanded withholding filing','Alphalist and annual information returns','SEC annual report (GIS, AFS filing)','Auditor coordination']}
+];
+const ONCE=[
+  {t:'BIR registration for freelancers',d:'Form 1901, books of accounts, receipts setup',p:4500,from:true},
+  {t:'Business registration (DTI + Mayor\'s permit + BIR)',d:'For sole proprietors, end to end',p:9500,from:true},
+  {t:'SEC incorporation',d:'OPC or corporation, up to BIR registration',p:28000,from:true},
+  {t:'Annual income tax return only',d:'For individuals with complete records',p:3500,from:true},
+  {t:'Catch-up filing for missed returns',d:'Per quarter, after a records review',p:2500,from:true},
+  {t:'Payroll and government agency setup',d:'Employer registration with SSS, PhilHealth, Pag-IBIG',p:6000,from:true},
+  {t:'Business closure / BIR retirement',d:'Including closure audit support',p:15000,from:true},
+  {t:'One-on-one tax consultation',d:'60 minutes, with a written summary',p:2000}
+];
+$('plans').innerHTML=PLANS.map(p=>`<article class="plan rv${p.feat?' feat':''}">
+  ${p.feat?'<span class="ribbon">Most chosen</span>':''}
+  <h3>${p.name}</h3><p class="for">${esc(p.for)}</p>
+  <div class="price num"><small>from</small><b>${peso(p.price)}</b><small>/ month</small></div>
+  <ul>${p.items.map(i=>`<li>${ICON('i-check')}<span>${esc(i)}</span></li>`).join('')}</ul>
+  <a class="btn${p.feat?'':' line'} block" href="#book" data-topic="books">Book a free call</a>
+</article>`).join('');
+$('once').innerHTML=ONCE.map(o=>`<article class="once-item"><div><h3>${esc(o.t)}</h3><p>${esc(o.d)}</p></div><div class="p num">${o.from?'<small>from</small>':''}<b>${peso(o.p)}</b></div></article>`).join('');
+function setTab(once){
+  $('tabMonthly').setAttribute('aria-selected',!once);$('tabOnce').setAttribute('aria-selected',once);
+  $('tabMonthly').tabIndex=once?-1:0;$('tabOnce').tabIndex=once?0:-1;
+  $('panelMonthly').hidden=once;$('panelOnce').hidden=!once;
+}
+$('tabMonthly').addEventListener('click',()=>setTab(false));
+$('tabOnce').addEventListener('click',()=>setTab(true));
+document.querySelector('.tabs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const once=$('tabMonthly').getAttribute('aria-selected')==='true';setTab(once);(once?$('tabOnce'):$('tabMonthly')).focus();}});
+
+/* ---------- Fee estimator (sample formula) ---------- */
+const ENT=[{k:'solo',b:'Freelancer / professional',s:'Self-employed individual',base:2500},{k:'sp',b:'Sole proprietorship',s:'DTI-registered business',base:4500},{k:'corp',b:'Partnership / corporation',s:'SEC-registered',base:9000}];
+const TAX=[{k:'nv',b:'Non-VAT',s:'8% or percentage tax',add:0},{k:'vat',b:'VAT-registered',s:'12% VAT filer',add:2500}];
+const ADD=[{k:'sec',b:'SEC annual reports',s:'GIS and AFS submission',p:1500,corp:true},{k:'aud',b:'Auditor coordination',s:'For audited financial statements',p:2000},{k:'lgu',b:'Permit renewal support',s:'Mayor\'s permit every January',p:800},{k:'rep',b:'Monthly management report',s:'Sales, expenses and cash flow',p:1200}];
+const est={ent:'sp',tax:'nv',add:new Set()};
+function seg(el,items,key,onPick){
+  el.innerHTML=items.map(i=>`<button type="button" class="opt" data-k="${i.k}" aria-pressed="${est[key]===i.k}"><b>${esc(i.b)}</b><small>${esc(i.s)}</small></button>`).join('');
+  el.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;est[key]=b.dataset.k;el.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed',o===b));onPick&&onPick();calc();});
+}
+seg($('segEntity'),ENT,'ent',renderAddons);
+seg($('segTax'),TAX,'tax');
+function renderAddons(){
+  const corp=est.ent==='corp';
+  if(!corp)est.add.delete('sec');
+  $('addons').innerHTML=ADD.filter(a=>!a.corp||corp).map(a=>`<label class="check"><input type="checkbox" value="${a.k}"${est.add.has(a.k)?' checked':''}><span><b>${esc(a.b)} <span class="num">+${peso(a.p)}</span></b><small>${esc(a.s)}</small></span></label>`).join('');
+}
+$('addons').addEventListener('change',e=>{if(e.target.checked)est.add.add(e.target.value);else est.add.delete(e.target.value);calc();});
+['txn','emp'].forEach(id=>$(id).addEventListener('input',calc));
+let lastEstimate='';
+function calc(){
+  const e=ENT.find(x=>x.k===est.ent),t=TAX.find(x=>x.k===est.tax);
+  const txn=+$('txn').value,emp=+$('emp').value;
+  const vol=Math.max(0,txn-50)*15;               // ₱15 per receipt above 50
+  const pay=emp?1500+emp*250:0;                  // payroll base + per head
+  const lines=[[e.b+' base',e.base]];
+  if(t.add)lines.push(['VAT filing',t.add]);
+  if(vol)lines.push([`Volume (${txn-50} receipts above 50)`,vol]);
+  if(pay)lines.push([`Payroll (${emp} ${emp===1?'employee':'employees'})`,pay]);
+  ADD.forEach(a=>{if(est.add.has(a.k))lines.push([a.b,a.p]);});
+  const total=lines.reduce((s,l)=>s+l[1],0);
+  $('txnOut').innerHTML=`${txn}<small>receipts</small>`;
+  $('empOut').innerHTML=`${emp}<small>${emp===1?'employee':'employees'}</small>`;
+  $('estTotal').innerHTML=`${peso(total)}<small>/ month</small>`;
+  const plan=est.ent==='corp'||est.tax==='vat'?'Korporasyon':est.ent==='solo'&&!emp?'Solo':'Negosyo';
+  $('estPlan').innerHTML=`Closest package: <b>${plan}</b>`;
+  $('estLines').innerHTML=lines.map(l=>`<li><span>${esc(l[0])}</span><span>${peso(l[1])}</span></li>`).join('');
+  lastEstimate=`Fee estimate: ${peso(total)}/month (${e.b}, ${t.b}, ${txn} receipts, ${emp} employees)`;
+}
+renderAddons();calc();
+
+/* ---------- Consultation booking (demo, on-device) ---------- */
+const TOPICS=[
+  {k:'reg',b:'Business registration',s:'DTI, SEC, BIR, permits',prep:['Valid government ID','Proposed business name and address','Lease contract or proof of address']},
+  {k:'books',b:'Monthly bookkeeping',s:'Retainer and payroll',prep:['Your BIR Certificate of Registration (Form 2303)','A sample month of sales and expense receipts','Number of employees, if any']},
+  {k:'tax',b:'Tax filing or BIR concern',s:'Missed returns, letters, open cases',prep:['Any BIR letters or notices received','Copies of your last filed returns','Your BIR Certificate of Registration (Form 2303)']},
+  {k:'other',b:'Something else',s:'Payroll, closure, advice',prep:['A short list of your questions','Any documents related to your concern']}
+];
+const MODES=[{k:'video',b:'Video call',s:'Google Meet link by email'},{k:'office',b:'In our office',s:'Sample address in [City]'}];
+const TIMES=['9:00','10:00','11:00','1:00','2:00','3:00','4:00'];
+const bk={topic:null,mode:'video',date:null,time:null};
+const KEY='linaw-demo-consults';
+function loadHist(){try{return JSON.parse(localStorage.getItem(KEY))||[];}catch(e){return [];}}
+function saveHist(h){try{localStorage.setItem(KEY,JSON.stringify(h));}catch(e){}}
+function bseg(el,items,key){
+  el.innerHTML=items.map(i=>`<button type="button" class="opt" data-k="${i.k}" aria-pressed="${bk[key]===i.k}"><b>${esc(i.b)}</b><small>${esc(i.s)}</small></button>`).join('');
+  el.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;bk[key]=b.dataset.k;paintSeg(el,key);step1();});
+}
+function paintSeg(el,key){el.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed',o.dataset.k===bk[key]));}
+bseg($('topics'),TOPICS,'topic');bseg($('modes'),MODES,'mode');
+function step1(){$('to2').disabled=!bk.topic;$('b1Note').textContent=bk.topic?'Free 30-minute call · no commitment':'Choose a topic to continue.';}
+function show(n){
+  ['b1','b2','b3','b4'].forEach((id,i)=>$(id).hidden=i!==n-1);
+  [1,2,3].forEach(i=>{const s=$('st'+i);s.classList.toggle('on',i===n);s.classList.toggle('ok',i<n||n===4);});
+}
+function goTo(n){show(n);const t=$('book');if(t.getBoundingClientRect().top<0)t.scrollIntoView({block:'start'});}
+/* Next 10 weekdays, starting tomorrow */
+function days(){const out=[],d=new Date();d.setHours(0,0,0,0);while(out.length<10){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)out.push(new Date(d));}return out;}
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const pretty=s=>{const d=new Date(s+'T00:00');return `${DOW[d.getDay()]}, ${MON[d.getMonth()]} ${d.getDate()}`;};
+const ampm=t=>t+(+t.split(':')[0]>=9&&+t.split(':')[0]<12?' AM':' PM');
+function taken(date,time){let h=0;for(const c of date+time)h=(h*31+c.charCodeAt(0))>>>0;if(h%4===0)return true;return loadHist().some(b=>b.date===date&&b.time===time);}
+function renderDates(){
+  $('dates').innerHTML=days().map(d=>{const v=iso(d);return `<button type="button" class="chip" data-v="${v}" aria-pressed="${bk.date===v}">${DOW[d.getDay()]}<small>${MON[d.getMonth()]} ${d.getDate()}</small></button>`;}).join('');
+}
+function renderTimes(){
+  if(!bk.date){$('times').innerHTML='<p class="note">Pick a date first.</p>';return;}
+  $('times').innerHTML=TIMES.map(t=>{const x=taken(bk.date,t);return `<button type="button" class="chip" data-v="${t}" aria-pressed="${bk.time===t}"${x?' disabled aria-label="'+ampm(t)+', booked"':''}>${ampm(t)}</button>`;}).join('');
+}
+$('dates').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;bk.date=c.dataset.v;bk.time=null;$('dates').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));renderTimes();$('to3').disabled=true;});
+$('times').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c||c.disabled)return;bk.time=c.dataset.v;$('times').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));$('to3').disabled=false;});
+$('to2').addEventListener('click',()=>{renderDates();renderTimes();goTo(2);});
+$('back1').addEventListener('click',()=>goTo(1));
+$('to3').addEventListener('click',()=>{
+  const t=TOPICS.find(x=>x.k===bk.topic),m=MODES.find(x=>x.k===bk.mode);
+  $('sum').innerHTML=`<div><span>Topic</span><b>${esc(t.b)}</b></div><div><span>Meeting</span><b>${esc(m.b)} · 30 min</b></div><div><span>Schedule</span><b>${pretty(bk.date)} · ${ampm(bk.time)}</b></div><div><span>Fee</span><b>Free (sample policy)</b></div>`;
+  goTo(3);$('bName').focus({preventScroll:true});
+});
+$('back2').addEventListener('click',()=>goTo(2));
+const phoneOk=v=>/^(\+?63|0)9\d{9}$/.test(v.replace(/[\s-]/g,''));
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function check(input,errEl,ok,msg){const bad=!ok;$(errEl).textContent=bad?msg:'';input.setAttribute('aria-invalid',bad);if(bad)input.setAttribute('aria-describedby',errEl);else input.removeAttribute('aria-describedby');return ok;}
+$('bookForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=$('bName'),em=$('bEmail'),ph=$('bPhone');
+  const ok=[check(n,'eName',n.value.trim().length>1,'Please enter your name.'),check(em,'eEmail',emailOk(em.value.trim()),'Please enter a valid email.'),check(ph,'ePhone',phoneOk(ph.value),'Use a PH mobile number, e.g. 0917 123 4567.')];
+  if(ok.includes(false)){[n,em,ph][ok.indexOf(false)].focus();return;}
+  const t=TOPICS.find(x=>x.k===bk.topic),m=MODES.find(x=>x.k===bk.mode);
+  const ref='LNW-'+Math.random().toString(36).slice(2,7).toUpperCase();
+  const h=loadHist();h.unshift({ref,topic:t.b,mode:m.b,date:bk.date,time:bk.time,name:n.value.trim()});saveHist(h.slice(0,8));
+  $('doneRef').textContent='Ref. '+ref;
+  $('doneMsg').innerHTML=`Salamat, ${esc(n.value.trim().split(' ')[0])}! Your <b>${esc(t.b)}</b> consultation is set for <b>${pretty(bk.date)} at ${ampm(bk.time)}</b> via ${esc(m.b.toLowerCase())}.`;
+  $('donePrep').innerHTML=`<h4>Helpful to prepare</h4><ul>${t.prep.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`;
+  goTo(4);renderHist();
+});
+$('again').addEventListener('click',()=>{Object.assign(bk,{topic:null,mode:'video',date:null,time:null});$('bookForm').reset();$('bNotes').value='';paintSeg($('topics'),'topic');paintSeg($('modes'),'mode');step1();goTo(1);});
+function renderHist(){
+  const h=loadHist();$('histEmpty').hidden=h.length>0;
+  $('hist').innerHTML=h.map(b=>`<li><div><b>${esc(b.topic)}</b><span>${pretty(b.date)} · ${ampm(b.time)}<br>${esc(b.mode)} · ${esc(b.ref)}</span></div><button type="button" data-ref="${esc(b.ref)}">Cancel</button></li>`).join('');
+}
+$('hist').addEventListener('click',e=>{const b=e.target.closest('button[data-ref]');if(!b)return;saveHist(loadHist().filter(x=>x.ref!==b.dataset.ref));renderHist();if(!$('b2').hidden)renderTimes();toast('Booking cancelled (demo).');});
+renderHist();
+/* Package and estimator buttons pre-select a topic */
+document.addEventListener('click',e=>{const a=e.target.closest('[data-topic]');if(a){bk.topic=a.dataset.topic;paintSeg($('topics'),'topic');step1();show(1);}});
+$('estBook').addEventListener('click',()=>{bk.topic='books';paintSeg($('topics'),'topic');step1();show(1);$('bNotes').value=lastEstimate;$('book').scrollIntoView({block:'start'});toast('Estimate added to your booking notes.');});
+
+/* ---------- Team (sample profiles, monograms instead of stock faces) ---------- */
+const TEAM=[
+  {i:'MR',n:'Maria Reyes',r:'Managing Partner',d:'Leads client engagements and tax planning for corporations.'},
+  {i:'JD',n:'Jose Dela Cruz',r:'Tax Lead',d:'Handles BIR filings, letters and catch-up plans.'},
+  {i:'AS',n:'Ana Santos',r:'Bookkeeping Lead',d:'Keeps monthly books and reports on schedule.'},
+  {i:'PG',n:'Paolo Garcia',r:'Registration & Payroll',d:'Business registration, permits and payroll setup.'}
+];
+$('teamGrid').innerHTML=TEAM.map(p=>`<article class="person rv"><div class="mono" aria-hidden="true"><span class="tag">Sample</span>${p.i}</div><div class="body"><span class="role">${esc(p.r)}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p></div></article>`).join('');
+
+/* ---------- Inquiry form (demo) ---------- */
+const SVCS=['Bookkeeping','Tax filing','Business registration','Payroll','SEC compliance','Catch-up filing','Business closure'];
+$('iSvcs').innerHTML=SVCS.map(s=>`<label class="pill"><input type="checkbox" value="${esc(s)}">${esc(s)}</label>`).join('');
+$('iFiles').addEventListener('change',e=>{
+  const f=[...e.target.files];$('iFileList').hidden=!f.length;
+  $('iFileList').innerHTML=f.length?`Selected (not uploaded in this demo):<ul>${f.map(x=>`<li>${esc(x.name)} · ${Math.max(1,Math.round(x.size/1024))} KB</li>`).join('')}</ul>`:'';
+});
+$('inqForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=$('iName'),em=$('iEmail'),ph=$('iPhone'),msg=$('iMsg');
+  const picked=[...$('iSvcs').querySelectorAll('input:checked')].map(x=>x.value);
+  $('eiSvcs').textContent=picked.length?'':'Pick at least one service.';
+  const ok=[check(n,'eiName',n.value.trim().length>1,'Please enter your name.'),check(em,'eiEmail',emailOk(em.value.trim()),'Please enter a valid email.'),check(ph,'eiPhone',!ph.value.trim()||phoneOk(ph.value),'Use a PH mobile number, e.g. 0917 123 4567.'),check(msg,'eiMsg',msg.value.trim().length>4,'Please add a short message.')];
+  if(ok.includes(false)||!picked.length){const f=[n,em,ph,msg][ok.indexOf(false)];(f||$('iSvcs').querySelector('input')).focus();return;}
+  $('inqMsg').innerHTML=`Thanks, ${esc(n.value.trim().split(' ')[0])}. We'll reply to <b>${esc(em.value.trim())}</b> within one business day about <b>${esc(picked.join(', '))}</b>.`;
+  $('inqForm').hidden=true;$('inqDone').hidden=false;
+});
+$('inqAgain').addEventListener('click',()=>{$('inqForm').reset();$('iFileList').hidden=true;$('inqDone').hidden=true;$('inqForm').hidden=false;});
+
+watch(document);
+</script>
+</body>
+</html>
