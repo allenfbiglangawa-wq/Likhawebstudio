@@ -1,0 +1,317 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Admin Dashboard · Lakas Fitness (Demo)</title>
+<meta name="description" content="Demo gym management dashboard for Lakas Fitness: members, QR attendance, class bookings, trainer schedules and sales reports. Simulated data only.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,800..900&display=swap">
+<link rel="stylesheet" href="../lakas.css">
+<style>
+/* Layout: staff login with role choice, then app shell: overview KPIs + charts, members table, QR check-in desk, classes/trainers, reports with filters + CSV export. */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid line{stroke:#2A2A2F;stroke-width:1}
+.chart .ax{fill:#71717A;font-size:11px;font-family:var(--body)}
+.chart .bar{fill:var(--red);transition:opacity .15s}
+.chart .bar.dim{fill:#5B1A20}
+.chart .hit{fill:transparent;cursor:crosshair}
+.chart .line{fill:none;stroke:#fff;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .area{fill:url(#ag)}
+.chart .xh{stroke:#71717A;stroke-width:1;stroke-dasharray:3 3}
+.chart .dot{fill:#fff;stroke:var(--card);stroke-width:2}
+.tip{position:absolute;pointer-events:none;background:#fff;color:#0A0A0B;border-radius:6px;padding:6px 10px;font-size:12.5px;white-space:nowrap;transform:translate(-50%,-100%);margin-top:-10px;box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:3}
+.tip b{display:block;font-size:14px}
+.hbar{display:grid;grid-template-columns:130px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13.5px;padding:6px 0}
+.hbar .tr{height:10px;background:var(--bg);border-radius:4px;overflow:hidden}
+.hbar .tr i{display:block;height:100%;background:var(--red);border-radius:0 4px 4px 0}
+.hbar b{text-align:right;font-variant-numeric:tabular-nums}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools input,.tools select{font:14px var(--body);color:#fff;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-height:40px}
+.tools input{flex:1;min-width:180px}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;font-size:13.5px;color:var(--muted)}
+.scan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px}
+.scanbox{aspect-ratio:1/1;max-width:320px;width:100%;margin:0 auto;border-radius:14px;background:#000;position:relative;overflow:hidden;display:grid;place-items:center}
+.scanbox::before,.scanbox::after{content:"";position:absolute;inset:18%;border:3px solid rgba(255,255,255,.85);border-radius:12px;clip-path:polygon(0 0,25% 0,25% 4%,4% 4%,4% 25%,0 25%,0 75%,4% 75%,4% 96%,25% 96%,25% 100%,75% 100%,75% 96%,96% 96%,96% 75%,100% 75%,100% 25%,96% 25%,96% 4%,75% 4%,75% 0,100% 0,100% 100%,0 100%)}
+.scanbox::after{border:0;inset:auto 18%;top:50%;height:2px;background:var(--red);box-shadow:0 0 12px var(--red);animation:sl 2.2s ease-in-out infinite;clip-path:none}
+@keyframes sl{0%,100%{transform:translateY(-70px)}50%{transform:translateY(70px)}}
+.scanbox svg{width:42%;opacity:.25}
+.res{border-radius:12px;padding:16px;display:flex;gap:14px;align-items:center;margin-top:14px}
+.res.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4)}
+.res.bad{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4)}
+.res .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:800;flex-shrink:0}
+.res.ok .ic{background:#22C55E;color:#000}.res.bad .ic{background:#EF4444;color:#fff}
+.lock{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:48px 16px;color:var(--muted)}
+.lock b{color:#fff;font-size:18px}
+.role{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.role label{border:1.5px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.role label b{display:block;color:#fff;font-size:15px}
+.role label:has(input:checked){border-color:var(--red);background:var(--red-soft)}
+.role input{accent-color:var(--red);margin-top:3px}
+.sched-t td:first-child{white-space:nowrap;font-weight:700}
+.wk{display:grid;grid-template-columns:110px repeat(7,minmax(0,1fr));gap:4px;font-size:12px;min-width:640px}
+.wk div{padding:7px 6px;border-radius:6px;background:var(--bg);min-height:34px}
+.wk .h{background:transparent;color:var(--dim);font-weight:700;text-align:center;min-height:0}
+.wk .n{background:transparent;font-weight:700;font-size:13px;display:flex;align-items:center}
+.wk .on{background:var(--red-soft);color:#FCA5A5;font-weight:600}
+@media (max-width:900px){.scan{grid-template-columns:1fr}.hbar{grid-template-columns:100px minmax(0,1fr) 56px}}
+</style>
+</head><body>
+
+<div class="demobar">Demo gym management system by <a href="../../../">Likha Web Studio</a>. All figures are simulated sample data, not real business information.</div>
+
+<div class="login" id="loginView">
+  <div class="art"><div class="ph"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1400&q=70" alt="" onerror="this.remove()"></div>
+    <div class="cap"><a class="logo" href="../" style="align-items:flex-start"><b>Lak<span>a</span>s</b><small>Fitness</small></a><h1 class="h2" style="margin-top:18px">Run your gym<br><em>from one dashboard.</em></h1></div></div>
+  <form id="loginForm" novalidate>
+    <div><h2 style="margin:0;font-size:26px">Staff login</h2><p style="margin:6px 0 0;color:var(--muted)">Members, attendance, classes and sales.</p></div>
+    <div class="notice">Demo account: <b>staff@lakas.demo</b> / <b>lakas-admin</b> (already filled in). Pick a role to see role-based access.</div>
+    <div class="field"><label for="lemail">Email</label><input id="lemail" type="email" autocomplete="username" value="staff@lakas.demo"></div>
+    <div class="field"><label for="lpass">Password</label><input id="lpass" type="password" autocomplete="current-password" value="lakas-admin"></div>
+    <div class="role" role="radiogroup" aria-label="Role">
+      <label><input type="radio" name="role" value="owner" checked><span><b>Owner</b>Full access, including sales</span></label>
+      <label><input type="radio" name="role" value="desk"><span><b>Front desk</b>Members and check-in only</span></label>
+    </div>
+    <div class="notice" id="lerr" hidden role="alert" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);color:#FCA5A5"></div>
+    <button class="btn" type="submit" id="lbtn">Log in <span class="arr" aria-hidden="true">→</span></button>
+    <p style="margin:0;font-size:13px;color:var(--dim)">On a live system, the server verifies the login, enforces each role on every request, and protects member records. This demo only simulates it in your browser.</p>
+    <a href="../" style="font-size:14px;color:var(--muted)">← Back to the Lakas Fitness website</a>
+  </form>
+</div>
+
+<div class="app" id="appView" hidden>
+  <aside class="side" id="side">
+    <a class="logo" href="../"><b>Lak<span>a</span>s</b><small>Fitness</small></a>
+    <nav aria-label="Admin" id="snav">
+      <button type="button" data-v="overview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="12" width="7" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="16" width="7" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Overview</button>
+      <button type="button" data-v="members"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>Members</button>
+      <button type="button" data-v="checkin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM18 18h3v3h-3z" fill="none" stroke="currentColor" stroke-width="2"/></svg>QR check-in</button>
+      <button type="button" data-v="classes"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/></svg>Classes &amp; trainers</button>
+      <button type="button" data-v="reports" data-owner><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2"/></svg>Sales &amp; reports</button>
+    </nav>
+    <div class="foot"><span class="badge-demo" id="roleBadge">Owner · demo</span><button class="btn dark sm" type="button" id="logout">Log out</button><a href="../">← Back to website</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div style="display:flex;gap:12px;align-items:center"><button class="x mtoggle" type="button" id="mt" aria-label="Open menu">☰</button><div><h1 id="vt">Overview</h1><p id="vs"></p></div></div>
+      <span class="badge-demo">Simulated data</span>
+    </div>
+
+    <!-- overview -->
+    <div class="view" id="v-overview" style="display:flex;flex-direction:column;gap:16px">
+      <div class="kpis" id="kpis"></div>
+      <div class="grid2">
+        <div class="panel"><h2>Revenue, last 12 months <span style="font-size:13px;color:var(--muted);font-weight:500" id="revTotal"></span></h2><div class="chart" id="revChart"></div></div>
+        <div class="panel"><h2>Daily attendance, last 30 days</h2><div class="chart" id="attChart"></div></div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><h2>Recent payments <button class="tlink" type="button" data-v="reports" data-owner style="font-size:13px;color:var(--muted)">All sales →</button></h2><div class="tscroll"><table><thead><tr><th>Date</th><th>Member</th><th>Plan</th><th>Type</th><th style="text-align:right">Amount</th></tr></thead><tbody id="recent"></tbody></table></div></div>
+        <div class="panel"><h2>Expiring in 7 days <button class="tlink" type="button" data-v="members" data-filter="Expiring" style="font-size:13px;color:var(--muted)">View all →</button></h2><div class="tscroll"><table><thead><tr><th>Member</th><th>Plan</th><th>Expires</th><th></th></tr></thead><tbody id="expiring"></tbody></table></div></div>
+      </div>
+    </div>
+
+    <!-- members -->
+    <div class="view" id="v-members" hidden>
+      <div class="panel">
+        <div class="tools">
+          <input type="search" id="q" placeholder="Search name or member ID" aria-label="Search members">
+          <select id="fStatus" aria-label="Status"><option value="">All statuses</option><option>Active</option><option>Expiring</option><option>Expired</option></select>
+          <select id="fPlan" aria-label="Plan"><option value="">All plans</option><option>Monthly</option><option>Quarterly</option><option>Annual</option><option>Personal Training</option></select>
+          <button class="btn sm" type="button" id="addMember">+ Add member</button>
+        </div>
+        <div class="tscroll"><table><thead><tr><th>Member</th><th>ID</th><th>Plan</th><th>Start</th><th>Expires</th><th>Status</th><th>Contact</th><th></th></tr></thead><tbody id="mtable"></tbody></table></div>
+        <div class="pager"><span id="mcount"></span><span style="display:flex;gap:8px"><button class="btn dark sm" type="button" id="prev">Previous</button><button class="btn dark sm" type="button" id="next">Next</button></span></div>
+      </div>
+    </div>
+
+    <!-- check-in -->
+    <div class="view" id="v-checkin" hidden>
+      <div class="scan">
+        <div class="panel">
+          <h2>Scan member pass</h2>
+          <div class="scanbox" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z" fill="none" stroke="#fff" stroke-width="1.5"/></svg></div>
+          <p style="color:var(--muted);font-size:13.5px;text-align:center;margin:12px 0">Demo: no camera is used. Simulate a scan, or type a member ID.</p>
+          <form class="tools" id="manual" style="margin:0"><input id="mid" placeholder="Member ID, e.g. LF-1004" aria-label="Member ID"><button class="btn sm" type="submit">Check</button></form>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn dark sm" type="button" id="simOk">Simulate valid pass</button><button class="btn dark sm" type="button" id="simBad">Simulate expired pass</button></div>
+          <div id="scanRes" aria-live="polite"></div>
+          <p style="font-size:12.5px;color:var(--dim);margin:14px 0 0">A live system encodes a signed, short-lived token in each QR pass and validates it on the server, so member IDs alone can't be used to check in.</p>
+        </div>
+        <div class="panel"><h2>Today's check-ins <span style="font-size:13px;color:var(--muted);font-weight:500" id="inNow"></span></h2><div class="tscroll"><table><thead><tr><th>Member</th><th>Plan</th><th>Time in</th><th>Time out</th><th></th></tr></thead><tbody id="tlog"></tbody></table></div></div>
+      </div>
+    </div>
+
+    <!-- classes -->
+    <div class="view" id="v-classes" hidden style="flex-direction:column;gap:16px">
+      <div class="panel"><h2>Today's classes</h2><div class="tscroll"><table class="sched-t"><thead><tr><th>Time</th><th>Class</th><th>Trainer</th><th>Booked</th><th>Status</th></tr></thead><tbody id="ctoday"></tbody></table></div></div>
+      <div class="panel"><h2>Trainer schedule this week</h2><div class="tscroll"><div class="wk" id="wk"></div></div></div>
+    </div>
+
+    <!-- reports -->
+    <div class="view" id="v-reports" hidden style="flex-direction:column;gap:16px">
+      <div class="lock" id="lockMsg" hidden><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg><b>Owner access only</b>Front desk accounts can't view revenue. Log out and choose Owner to see this page.</div>
+      <div id="repBody" style="display:flex;flex-direction:column;gap:16px">
+        <div class="tools" style="margin:0"><div class="chips" role="group" aria-label="Date range" id="range"></div><span style="flex:1"></span><button class="btn dark sm" type="button" id="csv">Export CSV</button></div>
+        <div class="kpis" id="rk"></div>
+        <div class="grid2">
+          <div class="panel"><h2 id="rch">Revenue</h2><div class="chart" id="repChart"></div></div>
+          <div class="panel"><h2>Most popular plans</h2><div id="pop"></div></div>
+        </div>
+        <div class="panel"><h2>Sales records <span style="font-size:13px;color:var(--muted);font-weight:500" id="scount"></span></h2><div class="tscroll"><table><thead><tr><th>Date</th><th>Member</th><th>Plan</th><th>Type</th><th>Method</th><th style="text-align:right">Amount</th></tr></thead><tbody id="stable"></tbody></table></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<dialog id="adlg" aria-labelledby="adlgH"><div class="mhead"><h3 id="adlgH">Add member</h3><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <form class="mbody" id="aform" novalidate>
+    <div class="field"><label for="aname">Full name</label><input id="aname" required minlength="3"></div>
+    <div class="field"><label for="aplan">Plan</label><select id="aplan"><option>Monthly</option><option>Quarterly</option><option>Annual</option><option>Personal Training</option></select></div>
+    <div class="field"><label for="aphone">Contact number</label><input id="aphone" type="tel" required pattern="^(\+?63|0)9[0-9 -]{9,12}$" placeholder="0917 123 4567"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn dark" type="button" data-close>Cancel</button><button class="btn" type="submit">Add member</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="../lakas-data.js"></script>
+<script>
+const $=id=>document.getElementById(id);const L=LAKAS;
+const TITLES={overview:['Overview','Today at a glance'],members:['Members','Search, filter and manage memberships'],checkin:['QR check-in','Front desk time-in and time-out'],classes:['Classes & trainers','Bookings and coach schedules'],reports:['Sales & reports','Revenue, renewals and plan performance']};
+let role='owner';
+function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').hidden=true,2600);}
+const SKEY='lakas-demo-staff';
+const sess=()=>{try{return sessionStorage.getItem(SKEY)}catch(e){return null}};
+$('loginForm').addEventListener('submit',e=>{e.preventDefault();$('lerr').hidden=true;
+  if($('lemail').value.trim().toLowerCase()!=='staff@lakas.demo'||$('lpass').value!=='lakas-admin'){$('lerr').textContent='That email and password don’t match the demo account. Use the details shown above.';$('lerr').hidden=false;return;}
+  const b=$('lbtn');b.disabled=true;b.innerHTML='<span class="spin" aria-hidden="true"></span> Logging in…';
+  setTimeout(()=>{const r=document.querySelector('input[name=role]:checked').value;try{sessionStorage.setItem(SKEY,r)}catch(e){}start(r);b.disabled=false;b.innerHTML='Log in <span class="arr" aria-hidden="true">→</span>';},700);});
+$('logout').onclick=()=>{try{sessionStorage.removeItem(SKEY)}catch(e){}$('appView').hidden=true;$('loginView').hidden=false;};
+$('mt').onclick=()=>$('side').classList.toggle('open');
+
+function show(v){if(!(v in TITLES))v='overview';
+  document.querySelectorAll('.view').forEach(x=>x.hidden=x.id!=='v-'+v);
+  document.querySelectorAll('#snav button').forEach(b=>b.dataset.v===v?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  $('vt').textContent=TITLES[v][0];$('vs').textContent=v==='overview'?L.fmt(L.NOW,{weekday:'long',month:'long',day:'numeric',year:'numeric'}):TITLES[v][1];
+  if(v==='reports'){$('lockMsg').hidden=role==='owner';$('repBody').hidden=role!=='owner';}
+  $('side').classList.remove('open');if(location.hash.slice(1)!==v)history.replaceState(null,'','#'+v);}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.v){if(b.dataset.filter){$('fStatus').value=b.dataset.filter;page=0;renderMembers();}show(b.dataset.v);}
+  if(b.hasAttribute('data-close'))b.closest('dialog').close();
+  if(b.dataset.remind)toast(`Renewal reminder queued for ${b.dataset.remind} (demo, nothing sent).`);
+  if(b.dataset.out){const r=today.find(x=>x.id===b.dataset.out&&!x.out);if(r){r.out=L.nowT();renderLog();toast(`${r.name} timed out.`);}}
+  if(b.dataset.range){range=b.dataset.range;renderReports();}});
+addEventListener('hashchange',()=>show(location.hash.slice(1)));
+
+/* ---------- charts (single series, hover tooltips) ---------- */
+function niceMax(v){const p=Math.pow(10,Math.floor(Math.log10(v)));return Math.ceil(v/p/ (v/p>5?2:1))*p*(v/p>5?2:1);}
+function barChart(el,data,fmtV,fmtL){const W=640,H=240,pl=48,pr=8,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;const max=niceMax(Math.max(...data.map(d=>d.v))||1);
+  const bw=iw/data.length,gap=Math.max(2,bw*.28);let g='';
+  for(let i=0;i<=4;i++){const y=pt+ih-ih*i/4;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}"/><text class="ax" x="${pl-8}" y="${y+4}" text-anchor="end">${fmtL(max*i/4)}</text>`;}
+  const step=Math.ceil(data.length/12);
+  const bars=data.map((d,i)=>{const h=Math.max(1,ih*d.v/max),x=pl+i*bw+gap/2,y=pt+ih-h,w=bw-gap,r=Math.min(4,w/2);
+    return `<path class="bar ${d.dim?'dim':''}" d="M${x},${pt+ih}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${pt+ih}Z"/>${i%step===0?`<text class="ax" x="${x+w/2}" y="${H-8}" text-anchor="middle">${d.l}</text>`:''}<rect class="hit" x="${pl+i*bw}" y="${pt}" width="${bw}" height="${ih}" data-i="${i}"/>`;}).join('');
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bar chart"><g class="grid">${g}</g>${bars}</svg><div class="tip" hidden></div>`;
+  const tip=el.querySelector('.tip'),svg=el.querySelector('svg');
+  svg.addEventListener('pointermove',e=>{const h=e.target.closest('.hit');if(!h){tip.hidden=true;return;}const i=+h.dataset.i,d=data[i];const r=svg.getBoundingClientRect(),s=r.width/W;
+    tip.innerHTML=`<b>${fmtV(d.v)}</b>${d.full||d.l}`;tip.style.left=(pl+i*bw+bw/2)*s+'px';tip.style.top=(pt+ih-ih*d.v/max)*s+'px';tip.hidden=false;
+    svg.querySelectorAll('.bar').forEach((b,k)=>b.style.opacity=k===i?1:.45);});
+  svg.addEventListener('pointerleave',()=>{tip.hidden=true;svg.querySelectorAll('.bar').forEach(b=>b.style.opacity=1);});}
+function lineChart(el,data){const W=460,H=250,pl=34,pr=10,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;const max=niceMax(Math.max(...data.map(d=>d.v)));
+  const X=i=>pl+iw*i/(data.length-1),Y=v=>pt+ih-ih*v/max;let g='';
+  for(let i=0;i<=4;i++){const y=pt+ih-ih*i/4;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}"/><text class="ax" x="${pl-8}" y="${y+4}" text-anchor="end">${Math.round(max*i/4)}</text>`;}
+  const pts=data.map((d,i)=>`${X(i)},${Y(d.v)}`).join(' ');
+  const lbl=data.map((d,i)=>i%7===0?`<text class="ax" x="${X(i)}" y="${H-8}" text-anchor="middle">${d.l}</text>`:'').join('');
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Line chart of daily attendance"><defs><linearGradient id="ag" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><g class="grid">${g}</g><polygon class="area" points="${pl},${pt+ih} ${pts} ${X(data.length-1)},${pt+ih}"/><polyline class="line" points="${pts}"/>${lbl}<line class="xh" y1="${pt}" y2="${pt+ih}" hidden/><circle class="dot" r="5" hidden/><rect class="hit" x="${pl}" y="${pt}" width="${iw}" height="${ih}"/></svg><div class="tip" hidden></div>`;
+  const svg=el.querySelector('svg'),tip=el.querySelector('.tip'),xh=svg.querySelector('.xh'),dot=svg.querySelector('.dot');
+  svg.addEventListener('pointermove',e=>{const r=svg.getBoundingClientRect(),s=r.width/W;const x=(e.clientX-r.left)/s;const i=Math.max(0,Math.min(data.length-1,Math.round((x-pl)/iw*(data.length-1))));const d=data[i];
+    xh.setAttribute('x1',X(i));xh.setAttribute('x2',X(i));xh.hidden=false;dot.setAttribute('cx',X(i));dot.setAttribute('cy',Y(d.v));dot.hidden=false;
+    tip.innerHTML=`<b>${d.v} check-ins</b>${d.full}`;tip.style.left=X(i)*s+'px';tip.style.top=Y(d.v)*s+'px';tip.hidden=false;});
+  svg.addEventListener('pointerleave',()=>{tip.hidden=xh.hidden=dot.hidden=true;});}
+const kfmt=v=>v>=1e6?'₱'+(v/1e6).toFixed(1)+'M':v>=1e3?'₱'+Math.round(v/1e3)+'k':'₱'+v;
+
+/* ---------- overview ---------- */
+const monthKey=t=>{const d=new Date(t);return d.getFullYear()*12+d.getMonth();};
+const nowKey=monthKey(L.NOW);
+function monthly(n){const out=[];for(let k=nowKey-n+1;k<=nowKey;k++){const y=Math.floor(k/12),m=k%12;const v=L.sales.filter(s=>monthKey(s.t)===k).reduce((a,s)=>a+s.amount,0);
+  out.push({v,l:L.fmt(new Date(y,m,1),{month:'short'}),full:L.fmt(new Date(y,m,1),{month:'long',year:'numeric'})+(k===nowKey?' (month to date)':''),dim:k===nowKey});}return out;}
+function renderOverview(){const M=L.members;const active=M.filter(m=>m.status!=='Expired').length,exp=M.filter(m=>m.status==='Expiring');
+  const newM=L.sales.filter(s=>monthKey(s.t)===nowKey&&s.type==='New').length;
+  const mtd=L.sales.filter(s=>monthKey(s.t)===nowKey).reduce((a,s)=>a+s.amount,0);
+  const last=L.sales.filter(s=>monthKey(s.t)===nowKey-1&&new Date(s.t).getDate()<=L.NOW.getDate()).reduce((a,s)=>a+s.amount,0);
+  const att=L.attendance[L.attendance.length-1].count,attY=L.attendance[L.attendance.length-8].count;
+  const pct=(a,b)=>b?Math.round((a-b)/b*100):0;
+  const K=[['Registered members',M.length,'all time',''],['Active memberships',active,`${Math.round(active/M.length*100)}% of members`,''],['Expiring in 7 days',exp.length,'send reminders','down'],
+    ['New this month',newM,'registrations',''],["Check-ins today",att,`so far · ${today.filter(r=>!r.out).length} in the gym now`,''],
+    ['Revenue this month',L.peso(mtd),`${pct(mtd,last)>=0?'▲':'▼'} ${Math.abs(pct(mtd,last))}% vs last month to date`,pct(mtd,last)>=0?'up':'down',1]];
+  $('kpis').innerHTML=K.map(([a,b,c,d,o])=>`<div class="kpi" ${o?'data-owner-only':''}><span>${a}</span><b>${b}</b><small class="${d}">${c}</small></div>`).join('');
+  const mdata=monthly(12);$('revTotal').textContent='12-mo total '+L.peso(mdata.reduce((a,d)=>a+d.v,0));
+  barChart($('revChart'),mdata,L.peso,kfmt);
+  lineChart($('attChart'),L.attendance.slice(-30).map(d=>({v:d.count,l:L.fmt(d.t,{month:'short',day:'numeric'}),full:L.fmt(d.t,{weekday:'short',month:'short',day:'numeric'})})));
+  $('recent').innerHTML=L.sales.slice(-6).reverse().map(s=>`<tr><td>${L.fmt(s.t,{month:'short',day:'numeric'})}</td><td>${s.member}</td><td>${s.plan}</td><td>${s.type}</td><td style="text-align:right">${L.peso(s.amount)}</td></tr>`).join('');
+  $('expiring').innerHTML=exp.length?exp.slice().sort((a,b)=>a.left-b.left).slice(0,6).map(m=>`<tr><td>${m.name}</td><td>${m.plan}</td><td>${m.left<=0?'Today':`in ${m.left} day${m.left>1?'s':''}`}</td><td><button class="btn dark sm" type="button" data-remind="${m.first}">Remind</button></td></tr>`).join(''):'<tr><td colspan="4" class="empty">No memberships expiring this week.</td></tr>';
+  applyRole();}
+
+/* ---------- members ---------- */
+let page=0;const PER=12;
+const st=s=>`<span class="st ${s==='Active'?'ok':s==='Expiring'?'warn':'bad'}">${s}</span>`;
+function renderMembers(){const q=$('q').value.trim().toLowerCase(),fs=$('fStatus').value,fp=$('fPlan').value;
+  const list=L.members.filter(m=>(!q||m.name.toLowerCase().includes(q)||m.id.toLowerCase().includes(q))&&(!fs||m.status===fs)&&(!fp||m.plan===fp));
+  const pages=Math.max(1,Math.ceil(list.length/PER));page=Math.min(page,pages-1);
+  $('mtable').innerHTML=list.length?list.slice(page*PER,page*PER+PER).map(m=>`<tr><td><b>${m.name}</b></td><td>${m.id}</td><td>${m.plan}</td><td>${L.fmt(m.start,{month:'short',day:'numeric'})}</td><td>${L.fmt(m.exp,{month:'short',day:'numeric',year:'numeric'})}</td><td>${st(m.status)}</td><td>${m.phone}</td><td>${m.status!=='Active'?`<button class="btn dark sm" type="button" data-remind="${m.first}">Remind</button>`:''}</td></tr>`).join('')
+    :`<tr><td colspan="8" class="empty">No members match your search. Try a different name, ID or filter.</td></tr>`;
+  $('mcount').textContent=list.length?`Showing ${page*PER+1}–${Math.min(list.length,page*PER+PER)} of ${list.length} members`:'0 members';
+  $('prev').disabled=page===0;$('next').disabled=page>=pages-1;}
+['q','fStatus','fPlan'].forEach(id=>$(id).addEventListener('input',()=>{page=0;renderMembers();}));
+$('prev').onclick=()=>{page--;renderMembers();};$('next').onclick=()=>{page++;renderMembers();};
+$('addMember').onclick=()=>{$('aform').reset();$('adlg').showModal();};
+$('aform').addEventListener('submit',e=>{e.preventDefault();if(!$('aname').checkValidity()||!$('aphone').checkValidity()){toast('Please enter a name and a valid PH mobile number.');return;}
+  const p=L.PLANS.find(x=>x.n===$('aplan').value);const s=new Date(L.NOW),x=new Date(+s+p.days*L.DAY);const n=$('aname').value.trim();
+  L.members.unshift({id:'LF-'+(1000+L.members.length),name:n,first:n.split(' ')[0],plan:p.n,start:L.iso(s),exp:L.iso(x),left:p.days,status:'Active',phone:$('aphone').value.replace(/^(\d{4}).*(\d{4})$/,'$1 XXX $2'),joined:L.iso(s)});
+  $('adlg').close();page=0;$('q').value='';$('fStatus').value='';$('fPlan').value='';renderMembers();renderOverview();toast(`${n} added (demo only, not saved).`);});
+
+/* ---------- check-in ---------- */
+const today=L.today;
+function renderLog(){$('tlog').innerHTML=today.map(r=>`<tr><td><b>${r.name}</b><br><span style="color:var(--dim);font-size:12.5px">${r.id}</span></td><td>${r.plan}</td><td>${L.time(r.in)}</td><td>${r.out?L.time(r.out):'<span class="st info">In gym</span>'}</td><td>${r.out?'':`<button class="btn dark sm" type="button" data-out="${r.id}">Time out</button>`}</td></tr>`).join('');
+  $('inNow').textContent=`${today.filter(r=>!r.out).length} in the gym now · ${today.length} today`;}
+function scan(m){const box=$('scanRes');
+  if(!m){box.innerHTML=`<div class="res bad"><span class="ic">!</span><div><b>Pass not recognized</b><br><span style="color:var(--muted)">Ask the member to refresh their pass in the app.</span></div></div>`;return;}
+  if(m.status==='Expired'){box.innerHTML=`<div class="res bad"><span class="ic">×</span><div><b>${m.name} · membership expired</b><br><span style="color:var(--muted)">Expired ${L.fmt(m.exp,{month:'short',day:'numeric'})}. Offer a renewal or a Day Pass.</span></div></div>`;return;}
+  const open=today.find(r=>r.id===m.id&&!r.out);
+  if(open){open.out=L.nowT();box.innerHTML=`<div class="res ok"><span class="ic">✓</span><div><b>${m.name} · timed out</b><br><span style="color:var(--muted)">${Math.round((open.out-open.in)/6e4)} min session.</span></div></div>`;}
+  else{today.unshift({id:m.id,name:m.name,plan:m.plan,in:L.nowT(),out:null});box.innerHTML=`<div class="res ok"><span class="ic">✓</span><div><b>Welcome, ${m.first}!</b><br><span style="color:var(--muted)">${m.plan} · ${m.status==='Expiring'?`expires in ${m.left} days, remind to renew`:'active'} · timed in ${L.time(L.nowT())}</span></div></div>`;}
+  renderLog();}
+$('simOk').onclick=()=>{const a=L.members.filter(m=>m.status!=='Expired');scan(a[Math.floor(Math.random()*a.length)]);};
+$('simBad').onclick=()=>scan(L.members.find(m=>m.status==='Expired'));
+$('manual').addEventListener('submit',e=>{e.preventDefault();const v=$('mid').value.trim().toUpperCase();if(!v){$('mid').focus();return;}scan(L.members.find(m=>m.id===v));$('mid').value='';});
+
+/* ---------- classes ---------- */
+const CL=[['6:00 AM','HIIT Burn','Jen A.',20],['7:00 AM','Beginner Fitness','Tin N.',14],['12:15 PM','Express Circuit','Jen A.',20],['5:30 PM','Strength Foundations','Mark V.',12],['6:30 PM','Boxing Fitness','Rey B.',16],['7:30 PM','Functional Strength','Tin N.',14]];
+function renderClasses(){const h=L.NOW.getHours()+L.NOW.getMinutes()/60;const toH=t=>{const[a,b]=t.split(/[: ]/);let H=+a%12;if(t.endsWith('PM'))H+=12;return H+ +b/60;};
+  $('ctoday').innerHTML=CL.map(([t,n,c,cap],i)=>{const b=Math.min(cap,Math.round(cap*.45)+(i*5+L.NOW.getDate())%8);const done=toH(t)+1<=h,live=!done&&toH(t)<=h;
+    return `<tr><td>${t}</td><td>${n}</td><td>${c}</td><td>${b} / ${cap}</td><td>${done?'<span class="st info">Done</span>':live?'<span class="st ok">In session</span>':b>=cap-2?'<span class="st warn">Almost full</span>':'<span class="st ok">Open</span>'}</td></tr>`;}).join('');
+  const T={'Mark V.':[1,0,1,0,1,1,0],'Jen A.':[1,1,1,1,1,1,0],'Rey B.':[1,1,1,1,1,0,0],'Tin N.':[1,1,0,1,1,1,1]};const H={'Mark V.':'5–9 PM','Jen A.':'6 AM–1 PM','Rey B.':'4–9 PM','Tin N.':'7 AM–3 PM'};
+  const days=[...Array(7)].map((_,i)=>{const d=new Date(L.NOW);d.setDate(d.getDate()-((d.getDay()+6)%7)+i);return d;});
+  $('wk').innerHTML='<div class="h"></div>'+days.map(d=>`<div class="h">${L.fmt(d,{weekday:'short'})}<br>${d.getDate()}</div>`).join('')+Object.entries(T).map(([n,a])=>`<div class="n">${n}</div>`+a.map(x=>`<div class="${x?'on':''}">${x?H[n]:''}</div>`).join('')).join('');}
+
+/* ---------- reports ---------- */
+const RANGES={today:'Today','7d':'Last 7 days',month:'This month','3m':'Last 3 months',year:'This year'};let range='month';
+function inRange(s){const n=L.NOW,t=s.t;if(range==='today')return s.date===L.iso(n);if(range==='7d')return t>+n-7*L.DAY;if(range==='month')return monthKey(t)===nowKey;if(range==='3m')return monthKey(t)>nowKey-3;return new Date(t).getFullYear()===n.getFullYear();}
+function renderReports(){$('range').innerHTML=Object.entries(RANGES).map(([k,v])=>`<button class="chip" type="button" data-range="${k}" aria-pressed="${k===range}">${v}</button>`).join('');
+  const S=L.sales.filter(inRange);const tot=S.reduce((a,s)=>a+s.amount,0),ren=S.filter(s=>s.type==='Renewal'),nw=S.filter(s=>s.type==='New');
+  $('rk').innerHTML=[['Revenue',L.peso(tot),RANGES[range]],['Transactions',S.length,'payments recorded'],['New memberships',nw.length,L.peso(nw.reduce((a,s)=>a+s.amount,0))],['Renewals',ren.length,L.peso(ren.reduce((a,s)=>a+s.amount,0))]].map(([a,b,c])=>`<div class="kpi"><span>${a}</span><b>${b}</b><small>${c}</small></div>`).join('');
+  let data;if(range==='year'){data=monthly(L.NOW.getMonth()+1);$('rch').textContent='Monthly revenue';}
+  else if(range==='3m'){data=monthly(3);$('rch').textContent='Monthly revenue';}
+  else{const n=range==='today'?1:range==='7d'?7:L.NOW.getDate();data=[...Array(n)].map((_,i)=>{const d=new Date(+L.NOW-(n-1-i)*L.DAY);const k=L.iso(d);return {v:L.sales.filter(s=>s.date===k).reduce((a,s)=>a+s.amount,0),l:L.fmt(d,{day:'numeric'}),full:L.fmt(d,{weekday:'short',month:'short',day:'numeric'})};});$('rch').textContent='Daily revenue';}
+  barChart($('repChart'),data,L.peso,kfmt);
+  const by={};S.forEach(s=>{by[s.plan]=by[s.plan]||{n:0,v:0};by[s.plan].n++;by[s.plan].v+=s.amount;});const arr=Object.entries(by).sort((a,b)=>b[1].n-a[1].n);const mx=arr.length?arr[0][1].n:1;
+  $('pop').innerHTML=arr.length?arr.map(([p,o])=>`<div class="hbar"><span>${p}</span><span class="tr"><i style="width:${o.n/mx*100}%"></i></span><b>${o.n}</b></div>`).join('')+'<p style="font-size:12.5px;color:var(--dim);margin:10px 0 0">Number of sales per plan in the selected range.</p>':'<div class="empty">No sales in this range yet.</div>';
+  $('scount').textContent=`${S.length} records`;
+  $('stable').innerHTML=S.length?S.slice(-25).reverse().map(s=>`<tr><td>${L.fmt(s.t,{month:'short',day:'numeric'})}</td><td>${s.member}</td><td>${s.plan}</td><td>${s.type}</td><td>${s.method}</td><td style="text-align:right">${L.peso(s.amount)}</td></tr>`).join('')+(S.length>25?`<tr><td colspan="6" class="empty">Showing the latest 25. Export CSV for all ${S.length}.</td></tr>`:''):'<tr><td colspan="6" class="empty">No sales in this range yet.</td></tr>';}
+$('csv').onclick=()=>{const S=L.sales.filter(inRange);const rows=[['date','member','plan','type','method','amount_php']].concat(S.map(s=>[s.date,s.member,s.plan,s.type,s.method,s.amount]));
+  const blob=new Blob(['# SAMPLE DATA - Lakas Fitness demo\n'+rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`lakas-demo-sales-${range}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast(`Exported ${S.length} sample records.`);};
+
+function applyRole(){document.querySelectorAll('[data-owner],[data-owner-only]').forEach(el=>el.hidden=role!=='owner');}
+function start(r){role=r;$('loginView').hidden=true;$('appView').hidden=false;$('roleBadge').textContent=(r==='owner'?'Owner':'Front desk')+' · demo';
+  renderOverview();renderMembers();renderLog();renderClasses();renderReports();applyRole();show(location.hash.slice(1)||'overview');}
+const s0=sess();if(s0)start(s0);
+</script>
+</body></html>

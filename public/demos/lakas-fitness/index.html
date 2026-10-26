@@ -1,177 +1,634 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Lakas Fitness Demo</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lakas Fitness · Strength, Cardio and Group Classes (Demo)</title>
+<meta name="description" content="Lakas Fitness is a sample commercial gym website by Likha Web Studio: membership plans, class booking, trainer profiles, online registration, member portal and admin dashboard.">
+<meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
-</head><body>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,800..900&display=swap">
+<link rel="stylesheet" href="lakas.css">
 <style>
-/* Layout: dark gym site — loud condensed hero, plan cards, day-tabbed class schedule, free-trial form. Single dark look by choice. */
-:root{
-  --bg:#14213D; --surface:#1C2D52; --line:#2E4170; --fg:#FFFFFF; --muted:#B8C2D9;
-  --accent:#FCA311; --on-accent:#14213D; --bar:#0B1324;
-  --display:'Anton', 'Barlow', Impact, sans-serif;
-  --body:'Barlow', system-ui, sans-serif;
-  color-scheme: dark;
+/* Layout: cinematic photo hero, feature strip, light facilities gallery with lightbox, plans over a dark photo band, weekly class booking with "my bookings", trainer cards, gym-system teaser, registration, visit info + FAQ. */
+header.site{position:sticky;top:0;z-index:40;background:rgba(10,10,11,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .2s}
+header.site.solid{background:rgba(10,10,11,.96)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.nav{display:flex;gap:4px}
+.nav a{text-decoration:none;font-weight:600;font-size:15px;color:#D4D4D8;padding:10px 12px;position:relative}
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--red);transform:scaleX(0);transition:transform .25s}
+.nav a:hover,.nav a.on{color:#fff}
+.nav a:hover::after,.nav a.on::after{transform:none}
+.hr{display:flex;align-items:center;gap:10px}
+.login-link{font-weight:600;font-size:14px;color:#D4D4D8;text-decoration:none;padding:10px}
+.login-link:hover{color:#fff}
+.burger{display:none;width:44px;height:44px;border-radius:6px;border:1px solid var(--line);background:transparent;color:#fff;cursor:pointer;place-items:center}
+.burger svg{width:22px;height:22px}
+.mnav{position:fixed;inset:0;z-index:70;background:rgba(10,10,11,.98);display:flex;flex-direction:column;padding:20px;gap:6px}
+.mnav .mtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.mnav a.l{font-family:var(--display);font-stretch:110%;font-weight:900;text-transform:uppercase;font-size:30px;text-decoration:none;padding:8px 0;border-bottom:1px solid var(--line)}
+.mnav .btn{margin-top:20px}
+
+/* hero */
+.hero{position:relative;min-height:min(820px,calc(100svh - 34px));display:flex;align-items:center;overflow:hidden;margin-top:-73px;padding-top:73px;isolation:isolate}
+.hero .ph{position:absolute;inset:0;z-index:-1}
+.hero .ph img{transform:scale(1.08);animation:kb 18s ease-out forwards;filter:saturate(.7) contrast(1.1) brightness(.85)}
+@keyframes kb{to{transform:scale(1)}}
+.hero .ph::after{background:linear-gradient(90deg,rgba(10,10,11,.96) 0%,rgba(10,10,11,.82) 34%,rgba(10,10,11,.25) 72%,rgba(10,10,11,.45) 100%),linear-gradient(0deg,rgba(10,10,11,1) 0%,rgba(10,10,11,0) 28%)}
+.hero .wrap{width:100%;padding-block:72px 120px}
+.hero .eyebrow{font-size:15px;letter-spacing:.3em}
+.hero h1{font-family:var(--display);font-stretch:118%;font-weight:900;font-size:clamp(54px,9.4vw,128px);line-height:.88;letter-spacing:-.025em;text-transform:uppercase;margin:6px 0 24px}
+.hero h1 span{display:block}
+.hero h1 .r{color:var(--red)}
+.hero p.d{font-size:clamp(17px,1.6vw,20px);color:#E4E4E7;max-width:40ch;margin:0 0 32px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .credit{position:absolute;right:20px;bottom:96px;z-index:1}
+.reveal-in>*{opacity:0;transform:translateY(22px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
+.reveal-in>*:nth-child(2){animation-delay:.12s}.reveal-in>*:nth-child(3){animation-delay:.24s}.reveal-in>*:nth-child(4){animation-delay:.36s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* feature strip */
+.strip{position:relative;z-index:2;margin-top:-64px}
+.strip .wrap>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:rgba(18,18,20,.94);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(10px)}
+.feat{display:flex;gap:14px;align-items:center;padding:22px 22px;border-right:1px solid var(--line)}
+.feat:last-child{border-right:0}
+.feat svg{width:34px;height:34px;flex-shrink:0;color:#fff}
+.feat b{display:block;font-size:15.5px}
+.feat span{font-size:13.5px;color:var(--muted)}
+
+section.s{padding-block:96px}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.tlink{font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;gap:8px;align-items:center;background:none;border:0;color:inherit;cursor:pointer;padding:8px 0}
+.tlink:hover{color:var(--red)}
+
+/* facilities (light) */
+.fac{background:var(--light);color:var(--light-ink)}
+.fac .lead{color:var(--light-muted)}
+.fgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.fcard{grid-column:span 3;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3.3;cursor:pointer;border:0;padding:0;background:#111;color:#fff;text-align:left;font:inherit}
+.fcard:nth-child(1),.fcard:nth-child(2){grid-column:span 6;aspect-ratio:16/9}
+.fcard .ph{position:absolute;inset:0}
+.fcard .ph img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.fcard:hover .ph img,.fcard:focus-visible .ph img{transform:scale(1.06)}
+.fcard .ph::after{background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.25) 50%,rgba(0,0,0,0) 70%)}
+.fcard .cap{position:absolute;left:0;right:0;bottom:0;padding:18px;display:flex;gap:14px;align-items:flex-end;z-index:1}
+.fcard .ic{width:44px;height:44px;border-radius:8px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;flex-shrink:0}
+.fcard .ic svg{width:22px;height:22px}
+.fcard b{display:block;font-size:18px}
+.fcard span{font-size:14px;color:#D4D4D8}
+.fcard .zoom{position:absolute;top:14px;right:14px;z-index:1;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.55);display:grid;place-items:center;opacity:0;transition:opacity .2s}
+.fcard:hover .zoom,.fcard:focus-visible .zoom{opacity:1}
+.fnote{margin-top:16px;font-size:13px;color:var(--light-muted)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.94);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:16px}
+.lb .lbt{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:14px}
+.lb figure{margin:0;display:grid;place-items:center;min-height:0;position:relative}
+.lb .ph{width:min(1200px,100%);height:100%;max-height:78vh;border-radius:8px}
+.lb .ph img{object-fit:contain;background:#000;filter:none}
+.lb figcaption{text-align:center;padding:14px 8px 4px}
+.lb figcaption b{display:block;font-size:20px}
+.lb figcaption span{color:var(--muted)}
+.lbn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.6);color:#fff;font-size:24px;cursor:pointer;z-index:2}
+.lbn:hover{background:var(--red);border-color:var(--red)}
+.lbn.p{left:8px}.lbn.n{right:8px}
+.thumbs{display:flex;gap:8px;justify-content:center;overflow-x:auto;padding-top:12px}
+.thumbs button{width:72px;height:50px;border-radius:6px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;flex-shrink:0;background:#222;opacity:.55}
+.thumbs button[aria-current="true"]{border-color:var(--red);opacity:1}
+.thumbs .ph{width:100%;height:100%}
+
+/* plans */
+.plans{position:relative;isolation:isolate;overflow:hidden}
+.plans>.ph{position:absolute;inset:0;z-index:-1}
+.plans>.ph img{filter:saturate(.4) brightness(.45)}
+.plans>.ph::after{background:linear-gradient(90deg,rgba(10,10,11,.97) 30%,rgba(10,10,11,.7)),linear-gradient(0deg,rgba(225,29,42,.10),transparent 60%)}
+.plans .wrap{display:grid;grid-template-columns:1fr;gap:36px}
+.pgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.plan{background:rgba(18,18,20,.92);border:1px solid var(--line);border-radius:10px;padding:26px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;position:relative;transition:transform .25s,border-color .25s}
+.plan:hover{transform:translateY(-4px);border-color:#3f3f46}
+.plan.pop{border:1.5px solid var(--red);background:linear-gradient(180deg,rgba(225,29,42,.12),rgba(18,18,20,.95) 45%)}
+.plan .tag{position:absolute;top:-1px;left:-1.5px;right:-1.5px;background:var(--red);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px;border-radius:10px 10px 0 0}
+.plan.pop{padding-top:38px}
+.plan svg{width:30px;height:30px;color:var(--red);margin-bottom:6px}
+.plan h3{margin:0;font-size:16px;font-weight:700}
+.plan .amt{font-family:var(--display);font-stretch:105%;font-weight:900;font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.plan .dur{font-size:13px;color:var(--muted)}
+.plan ul{list-style:none;padding:0;margin:10px 0 14px;font-size:13.5px;color:#D4D4D8;display:flex;flex-direction:column;gap:6px;text-align:left;flex:1;width:100%}
+.plan li{display:flex;gap:8px}
+.plan li::before{content:"";width:14px;height:14px;flex-shrink:0;margin-top:3px;background:var(--red);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.plan .btn{width:100%}
+.pnote{margin-top:16px;font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* classes */
+.cls-wrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:24px;align-items:start}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:14px}
+.day{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:8px;padding:10px 4px;cursor:pointer;text-align:center;font-weight:700;font-size:13px;line-height:1.2}
+.day b{display:block;color:#fff;font-size:20px;font-weight:800;margin-top:2px}
+.day[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.cfilter{margin-bottom:14px}
+.sched{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.crow{display:grid;grid-template-columns:96px 56px minmax(0,1fr) 170px 118px;gap:16px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.crow time{font-weight:800;font-variant-numeric:tabular-nums}
+.crow time small{display:block;color:var(--dim);font-weight:600;font-size:12.5px}
+.crow .ph{width:56px;height:56px;border-radius:50%}
+.crow .n b{display:block;font-size:16px}
+.crow .n span{font-size:13.5px;color:var(--muted)}
+.lvl{font-size:11.5px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+.slots{font-size:13px;color:var(--muted)}
+.slots .bar{height:6px;border-radius:99px;background:var(--line);margin-top:6px;overflow:hidden}
+.slots .bar i{display:block;height:100%;background:#fff;border-radius:99px}
+.slots.low .bar i{background:var(--red)}
+.slots.low{color:#FCA5A5}
+.crow .btn{width:100%}
+.mine{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;position:sticky;top:90px}
+.mine h3{margin:0 0 4px;font-size:18px}
+.bk{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.bk:last-of-type{border-bottom:0}
+.bk b{display:block;font-size:15px}
+.bk span{color:var(--muted)}
+.bk button{background:none;border:0;color:#FCA5A5;font-weight:700;cursor:pointer;font-size:13px;padding:8px}
+
+/* trainers */
+.tgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.tcard:hover{transform:translateY(-4px);border-color:#3f3f46}
+.tcard .ph{aspect-ratio:4/4.4}
+.tcard .ph img{filter:grayscale(.35) contrast(1.08)}
+.tcard .ph::after{background:linear-gradient(0deg,rgba(24,24,27,1) 0%,rgba(24,24,27,0) 40%)}
+.tcard .badge-demo{position:absolute;top:12px;left:12px;z-index:1}
+.tcard .bd{padding:0 18px 18px;margin-top:-28px;position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;flex:1}
+.tcard h3{margin:0;font-size:20px}
+.tcard .sp{color:var(--red);font-weight:700;font-size:14px}
+.tcard p{margin:0;color:var(--muted);font-size:14.5px;flex:1}
+.tcard .cred{font-size:13px;color:var(--dim);border-top:1px solid var(--line);padding-top:10px}
+
+/* system teaser */
+.sys{background:linear-gradient(180deg,var(--char),var(--bg))}
+.sysgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sysc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:border-color .2s,transform .2s}
+.sysc:hover{border-color:var(--red);transform:translateY(-3px)}
+.sysc .ic{width:46px;height:46px;border-radius:10px;background:var(--red-soft);color:var(--red);display:grid;place-items:center}
+.sysc .ic svg{width:24px;height:24px}
+.sysc h3{margin:0;font-size:19px}
+.sysc p{margin:0;color:var(--muted);font-size:14.5px;flex:1}
+.sysc ul{margin:0;padding-left:18px;color:#D4D4D8;font-size:14px}
+.sysc .go{font-weight:700;color:var(--red)}
+
+/* join */
+.join .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:start}
+.join .ph{border-radius:12px;aspect-ratio:4/4.6}
+.jform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.ok{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ok .tick{width:56px;height:56px;border-radius:50%;background:rgba(34,197,94,.14);color:#4ADE80;display:grid;place-items:center;font-size:28px;font-weight:800}
+.ok h3{margin:0;font-family:var(--display);font-stretch:108%;font-weight:900;text-transform:uppercase;font-size:30px}
+.ok p{margin:0;color:var(--muted)}
+.ref{font-family:ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 8px;color:#fff}
+
+/* visit + faq */
+.visit .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
+.info h4{margin:0 0 6px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.info p{margin:0;color:#D4D4D8}
+.map{margin-top:24px;border-radius:12px;overflow:hidden;border:1px solid var(--line);height:260px;background:var(--card)}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.9) contrast(.9)}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--red);font-size:24px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:10px 0 0;color:var(--muted)}
+
+/* cta + footer */
+.cta{position:relative;isolation:isolate;overflow:hidden;text-align:center}
+.cta .ph{position:absolute;inset:0;z-index:-1}
+.cta .ph img{filter:grayscale(1) brightness(.35)}
+.cta .ph::after{background:radial-gradient(60% 80% at 50% 50%,rgba(225,29,42,.28),rgba(10,10,11,.6))}
+.cta .h2{font-size:clamp(38px,6vw,76px)}
+footer.site{border-top:1px solid var(--line);background:#050506;color:var(--muted);font-size:14px}
+footer.site .wrap.cols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px;padding-block:56px 36px}
+footer.site h4{color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+footer.site a{text-decoration:none;display:block;padding:4px 0}
+footer.site a:hover{color:#fff}
+.legal{border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-block:20px;font-size:13px}
+.legal b{color:#fff}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+@media (max-width:1180px){.pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1060px){
+  .nav,.login-link{display:none}
+  .burger{display:grid}
+  .tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cls-wrap{grid-template-columns:1fr}
+  .mine{position:static}
+  .crow{grid-template-columns:84px 48px minmax(0,1fr) 120px}
+  .crow .slots{display:none}
+  .crow .ph{width:48px;height:48px}
 }
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
-.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.demo{background:var(--bar);color:var(--muted);font-size:13px;text-align:center;padding-block:9px}
-.demo b{color:var(--fg)}
-header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
-.brand{font-family:var(--display);font-size:28px;letter-spacing:0.02em;text-transform:uppercase}
-.brand span{color:var(--accent)}
-nav{display:flex;gap:24px;font-weight:600;color:var(--muted)}
-nav a{color:inherit;text-decoration:none}nav a:hover{color:var(--fg)}
-.btn{font:700 16px var(--body);border:0;border-radius:6px;padding:13px 22px;cursor:pointer;background:var(--accent);color:var(--on-accent);text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:0.04em}
-.btn.ghost{background:transparent;color:var(--fg);border:2px solid var(--line)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.hero .wrap{padding-block:48px 64px;display:flex;flex-direction:column;gap:24px}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,10vw,128px);line-height:0.92;text-transform:uppercase;margin:0;letter-spacing:0.005em;text-wrap:balance}
-.hero h1 span{color:var(--accent)}
-.hero p{color:var(--muted);font-size:20px;max-width:52ch;margin:0}
-.ctas{display:flex;gap:12px;flex-wrap:wrap}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:2px solid var(--line);padding-top:24px;margin-top:8px}
-.stats b{display:block;font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
-.stats span{color:var(--muted);font-size:15px}
-section{padding-block:64px}
-section h2{font-family:var(--display);font-weight:400;font-size:clamp(38px,5vw,56px);text-transform:uppercase;margin:0 0 8px;line-height:1}
-.sub{color:var(--muted);margin:0 0 28px}
-.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.plan{background:var(--surface);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:12px}
-.plan.hot{background:var(--accent);color:var(--on-accent)}
-.plan.hot .muted{color:#3A3320}
-.plan h3{margin:0;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
-.plan .amt{font-family:var(--display);font-size:44px;line-height:1}
-.plan .amt small{font-family:var(--body);font-size:15px;font-weight:600}
-.plan ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:15px;flex:1}
-.muted{color:var(--muted)}
-.tag{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
-.days{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.day{font:700 15px var(--body);padding:10px 16px;border-radius:6px;border:2px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;min-width:58px}
-.day[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.sched{background:var(--surface);border-radius:10px;overflow:hidden}
-.cls{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
-.cls:last-child{border-bottom:0}
-.cls time{font-weight:700;font-variant-numeric:tabular-nums}
-.cls .name{font-weight:700}
-.cls .coach{color:var(--muted);font-size:15px}
-.slots{font-size:13px;font-weight:700;padding:5px 10px;border-radius:4px;background:var(--line);white-space:nowrap}
-.slots.low{background:var(--accent);color:var(--on-accent)}
-.coaches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.coachcard{background:var(--surface);border-radius:10px;padding:22px;display:flex;gap:16px;align-items:center}
-.avatar{width:64px;height:64px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-family:var(--display);font-size:24px;flex-shrink:0}
-.coachcard b{display:block;font-size:18px}
-.trial .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
-form{background:var(--surface);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px}
-label{font-weight:600;font-size:15px;display:flex;flex-direction:column;gap:6px}
-input,select{font:16px var(--body);padding:12px;border-radius:6px;border:2px solid var(--line);background:var(--bg);color:var(--fg)}
-.ok{background:var(--surface);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:10px}
-.ok h3{font-family:var(--display);font-weight:400;font-size:36px;margin:0;text-transform:uppercase;color:var(--accent)}
-.info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:2px solid var(--line);padding-top:32px}
-.info h3{margin:0 0 4px;font-size:16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent)}
-.info p{margin:0;color:var(--muted)}
-footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px}
-@media (max-width:900px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.coaches{grid-template-columns:1fr}.trial .wrap{grid-template-columns:1fr}}
-@media (max-width:560px){.plans{grid-template-columns:1fr}nav{display:none}.cls{grid-template-columns:1fr auto}.cls time{grid-column:1/-1}.info{grid-template-columns:1fr}.stats b{font-size:32px}}
+@media (max-width:860px){
+  .strip .wrap>div{grid-template-columns:1fr 1fr}
+  .feat:nth-child(2){border-right:0}
+  .feat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fcard,.fcard:nth-child(1),.fcard:nth-child(2){grid-column:span 1;aspect-ratio:4/4.2}
+  .sysgrid{grid-template-columns:1fr}
+  .join .wrap,.visit .wrap{grid-template-columns:1fr}
+  .join .ph{display:none}
+  footer.site .wrap.cols{grid-template-columns:1fr 1fr}
+  footer.site .wrap.cols>div:first-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .hr .btn.join{display:none}
+  .hero{min-height:calc(100svh - 34px)}
+  .hero .wrap{padding-block:48px 110px}
+  .hero .ph::after{background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,.75) 45%,rgba(10,10,11,1) 100%)}
+  .hero .ph img{object-position:65% center}
+  .hero .ctas .btn{width:100%}
+  .hero .credit{bottom:84px;right:16px}
+  section.s{padding-block:72px}
+  .strip{margin-top:-48px}
+  .feat{padding:16px 14px;gap:10px;flex-direction:column;align-items:flex-start}
+  .feat svg{width:28px;height:28px}
+  .fcard .cap{padding:12px;gap:10px}
+  .fcard .ic{display:none}
+  .fcard b{font-size:15.5px}
+  .fcard span{font-size:12.5px}
+  .pgrid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;margin-inline:-20px;padding-inline:20px;scroll-padding-inline:20px}
+  .plan{scroll-snap-align:start}
+  .days{grid-template-columns:repeat(7,minmax(46px,1fr));overflow-x:auto}
+  .crow{grid-template-columns:64px minmax(0,1fr) auto;gap:12px;padding:14px}
+  .crow .ph{display:none}
+  .crow .btn{width:auto}
+  .tgrid{grid-template-columns:1fr}
+  .tcard{display:grid;grid-template-columns:120px minmax(0,1fr)}
+  .tcard .ph{aspect-ratio:auto;height:100%}
+  .tcard .ph::after{display:none}
+  .tcard .bd{margin-top:0;padding:16px}
+  .tcard .badge-demo{top:8px;left:8px;font-size:9.5px;padding:2px 6px}
+  .two,.info{grid-template-columns:1fr}
+  .jform{padding:20px}
+  .lbn{width:44px;height:44px;top:auto;bottom:-6px;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.hero .ph img{animation:none;transform:none}.reveal-in>*{opacity:1;transform:none;animation:none}.rv{opacity:1;transform:none}}
 </style>
+</head><body class="no-js">
 
-<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your gym? Starts at ₱3,500</div>
+<div class="demobar">Portfolio demo by <a href="../../">Likha Web Studio</a>. Lakas Fitness is a sample business; photos are licensed stock imagery, and prices and schedules are placeholders.</div>
 
-<header><div class="wrap">
-  <div class="brand">Lakas <span>Fitness</span></div>
-  <nav aria-label="Main"><a href="#plans">Membership</a><a href="#classes">Classes</a><a href="#coaches">Coaches</a></nav>
-  <a class="btn" href="#trial">Free trial</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-db" viewBox="0 0 24 24"><path d="M2 12h20M5 8v8M8 6v12M16 6v12M19 8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-group" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3" fill="currentColor"/><circle cx="5" cy="9" r="2.3" fill="currentColor"/><circle cx="19" cy="9" r="2.3" fill="currentColor"/><path d="M6.5 20a5.5 5.5 0 0 1 11 0ZM.8 19a4.3 4.3 0 0 1 6.4-3.7A7 7 0 0 0 5 19ZM23.2 19a4.3 4.3 0 0 0-6.4-3.7A7 7 0 0 1 19 19Z" fill="currentColor"/></symbol>
+  <symbol id="i-coach" viewBox="0 0 24 24"><circle cx="9" cy="6" r="3.2" fill="currentColor"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0Z" fill="currentColor"/><path d="M15.5 9.5l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8.5-5.2-8.5-11.2A4.8 4.8 0 0 1 12 6.6a4.8 4.8 0 0 1 8.5 3.2C20.5 15.8 12 21 12 21Z" fill="currentColor"/><path d="M8 12.5h2.5l1.3-2.5 1.6 4.5 1.2-2h1.9" fill="none" stroke="#0A0A0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-run" viewBox="0 0 24 24"><circle cx="15" cy="4" r="2.2" fill="currentColor"/><path d="M6 21l3.5-5.5 3 2.5V22M8 11.5l3-3.5 4 1 2 3.5h3M11 8l-2 6 4 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-kb" viewBox="0 0 24 24"><path d="M8 9a4 4 0 1 1 8 0" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M6 13a6 6 0 1 0 12 0 6 6 0 0 0-1-3H7a6 6 0 0 0-1 3Z" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="3" width="7" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="7" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 7h2M15.5 7h2M9 13v1M18 13v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 0 4v5h18v-5a2 2 0 0 1 0-4V5H3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="rotate(-12 12 12)"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17.5h2M11 17.5h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal3" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 13.5h8M8 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5Z" fill="currentColor"/></symbol>
+  <symbol id="i-whistle" viewBox="0 0 24 24"><circle cx="9" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 9.5h8v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="14" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 21h3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<header class="site" id="hdr"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Lakas Fitness home"><b>Lak<span>a</span>s</b><small>Fitness</small></a>
+  <nav class="nav" aria-label="Main">
+    <a href="#facilities">Facilities</a><a href="#membership">Membership</a><a href="#classes">Classes</a><a href="#trainers">Trainers</a><a href="#visit">Contact</a>
+  </nav>
+  <div class="hr">
+    <a class="login-link" href="member/">Member login</a>
+    <a class="btn join" href="#join">Join Now <span class="arr" aria-hidden="true">→</span></a>
+    <button class="burger" type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
 </div></header>
 
-<section class="hero" style="padding-block:0"><div class="wrap">
-  <h1>Stronger <span>than yesterday.</span></h1>
-  <p>Complete gym equipment, group classes and personal trainers. For beginners all the way to serious lifters.</p>
-  <div class="ctas"><a class="btn" href="#trial">Book a free trial</a><a class="btn ghost" href="#plans">See rates</a></div>
-  <div class="stats">
-    <div><b>300+</b><span>active members</span></div>
-    <div><b>6</b><span>certified coaches</span></div>
-    <div><b>5AM–11PM</b><span>open daily</span></div>
+<div class="mnav" id="mnav" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="mtop"><a class="logo" href="#top"><b>Lak<span>a</span>s</b><small>Fitness</small></a><button class="x" type="button" id="mclose" aria-label="Close menu">×</button></div>
+  <a class="l" href="#facilities">Facilities</a><a class="l" href="#membership">Membership</a><a class="l" href="#classes">Classes</a><a class="l" href="#trainers">Trainers</a><a class="l" href="#visit">Contact</a><a class="l" href="member/">Member login</a>
+  <a class="btn" href="#join">Join Now <span class="arr" aria-hidden="true">→</span></a>
+</div>
+
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+  <div class="ph"><img id="heroImg" alt="Athlete training with a barbell in a commercial gym (stock photo)" fetchpriority="high" onerror="this.remove()"></div>
+  <div class="wrap reveal-in">
+    <p class="eyebrow">Build a stronger you</p>
+    <h1 id="h1"><span>Discipline</span><span>builds</span><span class="r">results.</span></h1>
+    <p class="d">More than just a gym. A place to push your limits, build confidence, and become stronger every day.</p>
+    <div class="ctas"><a class="btn" href="#membership">View Membership Plans <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="#facilities">Explore Our Facilities</a></div>
   </div>
-</div></section>
+  <span class="badge-demo credit">Demo imagery</span>
+</section>
 
-<section id="plans"><div class="wrap">
-  <h2>Membership</h2>
-  <p class="sub">No joining fee this month. Pay with GCash or cash.</p>
-  <div class="plans">
-    <div class="plan"><h3>Day pass</h3><div class="amt">₱100</div><ul class="muted"><li>Full-day gym access</li><li>Locker and shower</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
-    <div class="plan hot"><span class="tag">Most popular</span><h3>Monthly</h3><div class="amt">₱1,200<small> /month</small></div><ul><li>Unlimited gym access</li><li>All group classes</li><li>Fitness assessment</li></ul><a class="btn" href="#trial" style="background:var(--on-accent);color:var(--accent)">Choose</a></div>
-    <div class="plan"><h3>3 Months</h3><div class="amt">₱3,200</div><ul class="muted"><li>Save ₱400</li><li>All group classes</li><li>1 free PT session</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
-    <div class="plan"><h3>With coach</h3><div class="amt">₱2,500<small> /month</small></div><ul class="muted"><li>8 personal training sessions</li><li>Meal guide</li><li>Monthly progress check</li></ul><a class="btn ghost" href="#trial">Choose</a></div>
+<div class="strip"><div class="wrap"><div>
+  <div class="feat"><svg aria-hidden="true"><use href="#i-db"/></svg><span><b>Modern Equipment</b>Complete strength and cardio area</span></div>
+  <div class="feat"><svg aria-hidden="true"><use href="#i-group"/></svg><span><b>Group Classes</b>HIIT, boxing, strength and more</span></div>
+  <div class="feat"><svg aria-hidden="true"><use href="#i-coach"/></svg><span><b>Personal Trainers</b>Guidance for all fitness levels</span></div>
+  <div class="feat"><svg aria-hidden="true"><use href="#i-heart"/></svg><span><b>Supportive Community</b>Train together, grow together</span></div>
+</div></div></div>
+
+<section class="s fac" id="facilities"><div class="wrap">
+  <div class="shead rv">
+    <div><p class="eyebrow">Our facilities</p><h2 class="h2">Train in a <em>premium environment</em></h2><p class="lead">Six dedicated zones, so you never wait long for a rack, a bench or a treadmill. Tap any zone to open the gallery.</p></div>
+    <button class="tlink" type="button" data-lb="0">View all photos <span aria-hidden="true">→</span></button>
   </div>
+  <div class="fgrid rv" id="fgrid"></div>
+  <p class="fnote">Illustrative stock photography for this demo. A live site would show the gym's own photos.</p>
 </div></section>
 
-<section id="classes" style="background:var(--bar)"><div class="wrap">
-  <h2>Class schedule</h2>
-  <p class="sub">Included in Monthly and 3 Months. Pick a day.</p>
-  <div class="days" role="group" aria-label="Day" id="days"></div>
-  <div class="sched" id="sched"></div>
-</div></section>
-
-<section id="coaches"><div class="wrap">
-  <h2>Coaches</h2>
-  <p class="sub">Certified trainers to help you reach your goal.</p>
-  <div class="coaches">
-    <div class="coachcard"><div class="avatar" aria-hidden="true">MR</div><div><b>Coach Mark</b><span class="muted">Strength and powerlifting</span></div></div>
-    <div class="coachcard"><div class="avatar" aria-hidden="true">JA</div><div><b>Coach Jen</b><span class="muted">HIIT and weight loss</span></div></div>
-    <div class="coachcard"><div class="avatar" aria-hidden="true">RB</div><div><b>Coach Rey</b><span class="muted">Boxing and conditioning</span></div></div>
-  </div>
-</div></section>
-
-<section class="trial" id="trial" style="background:var(--bar)"><div class="wrap">
-  <div>
-    <h2>Free trial</h2>
-    <p class="sub">Try the gym free for one day. No payment, no commitment.</p>
-    <div class="info">
-      <div><h3>Address</h3><p>[Street], [City]</p></div>
-      <div><h3>Hours</h3><p>Daily, 5AM–11PM</p></div>
-      <div><h3>Contact</h3><p>0917 000 0000</p></div>
+<section class="s plans" id="membership">
+  <div class="ph"><img id="plansImg" alt="" loading="lazy" onerror="this.remove()"></div>
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow">Membership plans</p>
+      <h2 class="h2">Choose your <em>fitness journey</em></h2>
+      <p class="lead">Flexible plans for every goal and schedule. No lock-in on monthly plans.</p>
+      <p class="pnote"><span class="badge-demo">Sample prices</span> Placeholder rates. The gym owner sets the real prices and inclusions.</p>
     </div>
+    <div class="pgrid rv" id="pgrid"></div>
   </div>
-  <div>
-    <form id="trialForm">
-      <label for="tname">Name<input id="tname" required autocomplete="name" value="Maria Santos"></label>
-      <label for="tphone">Mobile number<input id="tphone" required inputmode="tel" value="0917 123 4567"></label>
-      <label for="tdate">When will you come?<select id="tdate"></select></label>
-      <label for="tgoal">What's your goal?<select id="tgoal"><option>Lose weight</option><option>Build strength and muscle</option><option>Get fit and healthy</option><option>Boxing or combat</option></select></label>
-      <button class="btn" type="submit">Book my free trial</button>
+</section>
+
+<section class="s" id="classes"><div class="wrap">
+  <div class="shead rv">
+    <div><p class="eyebrow">Classes and schedule</p><h2 class="h2">Book your <em>next class</em></h2><p class="lead">Reserve a slot in seconds. Classes are free for Monthly, Quarterly and Annual members.</p></div>
+    <span class="badge-demo">Sample schedule</span>
+  </div>
+  <div class="cls-wrap rv">
+    <div>
+      <div class="days" role="group" aria-label="Day" id="days"></div>
+      <div class="chips cfilter" role="group" aria-label="Class type" id="ctypes"></div>
+      <div class="sched" id="sched" aria-live="polite"></div>
+    </div>
+    <aside class="mine" aria-labelledby="mineH">
+      <h3 id="mineH">My bookings</h3>
+      <p style="margin:0 0 6px;color:var(--muted);font-size:14px">Saved on this device for the demo. Members also see these in the <a href="member/">member portal</a>.</p>
+      <div id="mine"></div>
+    </aside>
+  </div>
+</div></section>
+
+<section class="s" id="trainers" style="background:var(--char)"><div class="wrap">
+  <div class="shead rv">
+    <div><p class="eyebrow">Our trainers</p><h2 class="h2">Coaches who <em>push you further</em></h2><p class="lead">One-on-one coaching for strength, fat loss, boxing and mobility.</p></div>
+    <span class="badge-demo">Sample profiles</span>
+  </div>
+  <div class="tgrid rv" id="tgrid"></div>
+  <p style="margin:16px 0 0;font-size:13px;color:var(--dim)">Profiles are fictional examples with stock photos, not real Lakas Fitness staff.</p>
+</div></section>
+
+<section class="s sys" id="system"><div class="wrap">
+  <div class="shead rv">
+    <div><p class="eyebrow">For gym owners</p><h2 class="h2">A complete <em>gym system</em>, not just a website</h2><p class="lead">This demo includes the tools a real gym runs on. Try them with sample data.</p></div>
+  </div>
+  <div class="sysgrid rv">
+    <a class="sysc" href="member/"><span class="ic"><svg aria-hidden="true"><use href="#i-user"/></svg></span><h3>Member portal</h3><p>Members log in to see their plan, expiry date, QR check-in pass, bookings and attendance.</p><span class="go">Open member demo →</span></a>
+    <a class="sysc" href="admin/"><span class="ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Admin dashboard</h3><p>Members, expiring plans, daily attendance, revenue, class bookings and trainer schedules in one place.</p><span class="go">Open admin demo →</span></a>
+    <a class="sysc" href="admin/#checkin"><span class="ic"><svg aria-hidden="true"><use href="#i-qr"/></svg></span><h3>QR attendance</h3><p>Front desk scans the member's QR pass to log time-in and time-out, with daily attendance reports.</p><span class="go">Try check-in demo →</span></a>
+  </div>
+</div></section>
+
+<section class="s join" id="join"><div class="wrap">
+  <div class="ph rv"><img id="joinImg" alt="Personal trainer coaching a member (stock photo)" loading="lazy" onerror="this.remove()"></div>
+  <div class="rv">
+    <p class="eyebrow">Online registration</p>
+    <h2 class="h2">Start your <em>membership</em></h2>
+    <p class="lead" style="margin-bottom:24px">Register online and pay at the front desk on your first visit. We'll confirm by text within the day.</p>
+    <form class="jform" id="jform" novalidate>
+      <div class="field" id="f-name"><label for="jname">Full name</label><input id="jname" name="name" autocomplete="name" required minlength="3" placeholder="Juan Dela Cruz"><span class="err" aria-live="polite"></span></div>
+      <div class="two">
+        <div class="field" id="f-email"><label for="jemail">Email address</label><input id="jemail" name="email" type="email" autocomplete="email" required placeholder="you@email.com"><span class="err" aria-live="polite"></span></div>
+        <div class="field" id="f-phone"><label for="jphone">Contact number</label><input id="jphone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="09XX XXX XXXX"><span class="err" aria-live="polite"></span></div>
+      </div>
+      <div class="two">
+        <div class="field" id="f-plan"><label for="jplan">Preferred membership</label><select id="jplan" name="plan" required></select><span class="err" aria-live="polite"></span></div>
+        <div class="field" id="f-start"><label for="jstart">Preferred start date</label><input id="jstart" name="start" type="date" required><span class="err" aria-live="polite"></span></div>
+      </div>
+      <input class="hp" type="text" name="company" id="jcompany" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field" id="f-consent"><label class="check"><input type="checkbox" id="jconsent" required> <span>I agree to the <a href="#privacy" id="privLink">privacy policy</a> and allow Lakas Fitness to contact me about my membership.</span></label><span class="err" aria-live="polite"></span></div>
+      <button class="btn" type="submit" id="jsubmit">Submit registration <span class="arr" aria-hidden="true">→</span></button>
+      <p style="margin:0;font-size:12.5px;color:var(--dim)">Demo form: nothing is sent or stored. On a live site, data goes to the gym's secure database and is never shown publicly.</p>
     </form>
-    <div class="ok" id="ok" hidden>
-      <h3>You're booked!</h3>
-      <p id="okMsg"></p>
-      <p class="muted" style="font-size:14px">This is a demo, so no real booking was sent. On a live website, the gym gets notified right away.</p>
-      <button class="btn ghost" type="button" id="again">Book again</button>
+    <div class="jform ok" id="jok" hidden tabindex="-1">
+      <span class="tick" aria-hidden="true">✓</span>
+      <h3>You're registered!</h3>
+      <p id="jmsg"></p>
+      <p>Reference: <span class="ref" id="jref"></span></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="member/">See the member portal</a><button class="btn dark" type="button" id="jagain">Register another</button></div>
     </div>
   </div>
 </div></section>
 
-<footer><div class="wrap"><span>© Lakas Fitness (sample business)</span><span>Website by Likha Web Studio</span></div></footer>
+<section class="s visit" id="visit" style="background:var(--char)"><div class="wrap">
+  <div class="rv">
+    <p class="eyebrow">Visit us</p>
+    <h2 class="h2">Come <em>train with us</em></h2>
+    <div class="info">
+      <div><h4>Address</h4><p>Sample address<br>Quezon City, Metro Manila</p></div>
+      <div><h4>Hours</h4><p>Mon to Sat · 5:00 AM – 11:00 PM<br>Sunday · 7:00 AM – 7:00 PM</p></div>
+      <div><h4>Contact</h4><p>0900 000 0000 (sample)<br>hello@lakasfitness.demo</p></div>
+      <div><h4>Payment</h4><p>GCash, Maya, card or cash</p></div>
+    </div>
+    <div class="map"><iframe title="Map of Quezon City" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Quezon%20City&z=12&output=embed"></iframe></div>
+  </div>
+  <div class="rv" id="faq">
+    <p class="eyebrow">FAQ</p>
+    <h2 class="h2" style="margin-bottom:12px">Good to <em>know</em></h2>
+    <details open><summary>Can I try the gym before signing up?</summary><p>Yes. Buy a Day Pass at the front desk or online. If you sign up for a Monthly plan the same week, many gyms credit it to your membership.</p></details>
+    <details><summary>I'm a beginner. Where do I start?</summary><p>Book a Beginner Fitness class or a personal training session. A coach will show you how to use the equipment safely.</p></details>
+    <details><summary>Do I need to book group classes?</summary><p>Yes, slots are limited so everyone gets enough space. Book here on the website or in the member portal.</p></details>
+    <details><summary>Is there a locker and shower?</summary><p>Yes. Bring your own lock, or rent one at the front desk.</p></details>
+    <details id="privacy"><summary>How is my personal data handled?</summary><p>On a live site, registrations are stored in the gym's private database, only staff can see them, and they're used only to manage your membership, in line with the Data Privacy Act of 2012. This demo stores nothing.</p></details>
+  </div>
+</div></section>
+
+<section class="s cta"><div class="ph"><img id="ctaImg" alt="" loading="lazy" onerror="this.remove()"></div><div class="wrap rv">
+  <p class="eyebrow">Your first step</p>
+  <h2 class="h2">Stronger <em>starts today.</em></h2>
+  <p class="lead" style="margin:16px auto 28px">Register online in under a minute.</p>
+  <a class="btn" href="#join">Join Now <span class="arr" aria-hidden="true">→</span></a>
+</div></section>
+</main>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div><a class="logo" href="#top" style="align-items:flex-start"><b>Lak<span>a</span>s</b><small>Fitness</small></a><p style="max-width:36ch;margin:16px 0 0">A sample commercial gym website with online registration, class booking, a member portal and an admin dashboard.</p></div>
+    <div><h4>Gym</h4><a href="#facilities">Facilities</a><a href="#membership">Membership</a><a href="#classes">Classes</a><a href="#trainers">Trainers</a></div>
+    <div><h4>Members</h4><a href="#join">Join now</a><a href="member/">Member login</a><a href="#faq">FAQ</a><a href="#privacy">Privacy</a></div>
+    <div><h4>System demo</h4><a href="member/">Member portal</a><a href="admin/">Admin dashboard</a><a href="admin/#checkin">QR check-in</a><a href="admin/#reports">Sales reports</a></div>
+  </div>
+  <div class="wrap legal"><span>© 2026 Lakas Fitness, a sample business. Photos: Unsplash (illustrative).</span><span>Website Demo by <a href="../../" style="display:inline;color:#fff;font-weight:700">Likha Web Studio</a></span></div>
+</footer>
+
+<dialog id="bdlg" aria-labelledby="bdlgH"><div class="mhead"><h3 id="bdlgH">Confirm booking</h3><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <div class="mbody" id="bdlgBody"></div>
+</dialog>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Facility gallery">
+  <div class="lbt"><span id="lbCount"></span><span class="badge-demo">Demo imagery</span><button class="x" type="button" id="lbClose" aria-label="Close gallery">×</button></div>
+  <figure><button class="lbn p" type="button" id="lbPrev" aria-label="Previous photo">‹</button><div class="ph" id="lbPh"></div><button class="lbn n" type="button" id="lbNext" aria-label="Next photo">›</button></figure>
+  <div><figcaption id="lbCap"></figcaption><div class="thumbs" id="lbThumbs"></div></div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <script>
+document.body.classList.remove('no-js');
 const $=id=>document.getElementById(id);
-const SCHED={
- Mon:[['6:00 AM','HIIT Burn','Coach Jen',4],['6:00 PM','Strength 101','Coach Mark',9],['7:30 PM','Boxing Basics','Coach Rey',2]],
- Tue:[['6:30 AM','Core & Mobility','Coach Jen',10],['7:00 PM','Circuit Training','Coach Mark',6]],
- Wed:[['6:00 AM','HIIT Burn','Coach Jen',3],['6:00 PM','Powerlifting Clinic','Coach Mark',5],['7:30 PM','Boxing Conditioning','Coach Rey',7]],
- Thu:[['6:30 AM','Core & Mobility','Coach Jen',11],['7:00 PM','Circuit Training','Coach Mark',8]],
- Fri:[['6:00 AM','HIIT Burn','Coach Jen',6],['7:00 PM','Friday Fight Night','Coach Rey',1]],
- Sat:[['8:00 AM','Weekend Bootcamp','Coach Jen',12],['10:00 AM','Strength 101','Coach Mark',9]]
-};
-let day='Mon';
-function renderDays(){$('days').innerHTML=Object.keys(SCHED).map(d=>`<button class="day" type="button" data-day="${d}" aria-pressed="${d===day}">${d}</button>`).join('');}
-function renderSched(){$('sched').innerHTML=SCHED[day].map(([t,n,c,s])=>`<div class="cls"><time>${t}</time><div><div class="name">${n}</div><div class="coach">${c}</div></div><span class="slots ${s<=3?'low':''}">${s<=3?'Almost full: ':''}${s} slots</span></div>`).join('');}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b){day=b.dataset.day;renderDays();renderSched();}});
-const opts=[];const fmt=new Intl.DateTimeFormat('en-PH',{weekday:'long',month:'long',day:'numeric'});
-for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()+i);opts.push(`<option>${fmt.format(d)}</option>`);}
-$('tdate').innerHTML=opts.join('');
-$('trialForm').addEventListener('submit',e=>{e.preventDefault();
-  $('okMsg').textContent=`See you on ${$('tdate').value}, ${$('tname').value.split(' ')[0]}! Goal: ${$('tgoal').value}. Bring water, a towel and rubber shoes.`;
-  $('trialForm').hidden=true;$('ok').hidden=false;});
-$('again').onclick=()=>{$('trialForm').hidden=false;$('ok').hidden=true;};
-renderDays();renderSched();
-</script>
+const peso=n=>'₱'+n.toLocaleString('en-PH');
+/* Unsplash photos, served in modern formats at responsive sizes */
+const U=(id,w)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=72`;
+const setImg=(img,id,sizes='100vw',ws=[640,1080,1600,2200])=>{img.srcset=ws.map(w=>`${U(id,w)} ${w}w`).join(', ');img.sizes=sizes;img.src=U(id,ws[1]);};
+const pic=(id,alt,sizes,ws=[480,800,1200],lazy=true)=>`<img srcset="${ws.map(w=>`${U(id,w)} ${w}w`).join(', ')}" sizes="${sizes}" src="${U(id,ws[1])}" alt="${alt}" ${lazy?'loading="lazy"':''} decoding="async" onerror="this.remove()">`;
+setImg($('heroImg'),'1517836357463-d25dfeac3438');
+setImg($('plansImg'),'1583454110551-21f2fa2afe61','100vw',[800,1400,2000]);
+setImg($('joinImg'),'1571019613454-1cb2f99b2d8b','(max-width:860px) 0px, 45vw',[600,900,1200]);
+setImg($('ctaImg'),'1534438327276-14e5300c3a48','100vw',[800,1400,2000]);
 
+/* facilities + gallery */
+const FAC=[
+ {t:'Strength Training Zone',d:'Squat racks, benches and plate-loaded machines',ic:'i-db',img:'1581009146145-b5ef050c2e1e',alt:'Squat racks and barbells in a strength training area'},
+ {t:'Cardio Area',d:'Treadmills, bikes and ellipticals',ic:'i-run',img:'1576678927484-cc907957088c',alt:'Row of treadmills facing a window'},
+ {t:'Free Weights',d:'Dumbbells from 2.5 to 50 kg',ic:'i-db',img:'1599058917212-d750089bc07e',alt:'Dumbbell rack in a gym'},
+ {t:'Functional Training',d:'Turf lane, sleds, kettlebells and ropes',ic:'i-kb',img:'1571902943202-507ec2618e8f',alt:'Person training with kettlebells'},
+ {t:'Group Workout Area',d:'HIIT, boxing and circuit classes',ic:'i-group',img:'1518611012118-696072aa579a',alt:'Group fitness class in progress'},
+ {t:'Locker Facilities',d:'Lockers and showers for members',ic:'i-lock',img:'1540497077202-7c8a3999166f',alt:'Gym interior near the changing area'}
+];
+const EXTRA=[
+ {t:'Personal Training',d:'One-on-one coaching sessions',img:'1571019614242-c5c5dee9f50b',alt:'Trainer coaching a member through an exercise'},
+ {t:'Boxing Fitness',d:'Bags and pads for conditioning classes',img:'1549060279-7e168fcee0c2',alt:'Boxing gloves and heavy bag'},
+ {t:'Main Gym Floor',d:'Open layout with plenty of space',img:'1574680096145-d05b474e2155',alt:'Wide view of a gym floor with equipment'}
+];
+const GAL=FAC.concat(EXTRA);
+$('fgrid').innerHTML=FAC.map((f,i)=>`<button class="fcard" type="button" data-lb="${i}" aria-label="${f.t}: ${f.d}. Open gallery">
+  <div class="ph">${pic(f.img,f.alt,i<2?'(max-width:860px) 100vw, 50vw':'(max-width:860px) 50vw, 33vw')}</div>
+  <span class="zoom" aria-hidden="true"><svg width="18" height="18"><use href="#i-zoom"/></svg></span>
+  <span class="cap"><span class="ic" aria-hidden="true"><svg><use href="#${f.ic}"/></svg></span><span><b>${f.t}</b><span>${f.d}</span></span></span></button>`).join('');
+let lbi=0,lbLast=null;
+function lbShow(i){lbi=(i+GAL.length)%GAL.length;const g=GAL[lbi];
+  $('lbPh').innerHTML=pic(g.img,g.alt,'100vw',[800,1400,2000],false);
+  $('lbCap').innerHTML=`<b>${g.t}</b><span>${g.d}</span>`;$('lbCount').textContent=`${lbi+1} / ${GAL.length}`;
+  [...$('lbThumbs').children].forEach((b,k)=>b.setAttribute('aria-current',k===lbi));}
+$('lbThumbs').innerHTML=GAL.map((g,i)=>`<button type="button" data-th="${i}" aria-label="Show ${g.t}"><div class="ph">${pic(g.img,'','80px',[160,240])}</div></button>`).join('');
+function lbOpen(i){lbLast=document.activeElement;$('lb').hidden=false;document.body.style.overflow='hidden';lbShow(i);$('lbClose').focus();}
+function lbClose(){$('lb').hidden=true;document.body.style.overflow='';lbLast&&lbLast.focus();}
+$('lbPrev').onclick=()=>lbShow(lbi-1);$('lbNext').onclick=()=>lbShow(lbi+1);$('lbClose').onclick=lbClose;
+$('lb').addEventListener('click',e=>{const t=e.target.closest('[data-th]');if(t)lbShow(+t.dataset.th);else if(e.target===$('lb'))lbClose();});
+let tx=null;$('lb').addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+$('lb').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)lbShow(lbi+(dx<0?1:-1));tx=null;});
+
+/* plans (placeholder prices) */
+const PLANS=[
+ {id:'day',n:'Day Pass',p:300,dur:'Valid for 1 day',ic:'i-ticket',b:['Full gym access for the day','Locker and shower'],cta:'Get Started'},
+ {id:'month',n:'Monthly',p:1500,dur:'per month',ic:'i-cal',b:['Unlimited gym access','All group classes','Free fitness assessment'],pop:1,cta:'Join Now'},
+ {id:'quarter',n:'Quarterly',p:4000,dur:'3 months',ic:'i-cal3',b:['Everything in Monthly','1 personal training session','Save vs. monthly'],cta:'Join Now'},
+ {id:'annual',n:'Annual',p:14000,dur:'12 months',ic:'i-crown',b:['Everything in Quarterly','4 PT sessions','Freeze up to 30 days'],cta:'Join Now'},
+ {id:'pt',n:'Personal Training',p:6000,dur:'10 sessions',ic:'i-whistle',b:['One-on-one with a coach','Program and meal guide','Progress check-ins'],cta:'Book a Coach'}
+];
+$('pgrid').innerHTML=PLANS.map(p=>`<article class="plan ${p.pop?'pop':''}">${p.pop?'<span class="tag">Most popular</span>':''}
+  <svg aria-hidden="true"><use href="#${p.ic}"/></svg><h3>${p.n}</h3><div class="amt">${peso(p.p)}</div><div class="dur">${p.dur}</div>
+  <ul>${p.b.map(x=>`<li>${x}</li>`).join('')}</ul>
+  <a class="btn ${p.pop?'':'dark'} sm" href="#join" data-plan="${p.id}">${p.cta}</a></article>`).join('');
+$('jplan').innerHTML='<option value="">Select a plan</option>'+PLANS.map(p=>`<option value="${p.id}">${p.n} · ${peso(p.p)} ${p.dur.startsWith('per')?'/ month':'· '+p.dur} (sample)</option>`).join('');
+
+/* trainers (fictional sample profiles) */
+const COACH=[
+ {k:'mark',n:'Mark Villanueva',sp:'Strength and Powerlifting',img:'1567013127542-490d757e51fc',bio:'Helps members build a strong base with safe, progressive barbell training.'},
+ {k:'jen',n:'Jen Aquino',sp:'HIIT and Fat Loss',img:'1594381898411-846e7d193883',bio:'High-energy classes and simple habits that make fat loss sustainable.'},
+ {k:'rey',n:'Rey Bautista',sp:'Boxing Fitness',img:'1549476464-37392f717541',bio:'Footwork, pad work and conditioning for beginners and amateur fighters.'},
+ {k:'tin',n:'Tin Navarro',sp:'Functional and Mobility',img:'1518310383802-640c2de311b2',bio:'Moves better before lifting heavier: mobility, core and functional strength.'}
+];
+$('tgrid').innerHTML=COACH.map(c=>`<article class="tcard"><div class="ph">${pic(c.img,`Stock photo used for the sample profile of ${c.n}`,'(max-width:640px) 120px, (max-width:1060px) 50vw, 25vw',[400,600,800])}<span class="badge-demo">Sample</span></div>
+  <div class="bd"><h3>${c.n}</h3><span class="sp">${c.sp}</span><p>${c.bio}</p><span class="cred">Credentials: listed here from the gym's records</span><a class="btn dark sm" href="#join" data-plan="pt" data-coach="${c.n}">Book a session</a></div></article>`).join('');
+
+/* classes: one week starting today, Manila time */
+const TYPES=['All','Strength','HIIT','Boxing','Functional','Beginner','Group'];
+const CL=[['6:00 AM','HIIT Burn','HIIT','jen',45,20,'All levels'],['7:00 AM','Beginner Fitness','Beginner','tin',50,14,'Beginner'],['12:15 PM','Express Circuit','Group','jen',30,20,'All levels'],['5:30 PM','Strength Foundations','Strength','mark',60,12,'Intermediate'],['6:30 PM','Boxing Fitness','Boxing','rey',60,16,'All levels'],['7:30 PM','Functional Strength','Functional','tin',50,14,'All levels'],['8:00 AM','Weekend Bootcamp','Group','jen',60,25,'All levels'],['10:00 AM','Powerlifting Clinic','Strength','mark',90,10,'Advanced']];
+const PLAN_BY_DOW={1:[0,1,3,4],2:[0,2,5,4],3:[0,1,3,4],4:[0,2,5,4],5:[0,2,3,4],6:[6,7,1],0:[6,5]};
+const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'}));
+const DAYS=[...Array(7)].map((_,i)=>{const d=new Date(now);d.setHours(0,0,0,0);d.setDate(d.getDate()+i);return d;});
+const fD=new Intl.DateTimeFormat('en-PH',{weekday:'short'}),fL=new Intl.DateTimeFormat('en-PH',{weekday:'long',month:'long',day:'numeric'});
+let di=0,ty='All';
+const KEY='lakas-demo-bookings';
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return []}};
+const save=b=>{try{localStorage.setItem(KEY,JSON.stringify(b))}catch(e){}};
+let mine=load().filter(b=>b.ts>=DAYS[0].getTime());save(mine);
+const toMin=t=>{const[h,m]=t.split(/[: ]/);let H=+h%12;if(t.endsWith('PM'))H+=12;return H*60+ +m;};
+function sessions(i){const d=DAYS[i];return (PLAN_BY_DOW[d.getDay()]||[]).map(k=>{const c=CL[k];const seed=(d.getDate()*7+k*13)%11;const taken=Math.min(c[5],Math.round(c[5]*.35)+seed);
+  const id=`${d.toISOString().slice(0,10)}-${k}`;const booked=mine.some(b=>b.id===id);const ts=d.getTime()+toMin(c[0])*60000;
+  return {id,k,time:c[0],name:c[1],type:c[2],coach:COACH.find(x=>x.k===c[3]),dur:c[4],cap:c[5],left:c[5]-taken-(booked?1:0),lvl:c[6],booked,past:ts<now.getTime(),ts,date:d};}).sort((a,b)=>a.ts-b.ts);}
+function renderDays(){$('days').innerHTML=DAYS.map((d,i)=>`<button class="day" type="button" data-day="${i}" aria-pressed="${i===di}" aria-label="${fL.format(d)}">${i===0?'Today':fD.format(d)}<b>${d.getDate()}</b></button>`).join('');
+  $('ctypes').innerHTML=TYPES.map(t=>`<button class="chip" type="button" data-ty="${t}" aria-pressed="${t===ty}">${t}</button>`).join('');}
+function renderSched(){const list=sessions(di).filter(s=>ty==='All'||s.type===ty);
+  $('sched').innerHTML=list.length?list.map(s=>{const pct=Math.round((s.cap-s.left)/s.cap*100);const low=s.left<=3;
+   return `<div class="crow"><time>${s.time}<small>${s.dur} min</small></time><div class="ph">${pic(s.coach.img,'','56px',[120,160])}</div>
+   <div class="n"><b>${s.name}<span class="lvl">${s.lvl}</span></b><span>with Coach ${s.coach.n.split(' ')[0]}</span></div>
+   <div class="slots ${low?'low':''}">${s.left<=0?'Full':`${s.left} of ${s.cap} slots left`}<div class="bar"><i style="width:${pct}%"></i></div></div>
+   ${s.booked?`<button class="btn dark sm" type="button" data-cancel="${s.id}">Booked ✓</button>`:s.past?`<button class="btn dark sm" type="button" disabled>Started</button>`:s.left<=0?`<button class="btn dark sm" type="button" disabled>Full</button>`:`<button class="btn sm" type="button" data-book="${s.id}">Book</button>`}</div>`}).join('')
+   :`<div class="empty">No ${ty==='All'?'':ty+' '}classes on this day. Try another day or class type.</div>`;}
+function renderMine(){mine.sort((a,b)=>a.ts-b.ts);$('mine').innerHTML=mine.length?mine.map(b=>`<div class="bk"><div><b>${b.name}</b><span>${fL.format(new Date(b.ts))} · ${b.time}<br>Coach ${b.coach}</span></div><button type="button" data-cancel="${b.id}" aria-label="Cancel ${b.name}">Cancel</button></div>`).join('')
+  :'<div class="empty">No bookings yet. Pick a class to reserve your slot.</div>';}
+function findS(id){for(let i=0;i<7;i++){const s=sessions(i).find(x=>x.id===id);if(s)return s;}}
+function askBook(id){const s=findS(id);
+  $('bdlgH').textContent='Confirm booking';
+  $('bdlgBody').innerHTML=`<div style="display:flex;gap:14px;align-items:center"><div class="ph" style="width:64px;height:64px;border-radius:50%;flex-shrink:0">${pic(s.coach.img,'','64px',[160])}</div><div><b style="font-size:18px">${s.name}</b><br><span style="color:var(--muted)">${fL.format(s.date)} · ${s.time} · ${s.dur} min<br>Coach ${s.coach.n}</span></div></div>
+   <p style="margin:0;color:var(--muted);font-size:14px">${s.left} slots left. Please arrive 10 minutes early. You can cancel up to 2 hours before class.</p>
+   <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn dark" type="button" data-close>Cancel</button><button class="btn" type="button" id="doBook">Confirm booking</button></div>`;
+  $('bdlg').showModal();
+  $('doBook').onclick=()=>{const b=$('doBook');b.disabled=true;b.innerHTML='<span class="spin" aria-hidden="true"></span> Booking…';
+    setTimeout(()=>{mine.push({id:s.id,name:s.name,time:s.time,coach:s.coach.n.split(' ')[0],ts:s.ts});save(mine);
+      $('bdlgH').textContent="You're booked!";
+      $('bdlgBody').innerHTML=`<p style="margin:0;font-size:17px"><b>${s.name}</b> on ${fL.format(s.date)} at ${s.time} with Coach ${s.coach.n.split(' ')[0]}.</p><p style="margin:0;color:var(--muted);font-size:14px">On a live site you'd also get a text reminder 2 hours before class. This demo saves the booking only on this device.</p><div style="display:flex;justify-content:flex-end"><button class="btn" type="button" data-close>Done</button></div>`;
+      renderSched();renderMine();},700);};}
+document.addEventListener('click',e=>{const b=e.target.closest('button,a');if(!b)return;
+  if(b.dataset.day){di=+b.dataset.day;renderDays();renderSched();}
+  if(b.dataset.ty){ty=b.dataset.ty;renderDays();renderSched();}
+  if(b.dataset.book)askBook(b.dataset.book);
+  if(b.dataset.cancel){const x=mine.find(m=>m.id===b.dataset.cancel);mine=mine.filter(m=>m.id!==b.dataset.cancel);save(mine);renderSched();renderMine();toast(`Cancelled ${x?x.name:'booking'}.`);}
+  if(b.hasAttribute('data-close'))b.closest('dialog').close();
+  if(b.dataset.lb!==undefined)lbOpen(+b.dataset.lb);
+  if(b.dataset.plan){$('jplan').value=b.dataset.plan;if(b.dataset.coach)toast(`Personal Training with ${b.dataset.coach} selected. Fill in your details below.`);}
+});
+document.addEventListener('keydown',e=>{if($('lb').hidden)return;if(e.key==='Escape')lbClose();if(e.key==='ArrowLeft')lbShow(lbi-1);if(e.key==='ArrowRight')lbShow(lbi+1);});
+function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').hidden=true,2600);}
+
+/* registration with validation and honeypot */
+const today=new Date(now);const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+$('jstart').min=iso(today);const def=new Date(today);def.setDate(def.getDate()+1);$('jstart').value=iso(def);
+const RULES={name:v=>v.trim().length>=3||'Please enter your full name.',email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())||'Please enter a valid email address.',
+ phone:v=>/^(\+?63|0)9\d{9}$/.test(v.replace(/[\s-]/g,''))||'Use a PH mobile number, e.g. 0917 123 4567.',plan:v=>!!v||'Please choose a membership.',
+ start:v=>(v&&v>=$('jstart').min)||'Pick a start date from today onwards.',consent:()=>$('jconsent').checked||'Please agree to the privacy policy to continue.'};
+const FIELDS={name:'jname',email:'jemail',phone:'jphone',plan:'jplan',start:'jstart',consent:'jconsent'};
+function check(k){const el=$(FIELDS[k]);const r=RULES[k](el.value);const f=$('f-'+k);f.classList.toggle('bad',r!==true);f.querySelector('.err').textContent=r===true?'':r;el.setAttribute('aria-invalid',r!==true);return r===true;}
+Object.keys(FIELDS).forEach(k=>{$(FIELDS[k]).addEventListener('blur',()=>{if($(FIELDS[k]).value||k==='consent')check(k);});$(FIELDS[k]).addEventListener('change',()=>check(k));});
+const started=Date.now();
+$('jform').addEventListener('submit',e=>{e.preventDefault();
+  const bad=Object.keys(FIELDS).filter(k=>!check(k));if(bad.length){$(FIELDS[bad[0]]).focus();return;}
+  if($('jcompany').value||Date.now()-started<1500){toast('Please try again.');return;} /* spam guard: honeypot + minimum fill time */
+  const b=$('jsubmit');b.disabled=true;b.innerHTML='<span class="spin" aria-hidden="true"></span> Submitting…';
+  setTimeout(()=>{const p=PLANS.find(x=>x.id===$('jplan').value);
+    $('jmsg').textContent=`Thanks, ${$('jname').value.trim().split(' ')[0]}! Your ${p.n} registration starting ${fL.format(new Date($('jstart').value+'T00:00'))} is in. We'll text you to confirm, then you can pay on your first visit.`;
+    $('jref').textContent='LF-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    $('jform').hidden=true;$('jok').hidden=false;$('jok').focus();b.disabled=false;b.innerHTML='Submit registration <span class="arr" aria-hidden="true">→</span>';},900);});
+$('jagain').onclick=()=>{$('jform').reset();$('jstart').value=iso(def);$('jform').hidden=false;$('jok').hidden=true;$('jname').focus();};
+
+/* header, mobile menu, reveals */
+const hdr=$('hdr');addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
+const openM=o=>{$('mnav').hidden=!o;$('burger').setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';if(o)$('mclose').focus();};
+$('burger').onclick=()=>openM(true);$('mclose').onclick=()=>openM(false);$('mnav').addEventListener('click',e=>{if(e.target.closest('a'))openM(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('mnav').hidden)openM(false);});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const links=[...document.querySelectorAll('.nav a')];const so=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+x.target.id));}),{rootMargin:'-45% 0px -50% 0px'});
+['facilities','membership','classes','trainers','visit'].forEach(id=>so.observe($(id)));
+
+renderDays();renderSched();renderMine();
+</script>
 </body></html>

@@ -1,0 +1,197 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Member Portal · Lakas Fitness (Demo)</title>
+<meta name="description" content="Demo member portal for Lakas Fitness: membership status, QR check-in pass, class bookings, attendance and payments. Sample data only.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,800..900&display=swap">
+<link rel="stylesheet" href="../lakas.css">
+<style>
+/* Layout: login split screen, then app shell with sidebar; overview = membership card + QR pass + stats + upcoming + recent visits. */
+.mcard{background:linear-gradient(135deg,#1f1f23 0%,#121214 60%),#121214;border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;position:relative;overflow:hidden}
+.mcard::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(225,29,42,.35),transparent 70%)}
+.mcard h2{margin:6px 0 2px;font-size:28px;font-weight:800}
+.mcard .meta{color:var(--muted);font-size:14px}
+.prog{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:16px 0 8px}
+.prog i{display:block;height:100%;background:var(--red);border-radius:99px}
+.pass{background:#fff;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#000;position:relative;z-index:1;align-self:start}
+.pass svg{width:128px;height:128px;display:block}
+.pass small{font-size:11px;font-weight:700;letter-spacing:.06em}
+.pass .cd{font-size:11px;color:#52525B}
+.list .it{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list .it:last-child{border-bottom:0}
+.list .it b{display:block;font-size:15px}
+.list .it span{color:var(--muted)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;font-size:12px;text-align:center}
+.cal .h{color:var(--dim);font-weight:700;padding-bottom:4px}
+.cal .d{aspect-ratio:1/1;border-radius:6px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:var(--dim);font-variant-numeric:tabular-nums}
+.cal .d.v{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.cal .d.t{outline:2px solid #fff;outline-offset:-2px;color:#fff}
+.cal .d.x{visibility:hidden}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.pf{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.err-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.4);color:#FCA5A5;border-radius:8px;padding:10px 12px;font-size:14px}
+@media (max-width:640px){.mcard{grid-template-columns:1fr}.pass{flex-direction:row;align-self:stretch;justify-content:flex-start;gap:14px}.pass svg{width:96px;height:96px}.pf{grid-template-columns:1fr}}
+</style>
+</head><body>
+
+<div class="demobar">Demo member portal by <a href="../../../">Likha Web Studio</a>. Sample account and sample data only; nothing here is a real person or record.</div>
+
+<!-- login -->
+<div class="login" id="loginView">
+  <div class="art"><div class="ph"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=70" alt="" onerror="this.remove()"></div>
+    <div class="cap"><a class="logo" href="../" style="align-items:flex-start"><b>Lak<span>a</span>s</b><small>Fitness</small></a><h1 class="h2" style="margin-top:18px">Your training,<br><em>all in one place.</em></h1></div></div>
+  <form id="loginForm" novalidate>
+    <div><h2 style="margin:0;font-size:26px">Member login</h2><p style="margin:6px 0 0;color:var(--muted)">Check your plan, book classes and get your check-in pass.</p></div>
+    <div class="notice">Demo account: <b>juan.demo@example.com</b> / <b>lakas-demo</b> (already filled in).</div>
+    <div class="field"><label for="lemail">Email</label><input id="lemail" type="email" autocomplete="username" value="juan.demo@example.com" required></div>
+    <div class="field"><label for="lpass">Password</label><input id="lpass" type="password" autocomplete="current-password" value="lakas-demo" required></div>
+    <div class="err-box" id="lerr" hidden role="alert"></div>
+    <button class="btn" type="submit" id="lbtn">Log in <span class="arr" aria-hidden="true">→</span></button>
+    <p style="margin:0;font-size:13px;color:var(--dim)">On a live system, login is verified by the server with hashed passwords, rate limiting and secure session cookies. This demo only checks the sample account in your browser.</p>
+    <a href="../" style="font-size:14px;color:var(--muted)">← Back to the Lakas Fitness website</a>
+  </form>
+</div>
+
+<!-- app -->
+<div class="app" id="appView" hidden>
+  <aside class="side" id="side">
+    <a class="logo" href="../"><b>Lak<span>a</span>s</b><small>Fitness</small></a>
+    <nav aria-label="Member portal">
+      <button type="button" data-v="overview" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>Overview</button>
+      <button type="button" data-v="bookings"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/></svg>My bookings</button>
+      <button type="button" data-v="attendance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2"/></svg>Attendance</button>
+      <button type="button" data-v="payments"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/></svg>Payments</button>
+      <button type="button" data-v="profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>Profile</button>
+    </nav>
+    <div class="foot"><span class="badge-demo">Demo mode</span><button class="btn dark sm" type="button" id="logout">Log out</button><a href="../">← Back to website</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div style="display:flex;gap:12px;align-items:center"><button class="x mtoggle" type="button" id="mt" aria-label="Open menu">☰</button><div><h1 id="vt">Welcome back, Juan</h1><p id="vs">Here's your membership at a glance.</p></div></div>
+      <a class="btn sm" href="../#classes">Book a class</a>
+    </div>
+    <div class="notice">Sample data for demonstration. Class bookings you make on the demo website appear under My bookings.</div>
+
+    <div id="v-overview" class="view" style="display:flex;flex-direction:column;gap:18px">
+      <div class="mcard">
+        <div style="position:relative;z-index:1">
+          <span class="st ok" id="mstatus">Active</span>
+          <h2 id="mplan">Quarterly membership</h2>
+          <div class="meta" id="mdates"></div>
+          <div class="prog" aria-hidden="true"><i id="mprog"></i></div>
+          <div class="meta" id="mleft"></div>
+          <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="btn sm" type="button" id="renewBtn">Request renewal</button><button class="btn dark sm" type="button" data-go="payments">Payment history</button></div>
+        </div>
+        <div class="pass"><svg viewBox="0 0 29 29" id="qr" role="img" aria-label="Sample check-in QR pass"></svg><div><small>CHECK-IN PASS</small><div class="cd" id="qrcd">Refreshes in 60s</div></div></div>
+      </div>
+      <div class="kpis" id="mk"></div>
+      <div class="grid2">
+        <div class="panel"><h2>Upcoming classes <a class="tlink" href="../#classes" style="font-size:13px;color:var(--muted)">Book more →</a></h2><div class="list" id="upc"></div></div>
+        <div class="panel"><h2>Recent visits</h2><div class="list" id="rv"></div></div>
+      </div>
+    </div>
+
+    <div id="v-bookings" class="view" hidden><div class="panel"><h2>My bookings</h2><div class="list" id="allb"></div></div></div>
+
+    <div id="v-attendance" class="view" hidden>
+      <div class="grid2">
+        <div class="panel"><h2 id="calh">This month</h2><div class="cal" id="cal"></div><div class="legend"><span><i style="background:var(--red)"></i>Visited</span><span><i style="border:2px solid #fff"></i>Today</span></div></div>
+        <div class="panel"><h2>Visit log</h2><div class="tscroll"><table><thead><tr><th>Date</th><th>Time in</th><th>Time out</th></tr></thead><tbody id="vlog"></tbody></table></div></div>
+      </div>
+    </div>
+
+    <div id="v-payments" class="view" hidden><div class="panel"><h2>Payment history</h2><div class="tscroll"><table><thead><tr><th>Date</th><th>Item</th><th>Method</th><th>Reference</th><th style="text-align:right">Amount</th></tr></thead><tbody id="pay"></tbody></table></div><p style="margin:12px 0 0;font-size:13px;color:var(--dim)">On a live system this list comes from the gym's payment records.</p></div></div>
+
+    <div id="v-profile" class="view" hidden>
+      <form class="panel" id="pform" style="display:flex;flex-direction:column;gap:14px;max-width:640px" novalidate>
+        <h2>Personal profile</h2>
+        <div class="pf">
+          <div class="field"><label for="pname">Full name</label><input id="pname" required></div>
+          <div class="field"><label for="pphone">Contact number</label><input id="pphone" type="tel" required></div>
+          <div class="field"><label for="pemail">Email</label><input id="pemail" type="email" required></div>
+          <div class="field"><label for="pgoal">Fitness goal</label><select id="pgoal"><option>Build strength</option><option>Lose weight</option><option>Improve endurance</option><option>General fitness</option></select></div>
+          <div class="field"><label for="pec">Emergency contact</label><input id="pec" value="Maria Dela Cruz · 0918 XXX 1122"></div>
+          <div class="field"><label for="pid">Member ID</label><input id="pid" readonly></div>
+        </div>
+        <label class="check"><input type="checkbox" checked> Send me class reminders by text</label>
+        <div><button class="btn" type="submit">Save changes</button></div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<dialog id="rdlg" aria-labelledby="rdlgH"><div class="mhead"><h3 id="rdlgH">Renewal inquiry</h3><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <form class="mbody" id="rform">
+    <p style="margin:0;color:var(--muted)">Tell us which plan you'd like next. The front desk will confirm the price and send a payment link.</p>
+    <div class="field"><label for="rplan">Plan</label><select id="rplan"><option>Quarterly (same plan)</option><option>Monthly</option><option>Annual</option><option>Personal Training add-on</option></select></div>
+    <div class="field"><label for="rnote">Note (optional)</label><textarea id="rnote" rows="3" placeholder="e.g. I'd like to start after my current plan ends"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn dark" type="button" data-close>Cancel</button><button class="btn" type="submit" id="rbtn">Send inquiry</button></div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="../lakas-data.js"></script>
+<script>
+const $=id=>document.getElementById(id);const L=LAKAS,M=L.demoMember;
+const TITLES={overview:[`Welcome back, ${M.first}`,"Here's your membership at a glance."],bookings:['My bookings','Classes you reserved.'],attendance:['Attendance','Every check-in from your QR pass.'],payments:['Payments','Your membership payments.'],profile:['Profile','Keep your details up to date.']};
+function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').hidden=true,2600);}
+const SKEY='lakas-demo-member';
+const logged=()=>{try{return sessionStorage.getItem(SKEY)==='1'}catch(e){return false}};
+function setLogged(v){try{v?sessionStorage.setItem(SKEY,'1'):sessionStorage.removeItem(SKEY)}catch(e){}}
+
+$('loginForm').addEventListener('submit',e=>{e.preventDefault();const b=$('lbtn');$('lerr').hidden=true;
+  if($('lemail').value.trim().toLowerCase()!=='juan.demo@example.com'||$('lpass').value!=='lakas-demo'){$('lerr').textContent='That email and password don’t match the demo account. Use the details shown above.';$('lerr').hidden=false;return;}
+  b.disabled=true;b.innerHTML='<span class="spin" aria-hidden="true"></span> Logging in…';
+  setTimeout(()=>{setLogged(true);start();b.disabled=false;b.innerHTML='Log in <span class="arr" aria-hidden="true">→</span>';},700);});
+$('logout').onclick=()=>{setLogged(false);$('appView').hidden=true;$('loginView').hidden=false;};
+
+function show(v){document.querySelectorAll('.view').forEach(x=>x.hidden=x.id!=='v-'+v);
+  document.querySelectorAll('.side nav button').forEach(b=>b.dataset.v===v?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  $('vt').textContent=TITLES[v][0];$('vs').textContent=TITLES[v][1];$('side').classList.remove('open');}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.v)show(b.dataset.v);if(b.dataset.go)show(b.dataset.go);
+  if(b.hasAttribute('data-close'))b.closest('dialog').close();
+  if(b.dataset.cancel){const all=L.bookings().filter(x=>x.id!==b.dataset.cancel);try{localStorage.setItem('lakas-demo-bookings',JSON.stringify(all))}catch(e){}renderBookings();toast('Booking cancelled.');}});
+$('mt').onclick=()=>$('side').classList.toggle('open');
+$('side').addEventListener('click',e=>{if(e.target===$('side'))$('side').classList.remove('open');});
+
+function bookingsHTML(list,empty){return list.length?list.map(b=>`<div class="it"><div><b>${b.name}</b><span>${L.fmt(b.ts,{weekday:'short',month:'short',day:'numeric'})} · ${b.time} · Coach ${b.coach}</span></div><button class="btn dark sm" type="button" data-cancel="${b.id}">Cancel</button></div>`).join(''):`<div class="empty">${empty}</div>`;}
+function renderBookings(){const bk=L.bookings().filter(b=>b.ts>=+L.NOW-3*36e5).sort((a,b)=>a.ts-b.ts);
+  $('upc').innerHTML=bookingsHTML(bk.slice(0,3),'No upcoming classes. <a href="../#classes" style="color:#fff">Book one on the website</a> and it will show up here.');
+  $('allb').innerHTML=bookingsHTML(bk,'You have no bookings yet. <a href="../#classes" style="color:#fff">Browse the class schedule</a>.');
+  renderKpis(bk.length);}
+function renderKpis(nb){const month=M.visits.filter(v=>new Date(v.t).getMonth()===L.NOW.getMonth()).length;
+  const streak=(()=>{let w=0;for(let i=0;i<8;i++){const a=+L.NOW-(i+1)*7*L.DAY,b=+L.NOW-i*7*L.DAY;if(M.visits.some(v=>v.t>=a&&v.t<b))w++;else break;}return w;})();
+  $('mk').innerHTML=[['Visits this month',month,'from your check-ins'],['Weekly streak',streak+' wks','at least one visit a week'],['Upcoming classes',nb,'booked'],['Days left',Math.max(0,M.left),'on your plan']].map(([a,b,c])=>`<div class="kpi"><span>${a}</span><b>${b}</b><small>${c}</small></div>`).join('');}
+
+function start(){
+  $('loginView').hidden=true;$('appView').hidden=false;
+  $('mplan').textContent=`${M.plan} membership`;
+  $('mdates').textContent=`Member ID ${M.id} · Started ${L.fmt(M.start,{month:'long',day:'numeric',year:'numeric'})}`;
+  $('mprog').style.width=Math.min(100,Math.round((M.total-M.left)/M.total*100))+'%';
+  $('mleft').textContent=`${M.left} days left · Expires ${L.fmt(M.exp,{weekday:'short',month:'long',day:'numeric',year:'numeric'})}`;
+  $('mstatus').className='st '+(M.left<=7?'warn':'ok');$('mstatus').textContent=M.left<=7?'Expiring soon':'Active';
+  let k=0,c=60;L.qr($('qr'),7);setInterval(()=>{c--;if(c<=0){c=60;L.qr($('qr'),++k+7);}$('qrcd').textContent=`Refreshes in ${c}s`;},1000);
+  $('rv').innerHTML=M.visits.slice(0,5).map(v=>`<div class="it"><div><b>${L.fmt(v.t,{weekday:'long',month:'short',day:'numeric'})}</b><span>${L.time(v.t)} – ${L.time(v.out)}</span></div><span>${Math.round((v.out-v.t)/6e4)} min</span></div>`).join('');
+  /* calendar */
+  const y=L.NOW.getFullYear(),m=L.NOW.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  const vd=new Set(M.visits.filter(v=>new Date(v.t).getMonth()===m).map(v=>new Date(v.t).getDate()));
+  $('calh').textContent=L.fmt(L.NOW,{month:'long',year:'numeric'})+` · ${vd.size} visits`;
+  $('cal').innerHTML=['S','M','T','W','T','F','S'].map(d=>`<div class="h">${d}</div>`).join('')+Array(first).fill('<div class="d x"></div>').join('')+
+    [...Array(days)].map((_,i)=>`<div class="d ${vd.has(i+1)?'v':''} ${i+1===L.NOW.getDate()?'t':''}" ${vd.has(i+1)?`aria-label="Visited on day ${i+1}"`:''}>${i+1}</div>`).join('');
+  $('vlog').innerHTML=M.visits.map(v=>`<tr><td>${L.fmt(v.t,{weekday:'short',month:'short',day:'numeric'})}</td><td>${L.time(v.t)}</td><td>${L.time(v.out)}</td></tr>`).join('');
+  $('pay').innerHTML=M.payments.map(p=>`<tr><td>${L.fmt(p.date,{month:'short',day:'numeric',year:'numeric'})}</td><td>${p.item}</td><td>${p.method}</td><td>${p.ref}</td><td style="text-align:right">${L.peso(p.amount)}</td></tr>`).join('');
+  $('pname').value=M.name;$('pphone').value=M.phone;$('pemail').value=M.email;$('pid').value=M.id;
+  renderBookings();show(location.hash.slice(1) in TITLES?location.hash.slice(1):'overview');
+}
+$('renewBtn').onclick=()=>$('rdlg').showModal();
+$('rform').addEventListener('submit',e=>{e.preventDefault();const b=$('rbtn');b.disabled=true;b.innerHTML='<span class="spin" aria-hidden="true"></span> Sending…';
+  setTimeout(()=>{$('rdlg').close();b.disabled=false;b.textContent='Send inquiry';toast('Renewal inquiry sent. The front desk will contact you (demo).');},700);});
+$('pform').addEventListener('submit',e=>{e.preventDefault();const ok=[...$('pform').querySelectorAll('input[required]')].every(i=>i.checkValidity());toast(ok?'Profile saved (demo only, nothing was sent).':'Please fill in all required fields.');});
+addEventListener('storage',e=>{if(e.key==='lakas-demo-bookings'&&logged())renderBookings();});
+if(logged())start();
+</script>
+</body></html>
