@@ -1,103 +1,224 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Kusina ni Lola Demo</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kusina ni Lola · Lutong-bahay delivered in Marikina and Pasig</title>
+<meta name="description" content="Home-cooked Filipino ulam, party bilao and kakanin from Kusina ni Lola. Order online for lunch, dinner or your next handaan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
-</head><body>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
 <style>
-/* Layout: home-cooked food delivery — green banana-leaf band hero, carinderia-board menu list beside a sticky order panel. Single light look. */
+/* Layout: home-cooked food delivery — photo hero on banana-leaf green, how-it-works, photo menu beside a sticky order panel with delivery-area fees, Lola's story, party trays, reviews, FAQ. Single light look. */
 :root{
-  --bg:#FFFFFF; --leaf:#1F5132; --leaf-2:#2C6B45; --sun:#F4C542; --ink:#1A1A14; --muted:#5F6358; --line:#E4E6DF; --soft:#F2F4EE; --bar:#111318;
-  --display:'DM Serif Display', Georgia, serif;
-  --body:'Nunito Sans', system-ui, sans-serif;
-  color-scheme: light;
+  --bg:#FFFFFF; --leaf:#1F5132; --leaf-2:#2C6B45; --sun:#F4C542; --ink:#1A1A14; --muted:#5F6358; --line:#E4E6DF; --soft:#F5F3EC; --bar:#111318; --red:#B7412E;
+  --display:'DM Serif Display',Georgia,serif;
+  --body:'Nunito Sans',system-ui,sans-serif;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
-.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding-block:9px}
-.demo b{color:#FFFFFF}
-.top{background:var(--leaf);color:#FFFFFF}
-.top header{display:flex;justify-content:space-between;align-items:center;padding-block:18px;gap:16px}
-.brand{font-family:var(--display);font-size:28px}
-.brand small{display:block;font-family:var(--body);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sun);font-weight:700}
-.top .hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;padding-block:28px 48px}
-.top h1{font-family:var(--display);font-weight:400;font-size:clamp(42px,6.5vw,76px);line-height:1;margin:0 0 16px;text-wrap:balance}
-.top h1 em{font-style:normal;color:var(--sun)}
-.top p{color:#D8E6DC;font-size:18px;margin:0;max-width:46ch}
-.badges{display:flex;flex-direction:column;gap:10px}
-.badge{background:var(--leaf-2);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-weight:600}
-.badge b{color:var(--sun)}
-.btn{font:800 16px var(--body);border:0;border-radius:8px;padding:13px 20px;cursor:pointer;background:var(--sun);color:var(--ink);text-decoration:none;display:inline-block}
-.btn.dark{background:var(--leaf);color:#FFFFFF}
-.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
-main .wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:36px;padding-block:40px 64px;align-items:start}
-.cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.cat{font:700 14px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
-.cat[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#FFFFFF}
-.group h2{font-family:var(--display);font-weight:400;font-size:34px;margin:28px 0 4px}
-.group .note{margin:0 0 8px}
-.dish{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;padding-block:16px;border-bottom:1px dashed #C9CDC0}
-.dish h3{margin:0;font-size:18px;font-weight:800}
-.dish p{margin:0;color:var(--muted);font-size:14px;grid-column:1}
-.dish .serve{font-size:13px;color:var(--leaf);font-weight:700}
-.dish .right{grid-row:1/span 3;grid-column:2;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px}
-.price{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
-.add{font:800 14px var(--body);border:0;background:var(--leaf);color:#FFFFFF;border-radius:8px;padding:9px 14px;cursor:pointer;min-height:40px}
-.note{font-size:13px;color:var(--muted)}
-.panel{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));background:var(--soft);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px}
-.panel h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0}
-.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;font-size:15px;padding-block:6px}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.demo{background:var(--bar);color:#E8E9EE;font-size:13px;text-align:center;padding:9px 16px}
+.demo a{color:#fff;font-weight:700}
+.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--c1,#C98B4A),var(--c2,#6E3B1E))}
+.ph img{width:100%;height:100%;object-fit:cover}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.btn{font:800 15px var(--body);border:0;border-radius:999px;padding:12px 22px;cursor:pointer;background:var(--sun);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px}
+.btn.dark{background:var(--leaf);color:#fff}
+.btn.ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* header */
+header{position:sticky;top:0;z-index:25;background:var(--leaf);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px}
+.brand{font-family:var(--display);font-size:26px;line-height:1;text-decoration:none;display:flex;flex-direction:column}
+.brand small{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sun);margin-top:4px}
+nav{display:flex;gap:24px;font-weight:700;font-size:15px}
+nav a{text-decoration:none;opacity:.85}nav a:hover{opacity:1}
+/* hero */
+.hero{background:var(--leaf);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:48px 64px}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700;margin-bottom:18px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dot,#7BD88F)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,6.4vw,78px);line-height:1;margin:0 0 18px;text-wrap:balance}
+.hero h1 em{color:var(--sun)}
+.hero p{font-size:19px;margin:0 0 26px;color:#DCE8DF;max-width:46ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:#C9DACE}
+.trust b{display:block;font-size:20px;color:#fff}
+.heroimg{position:relative}
+.heroimg .ph{aspect-ratio:1/1;border-radius:50%;border:10px solid rgba(255,255,255,.08);--c1:#C98B4A;--c2:#5A2E14}
+.sticker{position:absolute;background:#fff;color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(0,0,0,.25);font-size:14px;display:flex;gap:10px;align-items:center}
+.sticker b{display:block;font-size:15px}
+.sticker.s1{left:-8px;bottom:12%}
+.sticker.s2{right:-6px;top:10%;background:var(--sun)}
+.stars{color:#E8A317;letter-spacing:1px}
+/* how */
+.how{background:var(--soft)}
+.how .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-block:28px}
+.how div{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.how b{display:block;color:var(--ink);font-size:16px}
+.how i{font-style:normal;width:36px;height:36px;border-radius:50%;background:var(--leaf);color:#fff;display:grid;place-items:center;font-weight:800;flex-shrink:0}
+/* sections */
+section{padding-block:72px}
+section h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.6vw,50px);line-height:1.05;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:58ch}
+/* order area */
+main.order .wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;position:sticky;top:66px;background:var(--bg);padding-block:10px;z-index:5}
+.cat{font:700 15px var(--body);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-height:40px}
+.cat[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.group{margin-bottom:36px}
+.group h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 4px}
+.group>p{color:var(--muted);margin:0 0 16px;font-size:15px}
+.dishes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.dish{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;border:1px solid var(--line);border-radius:16px;padding:10px;background:var(--bg)}
+.dish .ph{border-radius:12px;aspect-ratio:1/1}
+.dish .bd{display:flex;flex-direction:column;gap:4px;padding:4px 4px 2px 0}
+.dish h4{margin:0;font-size:17px;line-height:1.25}
+.dish p{margin:0;color:var(--muted);font-size:14px;flex:1}
+.meta{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.pill.hot{background:#FBE3DE;color:var(--red)}
+.pill.best{background:#FFF3C9;color:#7A5A00}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
+.price{font-weight:800;font-variant-numeric:tabular-nums}
+.add{font:800 14px var(--body);border:0;background:var(--leaf);color:#fff;border-radius:999px;padding:8px 16px;cursor:pointer;min-height:38px}
+.add.in{background:var(--sun);color:var(--ink)}
+.panel{position:sticky;top:84px;border:1.5px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px;background:var(--bg);box-shadow:0 10px 30px rgba(26,26,20,.06);max-height:calc(100vh - 100px);overflow-y:auto}
+.panel h2{font-size:30px;margin:0}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding-block:8px;border-bottom:1px solid var(--line);font-size:15px}
 .qty{display:flex;align-items:center;gap:6px}
-.qty button{width:30px;height:30px;border-radius:7px;border:1.5px solid #C9CDC0;background:var(--bg);color:var(--ink);cursor:pointer}
-.totals div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;padding-block:2px}
-.totals .grand{font-weight:800;font-size:19px;border-top:1.5px solid #C9CDC0;padding-top:8px;margin-top:4px}
-.free{font-size:13px;font-weight:700;color:var(--leaf);background:#E3EEDF;border-radius:8px;padding:8px 10px}
-form{display:flex;flex-direction:column;gap:11px}
-label{font-weight:700;font-size:14px;display:flex;flex-direction:column;gap:5px}
-input,select,textarea{font:16px var(--body);padding:10px 12px;border-radius:8px;border:1.5px solid #C9CDC0;background:var(--bg);color:var(--ink)}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
-.choices{display:flex;gap:8px;flex-wrap:wrap}
-.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid #C9CDC0;border-radius:8px;padding:9px 12px;font-weight:600;background:var(--bg)}
-.qr{border:2px dashed #C9CDC0;border-radius:10px;padding:16px;text-align:center;font-size:14px;color:var(--muted);background:var(--bg)}
-.done{display:flex;flex-direction:column;gap:10px}
-.done .num{font-family:var(--display);font-size:34px;color:var(--leaf)}
-footer{background:var(--leaf);color:#D8E6DC}
-footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px}
-.mbar{position:fixed;left:0;right:0;bottom:0;background:var(--leaf);color:#FFFFFF;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20;display:none}
+.qty button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.totals div{display:flex;justify-content:space-between;padding-block:2px;font-variant-numeric:tabular-nums}
+.totals .grand{font-weight:800;font-size:19px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
+.free{font-size:14px;font-weight:700;color:var(--leaf);background:#E9F3EC;border-radius:10px;padding:8px 12px}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--leaf);transition:width .3s}
+form{display:flex;flex-direction:column;gap:12px}
+label{font-weight:700;font-size:14px;display:flex;flex-direction:column;gap:6px}
+input,select,textarea{font:16px var(--body);padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr;gap:10px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.choices label:has(input:checked){border-color:var(--leaf);background:#E9F3EC}
+.choices input{accent-color:var(--leaf)}
+.note{font-size:13px;color:var(--muted)}
+.gcash{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center;border:1.5px dashed var(--line);border-radius:12px;padding:12px;font-size:14px}
+.qr{width:84px;height:84px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px}
+.upload{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--leaf);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.done{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.done .num{font-family:var(--display);font-size:40px;line-height:1}
+.done .check{width:64px;height:64px;border-radius:50%;background:#E9F3EC;color:var(--leaf);display:grid;place-items:center;font-size:30px;font-weight:800}
+/* story */
+.story{background:var(--soft)}
+.story .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.story .ph{border-radius:24px;aspect-ratio:4/5;--c1:#B57A3E;--c2:#4A2A14}
+.story p{color:var(--muted);font-size:17px}
+.story blockquote{margin:24px 0 0;font-family:var(--display);font-size:26px;line-height:1.25;color:var(--leaf);border-left:4px solid var(--sun);padding-left:18px}
+/* trays */
+.trays .wrap>.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tray{border-radius:20px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+.tray .ph{aspect-ratio:16/10}
+.tray .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tray h3{margin:0;font-size:20px}
+.tray ul{margin:4px 0 8px;padding-left:18px;color:var(--muted);font-size:15px;flex:1}
+.tray .amt{font-family:var(--display);font-size:30px;line-height:1}
+.tray .amt small{font-family:var(--body);font-size:14px;color:var(--muted)}
+.tray.pop{border:2px solid var(--leaf)}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rev{border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.rev p{margin:0;flex:1}
+.who{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
+.who b{display:block;color:var(--ink)}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex-shrink:0}
+.revtop{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.fbsum{background:var(--soft);border-radius:14px;padding:12px 16px;font-size:14px;color:var(--muted)}
+.fbsum b{font-size:22px;color:var(--ink)}
+/* area + faq */
+.areafaq .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.areas{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.areas div{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.areas div:last-child{border:0}
+.areas div:nth-child(odd){background:var(--soft)}
+details{border-bottom:1px solid var(--line);padding-block:14px}
+summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--leaf)}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--muted)}
+footer{background:var(--leaf);color:#DCE8DF;font-size:14px}
+footer .wrap{padding-block:40px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+footer h4{color:#fff;margin:0 0 10px;font-size:15px}
+footer a{text-decoration:none;display:block;padding-block:3px}
+.legal{border-top:1px solid rgba(255,255,255,.15);padding-block:16px!important;display:flex!important;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.mbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;z-index:20;padding-bottom:env(safe-area-inset-bottom,0px);display:none}
 .mbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:12px;gap:12px}
-@media (max-width:900px){
-  main .wrap{grid-template-columns:1fr}
-  .panel{position:static}
-  .top .hero{grid-template-columns:1fr}
+.msg{position:fixed;right:18px;bottom:18px;z-index:19;width:56px;height:56px;border-radius:50%;background:#0866FF;color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(8,102,255,.4)}
+.msg svg{width:28px;height:28px}
+@media (max-width:980px){
+  main.order .wrap{grid-template-columns:1fr}
+  .panel{position:static;max-height:none}
   .mbar.show{display:block}
-  footer{padding-bottom:64px}
+  .msg{bottom:84px}
+  .trays .wrap>.grid,.revs{grid-template-columns:1fr}
+  .areafaq .wrap,.story .wrap{grid-template-columns:1fr}
+  nav{display:none}
 }
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:36px 48px;gap:32px}
+  .heroimg{max-width:360px;margin-inline:auto;width:100%}
+  .how .wrap{grid-template-columns:1fr;gap:14px}
+  .dishes{grid-template-columns:1fr}
+  .dish{grid-template-columns:100px minmax(0,1fr)}
+  section{padding-block:56px}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  footer .wrap>div:first-child{grid-column:1/-1}
+  .cats{top:62px}
+}
+@media (prefers-reduced-motion:no-preference){.add,.btn{transition:transform .12s}.add:active,.btn:active{transform:scale(.96)}}
 </style>
+</head><body>
 
-<div class="demo">Demo website by <a href="../../" style="color:#fff;font-weight:700">Likha Web Studio</a> · Want one like this for your food business? Starts at ₱3,500</div>
+<div class="demo">Sample website by <a href="../../">Likha Web Studio</a> · Want one like this for your food business? Starts at ₱3,500</div>
 
-<div class="top"><div class="wrap">
-  <header>
-    <div class="brand">Kusina ni Lola<small>Home-cooked, delivered home</small></div>
-    <a class="btn" href="#order">Order now</a>
-  </header>
-  <div class="hero">
-    <div>
-      <h1>Home cooking <em>just like Lola's.</em></h1>
-      <p>Adobo, kare-kare, pancit and kakanin, cooked fresh daily. Order now for lunch, dinner or your next party.</p>
-    </div>
-    <div class="badges">
-      <div class="badge"><span>Free delivery</span><b>₱800 and up</b></div>
-      <div class="badge"><span>Order cut-off</span><b>10 AM for lunch</b></div>
-      <div class="badge"><span>Payment</span><b>GCash or COD</b></div>
-    </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-msg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2Zm1 12.4-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8Z"/></symbol>
+</svg>
+
+<header><div class="wrap">
+  <a class="brand" href="#top">Kusina ni Lola<small>Lutong-bahay since 1987</small></a>
+  <nav aria-label="Main"><a href="#menu">Menu</a><a href="#trays">Party trays</a><a href="#story">Our story</a><a href="#faq">FAQ</a></nav>
+  <a class="btn" href="#order">Order now</a>
+</div></header>
+
+<div id="top" class="hero"><div class="wrap">
+  <div>
+    <span class="kicker" id="cutoff">Taking orders for today</span>
+    <h1>Home cooking, <em>just like Lola's.</em></h1>
+    <p>Adobo, kare-kare, sinigang and kakanin, cooked fresh every morning in our Marikina kitchen. Delivered hot to your home or office.</p>
+    <div class="ctas"><a class="btn" href="#menu">See today's menu</a><a class="btn ghost" href="#trays">Party trays and bilao</a></div>
+    <div class="trust"><div><b>12,000+</b>orders delivered</div><div><b>4.9 <span class="stars" aria-hidden="true">★</span></b>on Facebook</div><div><b>Free</b>delivery ₱800 up</div></div>
+  </div>
+  <div class="heroimg">
+    <div class="ph"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=70" alt="A table of home-cooked Filipino dishes" fetchpriority="high" onerror="this.remove()"></div>
+    <div class="sticker s1"><span class="stars" aria-hidden="true">★★★★★</span><span><b>“Lasang-bahay talaga!”</b>Mae, Pasig</span></div>
+    <div class="sticker s2"><span><b>Bilao for 10–12</b>from ₱850</span></div>
   </div>
 </div></div>
 
-<main><div class="wrap">
+<div class="how"><div class="wrap">
+  <div><i>1</i><span><b>Pick your ulam</b>Order by 10 AM for lunch, 3 PM for dinner.</span></div>
+  <div><i>2</i><span><b>Pay with GCash or COD</b>Upload your receipt in one tap.</span></div>
+  <div><i>3</i><span><b>We deliver it hot</b>Via our own riders within Marikina and Pasig.</span></div>
+</div></div>
+
+<main class="order" id="menu"><section><div class="wrap">
   <div>
+    <h2>Today's menu</h2>
+    <p class="sub">Small batches, cooked fresh daily. When it's gone, it's gone, so order early!</p>
     <div class="cats" role="group" aria-label="Category" id="cats"></div>
-    <div id="menu"></div>
+    <div id="dishes"></div>
   </div>
   <aside class="panel" id="order" aria-label="Your order">
     <div id="orderView">
@@ -105,92 +226,181 @@ footer .wrap{padding-block:24px;display:flex;justify-content:space-between;flex-
       <div id="lines"></div>
       <p class="note" id="empty">Your order is empty. Pick a dish from the menu.</p>
       <div id="sum">
-        <div class="totals">
+        <div class="totals" style="margin-top:10px">
           <div><span>Subtotal</span><span id="sub">₱0</span></div>
           <div><span>Delivery</span><span id="fee">₱0</span></div>
           <div class="grand"><span>Total</span><span id="total">₱0</span></div>
         </div>
-        <div class="free" id="free"></div>
-        <form id="checkout" style="margin-top:12px">
+        <div class="free" id="free" style="margin-top:10px"></div>
+        <form id="checkout" style="margin-top:14px">
           <label for="oname">Name<input id="oname" required autocomplete="name" value="Ana Reyes"></label>
-          <label for="ophone">Mobile number<input id="ophone" required inputmode="tel" value="0918 765 4321"></label>
-          <label for="oaddr">Delivery address<textarea id="oaddr" rows="2" required>Blk 5 Lot 12, Sampaguita St.</textarea></label>
+          <label for="ophone">Mobile number<input id="ophone" required inputmode="tel" autocomplete="tel" value="0918 765 4321"></label>
+          <label for="oarea">Barangay<select id="oarea"></select></label>
+          <label for="oaddr">Street, house no., landmark<textarea id="oaddr" rows="2" required>12 Sampaguita St., near the blue gate</textarea></label>
           <div class="two">
             <label for="odate">Date<select id="odate"></select></label>
-            <label for="oslot">Time<select id="oslot"><option>11:00 AM – 12:00 NN</option><option>12:00 – 1:00 PM</option><option>5:00 – 6:00 PM</option><option>6:00 – 7:00 PM</option></select></label>
+            <label for="oslot">Time<select id="oslot"></select></label>
           </div>
           <div class="choices" role="radiogroup" aria-label="Payment">
-            <label><input type="radio" name="pay" id="pg" value="GCash" checked> GCash</label>
-            <label><input type="radio" name="pay" id="pc" value="COD"> Cash on delivery</label>
+            <label><input type="radio" name="pay" value="GCash" checked> GCash</label>
+            <label><input type="radio" name="pay" value="COD"> Cash on delivery</label>
           </div>
-          <div class="qr" id="qr">Your GCash QR code appears here. Customers scan, pay, and upload a screenshot.</div>
-          <button class="btn dark" type="submit">Place order</button>
+          <div id="gcashBox" style="display:flex;flex-direction:column;gap:10px">
+            <div class="gcash"><svg class="qr" viewBox="0 0 29 29" role="img" aria-label="Sample GCash QR code" id="qr"></svg><span><b>Scan to pay</b><br><span class="note">Kusina ni Lola · 0917 503 2288. Then upload your receipt below.</span></span></div>
+            <label class="upload"><input type="file" accept="image/*" id="rcpt" hidden><span id="rcptTxt">＋ Upload GCash receipt</span></label>
+          </div>
+          <button class="btn dark" type="submit" id="placeBtn">Place order</button>
         </form>
       </div>
     </div>
     <div class="done" id="doneView" hidden>
+      <span class="check" aria-hidden="true">✓</span>
       <span class="note">Order number</span>
       <div class="num" id="num">KL-0000</div>
-      <p id="doneMsg"></p>
-      <p class="note">This is a demo, so no real order was sent. On a live website, the business gets notified of every order.</p>
-      <button class="btn ghost" type="button" id="again">New order</button>
+      <p id="doneMsg" style="margin:0"></p>
+      <p class="note">This is a demo, so no real order was sent. On a live website, the business gets every order on Messenger and by text.</p>
+      <button class="btn ghost" type="button" id="again" style="color:var(--leaf)">New order</button>
     </div>
   </aside>
-</div></main>
+</div></section></main>
 
-<footer><div class="wrap"><span>© Kusina ni Lola (sample business) · 0917 000 0000</span><span>Website by Likha Web Studio</span></div></footer>
+<section class="story" id="story"><div class="wrap">
+  <div class="ph"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=70" alt="Cooking in the Kusina ni Lola kitchen" loading="lazy" onerror="this.remove()"></div>
+  <div>
+    <h2>It started with Lola Remy's kitchen.</h2>
+    <p>For over 30 years, Lola Remy cooked for every birthday, fiesta and Sunday lunch on our street in Marikina. Neighbors kept asking if they could order, so in 2020 her grandchildren turned the family kitchen into Kusina ni Lola.</p>
+    <p>We still use her recipes, her clay palayok for the kare-kare, and fresh ingredients from Marikina public market every morning. No shortcuts, no MSG.</p>
+    <blockquote>“Kung hindi mo ihahain sa pamilya mo, huwag mong ibenta.”<br><span style="font-family:var(--body);font-size:15px;color:var(--muted)">Lola Remy</span></blockquote>
+  </div>
+</div></section>
 
+<section class="trays" id="trays"><div class="wrap">
+  <h2>Party trays and bilao</h2>
+  <p class="sub">For birthdays, office parties and handaan. Order at least 2 days ahead. Message us for custom packages.</p>
+  <div class="grid">
+    <div class="tray"><div class="ph" style="--c1:#D9A35B;--c2:#7A4A1C"><img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=700&q=70" alt="Pancit bilao" loading="lazy" onerror="this.remove()"></div><div class="bd"><h3>Pancit Bilao</h3><ul><li>Canton, bihon or palabok</li><li>Good for 10–12 people</li><li>With calamansi and puto</li></ul><div class="row"><span class="amt">₱850 <small>and up</small></span><button class="add" type="button" data-add="pan">Add</button></div></div></div>
+    <div class="tray pop"><div class="ph" style="--c1:#B5652E;--c2:#5A2A10"><img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=700&q=70" alt="Handaan package spread" loading="lazy" onerror="this.remove()"></div><div class="bd"><span class="pill best" style="align-self:flex-start">Most ordered</span><h3>Handaan Package</h3><ul><li>Pancit bilao, 50-pc lumpia, 2 ulam trays</li><li>Good for 20–25 people</li><li>Free delivery and setup</li></ul><div class="row"><span class="amt">₱4,500</span><button class="add" type="button" data-add="hnd">Add</button></div></div></div>
+    <div class="tray"><div class="ph" style="--c1:#E7C27A;--c2:#9A6B2A"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=700&q=70" alt="Lumpiang Shanghai tray" loading="lazy" onerror="this.remove()"></div><div class="bd"><h3>Lumpia Tray</h3><ul><li>50 pcs Lumpiang Shanghai</li><li>Sweet chili and vinegar dips</li><li>Fried fresh before delivery</li></ul><div class="row"><span class="amt">₱650</span><button class="add" type="button" data-add="lum">Add</button></div></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="revtop"><div><h2>Sabi ng mga suki</h2><p class="sub" style="margin:0">From our Facebook page reviews.</p></div><div class="fbsum"><b>4.9</b> / 5 · 2,140 reviews on Facebook</div></div>
+  <div class="revs">
+    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“Ang sarap ng kare-kare, lasang lutong probinsya! Ordered for my mom's 70th birthday, everyone asked where we got it.”</p><div class="who"><span class="av" style="background:#1F5132">MC</span><span><b>Mae Castillo</b>Pasig · 1 week ago</span></div></div>
+    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“We order lunch for the office every Friday. Always on time, still hot, and the serving is generous. Sulit!”</p><div class="who"><span class="av" style="background:#B7412E">RT</span><span><b>Ramon Tolentino</b>Marikina · 3 weeks ago</span></div></div>
+    <div class="rev"><span class="stars" aria-label="5 stars">★★★★★</span><p>“Super easy to order sa website, nag-GCash lang ako. The bibingka is the best I've had outside of Christmas season.”</p><div class="who"><span class="av" style="background:#9A6B2A">JL</span><span><b>Joanna Lim</b>Cainta · 1 month ago</span></div></div>
+  </div>
+</div></section>
+
+<section class="areafaq" id="faq" style="background:var(--soft)"><div class="wrap">
+  <div>
+    <h2>Delivery areas</h2>
+    <p class="sub">Free delivery for orders ₱800 and up. Outside these areas? Message us and we'll book a Lalamove for you.</p>
+    <div class="areas" id="areas"></div>
+  </div>
+  <div>
+    <h2>FAQ</h2>
+    <details open><summary>What time is the order cut-off?</summary><p>10 AM for lunch delivery (11 AM – 1 PM) and 3 PM for dinner (5 PM – 7 PM). Party trays need at least 2 days' notice.</p></details>
+    <details><summary>Can I pre-order for a future date?</summary><p>Yes, you can schedule up to 6 days ahead. Just pick the date and time slot at checkout.</p></details>
+    <details><summary>How do I pay?</summary><p>GCash (scan our QR and upload the receipt) or cash on delivery. For party packages, we ask for a 50% downpayment.</p></details>
+    <details><summary>Is the food spicy?</summary><p>Only dishes marked “Spicy”. Bicol Express can be made mild, just add a note.</p></details>
+    <details><summary>Do you cater events?</summary><p>Yes! We cater for 30 to 200 guests with buffet setup and servers. Message us on Facebook for a quote.</p></details>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div><h4>Kusina ni Lola</h4><p style="margin:0;max-width:40ch">34 J.P. Rizal St., Concepcion Uno, Marikina City<br>0917 503 2288 · Open Monday to Saturday, 8 AM – 7 PM</p></div>
+    <div><h4>Order</h4><a href="#menu">Today's menu</a><a href="#trays">Party trays</a><a href="#faq">Delivery areas</a></div>
+    <div><h4>Follow</h4><a href="#top">Facebook</a><a href="#top">Instagram</a><a href="#top">Messenger</a></div>
+  </div>
+  <div class="wrap legal"><span>© 2026 Kusina ni Lola (sample business for demo purposes)</span><span>Website by <a href="../../" style="display:inline;color:#fff">Likha Web Studio</a></span></div>
+</footer>
+<div style="height:64px" aria-hidden="true"></div>
+
+<a class="msg" href="#top" aria-label="Message us on Messenger"><svg aria-hidden="true"><use href="#i-msg"/></svg></a>
 <div class="mbar" id="mbar"><div class="wrap"><span><b id="mCount">0</b> item · <b id="mTotal">₱0</b></span><a class="btn" href="#order">View order</a></div></div>
 
 <script>
 const $=id=>document.getElementById(id);
 const peso=n=>'₱'+n.toLocaleString('en-PH');
-const GROUPS={ulam:'Ulam (main dishes)',bilao:'Bilao and party trays',merienda:'Merienda (snacks)'};
+const IMG=(id,w=400)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+const GROUPS={ulam:['Ulam','Served with a cup of rice upon request (+₱20).'],bilao:['Bilao and trays','For family lunches and small parties.'],merienda:['Merienda and kakanin','Freshly made every afternoon.']};
 const MENU=[
- {id:'ado',g:'ulam',name:'Chicken Pork Adobo',desc:'Garlicky dry-style adobo, Lola’s recipe.',serve:'Good for 2',price:180},
- {id:'kar',g:'ulam',name:'Kare-Kare',desc:'Thick peanut sauce, served with bagoong.',serve:'Good for 2–3',price:320},
- {id:'sin',g:'ulam',name:'Sinigang na Baboy',desc:'Tangy broth with gabi and kangkong.',serve:'Good for 2–3',price:260},
- {id:'bic',g:'ulam',name:'Bicol Express',desc:'Coconut milk and chili. Medium spicy.',serve:'Good for 2',price:200},
- {id:'pan',g:'bilao',name:'Pancit Canton Bilao',desc:'With shrimp, chicken and vegetables.',serve:'Good for 10–12',price:850},
- {id:'pal',g:'bilao',name:'Pancit Palabok Bilao',desc:'Topped with chicharon, egg and tinapa flakes.',serve:'Good for 10–12',price:900},
- {id:'lum',g:'bilao',name:'Lumpiang Shanghai Tray',desc:'50 pieces, with sweet chili sauce.',serve:'50 pcs',price:650},
- {id:'bib',g:'merienda',name:'Bibingka',desc:'Charcoal-cooked, with salted egg and cheese.',serve:'1 pc',price:70},
- {id:'tur',g:'merienda',name:'Turon',desc:'Banana and jackfruit in a crispy wrapper.',serve:'3 pcs',price:60},
- {id:'puto',g:'merienda',name:'Puto Cheese',desc:'Soft and freshly steamed.',serve:'12 pcs',price:120}
+ {id:'ado',g:'ulam',name:'Chicken Pork Adobo',desc:'Garlicky dry-style adobo, Lola Remy’s original recipe.',serve:'Good for 2',price:180,img:'1598515214211-89d3c73ae83b',c:['#8A5A2B','#3E2410'],tag:'best'},
+ {id:'kar',g:'ulam',name:'Kare-Kare',desc:'Oxtail and tripe in thick peanut sauce, with bagoong.',serve:'Good for 2–3',price:320,img:'1544025162-d76694265947',c:['#C98B4A','#6E3B1E'],tag:'best'},
+ {id:'sin',g:'ulam',name:'Sinigang na Baboy',desc:'Tangy sampalok broth with gabi, sitaw and kangkong.',serve:'Good for 2–3',price:260,img:'1547592180-85f173990554',c:['#B9B26A','#5E6A2C']},
+ {id:'bic',g:'ulam',name:'Bicol Express',desc:'Pork in coconut milk and siling labuyo.',serve:'Good for 2',price:200,img:'1455619452474-d2be8b1e70cd',c:['#E3B06B','#9B5A22'],tag:'hot'},
+ {id:'lec',g:'ulam',name:'Lechon Kawali',desc:'Crispy pork belly with Mang Tomas-style sauce.',serve:'Good for 2',price:240,img:'1529042410759-befb1204b468',c:['#D08A44','#6B3414'],left:4},
+ {id:'gin',g:'ulam',name:'Ginataang Kalabasa',desc:'Squash, sitaw and shrimp in coconut milk.',serve:'Good for 2',price:170,img:'1546069901-ba9599a7e63c',c:['#E8B651','#8E6A1E']},
+ {id:'pan',g:'bilao',name:'Pancit Canton Bilao',desc:'With shrimp, chicken liver and vegetables.',serve:'Good for 10–12',price:850,img:'1569058242253-92a9c755a0ec',c:['#D9A35B','#7A4A1C']},
+ {id:'pal',g:'bilao',name:'Pancit Palabok Bilao',desc:'Topped with chicharon, egg and tinapa flakes.',serve:'Good for 10–12',price:900,img:'1585032226651-759b368d7246',c:['#E9A23B','#8A4E14']},
+ {id:'lum',g:'bilao',name:'Lumpiang Shanghai Tray',desc:'50 pieces, with sweet chili sauce.',serve:'50 pcs',price:650,img:'1563245372-f21724e3856d',c:['#E7C27A','#9A6B2A']},
+ {id:'hnd',g:'bilao',name:'Handaan Package',desc:'Pancit bilao, lumpia tray, kare-kare and adobo trays.',serve:'Good for 20–25',price:4500,img:'1543353071-873f17a7a088',c:['#B5652E','#5A2A10'],hidden:1},
+ {id:'bib',g:'merienda',name:'Bibingka',desc:'Charcoal-cooked, with salted egg and kesong puti.',serve:'1 pc',price:70,img:'1567620905732-2d1ec7ab7445',c:['#E6C07E','#9A6A2C'],tag:'best'},
+ {id:'tur',g:'merienda',name:'Turon',desc:'Saba and langka in a crispy caramelized wrapper.',serve:'3 pcs',price:60,img:'1551024601-bec78aea704b',c:['#D9A35B','#7A4A1C']},
+ {id:'puto',g:'merienda',name:'Puto Cheese',desc:'Soft and freshly steamed.',serve:'12 pcs',price:120,img:'1488477181946-6428a0291777',c:['#F3E2B3','#C9A65A']}
 ];
-const cart={ado:1,pan:1};let g='all';
-function renderCats(){$('cats').innerHTML=[['all','All'],...Object.entries(GROUPS)].map(([k,v])=>`<button class="cat" type="button" data-g="${k}" aria-pressed="${k===g}">${v}</button>`).join('');}
+const AREAS=[['Concepcion Uno, Marikina',0],['Concepcion Dos, Marikina',0],['Sto. Niño, Marikina',40],['Kalumpang, Marikina',40],['Marikina Heights',50],['Rosario, Pasig',60],['Manggahan, Pasig',70],['Cainta, Rizal',80]];
+const TAG={best:['best','Bestseller'],hot:['hot','Spicy']};
+const cart={};let g='all';
+function renderCats(){$('cats').innerHTML=[['all','All']].concat(Object.entries(GROUPS).map(([k,v])=>[k,v[0]])).map(([k,v])=>`<button class="cat" type="button" data-g="${k}" aria-pressed="${g===k}">${v}</button>`).join('');}
 function renderMenu(){
-  $('menu').innerHTML=Object.entries(GROUPS).filter(([k])=>g==='all'||g===k).map(([k,v])=>`
-   <div class="group"><h2>${v}</h2>${MENU.filter(m=>m.g===k).map(m=>`
-    <div class="dish"><h3>${m.name}</h3><p>${m.desc}</p><span class="serve">${m.serve}</span>
-     <div class="right"><span class="price">${peso(m.price)}</span><button class="add" type="button" data-add="${m.id}" aria-label="Add ${m.name}">Add</button></div></div>`).join('')}</div>`).join('');
+  $('dishes').innerHTML=Object.entries(GROUPS).filter(([k])=>g==='all'||g===k).map(([k,[h,p]])=>`
+   <div class="group"><h3>${h}</h3><p>${p}</p><div class="dishes">${MENU.filter(m=>m.g===k&&!m.hidden).map(m=>`
+    <article class="dish"><div class="ph" style="--c1:${m.c[0]};--c2:${m.c[1]}"><img src="${IMG(m.img)}" alt="${m.name}" loading="lazy" onerror="this.remove()"></div>
+     <div class="bd"><h4>${m.name}</h4><div class="meta"><span class="pill">${m.serve}</span>${m.tag?`<span class="pill ${TAG[m.tag][0]}">${TAG[m.tag][1]}</span>`:''}${m.left?`<span class="pill hot">Only ${m.left} left</span>`:''}</div><p>${m.desc}</p>
+     <div class="row"><span class="price">${peso(m.price)}</span><button class="add ${cart[m.id]?'in':''}" type="button" data-add="${m.id}" aria-label="Add ${m.name}">${cart[m.id]?cart[m.id]+' in order · +':'Add'}</button></div></div></article>`).join('')}</div></div>`).join('');
 }
-function calc(){const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);const fee=sub===0||sub>=800?0:49;return{sub,fee,total:sub+fee,count:Object.values(cart).reduce((a,b)=>a+b,0)};}
+function fee(sub){return sub===0||sub>=800?0:AREAS[$('oarea').selectedIndex][1]||0;}
+function calc(){const sub=Object.entries(cart).reduce((s,[id,q])=>s+MENU.find(m=>m.id===id).price*q,0);const f=fee(sub);return{sub,fee:f,total:sub+f,count:Object.values(cart).reduce((a,b)=>a+b,0)};}
 function renderCart(){
   const t=calc();
-  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `<div class="line"><span>${m.name}</span><span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one">+</button></span><span class="price" style="font-size:15px">${peso(m.price*q)}</span></div>`}).join('');
+  $('lines').innerHTML=Object.entries(cart).map(([id,q])=>{const m=MENU.find(x=>x.id===id);return `<div class="line"><span>${m.name}</span><span class="qty"><button type="button" data-dec="${id}" aria-label="Remove one ${m.name}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Add one ${m.name}">+</button></span><span class="price">${peso(m.price*q)}</span></div>`}).join('');
   $('empty').hidden=t.count>0;$('sum').hidden=t.count===0;
   $('sub').textContent=peso(t.sub);$('fee').textContent=t.fee?peso(t.fee):'Free';$('total').textContent=peso(t.total);
-  $('free').textContent=t.sub>=800?'You get free delivery!':`Add ${peso(800-t.sub)} more for free delivery.`;
+  const pct=Math.min(100,t.sub/8);
+  $('free').innerHTML=t.sub>=800?'🎉 You get free delivery!':`Add ${peso(800-t.sub)} more for free delivery.<div class="bar"><i style="width:${pct}%"></i></div>`;
+  $('placeBtn').textContent=`Place order · ${peso(t.total)}`;
   $('mCount').textContent=t.count;$('mTotal').textContent=peso(t.total);$('mbar').classList.toggle('show',t.count>0);
 }
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;renderMenu();renderCart();if(b.closest('.tray')){b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',1000);}}
+  if(b.dataset.inc){cart[b.dataset.inc]++;renderMenu();renderCart();}
+  if(b.dataset.dec){cart[b.dataset.dec]--;if(cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderMenu();renderCart();}
   if(b.dataset.g){g=b.dataset.g;renderCats();renderMenu();}
-  if(b.dataset.add){cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;b.textContent='Added ✓';setTimeout(()=>b.textContent='Add',900);renderCart();}
-  if(b.dataset.inc){cart[b.dataset.inc]++;renderCart();}
-  if(b.dataset.dec){if(--cart[b.dataset.dec]<=0)delete cart[b.dataset.dec];renderCart();}
 });
-const fmt=new Intl.DateTimeFormat('en-PH',{weekday:'short',month:'short',day:'numeric'});const ds=[];
-for(let i=0;i<6;i++){const d=new Date();d.setDate(d.getDate()+i);ds.push(`<option>${i===0?'Today, ':''}${fmt.format(d)}</option>`);}
-$('odate').innerHTML=ds.join('');
-document.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{$('qr').hidden=!$('pg').checked;});
+$('oarea').innerHTML=AREAS.map(([a,f])=>`<option>${a}${f?` (+${peso(f)})`:' (free)'}</option>`).join('');
+$('oarea').onchange=renderCart;
+$('areas').innerHTML=AREAS.map(([a,f])=>`<div><span>${a}</span><b>${f?peso(f):'Free'}</b></div>`).join('');
+
+/* Manila-time cut-offs: lunch slots close at 10 AM, dinner slots at 3 PM */
+const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'}));const hr=now.getHours()+now.getMinutes()/60;
+const SLOTS=[['11:00 AM – 12:00 NN',10],['12:00 – 1:00 PM',10],['5:00 – 6:00 PM',15],['6:00 – 7:00 PM',15]];
+const fmt=new Intl.DateTimeFormat('en-PH',{weekday:'short',month:'short',day:'numeric'});
+const ds=[];for(let i=0;ds.length<6;i++){const d=new Date(now);d.setDate(d.getDate()+i);if(d.getDay()===0)continue;if(i===0&&hr>=15)continue;ds.push([i===0?`Today, ${fmt.format(d)}`:i===1?`Tomorrow, ${fmt.format(d)}`:fmt.format(d),i===0]);}
+$('odate').innerHTML=ds.map(([l])=>`<option>${l}</option>`).join('');
+function renderSlots(){const today=ds[$('odate').selectedIndex][1];$('oslot').innerHTML=SLOTS.map(([s,c])=>`<option ${today&&hr>=c?'disabled':''}>${s}${today&&hr>=c?' (closed)':''}</option>`).join('');const f=[...$('oslot').options].find(o=>!o.disabled);if(f)f.selected=true;}
+$('odate').onchange=renderSlots;renderSlots();
+const open=now.getDay()!==0&&hr<15;
+$('cutoff').textContent=open?(hr<10?'Order by 10 AM for today’s lunch':'Order by 3 PM for today’s dinner'):'Pre-order now for tomorrow';
+$('cutoff').style.setProperty('--dot',open?'#7BD88F':'#F4C542');
+
+document.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{$('gcashBox').hidden=document.querySelector('input[name=pay]:checked').value!=='GCash';});
+$('rcpt').onchange=()=>{if($('rcpt').files[0])$('rcptTxt').textContent='✓ '+$('rcpt').files[0].name;};
+(function(){let s=11,out='';const rnd=()=>(s=(s*9301+49297)%233280)/233280;
+  const fin=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#111"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#111"/>`;
+  for(let y=0;y<29;y++)for(let x=0;x<29;x++){const f=(x<8&&y<8)||(x>20&&y<8)||(x<8&&y>20);if(!f&&rnd()>.52)out+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#111"/>`;}
+  $('qr').innerHTML=out+fin(0,0)+fin(22,0)+fin(0,22);})();
+
 $('checkout').addEventListener('submit',e=>{e.preventDefault();const t=calc();
   $('num').textContent='KL-'+Math.floor(1000+Math.random()*9000);
-  $('doneMsg').textContent=`Thank you, ${$('oname').value.split(' ')[0]}! We will deliver ${t.count} item(s) on ${$('odate').value}, ${$('oslot').value}. Total: ${peso(t.total)} (${document.querySelector('input[name=pay]:checked').value}).`;
+  const pay=document.querySelector('input[name=pay]:checked').value;
+  $('doneMsg').textContent=`Salamat, ${$('oname').value.split(' ')[0]}! We will deliver ${t.count} item${t.count>1?'s':''} on ${$('odate').value}, ${$('oslot').value}. Total: ${peso(t.total)} (${pay}). We'll text you when our rider is on the way.`;
   $('orderView').hidden=true;$('doneView').hidden=false;$('mbar').classList.remove('show');});
-$('again').onclick=()=>{for(const k in cart)delete cart[k];$('orderView').hidden=false;$('doneView').hidden=true;renderCart();};
+$('again').onclick=()=>{for(const k in cart)delete cart[k];$('orderView').hidden=false;$('doneView').hidden=true;renderMenu();renderCart();};
+cart.kar=1;cart.ado=2;cart.bib=2;
 renderCats();renderMenu();renderCart();
 </script>
-
 </body></html>
