@@ -12,24 +12,24 @@ const PROJECTS={
   kape:{name:'Kape Pinagpala',kind:'live',url:'https://kapepinagpala.pages.dev/',host:'kapepinagpala.pages.dev',type:'Specialty coffee house',filter:['food'],cat:'restaurants',
     desc:'Specialty coffee house with SM mall pop-up stalls. Menu, pre-ordering for pick-up, and event coffee cart booking.',
     feats:['Menu with pre-ordering for pick-up','Event coffee cart booking','Mobile-friendly design'],web:['pages','order'],mods:['booking']},
-  sleep:{name:'SleepScienzzz',kind:'live',url:'https://sleepscienzzz-pi.vercel.app/',host:'sleepscienzzz-pi.vercel.app',type:'Sleep care clinic platform',filter:['health'],cat:'clinics',
+  sleep:{name:'SleepScienzzz',kind:'live',url:'https://sleepscienzzz-pi.vercel.app/',host:'sleepscienzzz-pi.vercel.app',type:'Sleep care clinic platform',filter:['health'],cat:'clinics',embed:false,tone:'#123A5C',
     desc:'Sleep care clinic platform. Sleep study booking, CPAP shop, machine registration, servicing reminders, and staff tools for stock and scheduling.',
     feats:['Sleep study booking','CPAP online shop and patient accounts','Staff tools for stock and scheduling'],web:['pages','custom'],mods:['booking','shop','inventory']},
-  pabango:{name:'Pabango de Manila',kind:'live',url:'https://pabangodemanila.pabangodemanilaph.workers.dev/',host:'pabangodemanila…workers.dev',type:'Perfume shop',filter:['shop'],cat:'online',
+  pabango:{name:'Pabango de Manila',kind:'live',url:'https://pabangodemanila.pabangodemanilaph.workers.dev/',host:'pabangodemanila…workers.dev',type:'Perfume shop',filter:['shop'],cat:'online',embed:false,tone:'#4A2638',
     desc:'Perfume shop website with customer accounts.',
     feats:['Online product catalog','Customer accounts','Mobile-friendly shopping'],web:['pages'],mods:['shop']},
   brew:{name:'Brew & Co.',kind:'demo',url:'demos/brew-and-co/',slug:'brew-and-co',host:'brewandco.com',type:'Coffee shop',filter:['food'],cat:'restaurants',
-    desc:'Coffee shop with a menu and online ordering for pick-up or delivery.',
-    feats:['Menu with categories','Cart and online ordering','GCash or cash, pick-up or delivery'],web:['pages','order'],mods:[]},
-  kusina:{name:'Kusina ni Lola',kind:'demo',url:'demos/kusina-ni-lola/',slug:'kusina-ni-lola',host:'kusinanilola.com',type:'Home-cooked food delivery',filter:['food'],cat:'restaurants',
-    desc:'Food business with ulam, bilao trays and merienda, plus scheduled delivery.',
-    feats:['Ulam, bilao and merienda menu','Scheduled delivery ordering','Free delivery promo banner'],web:['pages','order'],mods:[]},
-  lakas:{name:'Lakas Fitness',kind:'demo',url:'demos/lakas-fitness/',slug:'lakas-fitness',host:'lakasfitness.com',type:'Gym',filter:['fitness'],cat:'gyms',
-    desc:'Gym with membership rates, a class schedule and free trial booking.',
-    feats:['Membership rates','Class schedule','Free trial booking'],web:['pages'],mods:['booking']},
-  ganda:{name:'Ganda Studio',kind:'demo',url:'demos/ganda-studio/',slug:'ganda-studio',host:'gandastudio.com',type:'Salon and spa',filter:['health'],cat:'salons',
-    desc:'Salon and spa with online booking for service, date and time.',
-    feats:['Service menu with prices','Booking by service, date and time','Mobile-first design'],web:['pages'],mods:['booking']}
+    desc:'Specialty coffee shop with a cinematic homepage, an interactive menu, online ordering for pickup or dine-in, and table reservations.',
+    feats:['Filterable menu with drink customization','Online ordering for pickup or dine-in, with status tracking','Table reservations that block booked slots'],web:['pages','order'],mods:['booking']},
+  kusina:{name:'Kusina ni Lola',kind:'demo',url:'demos/kusina-ni-lola/',slug:'kusina-ni-lola',host:'kusinanilola.com',type:'Filipino home cooking and delivery',filter:['food'],cat:'restaurants',
+    desc:'Home-cooked Filipino ulam, party bilao and kakanin, with delivery areas, order cut-offs and GCash or COD checkout.',
+    feats:["Today's menu plus party trays and bilao",'Delivery areas with fees and order cut-offs','GCash QR or COD checkout with an order tracker'],web:['pages','order'],mods:[]},
+  lakas:{name:'Lakas Fitness',kind:'demo',url:'demos/lakas-fitness/',slug:'lakas-fitness',host:'lakasfitness.com',type:'Commercial gym',filter:['fitness'],cat:'gyms',
+    desc:'Commercial gym with membership plans, class booking, trainer profiles, online registration, a member portal and an admin dashboard.',
+    feats:['Membership plans and online registration','Class booking and trainer profiles','Sample member portal and admin dashboard'],web:['pages'],mods:['booking','dashboard']},
+  ganda:{name:'Ganda Studio',kind:'demo',url:'demos/ganda-studio/',slug:'ganda-studio',host:'gandastudio.com',type:'Beauty salon',filter:['health'],cat:'salons',
+    desc:'Beauty salon for hair, nails, facials and makeup, with a service menu, photo gallery, stylist profiles and online booking.',
+    feats:['Service menu and photo gallery','Booking by service, stylist, date and time','Booking history with cancel'],web:['pages'],mods:['booking']}
 };
 const WORK_FILTERS=[['all','All'],['live','Client projects'],['demo','Sample sites'],['food','Food & drinks'],['shop','Shops'],['health','Health & beauty'],['fitness','Fitness']];
 
@@ -118,7 +118,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false);});
 /* ---------- Category selector ---------- */
 const catGrid=$('catGrid'),catPanel=$('catPanel');
 catGrid.innerHTML=CATS.map((c,i)=>`<button type="button" class="cat" role="tab" id="cat-${c.id}" data-cat="${c.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${icon(c.ic)}${esc(c.name)}</button>`).join('');
-function exCard(k){const p=PROJECTS[k];const img=p.slug?`<img src="assets/shots/${p.slug}-desktop.webp" alt="" loading="lazy" width="76" height="48">`:`<span class="ph" aria-hidden="true">${esc(p.name[0])}</span>`;
+function exCard(k){const p=PROJECTS[k];const img=`<span class="ph" aria-hidden="true">${esc(p.name.replace(/[^A-Za-z ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join(''))}</span>`;
   return `<a class="ex" href="${p.url}" ${p.kind==='live'?'target="_blank" rel="noopener"':''}>${img}<span><b>${esc(p.name)}</b><small><span class="badge ${p.kind}">${p.kind==='live'?'Client project':'Sample site'}</span></small></span></a>`;}
 function showCat(id){
   const c=CATS.find(x=>x.id===id);
@@ -143,12 +143,13 @@ showCat(CATS[0].id);
 /* ---------- Portfolio slideshow ---------- */
 const track=$('showTrack'),dots=$('showDots'),count=$('showCount');
 let workFilter='all',visible=[];
+function liveFrame(url,name,w,h,label){return `<div class="cover"><b>${esc(name)}</b><small>Loading preview…</small></div><iframe data-src="${url}" title="${label}${esc(name)}" width="${w}" height="${h}" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer"></iframe>`;}
 function slideHTML(k){
   const p=PROJECTS[k],live=p.kind==='live';
-  const desk=live?`<div class="cover"><b>${esc(p.name)}</b><small>Loading live preview…</small></div><iframe data-src="${p.url}" title="Live preview of ${esc(p.name)}" width="1280" height="800" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer"></iframe>`
-    :`<img src="assets/shots/${p.slug}-desktop.webp" alt="${esc(p.name)} desktop screenshot" loading="lazy" width="1200" height="750">`;
-  const mob=live?`<div class="cover"><b>${esc(p.name)}</b></div><iframe data-src="${p.url}" title="Mobile preview of ${esc(p.name)}" width="390" height="800" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer"></iframe>`
-    :`<img src="assets/shots/${p.slug}-mobile.webp" alt="${esc(p.name)} mobile screenshot" loading="lazy" width="390" height="780">`;
+  // Sites that refuse to be embedded get a branded card instead of a live preview.
+  const card=(sm)=>`<a class="cover brand" href="${p.url}" target="_blank" rel="noopener" style="--tone:${p.tone}" tabindex="-1"><small>${esc(p.type)}</small><b>${esc(p.name)}</b>${sm?'':`<span class="visit">Visit the live site ↗</span>`}</a>`;
+  const desk=p.embed===false?card(false):liveFrame(p.url,p.name,1280,800,'Live preview of ');
+  const mob=p.embed===false?card(true):liveFrame(p.url,p.name,390,800,'Mobile preview of ');
   return `<article class="slide" data-k="${k}" role="group" aria-roledescription="slide" aria-label="${esc(p.name)}">
     <div class="stage"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>${esc(p.host)}</span></div><div class="vp" data-w="1280">${desk}</div></div>
       <div class="mob"><div class="vp" data-w="390">${mob}</div></div></div>
@@ -168,7 +169,7 @@ function renderWork(){
 }
 $('workFilters').innerHTML=WORK_FILTERS.map(([v,l],i)=>`<button type="button" data-f="${v}" aria-pressed="${i===0}">${l}</button>`).join('');
 $('workFilters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;workFilter=b.dataset.f;$$('#workFilters button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderWork();});
-function fitFrames(){$$('.vp',track).forEach(vp=>{const f=vp.querySelector('iframe');if(!f)return;const s=vp.clientWidth/(+vp.dataset.w);f.style.transform=`scale(${s})`;f.style.height=(vp.clientHeight/s)+'px';});}
+function fitFrames(){$$('.vp[data-w]').forEach(vp=>{const f=vp.querySelector('iframe');if(!f)return;const s=vp.clientWidth/(+vp.dataset.w);f.style.transform=`scale(${s})`;f.style.height=(vp.clientHeight/s)+'px';});}
 let active=0;
 function setActive(i){
   active=Math.max(0,Math.min(i,visible.length-1));
@@ -176,7 +177,7 @@ function setActive(i){
   count.textContent=visible.length?`${active+1} / ${visible.length}`:'';
   $('prevSlide').disabled=active===0;$('nextSlide').disabled=active>=visible.length-1;
   const s=track.children[active];
-  if(s)$$('iframe[data-src]',s).forEach(f=>{f.addEventListener('load',()=>f.classList.add('loaded'),{once:true});f.src=f.dataset.src;f.removeAttribute('data-src');});
+  if(s)$$('iframe[data-src]',s).forEach(loadFrame);
 }
 function go(i){const s=track.children[i];if(s)track.scrollTo({left:s.offsetLeft-track.offsetLeft,behavior:'smooth'});}
 let st;track.addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>setActive(Math.round(track.scrollLeft/track.clientWidth)),60);},{passive:true});
@@ -185,6 +186,9 @@ $('nextSlide').addEventListener('click',()=>go(active+1));
 dots.addEventListener('click',e=>{const b=e.target.closest('button');if(b)go(+b.dataset.i);});
 track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(active+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(active-1);}});
 window.addEventListener('resize',()=>{fitFrames();},{passive:true});
+/* Hero mockups show the live sample sites. Load them after the page so they never slow the first paint. */
+function loadFrame(f){f.addEventListener('load',()=>f.classList.add('loaded'),{once:true});f.src=f.dataset.src;f.removeAttribute('data-src');}
+window.addEventListener('load',()=>setTimeout(()=>{fitFrames();$$('.devices iframe[data-src]').forEach(f=>{if(f.closest('.vp').offsetParent!==null)loadFrame(f);});},600));
 renderWork();
 
 /* ---------- Business systems catalog ---------- */
