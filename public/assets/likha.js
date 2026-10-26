@@ -9,7 +9,7 @@ const icon=(n,c='ic')=>`<svg class="${c}" aria-hidden="true"><use href="#i-${n}"
 
 /* ---------- Data ---------- */
 const PROJECTS={
-  kape:{name:'Kape Pinagpala',kind:'live',url:'https://kapepinagpala.pages.dev/',host:'kapepinagpala.pages.dev',type:'Specialty coffee house',filter:['food'],cat:'restaurants',
+  kape:{name:'Kape Pinagpala',kind:'live',url:'https://kapepinagpala.pages.dev/',host:'kapepinagpala.pages.dev',type:'Specialty coffee house',filter:['food','events'],cat:'restaurants',
     desc:'Specialty coffee house with SM mall pop-up stalls. Menu, pre-ordering for pick-up, and event coffee cart booking.',
     feats:['Menu with pre-ordering for pick-up','Event coffee cart booking','Mobile-friendly design'],web:['pages','order'],mods:['booking']},
   sleep:{name:'SleepScienzzz',kind:'live',url:'https://sleepscienzzz-pi.vercel.app/',host:'sleepscienzzz-pi.vercel.app',type:'Sleep care clinic platform',filter:['health'],cat:'clinics',embed:false,tone:'#123A5C',
@@ -29,20 +29,29 @@ const PROJECTS={
     feats:['Membership plans and online registration','Class booking and trainer profiles','Sample member portal and admin dashboard'],web:['pages'],mods:['booking','dashboard']},
   ganda:{name:'Ganda Studio',kind:'demo',url:'demos/ganda-studio/',slug:'ganda-studio',host:'gandastudio.com',type:'Beauty salon',filter:['health'],cat:'salons',
     desc:'Beauty salon for hair, nails, facials and makeup, with a service menu, photo gallery, stylist profiles and online booking.',
-    feats:['Service menu and photo gallery','Booking by service, stylist, date and time','Booking history with cancel'],web:['pages'],mods:['booking']}
+    feats:['Service menu and photo gallery','Booking by service, stylist, date and time','Booking history with cancel'],web:['pages'],mods:['booking']},
+  handaan:{name:'Handaan Catering & Events',kind:'demo',url:'demos/handaan-catering/',host:'handaancatering.com',type:'Catering and events',filter:['events','food'],cat:'events',
+    desc:'Catering for weddings, debuts and corporate events, with event packages, a menu builder, live date availability and an instant quotation estimate.',
+    feats:['Event packages and a menu builder','Live date availability','Instant quotation estimate'],web:['pages','custom'],mods:['booking']},
+  linaw:{name:'Linaw Accounting & Tax',kind:'demo',url:'demos/linaw-accounting/',host:'linawaccounting.com',type:'Accounting and tax services',filter:['services'],cat:'services',
+    desc:'Bookkeeping, BIR compliance and business registration services, with service packages, a fee estimator, consultation booking and a client inquiry form.',
+    feats:['Service packages with sample pricing','Fee estimator','Consultation booking and inquiry form'],web:['pages'],mods:['booking']},
+  tahanan:{name:'Tahanan Realty',kind:'demo',url:'demos/tahanan-realty/',host:'tahananrealty.com',type:'Real estate',filter:['services'],cat:'realestate',
+    desc:'Homes, condos and lots, with searchable listings and filters, photo galleries, a loan estimator and online viewing scheduling.',
+    feats:['Searchable listings with filters','Photo galleries and a loan estimator','Online viewing scheduling'],web:['pages','custom'],mods:['booking','crm']}
 };
-const WORK_FILTERS=[['all','All'],['live','Client projects'],['demo','Sample sites'],['food','Food & drinks'],['shop','Shops'],['health','Health & beauty'],['fitness','Fitness']];
+const WORK_FILTERS=[['all','All'],['live','Client projects'],['demo','Sample sites'],['food','Food & drinks'],['shop','Shops'],['health','Health & beauty'],['fitness','Fitness'],['events','Events'],['services','Services & real estate']];
 
 const CATS=[
-  {id:'restaurants',name:'Restaurants & Cafes',ic:'cup',blurb:'Show your menu and let customers order ahead for pick-up or delivery.',ex:['kape','brew','kusina'],feats:['Menu with photos and prices','Online ordering with GCash QR','Pick-up and delivery options','Event or table reservations','Google Maps and opening hours'],pkg:'business',web:['pages','order'],mods:[]},
+  {id:'restaurants',name:'Restaurants & Cafes',ic:'cup',blurb:'Show your menu and let customers order ahead for pick-up or delivery.',ex:['kape','brew','kusina','handaan'],feats:['Menu with photos and prices','Online ordering with GCash QR','Pick-up and delivery options','Event or table reservations','Google Maps and opening hours'],pkg:'business',web:['pages','order'],mods:[]},
   {id:'retail',name:'Retail Stores',ic:'store',blurb:'Keep stock and sales organized while customers browse your products online.',ex:['pabango'],feats:['Product catalog','Inventory with low-stock alerts','POS with daily sales reports','Barcode and QR labels','Store location and hours'],pkg:'premium',web:['pages'],mods:['inventory','pos','reports']},
   {id:'online',name:'Online Shops',ic:'bag',blurb:'A real shop with cart, checkout and customer accounts, not just a chat inbox.',ex:['pabango','brew'],feats:['Cart and checkout','Customer accounts and order history','Order status tracking','Discount codes','Payment instructions or verified gateway'],pkg:'premium',web:['pages'],mods:['shop','inventory']},
   {id:'salons',name:'Salons & Spas',ic:'spark',blurb:'Let clients pick a service, date and time without the back-and-forth.',ex:['ganda'],feats:['Service menu with prices','Appointment booking','Staff availability','Booking reminders','Photo gallery'],pkg:'business',web:['pages'],mods:['booking']},
   {id:'clinics',name:'Clinics & Healthcare',ic:'heart',blurb:'Appointments, patient accounts and staff tools in one secure platform.',ex:['sleep','ganda'],feats:['Appointment booking','Patient accounts','Services and doctor profiles','Staff scheduling','Secure, role-based staff access'],pkg:'premium',web:['pages','custom'],mods:['booking','team']},
   {id:'gyms',name:'Gyms & Fitness Centers',ic:'dumbbell',blurb:'Show rates and schedules, and turn visitors into free-trial bookings.',ex:['lakas'],feats:['Membership rates','Class schedule','Free trial booking','Coach profiles','Messenger inquiry button'],pkg:'business',web:['pages'],mods:['booking']},
-  {id:'realestate',name:'Real Estate',ic:'home',blurb:'Showcase properties and collect serious buyer inquiries.',ex:[],feats:['Property listings with photos','Inquiry and viewing request form','Google Maps per property','Agent profiles','Lead tracking (custom)'],pkg:'business',web:['pages'],mods:['crm']},
-  {id:'services',name:'Professional Services',ic:'brief',blurb:'Look established and make it easy to book a consultation.',ex:[],feats:['Services and pricing pages','About and credentials','Consultation booking','Contact form and Messenger','Client management (custom)'],pkg:'business',web:['pages'],mods:['booking']},
-  {id:'events',name:'Events & Reservations',ic:'party',blurb:'Take reservations and event bookings with clear dates and availability.',ex:['kape','ganda'],feats:['Event and package pages','Reservation calendar','Booking approval','Inquiry form','Gallery of past events'],pkg:'business',web:['pages'],mods:['booking']},
+  {id:'realestate',name:'Real Estate',ic:'home',blurb:'Showcase properties and collect serious buyer inquiries.',ex:['tahanan'],feats:['Property listings with photos','Inquiry and viewing request form','Google Maps per property','Agent profiles','Lead tracking (custom)'],pkg:'business',web:['pages'],mods:['crm']},
+  {id:'services',name:'Professional Services',ic:'brief',blurb:'Look established and make it easy to book a consultation.',ex:['linaw'],feats:['Services and pricing pages','About and credentials','Consultation booking','Contact form and Messenger','Client management (custom)'],pkg:'business',web:['pages'],mods:['booking']},
+  {id:'events',name:'Events & Reservations',ic:'party',blurb:'Take reservations and event bookings with clear dates and availability.',ex:['handaan','kape','brew'],feats:['Event and package pages','Reservation calendar','Booking approval','Inquiry form','Gallery of past events'],pkg:'business',web:['pages'],mods:['booking']},
   {id:'other',name:'Other Businesses',ic:'dots',blurb:'Tell us how your business works and we will suggest the right setup.',ex:[],feats:['Professional homepage','Contact form and Messenger','Google Maps','Mobile-friendly design','Room to add systems later'],pkg:'starter',web:[],mods:[]}
 ];
 
