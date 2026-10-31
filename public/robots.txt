@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://likha-webstudio.likhawebstudioph.workers.dev/sitemap.xml
+Sitemap: https://likhawebstudioph.com/sitemap.xml
