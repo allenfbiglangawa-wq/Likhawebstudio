@@ -5,5 +5,11 @@
   "observability": { "enabled": true },
   "assets": {
     "directory": "./public"
-  }
+  },
+  // Keep the old workers.dev URL working so existing links don't break.
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "likhawebstudioph.com", "custom_domain": true },
+    { "pattern": "www.likhawebstudioph.com", "custom_domain": true }
+  ]
 }
