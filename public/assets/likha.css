@@ -150,6 +150,7 @@ section h2{font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.035
 .browser .bar span{margin-left:10px;background:#fff;border-radius:5px;font-size:11px;color:#5B6274;padding:3px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
 .vp{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--navy-2)}
 .vp img{width:100%;height:100%;object-fit:cover;object-position:top}
+.vp>a{display:block;width:100%;height:100%}
 .vp iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;background:transparent;opacity:0;transition:opacity .4s}
 .vp iframe.loaded{opacity:1;background:#fff}
 .mob{position:absolute;right:0;bottom:0;width:24%;background:#0B0F19;border-radius:22px;padding:6px;box-shadow:var(--shadow-lg)}

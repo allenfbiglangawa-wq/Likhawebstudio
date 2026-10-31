@@ -12,10 +12,10 @@ const PROJECTS={
   kape:{name:'Kape Pinagpala',kind:'live',url:'https://kapepinagpala.pages.dev/',host:'kapepinagpala.pages.dev',type:'Specialty coffee house',filter:['food','events'],cat:'restaurants',
     desc:'Specialty coffee house with SM mall pop-up stalls. Menu, pre-ordering for pick-up, and event coffee cart booking.',
     feats:['Menu with pre-ordering for pick-up','Event coffee cart booking','Mobile-friendly design'],web:['pages','order'],mods:['booking']},
-  sleep:{name:'SleepScienzzz',kind:'live',url:'https://sleepscienzzz-pi.vercel.app/',host:'sleepscienzzz-pi.vercel.app',type:'Sleep care clinic platform',filter:['health'],cat:'clinics',embed:false,tone:'#123A5C',
+  sleep:{name:'SleepScienzzz',kind:'live',url:'https://sleepscienzzz-pi.vercel.app/',host:'sleepscienzzz-pi.vercel.app',type:'Sleep care clinic platform',filter:['health'],cat:'clinics',embed:false,shot:'sleep',tone:'#123A5C',
     desc:'Sleep care clinic platform. Sleep study booking, CPAP shop, machine registration, servicing reminders, and staff tools for stock and scheduling.',
     feats:['Sleep study booking','CPAP online shop and patient accounts','Staff tools for stock and scheduling'],web:['pages','custom'],mods:['booking','shop','inventory']},
-  pabango:{name:'Pabango de Manila',kind:'live',url:'https://pabangodemanila.pabangodemanilaph.workers.dev/',host:'pabangodemanila…workers.dev',type:'Perfume shop',filter:['shop'],cat:'online',embed:false,tone:'#4A2638',
+  pabango:{name:'Pabango de Manila',kind:'live',url:'https://pabangodemanila.pabangodemanilaph.workers.dev/',host:'pabangodemanila…workers.dev',type:'Perfume shop',filter:['shop'],cat:'online',embed:false,shot:'pabango',tone:'#4A2638',
     desc:'Perfume shop website with customer accounts.',
     feats:['Online product catalog','Customer accounts','Mobile-friendly shopping'],web:['pages'],mods:['shop']},
   brew:{name:'Brew & Co.',kind:'demo',url:'demos/brew-and-co/',slug:'brew-and-co',host:'brewandco.com',type:'Coffee shop',filter:['food'],cat:'restaurants',
@@ -155,8 +155,8 @@ let workFilter='all',visible=[];
 function liveFrame(url,name,w,h,label){return `<div class="cover"><b>${esc(name)}</b><small>Loading preview…</small></div><iframe data-src="${url}" title="${label}${esc(name)}" width="${w}" height="${h}" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer"></iframe>`;}
 function slideHTML(k){
   const p=PROJECTS[k],live=p.kind==='live';
-  // Sites that refuse to be embedded get a branded card instead of a live preview.
-  const card=(sm)=>`<a class="cover brand" href="${p.url}" target="_blank" rel="noopener" style="--tone:${p.tone}" tabindex="-1"><small>${esc(p.type)}</small><b>${esc(p.name)}</b>${sm?'':`<span class="visit">Visit the live site ↗</span>`}</a>`;
+  // Sites that refuse to be embedded show a homepage screenshot (or a branded card if there is none).
+  const card=(sm)=>p.shot?`<a href="${p.url}" target="_blank" rel="noopener" tabindex="-1"><img src="/assets/shots/${p.shot}-${sm?'mobile':'desktop'}.webp" alt="${sm?'Mobile':'Desktop'} homepage of ${esc(p.name)}" loading="lazy" decoding="async"></a>`:`<a class="cover brand" href="${p.url}" target="_blank" rel="noopener" style="--tone:${p.tone}" tabindex="-1"><small>${esc(p.type)}</small><b>${esc(p.name)}</b>${sm?'':`<span class="visit">Visit the live site ↗</span>`}</a>`;
   const desk=p.embed===false?card(false):liveFrame(p.url,p.name,1280,800,'Live preview of ');
   const mob=p.embed===false?card(true):liveFrame(p.url,p.name,390,800,'Mobile preview of ');
   return `<article class="slide" data-k="${k}" role="group" aria-roledescription="slide" aria-label="${esc(p.name)}">
